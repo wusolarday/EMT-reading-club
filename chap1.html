@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
+                    colors: {
+                        ems: {
+                            navy: '#1e293b',
+                            blue: '#0284c7',
+                            light: '#f8fafc',
+                            orange: '#ea580c',
+                            gray: '#64748b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* <!-- Chosen Palette: EMS Professional (Navy, Cerulean Blue, Safety Orange, Slate Gray) -->
+        <!-- Application Structure Plan: 採用左側固定導覽列、右側動態內容區的 SPA 架構。為了配合讀書會「跟著書本讀」的需求，導覽列嚴格按照課本頁次 (P.10 ~ P.31) 進行章節劃分。每個章節內部運用不同的互動元件（時間軸、翻轉卡片、長條圖、互動網格、輪播）來降低認知負荷，提升吸收效率。 -->
+        <!-- Visualization & Content Choices: 
+            1. 歷史沿革 (P.10-15): 目標為「改變/演進」，使用 HTML+CSS 互動時間軸。
+            2. 法規定義 (P.16-19): 目標為「組織」，使用點擊展開的手風琴 (Accordion) 卡片。
+            3. 訓練制度 (P.20-27): 目標為「比較」，使用 Chart.js 長條圖比較初/中/高級時數差異。
+            4. 實務職責 (P.28-29): 目標為「關係/細節」，使用 3x3 互動網格，點擊查看詳細規範。
+            5. 醫學倫理 (P.30-31): 目標為「通知/強調」，使用動態引言輪播。
+        -->
+        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --> */
+
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
+        
+        /* Chart Container Requirements */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+
+        /* Animations & Transitions */
+        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-item.active {
+            background-color: #0284c7;
+            color: white;
+            border-left: 4px solid #ea580c;
+        }
+
+        /* Timeline styling */
+        .timeline-item { border-left: 2px solid #cbd5e1; padding-left: 20px; position: relative; padding-bottom: 20px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px;
+            background-color: #0284c7; border-radius: 50%; border: 3px solid white;
+        }
+
+        /* Interactive Grid */
+        .duty-card { transition: all 0.2s; cursor: pointer; }
+        .duty-card:hover, .duty-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- 左側導覽列 (Side Navigation) -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn & Solarday <br> Monday 21:00 - 22:00</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">按書本頁碼導覽</div>
+            
+            <button onclick="switchView('view-origins', this)" class="nav-item active w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">概論與發展源起</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span>
+            </button>
+            
+            <button onclick="switchView('view-intro', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">歷史沿革與現況</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span>
+            </button>
+            
+            <button onclick="switchView('view-law', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">法規與名詞定義</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span>
+            </button>
+            
+            <button onclick="switchView('view-training', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">制度與訓練基準</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span>
+            </button>
+            
+            <button onclick="switchView('view-duties', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">九大核心職責</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span>
+            </button>
+            
+            <button onclick="switchView('view-ethics', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">醫學倫理與心法</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span>
+            </button>
+        </div>
+        
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">
+            請搭配實體書本對照閱讀
+        </div>
+    </nav>
+
+    <!-- 右側主內容區 (Main Content Area) -->
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        
+        <!-- View 0: 概論與源起 (P.6 - P.9) -->
+        <section id="view-origins" class="view-section p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.6 - P.9</div>
+                <h2 class="text-3xl font-bold text-ems-navy">臺灣緊急醫療救護體系概論</h2>
+                <p class="text-ems-gray mt-2 text-lg">本章節將帶領您瞭解 EMS 的起源、學習目標，以及認識代表緊急救護精神的「藍色生命之星」。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 學習目標 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🎯</span> 本章學習目標
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>瞭解緊急醫療救護的沿革與國際現況</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>簡介緊急醫療救護相關的法規</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>瞭解救護技術員在法規中的資格、職責、得施行項目與罰則</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>認識救護技術員之角色及職責</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>落實醫學倫理與病人隱私權保護</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 發展起源 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🌍</span> EMS 的世界起源
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">拿破崙軍隊 (1792-1797)</h4>
+                            <p class="text-sm text-slate-600">現代 EMS 概念來自「軍陣醫學」。拿破崙軍隊外科醫師拉瑞 (Larrey) 發展了「飛速救護車系統」，能在短時間內運送傷兵，為現代戰野醫療的雛形。</p>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">美國 (1968-1973)</h4>
+                            <p class="text-sm text-slate-600">1968 年急診醫學會成立；1973 年頒布《緊急醫療救護體系法 (EMS Act)》，明定消防單位負責運送受傷病人。</p>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">臺灣 (民國 84 年)</h4>
+                            <p class="text-sm text-slate-600">臺灣發展較晚，於民國 84 年制定《緊急醫療救護法》，並於消防法中將緊急救護列為消防三大任務之一。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生命之星 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-2/5 text-center flex flex-col items-center">
+                        <!-- 圖片展示區塊：已替換為標準藍色生命之星圖檔，您也可以自行替換 src 為課本裁切圖 -->
+                        <div class="bg-white p-4 rounded-xl mb-4 shadow-lg border-2 border-slate-200">
+                            <img src="img-1-1.png" alt="" class="object-contain drop-shadow-md">
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">藍色生命之星</h3>
+                        <p class="text-sm text-slate-300">Star of Life (請對照課本圖 1-1)</p>
+                    </div>
+                    <div class="md:w-3/5">
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            由美國 R. 史瓦茲 (Leo R. Schwartz) 命名，中間的蛇杖代表希臘神話神醫亞斯古尼克 (Asclepius)。這六角星的每一個角，代表著緊急醫療救護服務的「六大程序」，順時針方向依序為：
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div>
+                                <div class="text-sm font-bold">發現 <span class="text-slate-400 font-normal text-xs ml-1">(Detection)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div>
+                                <div class="text-sm font-bold">通報 <span class="text-slate-400 font-normal text-xs ml-1">(Reporting)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div>
+                                <div class="text-sm font-bold">反應/出勤 <span class="text-slate-400 font-normal text-xs ml-1">(Response)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div>
+                                <div class="text-sm font-bold">現場處置 <span class="text-slate-400 font-normal text-xs ml-1">(On Scene Care)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</div>
+                                <div class="text-sm font-bold">運送照護 <span class="text-slate-400 font-normal text-xs ml-1">(Care In Transit)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</div>
+                                <div class="text-sm font-bold">確切醫療 <span class="text-slate-400 font-normal text-xs ml-1">(Definitive Care)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 1: 歷史沿革 (P.10 - P.15) -->
+        <section id="view-intro" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.10 - P.15</div>
+                <h2 class="text-3xl font-bold text-ems-navy">臺灣緊急醫療救護體系：發展與現況</h2>
+                <p class="text-ems-gray mt-2 text-lg">了解過去的演進，才能明白現行法規與制度的設計初衷。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 時間軸 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-6 border-b pb-2">重要歷史里程碑</h3>
+                    <div class="ml-2">
+                        <div class="timeline-item">
+                            <span class="text-sm font-bold text-ems-blue">民國 48 年</span>
+                            <h4 class="font-bold text-lg text-slate-800">確立「119」報案專線</h4>
+                            <p class="text-slate-600 text-sm mt-1">統一窗口，民眾火警與緊急報案免付費專線。</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="text-sm font-bold text-ems-blue">民國 58 年</span>
+                            <h4 class="font-bold text-lg text-slate-800">消防接辦救護</h4>
+                            <p class="text-slate-600 text-sm mt-1">消防警察大隊成立勤務指揮中心，集中受理並開始系統化運作。</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="text-sm font-bold text-ems-orange">民國 84 年 (核心)</span>
+                            <h4 class="font-bold text-lg text-slate-800">緊急醫療救護法</h4>
+                            <p class="text-slate-600 text-sm mt-1">正式立法通過，奠定我國緊急醫療救護之法源基礎。</p>
+                        </div>
+                        <div class="timeline-item border-l-transparent">
+                            <span class="text-sm font-bold text-ems-blue">民國 86 年</span>
+                            <h4 class="font-bold text-lg text-slate-800">EMT 制度建立</h4>
+                            <p class="text-slate-600 text-sm mt-1">發布「救護技術員管理要點」，全面啟動各級專業訓練。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 國際體系比較 -->
+                <div class="flex flex-col gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 border-b pb-2">國際體系比較</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 relative overflow-hidden">
+                                <div class="absolute right-0 top-0 bg-ems-blue text-white px-2 py-1 rounded-bl-lg text-xs font-bold">臺灣屬此類</div>
+                                <h4 class="font-bold text-ems-navy text-lg">英美體系 (Anglo-American)</h4>
+                                <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                                    <li>由 <strong>救護技術員 (EMT)</strong> 主導現場。</li>
+                                    <li>核心理念：將病人「送醫」。</li>
+                                    <li>著重於 Load & Go，現場僅做必要穩定。</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <h4 class="font-bold text-ems-navy text-lg">德法體系 (Franco-German)</h4>
+                                <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                                    <li>由 <strong>醫師</strong> 直接前往現場主導。</li>
+                                    <li>核心理念：將醫療「送給病人」。</li>
+                                    <li>著重於 Stay & Play，現場進行高階處置。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 2: 法規與定義 (P.16 - P.19) -->
+        <section id="view-law" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.16 - P.17</div>
+                <h2 class="text-3xl font-bold text-ems-navy">法規與核心名詞定義</h2>
+                <p class="text-ems-gray mt-2 text-lg">依法行政是救護的基礎，以下為前線人員必須熟記的法規定義。點擊卡片查看細節。</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 互動展開卡片 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(1)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">📜 緊急醫療救護 (法規定義)</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-1">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-1">
+                        依緊急醫療救護法第3條，包括下列事項：<br>
+                        1. 緊急傷病、大量傷病患或野外地區傷病之現場急救及送醫途中救護。<br>
+                        2. 重大傷病患或離島、偏遠地區難以診治之傷病患之轉診。<br>
+                        3. 醫療機構之緊急醫療。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(2)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">🧑‍⚕️ 救護人員</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-2">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-2">
+                        緊急醫療救護法第4條規定，指導醫師、護理人員、以及<strong>救護技術員 (EMT)</strong>。<br>
+                        其中救護技術員又分為初級(EMT-1)、中級(EMT-2)及高級(EMTP)三類。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-orange" onclick="toggleLaw(3)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">🚨 大量傷病患 (大傷)</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-3">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-3">
+                        指單一事故、災害發生之傷病患人數達 <strong>15人以上</strong>，或預判可能達 15人以上者。此時需啟動大傷機制進行檢傷分類。
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(4)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">🚑 救護運輸工具規範</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-4">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-4">
+                        1. <strong>人力：</strong>出勤應有救護人員 2 名以上。<br>
+                        2. <strong>警示燈/鳴器：</strong>非因情況緊急，不得使用，違者依《緊急醫療救護法》處新臺幣 6 萬元以上 30 萬元以下罰鍰。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 3: 制度與訓練 (P.20 - P.27) -->
+        <section id="view-training" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.18 - P.19</div>
+                <h2 class="text-3xl font-bold text-ems-navy">訓練制度與救護項目</h2>
+                <p class="text-ems-gray mt-2 text-lg">級別越高，訓練時數與可執行的侵入性/高階處置也隨之增加。</p>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                <!-- Chart.js 容器 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-2">EMT 訓練時數比較</h3>
+                    <p class="text-sm text-slate-500 mb-4">法規明定的各級訓練時數基準 (小時)</p>
+                    <div class="chart-container flex-1">
+                        <canvas id="trainingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- 救護項目清單 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">得施行之救護項目比較</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-lg p-4 bg-slate-50">
+                            <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                                <span>初級救護技術員 (EMT-1)</span>
+                                <span class="text-xs bg-slate-200 px-2 py-1 rounded">20 大項</span>
+                            </div>
+                            <p class="text-sm text-slate-600">包含：傷病檢視/檢傷分類、生命徵象/血氧評估、CPR、抽吸/清除呼吸道異物、使用鼻/口咽人工呼吸道、給予氧氣、止血包紮、姿勢擺位/體溫維持、頸脊椎/骨折固定、脫困搬運、送醫照護、使用心電圖監視器或AED/自動心肺復甦機、測血糖及給口服葡萄糖、心理支持、急產接生、燒燙傷處置、沖洗眼睛等。</p>
+                        </div>
+                        
+                        <div class="border border-ems-blue rounded-lg p-4 bg-blue-50 relative">
+                            <div class="absolute -left-[1px] top-4 w-1 h-8 bg-ems-blue"></div>
+                            <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                                <span>中級救護技術員 (EMT-2)</span>
+                                <span class="text-xs bg-blue-200 px-2 py-1 rounded text-blue-800">進階增列項目</span>
+                            </div>
+                            <p class="text-sm text-slate-600 font-medium italic mb-1">除執行初級項目外，增加下列：</p>
+                            <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1">
+                                <li>周邊靜脈血管路徑之設置及維持 (IV)</li>
+                                <li>給予注射用葡萄糖、乳酸林格氏液或生理食鹽水</li>
+                                <li>使用聲門上呼吸道 (如 LMA)</li>
+                                <li>協助使用吸入型支氣管擴張劑、自備腎上腺素注射筆及硝化甘油舌下含片</li>
+                                <li>潮氣末二氧化碳監測 (ETCO2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 4: 九大職責 (P.28 - P.29) -->
+        <section id="view-duties" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.28 - P.29</div>
+                <h2 class="text-3xl font-bold text-ems-navy">救護技術員 9 大核心職責</h2>
+                <p class="text-ems-gray mt-2 text-lg">點擊下方網格，了解每一個出勤環節的實務重點。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- 互動按鈕區 -->
+                <div class="lg:col-span-5 grid grid-cols-3 gap-3">
+                    <button onclick="showDuty(1)" id="btn-duty-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">1</span>準備
+                    </button>
+                    <button onclick="showDuty(2)" id="btn-duty-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">2</span>出勤
+                    </button>
+                    <button onclick="showDuty(3)" id="btn-duty-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">3</span>評估
+                    </button>
+                    <button onclick="showDuty(4)" id="btn-duty-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">4</span>穩定
+                    </button>
+                    <button onclick="showDuty(5)" id="btn-duty-5" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">5</span>溝通
+                    </button>
+                    <button onclick="showDuty(6)" id="btn-duty-6" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">6</span>運送
+                    </button>
+                    <button onclick="showDuty(7)" id="btn-duty-7" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">7</span>紀錄
+                    </button>
+                    <button onclick="showDuty(8)" id="btn-duty-8" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">8</span>教育
+                    </button>
+                    <button onclick="showDuty(9)" id="btn-duty-9" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
+                        <span class="text-2xl text-ems-blue mb-1">9</span>個資
+                    </button>
+                </div>
+
+                <!-- 詳細說明展示區 -->
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[350px]">
+                    <h3 id="duty-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">1. 準備 (Preparation)</h3>
+                    <div id="duty-content" class="text-slate-300 space-y-3 leading-relaxed text-lg flex-1">
+                        <p class="font-bold text-white mb-2">工欲善其事，必先利其器。</p>
+                        <ul class="list-disc pl-5 space-y-2 text-base">
+                            <li>車輛出勤前後，都必須清洗及消毒。</li>
+                            <li>器材及耗材數量須確保足夠及堪用。</li>
+                            <li>熟悉轄區道路以掌握時效。</li>
+                            <li>隨時保持體能最佳狀態，以維持身心健康面對勤務。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 5: 倫理與心法 (P.30 - P.31) -->
+        <section id="view-ethics" class="view-section p-8 md:p-12 hidden h-full">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.30 - P.31</div>
+                <h2 class="text-3xl font-bold text-ems-navy">醫學倫理與前線心法</h2>
+                <p class="text-ems-gray mt-2 text-lg">除了熟讀《日內瓦宣言》，前線學長姐留下的 101 件心法更是實務生存的智慧。</p>
+            </header>
+
+            <div class="flex flex-col items-center justify-center mt-10 w-full max-w-4xl mx-auto">
+                <div class="bg-white w-full p-10 rounded-2xl shadow-lg border-t-8 border-ems-orange relative text-center">
+                    <div class="text-6xl text-slate-100 absolute top-4 left-6 leading-none">"</div>
+                    
+                    <div class="min-h-[120px] flex items-center justify-center flex-col relative z-10 px-8">
+                        <p id="quote-text" class="text-2xl font-bold text-slate-800 leading-relaxed">
+                            「你不知道所有的事，承認自己的錯誤。我們都會犯錯，但只有最優秀的人才會承認犯錯。」
+                        </p>
+                    </div>
+                    
+                    <div class="text-6xl text-slate-100 absolute bottom-4 right-6 rotate-180 leading-none">"</div>
+                </div>
+                
+                <div class="flex gap-4 mt-8">
+                    <button onclick="changeQuote(-1)" class="px-6 py-2 bg-slate-200 text-slate-700 font-bold rounded-lg hover:bg-slate-300 transition">◀ 前一則</button>
+                    <button onclick="changeQuote(1)" class="px-6 py-2 bg-ems-navy text-white font-bold rounded-lg shadow-md hover:bg-slate-800 transition">下一則 ▶</button>
+                </div>
+                
+                <div class="mt-8 text-sm text-slate-500 font-bold bg-slate-200 px-4 py-1 rounded-full">
+                    節錄自課本 P.30-31《101件我們該教給 EMT 的事》
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        // 1. Navigation Logic
+        function switchView(viewId, btnElement) {
+            // Hide all sections
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('block', 'fade-in');
+                el.classList.add('hidden');
+            });
+            // Show target section
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            // Trigger reflow to restart animation
+            void target.offsetWidth; 
+            target.classList.add('block', 'fade-in');
+
+            // Update nav styling
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Initialize chart if navigating to training section for the first time
+            if (viewId === 'view-training' && !window.chartInit) {
+                initChart();
+                window.chartInit = true;
+            }
+        }
+
+        // 2. Law Accordion Logic
+        function toggleLaw(id) {
+            const content = document.getElementById('law-content-' + id);
+            const icon = document.getElementById('law-icon-' + id);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '-';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        // 3. Chart.js Logic (Training Hours)
+        window.chartInit = false;
+        function initChart() {
+            const ctx = document.getElementById('trainingChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['初級 (EMT-1)', '中級 (EMT-2)', '高級 (EMTP)'],
+                    datasets: [{
+                        label: '法規訓練時數',
+                        data: [56, 336, 1296],
+                        backgroundColor: ['#94a3b8', '#0ea5e9', '#1e293b'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: { label: function(context) { return context.raw + ' 小時'; } },
+                            padding: 10, titleFont: { size: 14 }, bodyFont: { size: 14 }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            title: { display: true, text: '訓練時數 (小時)' },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: { font: { weight: 'bold' } }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 4. Duties Grid Logic
+        const dutiesData = {
+            1: { t: "1. 準備", c: "<p class='font-bold text-white mb-2'>工欲善其事，必先利其器。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>車輛出勤前後，都必須清洗及消毒。</li><li>器材及耗材數量須確保足夠及堪用。</li><li>熟悉轄區道路以掌握時效。</li><li>隨時保持體能最佳狀態，以維持身心健康。</li></ul>" },
+            2: { t: "2. 出勤", c: "<p class='font-bold text-white mb-2'>平穩抵達比飆車更重要。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>接獲派遣後須立即出勤、迅速著裝。</li><li>在路上行駛時，開快車不見得能省下時間，一旦發生事故反而延誤。</li><li>平安抵達比開快車來得更加重要。</li></ul>" },
+            3: { t: "3. 評估", c: "<p class='font-bold text-white mb-2'>包含現場安全與病人評估。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>接近事故現場前，務必確定現場是否安全；有危害需立即排除或控制，才能進行後面的處置。</li><li>評估是否需要其他單位支援或是啟動大量傷病患機制。</li><li>瞭解可能的致病機轉並給予適當處置。</li></ul>" },
+            4: { t: "4. 穩定", c: "<p class='font-bold text-white mb-2'>精準判斷送醫策略與穩定病情。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>主要任務是穩定病人病情，並將其迅速就醫。</li><li>必須精準判斷傷病患是屬於「就走 (Load and Go)」，還是「留在現場穩定後再離開 (Stay and Play)」。</li><li>就算是「就走」的病人也絕不是什麼都不做就開快車，仍需及時提供穩定生命徵象之處置。</li></ul>" },
+            5: { t: "5. 溝通", c: "<p class='font-bold text-white mb-2'>成為急診醫師的千里眼。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>現場與家屬及旁觀者的溝通能獲取充足資訊並安撫情緒。</li><li>透過工具精準將資訊傳達給責任醫院，再依指示處置病人。</li></ul>" },
+            6: { t: "6. 運送", c: "<p class='font-bold text-white mb-2'>運送過程絕不可鬆懈。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>送醫途中隨時注意病人狀況並記錄生命徵象。</li><li>即使看似穩定的病人也有可能突然惡化，安全且迅速將病人交給醫院，生命之鏈才得連貫。</li></ul>" },
+            7: { t: "7. 紀錄", c: "<p class='font-bold text-white mb-2'>具備法律效力的正式文件。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>填寫救護紀錄表就像醫護人員填寫病歷一樣重要，須記錄病人狀況與處置。</li><li>每個重點都必須被記錄下來，以利事後回想和案例分享。</li><li>詳實紀錄不但是責任，更是對自己的保護。</li></ul>" },
+            8: { t: "8. 教育", c: "<p class='font-bold text-white mb-2'>四大不可犯原則與持續精進。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>取得證照不是終點，需透過繼續教育維持專業巔峰。</li><li><strong>四大「不」可犯原則：</strong><br>1. 有知識而不更新<br>2. 有器材而不使用<br>3. 有耗材而不補充<br>4. 有病人而漠不關心。</li><li>累積實務經驗後，可擔任教學宣導工作造福社會。</li></ul>" },
+            9: { t: "9. 個資", c: "<p class='font-bold text-white mb-2'>嚴守秘密是不可妥協的底線。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>依法規因業務知悉之秘密，不得無故洩漏。</li><li>現場影音、車內錄影及電子紀錄表等，須受妥善保管，檔案下載需加密保存。</li></ul>" }
+        };
+
+        function showDuty(id) {
+            document.getElementById('duty-title').innerText = dutiesData[id].t;
+            document.getElementById('duty-content').innerHTML = dutiesData[id].c;
+            
+            document.querySelectorAll('.duty-card').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-duty-' + id).classList.add('active');
+
+            // Quick fade effect
+            const contentDiv = document.getElementById('duty-content');
+            contentDiv.style.opacity = '0';
+            setTimeout(() => {
+                contentDiv.style.transition = 'opacity 0.2s ease-in';
+                contentDiv.style.opacity = '1';
+            }, 50);
+        }
+
+        // 5. Ethics Carousel Logic
+        const ethicsQuotes = [
+            "「你不知道所有的事，承認自己的錯誤。我們都會犯錯，但只有最優秀的人才會承認犯錯。」",
+            "「把每一趟救護想成這是你人生中最後一趟救護，好好做！」",
+            "「保護好你的背部。這很有可能是決定你救護生涯長度的唯一因素。」",
+            "「當你犯錯時，『馬上』為你的錯誤道歉。」",
+            "「記得帶走你的裝備；小心運送你的病人。」",
+            "「沒有任何正當的理由可以讓你在無線電裡大吼。」",
+            "「不要對病人說謊，如果事情讓你難以啟齒，試著坦白說出來。」",
+            "「不要把病人的氣話放在心上，更不要把病人的髒話放在心上。」"
+        ];
+        let currentQuote = 0;
+
+        function changeQuote(direction) {
+            currentQuote += direction;
+            if (currentQuote >= ethicsQuotes.length) currentQuote = 0;
+            if (currentQuote < 0) currentQuote = ethicsQuotes.length - 1;
+            
+            const textEl = document.getElementById('quote-text');
+            textEl.style.opacity = '0';
+            setTimeout(() => {
+                textEl.innerText = ethicsQuotes[currentQuote];
+                textEl.style.transition = 'opacity 0.3s ease-in';
+                textEl.style.opacity = '1';
+            }, 200);
+        }
+    </script>
+</body>
+</html>
