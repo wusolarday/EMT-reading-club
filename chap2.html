@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 讀書會 - 第二章 人體基本解剖與生理學</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
+                    colors: {
+                        ems: {
+                            navy: '#1e293b',
+                            blue: '#0284c7',
+                            light: '#f8fafc',
+                            orange: '#ea580c',
+                            gray: '#64748b',
+                            danger: '#dc2626'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
+        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-item { transition: all 0.3s ease; border-left: 4px solid transparent; }
+        .nav-item.active { background-color: #0284c7; color: white; border-left: 4px solid #ea580c; }
+        
+        /* 系統互動網格樣式 */
+        .sys-card { transition: all 0.2s; cursor: pointer; border: 1px solid #cbd5e1; }
+        .sys-card:hover, .sys-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
+        
+        /* 結構化表格樣式 */
+        .data-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 0.5rem; overflow: hidden; border: 1px solid #e2e8f0; }
+        .data-table th { background-color: #1e293b; color: white; font-weight: 700; text-align: left; padding: 0.75rem 1rem; }
+        .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; background-color: white; color: #334155; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background-color: #f8fafc; }
+        
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第二章 解剖與生理學</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">人體結構與生命徵象</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">第一節：基本解剖</div>
+            <button onclick="switchView('view-anatomy-base', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">解剖切面與體腔組織</span>
+                <span class="text-[11px] text-slate-400">P.34 - P.37</span>
+            </button>
+            <button onclick="switchView('view-systems', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">人體各大系統生理</span>
+                <span class="text-[11px] text-slate-400">P.38 - P.49</span>
+            </button>
+            
+            <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase border-t border-slate-700">第二節：八大生命徵象 (P.50)</div>
+            <button onclick="switchView('view-vs-1', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">1. 意識狀態 (GCS)</span>
+                <span class="text-[11px] text-slate-400">P.50 - P.52 | AVPU, 昏迷指標</span>
+            </button>
+            <button onclick="switchView('view-vs-2', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">2. 呼吸評估 (Respiration)</span>
+                <span class="text-[11px] text-slate-400">P.53 - P.54 | 異常型態與姿勢</span>
+            </button>
+            <button onclick="switchView('view-vs-3', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">3. 脈搏評估 (Pulse)</span>
+                <span class="text-[11px] text-slate-400">P.55 | 速率, 觸摸點預估血壓</span>
+            </button>
+            <button onclick="switchView('view-vs-4', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">4. 血壓量測 (Blood Pressure)</span>
+                <span class="text-[11px] text-slate-400">P.56 - P.57 | 台灣血壓參考標準</span>
+            </button>
+            <button onclick="switchView('view-vs-5', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">5. 瞳孔變化 (Pupil)</span>
+                <span class="text-[11px] text-slate-400">P.57 - P.58 | 對光反應, 異常意義</span>
+            </button>
+            <button onclick="switchView('view-vs-6', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">6. 體溫量測 (Temperature)</span>
+                <span class="text-[11px] text-slate-400">P.58 - P.59 | 核心體溫, 低體溫分期</span>
+            </button>
+            <button onclick="switchView('view-vs-7', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">7. 膚色表徵 (Skin Color)</span>
+                <span class="text-[11px] text-slate-400">P.60 | 四大異常膚色臨床意義</span>
+            </button>
+            <button onclick="switchView('view-vs-8', this)" class="nav-item w-full text-left px-6 py-2 hover:bg-slate-800 flex flex-col">
+                <span class="font-bold text-sm">8. 血氧濃度 (SpO2)</span>
+                <span class="text-[11px] text-slate-400">P.60 - P.61 | 監測限制與致命陷阱</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+        
+        <section id="view-anatomy-base" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.36 - P.37</div>
+                <h2 class="text-3xl font-bold text-ems-navy">人體解剖位置、切面與體腔</h2>
+                <p class="text-ems-gray mt-2 text-lg">標準解剖學姿勢：解剖學姿勢為病人直立面對救護人員，兩手掌朝向前方。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 border-b pb-2">📐 三大解剖切面</h3>
+                    <ul class="space-y-4">
+                        <li class="p-3 bg-slate-50 border-l-4 border-ems-blue rounded">
+                            <strong class="text-ems-navy text-base">1. 正中矢狀面 (Median Sagittal Plane)</strong>
+                            <p class="text-sm text-slate-600 mt-1">通過人體構造或身體中線的垂直平面，依此可平分成<strong>左右兩側</strong>。</p>
+                        </li>
+                        <li class="p-3 bg-slate-50 border-l-4 border-ems-blue rounded">
+                            <strong class="text-ems-navy text-base">2. 冠狀面 (Frontal / Coronal Plane)</strong>
+                            <p class="text-sm text-slate-600 mt-1">將人體切分為<strong>前側（腹側）</strong>與<strong>後側（背側）</strong>兩部分。</p>
+                        </li>
+                        <li class="p-3 bg-slate-50 border-l-4 border-ems-blue rounded">
+                            <strong class="text-ems-navy text-base">3. 水平面 / 橫切面 (Horizontal / Transverse Plane)</strong>
+                            <p class="text-sm text-slate-600 mt-1">平行於地面，可將人體分為<strong>上端（頭端）</strong>與<strong>下端（尾端）</strong>兩部分。</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-ems-navy mb-3">📦 體腔 (Body Cavities)</h3>
+                        <p class="text-sm text-slate-600 mb-3">體腔是身體含有內部空間的結構，分為腹側與背側。<strong>腹腔</strong>是人體最大的體腔，包含消化及泌尿系統的重要器官。</p>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="p-2 border border-slate-200 rounded bg-slate-50"><strong>腹側體腔：</strong>胸腔、腹盆腔（由橫膈膜隔開）</div>
+                            <div class="p-2 border border-slate-200 rounded bg-slate-50"><strong>背側體腔：</strong>主要包含顱腔、脊髓腔</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-ems-navy mb-3">🧬 四大基本組織</h3>
+                        <div class="grid grid-cols-2 gap-3 text-sm">
+                            <div class="p-3 border border-slate-200 rounded bg-slate-50"><strong>上皮組織：</strong>覆蓋人體表層，主要是保護功能。</div>
+                            <div class="p-3 border border-slate-200 rounded bg-blue-50 text-ems-navy"><strong>結締組織：</strong>保護、連結、支持（如骨、脂肪、軟骨、肌腱，<strong>血液中的紅血球亦屬之</strong>）。</div>
+                            <div class="p-3 border border-slate-200 rounded bg-slate-50"><strong>肌肉組織：</strong>有骨骼肌、平滑肌及心肌三類。</div>
+                            <div class="p-3 border border-slate-200 rounded bg-slate-50"><strong>神經組織：</strong>負責訊息的形成與傳遞。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-systems" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.38 - P.49</div>
+                <h2 class="text-3xl font-bold text-ems-navy">人體各大系統生理學</h2>
+                <p class="text-ems-gray mt-2 text-lg">前線救護與各項生理系統息息相關，點擊左側分類可快速查看系統核心機轉。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+                    <button onclick="showSystem(1)" id="btn-sys-1" class="sys-card active bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">🧠 神經系統</button>
+                    <button onclick="showSystem(2)" id="btn-sys-2" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">🫁 呼吸系統</button>
+                    <button onclick="showSystem(3)" id="btn-sys-3" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">❤️ 循環系統</button>
+                    <button onclick="showSystem(4)" id="btn-sys-4" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">Bone 骨骼肌肉</button>
+                    <button onclick="showSystem(5)" id="btn-sys-5" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">🩸 內分泌</button>
+                    <button onclick="showSystem(6)" id="btn-sys-6" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">🍔 消化與免疫</button>
+                    <button onclick="showSystem(7)" id="btn-sys-7" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">🚻 泌尿與生殖</button>
+                    <button onclick="showSystem(8)" id="btn-sys-8" class="sys-card bg-white rounded-lg p-4 flex flex-col items-center justify-center font-bold text-sm">👁️ 皮膚與感官</button>
+                </div>
+
+                <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[420px]">
+                    <h3 id="sys-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">🧠 神經系統 (P.38)</h3>
+                    <div id="sys-content" class="text-slate-300 space-y-3 leading-relaxed text-sm flex-1">
+                        <p><strong class="text-white text-base">1. 中樞神經系統 (CNS)</strong></p>
+                        <ul class="list-disc pl-5 space-y-1 mb-3">
+                            <li><strong>大腦：</strong>主管意識、思考、感覺、智力、記憶。兩側大腦半球接收與產生身體對側的運動指令。</li>
+                            <li><strong>小腦：</strong>監督並協調維持身體姿勢的肌肉。</li>
+                            <li><strong class="text-ems-orange">延腦 (生命中樞)：</strong>控制心跳速率、收縮力、血管舒縮、呼吸節律、吞嚥與嘔吐。</li>
+                            <li><strong>脊髓：</strong>人體脊髓分成 31 個脊髓節（頸 8、胸 12、腰 5、薦 5、尾 1）。</li>
+                        </ul>
+                        <p><strong class="text-white text-base">2. 周邊與自主神經系統</strong></p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li><strong class="text-ems-orange">交感神經：</strong>「戰鬥或逃跑 (Fight or flight)」，心跳加快、減少胃腸蠕動、加強心收縮力、瞳孔放大。</li>
+                            <li><strong class="text-ems-blue">副交感神經：</strong>「休息與消化 (Rest and digest)」，心跳變慢、促進胃腸蠕動。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-1" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其一</div>
+                <h2 class="text-3xl font-bold text-ems-navy">意識狀態 (Consciousness / GCS)</h2>
+                <p class="text-ems-gray mt-2 text-sm">意識為中樞神經系統功能呈現之表徵，初級評估首要檢查項目。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-ems-navy mb-3">🚨 AVPU 意識快速分類</h3>
+                        <ul class="space-y-2 text-xs leading-relaxed">
+                            <li><strong class="bg-slate-100 px-1.5 py-0.5 rounded">A (Alert) 清：</strong> 清醒且對時間、地點、人物回答適當。</li>
+                            <li><strong class="bg-slate-100 px-1.5 py-0.5 rounded">V (Verbal) 聲：</strong> 對聲音刺激才有反應，講話語意不清。</li>
+                            <li><strong class="bg-slate-100 px-1.5 py-0.5 rounded">P (Painful) 痛：</strong> 對疼痛刺激才有反應（如按壓指甲床、捏斜方肌）。</li>
+                            <li><strong class="bg-red-50 text-red-700 px-1.5 py-0.5 rounded">U (Unresponsive) 否：</strong> 對任何刺激均無反應，臨床定義為昏迷。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-orange">
+                        <h3 class="font-bold text-ems-navy mb-2">⚠️ 昏迷危急病態姿勢</h3>
+                        <p class="text-xs text-slate-600 mb-2">當 GCS 總分 <strong>&le; 8 分</strong> 時即為意識昏迷。以下姿勢提示腦部嚴重損傷：</p>
+                        <ul class="space-y-2 text-xs">
+                            <li class="p-2 bg-slate-50 rounded"><strong>異常屈曲 (M3 / 去皮質姿勢)：</strong> 大腦皮質失去功能。表現為雙手朝胸口內收屈曲，足底彎曲。</li>
+                            <li class="p-2 bg-red-50 text-red-900 rounded"><strong>異常伸直 (M2 / 去大腦姿勢)：</strong> 腦幹、中腦嚴重受損。表現為雙上肢僵直伸展且向外旋。極度危險。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 表 2-3：格拉斯哥昏迷指標 (GCS) 評分表</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs">
+                            <thead>
+                                <tr>
+                                    <th class="w-16 text-center">分數</th>
+                                    <th>👁️ 睜眼反應 (Eye response, E)</th>
+                                    <th>🗣️ 最佳言語反應 (Verbal response, V)</th>
+                                    <th>💪 最佳運動反應 (Motor response, M)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="text-center font-bold">6</td><td class="text-slate-400">-</td><td class="text-slate-400">-</td><td class="text-ems-blue font-bold">可依指令動作</td></tr>
+                                <tr><td class="text-center font-bold">5</td><td class="text-slate-400">-</td><td class="text-ems-blue font-bold">說話清楚有條理</td><td>對刺激可定位位置 (查知痛點)</td></tr>
+                                <tr><td class="text-center font-bold">4</td><td class="text-ems-blue font-bold">自發性睜眼</td><td>混亂的言語 (答非所問)</td><td>對刺激產生正常閃避收縮</td></tr>
+                                <tr><td class="text-center font-bold">3</td><td>對聲音刺激睜眼</td><td>可說出字詞 (不合理字彙)</td><td class="text-ems-orange font-bold">異常屈曲收縮 (M3, 去皮質)</td></tr>
+                                <tr><td class="text-center font-bold">2</td><td>對壓力刺激睜眼</td><td>可發出聲音 (呻吟、嘟囔)</td><td class="text-red-600 font-bold">異常伸直 (M2, 去大腦)</td></tr>
+                                <tr><td class="text-center font-bold text-slate-400">1</td><td class="text-slate-400">無任何反應</td><td class="text-slate-400">無任何反應</td><td class="text-slate-400">無 any 反應</td></tr>
+                                <tr class="bg-slate-100 font-medium">
+                                    <td class="text-center">無法<br>檢測</td>
+                                    <td>因眼睛腫脹等不能睜眼：<strong>C (Closed)</strong></td>
+                                    <td>氣管插管：<strong>E (Endo)</strong><br>氣切：<strong>T (Trachea)</strong><br>失語症：<strong>A (Aphasia)</strong></td>
+                                    <td class="text-slate-400">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-2" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其二</div>
+                <h2 class="text-3xl font-bold text-ems-navy">呼吸評估 (Breathing)</h2>
+                <p class="text-ems-gray mt-2 text-sm">正常成人安靜休息時呼吸速率約為每分鐘 10 - 20 次。評估需包含深、淺、快、慢與異常作功。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-ems-navy mb-3">🫁 呼吸窘迫生理危急特徵</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="p-3 bg-slate-50 rounded">
+                            <strong class="text-ems-blue block mb-1">呼吸音異常：</strong>
+                            • <strong>哮鳴音 (Wheezing):</strong> 吐氣高音調，下呼吸道阻塞。<br>
+                            • <strong>喘鳴音 (Stridor):</strong> 吸氣高音調，上呼吸道阻塞。<br>
+                            • <strong>咕嚕聲 (Grunting):</strong> 吐氣低音調。
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded">
+                            <strong class="text-ems-orange block mb-1">危急高代償姿勢：</strong>
+                            • <strong>聞東西姿勢 (Sniffing Position):</strong> 提示上呼吸道阻塞。<br>
+                            • <strong>三腳架姿勢 (Tripod Position):</strong> 雙手撐膝，提示下呼吸道阻塞（如 COPD 病人）。
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded">
+                            <strong class="text-slate-700 block mb-1">輔助肌作功：</strong>
+                            出現鼻翼煽動，或肋間肌、肋下肌、胸骨上及鎖骨上凹陷，提示呼吸功極度增加，隨時有衰竭可能。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 異常呼吸型態對照表</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">呼吸型態</th>
+                                    <th class="w-1/3">定義 / 生理特徵</th>
+                                    <th>常見到院前臨床病因</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="font-bold">過度換氣 (Hyperventilation)</td><td>規則性、速度加快之深呼吸。</td><td>代謝性酸中毒（如 DKA）、嚴重缺氧（肺栓塞、高海拔）、焦慮恐慌。</td></tr>
+                                <tr><td class="font-bold">呼吸過速 (Tachypnea)</td><td>每分鐘呼吸次數大於 20 次。</td><td>發燒、中暑代償、輕中度疼痛、嚴重缺氧早期。</td></tr>
+                                <tr><td class="font-bold">呼吸徐緩 (Bradypnea)</td><td>每分鐘呼吸次數小於 10 次。</td><td>中樞神經藥物中毒（如嗎啡、鎮靜劑）、嚴重末期腦傷。</td></tr>
+                                <tr><td class="font-bold">閉氣式呼吸 (Apneustic)</td><td>在吸氣末期後發生長時間之閉氣。</td><td>腦幹（橋腦）處之嚴重損傷或病變。</td></tr>
+                                <tr class="bg-red-50 text-red-900 font-medium">
+                                    <td class="font-bold text-red-600">瀕死或喘息式呼吸<br>(Agonal or Gasping)</td>
+                                    <td class="text-red-700">極慢、不規則且長之深呼吸。</td>
+                                    <td class="font-bold text-red-600">絕對無效呼吸！常見於突然心跳停止 (OHCA) 病人之初期微弱生理反射，必須立即施予 CPR。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-3" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其三</div>
+                <h2 class="text-3xl font-bold text-ems-navy">脈搏評估 (Pulse)</h2>
+                <p class="text-ems-gray mt-2 text-sm">正常成人清醒且休息時每分鐘脈搏約為 60 - 100 次。需評估速率、節律與強度。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-ems-navy mb-3">💓 脈搏生理連動要點</h3>
+                    <ul class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                        <li><strong>觸摸量測：</strong>初級評估時以食指、中指觸摸橈動脈或評估頸動脈，量測 10 秒鐘心跳數再乘以 6。</li>
+                        <li class="p-3 bg-orange-50 text-orange-900 rounded border-l-4 border-ems-orange">
+                            <strong>體溫連動關係（高頻考點）：</strong><br>
+                            發燒通常會引致脈搏增加，<strong>當體溫每上升 1°C，脈搏每分鐘約增加 8 ~ 10 次</strong>。
+                        </li>
+                        <li><strong>變慢因素：</strong>低體溫、服用強心劑（如毛地黃類藥物）、或是長期受過訓練的運動員在休息狀態。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-ems-navy mb-3">🩸 臨床觸摸脈搏預估最低收縮壓 (P.41)</h3>
+                    <p class="text-[11px] text-slate-500 mb-2">當無法立即量測血壓計時，可藉由能觸摸到的動脈部位，粗估傷病患的最低收縮壓臨界值。</p>
+                    <table class="data-table text-xs text-center">
+                        <thead>
+                            <tr>
+                                <th class="text-left">可觸摸到的動脈部位</th>
+                                <th>代表收縮壓至少為</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="text-left font-bold">頸動脈點 (Carotid pulse)</td><td class="text-ems-orange font-bold">60 mmHg</td></tr>
+                            <tr><td class="text-left font-bold">股動脈點 (Femoral pulse)</td><td class="text-ems-orange font-bold">70 mmHg</td></tr>
+                            <tr><td class="text-left font-bold">肱動脈點 (Brachial pulse)</td><td class="text-ems-orange font-bold">70 mmHg</td></tr>
+                            <tr><td class="text-left font-bold">橈動脈點 (Radial pulse)</td><td class="text-ems-orange font-bold">80 mmHg</td></tr>
+                            <tr><td class="text-left font-bold">足背動脈點 (Dorsalis pedis pulse)</td><td class="text-ems-orange font-bold">90 mmHg</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-4" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其四</div>
+                <h2 class="text-3xl font-bold text-ems-navy">血壓量測 (Blood Pressure)</h2>
+                <p class="text-ems-gray mt-2 text-sm">血壓單位為毫米汞柱 (mmHg)。收縮壓為心室收縮時排血產生的最高壓力；舒張壓為心室舒張時血管內的最低壓力。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 表 2-4：衛生福利部國民健康署 血壓參考標準</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs text-center">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/3 text-left">分類</th>
+                                    <th class="w-1/3">收縮壓 (Systolic, mmHg)</th>
+                                    <th class="w-1/3">舒張壓 (Diastolic, mmHg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-green-700 font-medium">
+                                    <td class="text-left font-bold">正常血壓</td>
+                                    <td>&lt; 120</td>
+                                    <td>且 &lt; 80</td>
+                                </tr>
+                                <tr class="bg-slate-50 text-slate-700">
+                                    <td class="text-left font-bold text-amber-600">高血壓前期</td>
+                                    <td>120 - 139</td>
+                                    <td>或 80 - 89</td>
+                                </tr>
+                                <tr class="bg-orange-50 text-orange-950">
+                                    <td class="text-left font-bold text-ems-orange">高血壓第一期</td>
+                                    <td>140 - 159</td>
+                                    <td>或 90 - 99</td>
+                                </tr>
+                                <tr class="bg-red-50 text-red-950 font-bold">
+                                    <td class="text-left text-red-600">高血壓第二期</td>
+                                    <td>&ge; 160</td>
+                                    <td>或 &ge; 100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-xs leading-relaxed space-y-2">
+                    <h4 class="font-bold text-ems-navy text-sm">💡 量測操作注意事項與限制：</h4>
+                    <p>• <strong>操作規範：</strong> 壓脈帶應綁於傷病患肘關節上 2 指高度（約 3 公分），鬆緊度應留 1 - 2 根手指能伸入進出的空隙，避免數據不準。</p>
+                    <p>• <strong>姿勢影響：</strong> 姿勢變化會造成血壓變動（血壓值：站姿 &gt; 坐姿 &gt; 平躺）。若由躺姿驟然站立時，收縮壓急速下降達 20 mmHg 以上且出現頭暈、出冷汗，臨床稱為<strong>姿勢性低血壓</strong>。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-5" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其五</div>
+                <h2 class="text-3xl font-bold text-ems-navy">瞳孔變化 (Pupil)</h2>
+                <p class="text-ems-gray mt-2 text-sm">正常人兩眼瞳孔應等大（約 2-4mm）、圓形且對光有迅速收縮的反應。為到院前探查中中樞神經病變的重要指標。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 瞳孔臨床異常表徵對照表</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">瞳孔異常型態</th>
+                                    <th class="w-1/4">數據定義</th>
+                                    <th>可能之臨床損傷與中毒病因</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-bold text-ems-orange">瞳孔不等大<br>(Anisocoria)</td>
+                                    <td class="font-medium">兩眼瞳孔相差 <strong>1 mm 以上</strong>。</td>
+                                    <td>嚴重腦損傷、顱內出血（致使腦壓上升、顱內壓上升 IICP）、腦袋內病變（腦瘤、動眼神經受損）。</td>
+                                </tr>
+                                <tr class="bg-red-50 text-red-950">
+                                    <td class="font-bold text-red-600">針尖狀瞳孔<br>(Pinhole)</td>
+                                    <td class="font-medium text-red-700">小於 2 mm。</td>
+                                    <td class="font-bold">臨床三大魔王病因：1. 橋腦出血。2. 有機磷農藥（殺蟲劑）中毒。3. 鴉片類（毒品/嗎啡）藥物中毒。</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold">瞳孔散大</td>
+                                    <td class="font-medium">大於 4 mm 且對光無反應。</td>
+                                    <td>重度中樞神經缺氧、末期嚴重腦出血、抗乙醯膽鹼藥物中毒（如阿托品類藥物散瞳效應）。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-[11px] text-slate-500 mt-3">評估方式：用筆燈從眼睛外側水平 45 度角照射眼睛，觀察兩眼雙側光反射是否對等、有無遲鈍。</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-6" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其六</div>
+                <h2 class="text-3xl font-bold text-ems-navy">體溫量測 (Body Temperature)</h2>
+                <p class="text-ems-gray mt-2 text-sm">分為反映生命重要器官（腦、心、腎）的「核心體溫」與「體表溫度」。耳溫與肛溫較能準確代表核心溫度。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 lg:col-span-1">
+                    <h3 class="font-bold text-ems-navy mb-3">🌡️ 體溫基礎常識</h3>
+                    <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+                        <li><strong>核心體溫：</strong> 由腦部「下視丘」負責體溫調節中樞，正常成人恆定值約為 36.5°C ~ 37.5°C。</li>
+                        <li><strong>體表溫度：</strong> 指表層皮膚、皮下組織及肌肉等溫度，易受環境對流、傳導、輻射影響（如額溫、腋溫，正常成人約 36.0°C）。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-ems-navy mb-3">❄️ 低體溫症 (Hypothermia) 臨床分期表</h3>
+                    <p class="text-[11px] text-slate-500 mb-2">當暴露於寒冷、溺水或嚴重外傷導致核心體溫 <strong>低於 35°C</strong> 時，定義為低體溫，代償機制會改變：</p>
+                    <table class="data-table text-xs">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">低體溫分期</th>
+                                <th class="w-1/4">核心體溫範圍</th>
+                                <th>傷病患前線生理機轉與特徵</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="font-bold text-blue-700">輕度低體溫</td><td>32°C - 35°C</td><td>身體骨骼肌會自發性劇烈<strong>發抖</strong>以產生熱能代償。</td></tr>
+                            <tr class="bg-orange-50"><td class="font-bold text-ems-orange">中度低體溫</td><td>28°C - 32°C</td><td>核心溫度過低導致代償衰竭，<strong>身體發抖減少或停止</strong>，意識開始模糊、變得呆滯。</td></tr>
+                            <tr class="bg-red-50 text-red-950 font-bold">
+                                <td class="text-red-600">重度低體溫</td>
+                                <td>&lt; 28°C</td>
+                                <td>身體機制完全崩潰，發抖完全停止，意識呈現深度昏迷、心律不整。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-7" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其七</div>
+                <h2 class="text-3xl font-bold text-ems-navy">膚色表徵 (Skin Color)</h2>
+                <p class="text-ems-gray mt-2 text-sm">膚色為身體循環及氧合狀況呈現於外在皮膚之表現。評估通常需結合溫度、潮溼度（如濕冷、溫乾）共同判讀。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 四大異常膚色臨床意義對照表</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs text-center">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">膚色表現</th>
+                                    <th class="w-1/4">微血管生理狀況</th>
+                                    <th class="w-2/4 text-left">到院前常見臨床意義與休克病因</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-bold text-slate-500 bg-slate-50">蒼白 (Pale)</td>
+                                    <td>表皮微血管灌流不足。</td>
+                                    <td class="text-left">一般代表末梢血液灌流嚴重缺乏，如<strong>失血性休克</strong>、重大創傷、嚴寒環境。皮膚潮溼且冷常提示休克代償期。</td>
+                                </tr>
+                                <tr class="bg-blue-50 text-blue-950">
+                                    <td class="font-bold text-blue-600">發紺 (Cyanotic)</td>
+                                    <td>血液中去氧血紅素過高。</td>
+                                    <td class="text-left">代表血液中氧氣含量太低，常見於<strong>呼吸道完全阻塞、嚴重氣喘、溺水、肺泡氣體交換不良</strong>等危急缺氧疾病。</td>
+                                </tr>
+                                <tr class="bg-red-50 text-red-950">
+                                    <td class="font-bold text-red-600">潮紅 (Flushed)</td>
+                                    <td>周邊血管過度擴張。</td>
+                                    <td class="text-left">可見於劇烈運動、高熱環境<strong>熱急症（如中暑）</strong>，或因脊髓受損導致交感神經中斷引起的<strong>神經性休克（溫乾的皮膚）</strong>。</td>
+                                </tr>
+                                <tr class="bg-yellow-50 text-amber-950">
+                                    <td class="font-bold text-amber-600">黃疸 (Jaundiced)</td>
+                                    <td>膽紅素過高堆積。</td>
+                                    <td class="text-left">提示病人可能有肝臟、膽囊方面的疾病或系統性溶血。</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-vs-8" class="view-section hidden">
+            <header class="mb-6">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">八大生命徵象 - 其八</div>
+                <h2 class="text-3xl font-bold text-ems-navy">血氧濃度 (Pulse Oximetry / SpO2)</h2>
+                <p class="text-ems-gray mt-2 text-sm">血氧飽和度代表血紅素攜帶氧氣的程度。到院前一般以血氧濃度 <strong>低於 94%</strong> 作為缺氧與給氧的評估依據。</p>
+            </header>
+
+            <div class="space-y-6">
+                <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white">
+                    <h3 class="text-lg font-bold text-ems-blue mb-3 flex items-center gap-1.5">
+                        <span>⚠️ 致命陷阱：血紅素載體異常（最常考考點）</span>
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        常規到院前血氧分析儀<strong>完全無法偵測血液中的變性血紅素及一氧化碳血紅素</strong>！<br>
+                        因此，在火災現場或<strong>一氧化碳 (CO) 中毒</strong>的環境中，儀器會誤將一氧化碳結合的血紅素當作氧氣，在螢幕上呈現<span class="text-ems-orange font-bold text-sm">偽陽性的正常高血氧值（例如 99% 或 100%）</span>。前線 EMT 絕不可盲目依賴儀器，應根據火災環境直接給予高濃度氧氣治療！
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-ems-navy mb-3">📋 影響血氧計 ($SpO_2$) 準確度之六大限制因素表</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table text-xs">
+                            <thead>
+                                <tr>
+                                    <th class="w-1/4">干擾因素項目</th>
+                                    <th>干擾生理機轉與細節</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="font-bold">1. 一氧化碳中毒</td><td>無法辨識變性血紅素，造成偽陽性的高數值讀數。</td></tr>
+                                <tr><td class="font-bold">2. 末梢指尖冰冷</td><td>身體長環境曝露在低溫天氣或休克，造成血管極度收縮，血流不足使數值偏低或不顯示。</td></tr>
+                                <tr><td class="font-bold">3. 指端物品干擾</td><td>指甲塗抹指甲油、指甲有嚴重污垢、指甲床過厚或有灰指甲，均會阻礙紅外線穿透。</td></tr>
+                                <tr><td class="font-bold">4. 同側肢體血壓干擾</td><td>血氧分析儀與血壓計壓脈帶綁在「同一側肢體」，當血壓計充氣阻斷肢體血流時，會造成血氧無法讀取。</td></tr>
+                                <tr><td class="font-bold">5. 探頭指套位移</td><td>指甲床未精準對正紅光，或是探頭大小不符合，手指探入過深、過淺。</td></tr>
+                                <tr><td class="font-bold">6. 高海拔低氣壓</td><td>高海拔（低氧分壓）環境，大氣氧分壓低，正常人的 SpO2 數值亦會生理性降低。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // 側邊欄切換畫面
+        function switchView(viewId, btnElement) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('block', 'fade-in');
+                el.classList.add('hidden');
+            });
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            void target.offsetWidth; 
+            target.classList.add('block', 'fade-in');
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+
+        // 人體各系統資料庫 (P.38 - P.49)
+        const systemsData = {
+            1: {
+                t: "🧠 神經系統 (P.38)",
+                c: "<p><strong class='text-white text-base'>1. 中樞神經系統 (CNS)</strong></p><ul class='list-disc pl-5 space-y-1 mb-3'><li><strong>大腦：</strong>主管意識、思考、感覺。兩側大腦半球控制身體對側的運動。</li><li><strong>小腦：</strong>協調身體姿勢與不隨意的大動作。</li><li><strong class='text-ems-orange'>延腦 (生命中樞)：</strong>控制心跳速率、血管舒縮、呼吸節律、吞嚥與嘔吐。</li><li><strong>脊髓：</strong>人體分 31 個脊髓節（頸 8、胸 12、腰 5、薦 5、尾 1）。</li></ul><p><strong class='text-white text-base'>2. 周邊與自主神經系統</strong></p><ul class='list-disc pl-5 space-y-1'><li><strong class='text-ems-orange'>交感神經：</strong>「戰鬥或逃跑」，使心跳加快、血管收縮、瞳孔放大、支氣管擴張。</li><li><strong class='text-ems-blue'>副交感神經：</strong>「休息與消化」，使心跳變慢、促進消化腺分泌。</li></ul>"
+            },
+            2: {
+                t: "🫁 呼吸系統 (P.40)",
+                c: "<p><strong class='text-white'>氣體交換單位：</strong>由鼻、喉、氣管、支氣管、肺至<span class='text-ems-blue font-bold'>肺泡</span>進行氣體交換。正常成人潮氣量 (Tidal Volume) 介於 <strong class='text-white'>300 ~ 700 mL</strong> (6~8 mL/kg)。</p><ul class='list-disc pl-5 space-y-1 text-sm mt-3'><li><strong class='text-white'>外呼吸 (肺呼吸)：</strong>在肺泡與微血管間進行。氧氣進入血液，二氧化碳排出。</li><li><strong class='text-white'>內呼吸 (組織呼吸)：</strong>在微血管與全身組織間進行。</li><li><strong class='text-white'>呼吸原理：</strong>吸氣為「主動」（橫膈膜與外肋間肌收縮）；呼氣為「被動」。成人正常呼吸速率約 <strong class='text-white'>10~20 次/分</strong>。</li></ul>"
+            },
+            3: {
+                t: "❤️ 循環系統 (P.41)",
+                c: "<p><strong class='text-white'>心臟腔室與血流：</strong></p><ul class='list-disc pl-5 space-y-1 text-sm mt-2'><li><strong class='text-ems-blue'>右心室：</strong>將缺氧血打入肺動脈，進行肺循環（小循環）。</li><li><strong class='text-ems-orange'>左心室：</strong>將充氧血打入主動脈，送至全身微血管進行體循環（大循環）。</li></ul><p class='mt-3'><strong class='text-white'>動脈預估血壓 (P.41)：</strong>能摸到脈搏代表最低收縮壓。</p><ul class='list-disc pl-5 mt-1 text-sm'><li>頸動脈：60 mmHg</li><li>股動脈 / 肱動脈：70 mmHg</li><li>橈動脈：80 mmHg</li><li>足背動脈：90 mmHg</li></ul>"
+            },
+            4: {
+                t: "🦴 骨骼肌肉系統 (P.42-44)",
+                c: "<p><strong class='text-white text-base'>1. 骨骼系統</strong></p><ul class='list-disc pl-5 space-y-1 mb-3'><li>成人約有 <strong class='text-white'>206 塊</strong> 骨骼。</li><li>脊柱分類：頸椎(7)、胸椎(12)、腰椎(5)、薦椎(5)、尾椎(4)。</li><li><strong class='text-ems-blue'>肌腱：</strong>連接肌肉與骨骼。</li><li><strong class='text-ems-orange'>韌帶：</strong>連接骨骼與骨骼。</li></ul><p><strong class='text-white text-base'>2. 肌肉系統</strong></p><ul class='list-disc pl-5 space-y-1'><li><strong>骨骼肌：</strong>為隨意肌，有橫紋。</li><li><strong>平滑肌：</strong>為不隨意肌，無橫紋 (如腸胃道內臟壁)。</li><li><strong>心肌：</strong>為不隨意肌，有橫紋 (組成心臟壁)。</li></ul>"
+            },
+            5: {
+                t: "🩸 內分泌系統 (P.44-45)",
+                c: "<p>內分泌腺分泌<span class='text-ems-blue font-bold'>激素 (荷爾模)</span>，直接進入血液調節身體機能。</p><ul class='list-disc pl-5 space-y-2 text-sm mt-3'><li><strong class='text-white'>腦下垂體：</strong>內分泌總指揮，位於腦底部。</li><li><strong class='text-white'>甲狀腺：</strong>位於頸部，分泌甲狀腺素，調節全身細胞代謝速率。</li><li><strong class='text-white'>副甲狀腺：</strong>調節血液中鈣和磷的濃度。</li><li><strong class='text-ems-orange'>腎上腺：</strong>位於腎臟上方。髓質分泌「腎上腺素」與「正腎上腺素」，幫助身體應付緊急壓力情況。</li><li><strong class='text-white'>胰島：</strong>位於胰臟內，分泌胰島素 (降低血糖) 與升糖素 (升高血糖)。</li></ul>"
+            },
+            6: {
+                t: "🍔 消化與免疫系統 (P.45-47)",
+                c: "<p><strong class='text-white text-base'>消化系統 (P.45-46)</strong></p><ul class='list-disc pl-5 space-y-1 mb-3 text-sm'><li><strong class='text-white'>消化道：</strong>口、咽、食道、胃、小腸 (空腸/迴腸)、大腸 (盲腸/結腸/直腸)、肛門。</li><li><strong class='text-ems-orange'>肝臟：</strong>腹部最大的實質臟器。分泌<strong class='text-ems-blue'>膽汁</strong> (儲存於膽囊中)，負責乳化脂肪；並具有解毒與代謝功能。</li><li><strong class='text-white'>胃：</strong>分泌胃酸與蛋白酶，在酸性環境下分解蛋白質。</li></ul><p><strong class='text-white text-base'>免疫系統 (P.47)</strong></p><ul class='list-disc pl-5 text-sm'><li>人體抵抗病原的最重要保衛系統。包含骨髓、胸腺、脾臟、淋巴結等器官，以及白血球、抗體等免疫細胞與分子。</li></ul>"
+            },
+            7: {
+                t: "🚻 泌尿與生殖系統 (P.47-48)",
+                c: "<p><strong class='text-white text-base'>泌尿系統 (P.47-48)</strong></p><ul class='list-disc pl-5 space-y-1 mb-3 text-sm'><li><strong class='text-white'>腎臟：</strong>過濾血液製造尿液，並調節電解質與血壓。每顆腎臟約有100萬個「腎元」(過濾單位)。</li><li><strong class='text-white'>輸尿管：</strong>將尿液送至膀胱，長約30公分。</li><li><strong class='text-white'>膀胱：</strong>儲存尿液的中空器官。</li><li><strong class='text-white'>尿道：</strong>女性約 3-4 公分 (較易感染)，男性約 18-20 公分。</li></ul><p><strong class='text-white text-base'>生殖系統 (P.48-49)</strong></p><ul class='list-disc pl-5 text-sm'><li>男性：睪丸、副睪、輸精管、前列腺等。</li><li>女性：卵巢 (製造卵子與激素)、輸卵管、子宮、陰道。</li></ul>"
+            },
+            8: {
+                t: "👁️ 皮膚與感官系統 (P.49)",
+                c: "<p><strong class='text-white text-base'>皮膚系統 (P.49)</strong></p><ul class='list-disc pl-5 space-y-1 mb-3 text-sm'><li>人體<strong class='text-ems-orange'>最大的「系統」</strong>，為抵禦外來侵擾的第一道防線。</li><li>具有保護、調節體溫、儲存能量、接受感覺及分泌排泄等功能。</li><li>分層：表皮層、真皮層 (含毛囊、血管、神經) 及皮下組織。</li></ul><p><strong class='text-white text-base'>感官系統 - 眼睛 (P.49)</strong></p><ul class='list-disc pl-5 text-sm'><li><strong class='text-white'>角膜：</strong>透明組織，讓光線進入。</li><li><strong class='text-ems-blue'>瞳孔：</strong>虹膜中間的洞形，光線強時縮小，光線暗時放大。</li><li><strong class='text-white'>視網膜：</strong>佈滿感光細胞與神經纖維，是視力最重要的地方。</li></ul>"
+            }
+        };
+
+        function showSystem(id) {
+            document.getElementById('sys-title').innerText = systemsData[id].t;
+            document.getElementById('sys-content').innerHTML = systemsData[id].c;
+            
+            document.querySelectorAll('.sys-card').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-sys-' + id).classList.add('active');
+
+            const contentDiv = document.getElementById('sys-content');
+            contentDiv.style.opacity = '0';
+            setTimeout(() => {
+                contentDiv.style.transition = 'opacity 0.2s ease-in';
+                contentDiv.style.opacity = '1';
+            }, 50);
+        }
+    </script>
+</body>
+</html>
