@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 讀書會 - 第三章：緊急醫療救護職業安全 (全)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
+                    colors: {
+                        ems: {
+                            navy: '#1e293b',
+                            blue: '#0284c7',
+                            light: '#f8fafc',
+                            orange: '#ea580c',
+                            gray: '#64748b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin: auto; height: 260px; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-item.active { background-color: #0284c7; color: white; border-left: 4px solid #ea580c; }
+        .duty-card { transition: all 0.2s; cursor: pointer; }
+        .duty-card:hover, .duty-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">職業安全與風險管理</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第三章〈緊急醫療救護職業安全〉</div>
+            
+            <button onclick="switchView('view-safety-intro', this)" class="nav-item active w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">01 職業安全概論</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.64 - P.65</span>
+            </button>
+            
+            <button onclick="switchView('view-musculoskeletal', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">02 肌肉骨骼與搬運</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.66 - P.69</span>
+            </button>
+            
+            <button onclick="switchView('view-infection', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">03 針紮與傳染病防治</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.70 - P.71</span>
+            </button>
+            
+            <button onclick="switchView('view-ambulance-safety', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">04 救護車安全與停放</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.72 - P.79</span>
+            </button>
+            
+            <button onclick="switchView('view-psychology-death', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">05 面對死亡與心理建設</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.82 - P.83</span>
+            </button>
+            
+            <button onclick="switchView('view-ptsd-safety2', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-base">06 PTSD 與安全文化</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.84 - P.87</span>
+            </button>
+        </div>
+        
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">
+            消防署最新教材修訂版連載中
+        </div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        
+        <section id="view-safety-intro" class="view-section p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.64 - P.65</div>
+                <h2 class="text-3xl font-bold text-ems-navy">救護職業安全概論</h2>
+                <p class="text-ems-gray mt-2 text-lg">救護現場充滿未知與動態風險，樹立牢固的「安全文化」是平安回家唯一的路。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">⚠️</span> 現場安全與安全第三
+                    </h3>
+                    <div class="space-y-4 text-slate-700">
+                        <p>一直以來，<b class="text-ems-navy">「現場是否安全？」、「安全！」</b>已經是全國 EMT 朗朗上口、心照不宣的組織密語。這暗示如果無法確認安全，就沒有接下來的救護作為。</p>
+                        
+                        <div class="p-3 bg-blue-50 border-l-4 border-ems-blue rounded text-sm">
+                            <p><b class="text-ems-navy">💡 外傷救護的典範轉移：TECC</b></p>
+                            <p>美國發展了 TECC (戰術緊急傷患照護)，強調主動判斷所在的「動態風險等級」並根據分級行動，而非僅被動等待警方淨空現場。</p>
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg text-center shadow-inner">
+                            <p class="text-sm text-slate-500 mb-1">「安全第三」的核心重點</p>
+                            <p class="font-bold text-ems-orange text-lg">「誠實面對現實，認清救護工作本質上的危險，將風險降到最低。」</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-blue text-2xl">📊</span> 消防人員傷亡數據 (113年度)
+                    </h3>
+                    <p class="text-xs text-ems-gray mb-2">根據消防署統計，各勤務類別傷亡案件中，緊急救護佔比最高！</p>
+                    <div class="chart-container">
+                        <canvas id="injuryChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-musculoskeletal" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.66 - P.69</div>
+                <h2 class="text-3xl font-bold text-ems-navy">肌肉骨骼傷害與搬運技巧</h2>
+                <p class="text-ems-gray mt-2 text-lg">工作相關肌肉骨骼疾病 (WMSDs) 是 EMT 最常見的職業傷害，其中扭傷和拉傷佔了 67%（43% 涉及背部）。</p>
+            </header>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="text-lg font-bold text-ems-navy mb-3">🚨 搬運前的事前規劃與評估 (P.67-68)</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                    <div class="p-3 bg-red-50 border border-red-100 rounded">
+                        <span class="font-bold text-ems-orange">1. 風險評估</span><br>評估病人體重、環境限制與現有資源。
+                    </div>
+                    <div class="p-3 bg-blue-50 border border-blue-100 rounded">
+                        <span class="font-bold text-ems-blue">2. 尋求協助</span><br>若有顧慮務必請求支援，切勿冒險。
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+                        <span class="font-bold text-ems-navy">3. 溝通</span><br>團隊與病人清楚溝通，保持口令。
+                    </div>
+                    <div class="p-3 bg-slate-50 border border-slate-200 rounded">
+                        <span class="font-bold text-ems-navy">4. 器材</span><br>評估合適器材並熟悉操作。
+                    </div>
+                    <div class="p-3 bg-emerald-50 border border-emerald-100 rounded">
+                        <span class="font-bold text-emerald-700">5. 病人移動能力</span><br>評估能否坐起、站立或自己走。
+                    </div>
+                    <div class="p-3 bg-emerald-50 border border-emerald-100 rounded">
+                        <span class="font-bold text-emerald-700">6. 環境評估</span><br>注意潛在危險，如濕滑或狹窄空間。
+                    </div>
+                    <div class="p-3 bg-purple-50 border border-purple-100 rounded col-span-2 md:col-span-2">
+                        <span class="font-bold text-purple-700">7. 替代方案</span><br>是否有替代方案可避免徒手搬運？徒手搬運應是最後手段。
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-5 grid grid-cols-2 gap-2">
+                    <div class="col-span-2 text-xs font-bold text-ems-gray pb-1">✍️ 個人搬運核心 8 大原則 (點擊查看)</div>
+                    <button onclick="showDuty(1)" id="btn-duty-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">1. 保持良好姿勢</button>
+                    <button onclick="showDuty(2)" id="btn-duty-2" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">2. 啟動核心肌群</button>
+                    <button onclick="showDuty(3)" id="btn-duty-3" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">3. 靠近重物搬運</button>
+                    <button onclick="showDuty(4)" id="btn-duty-4" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">4. 避免突然動作</button>
+                    <button onclick="showDuty(5)" id="btn-duty-5" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">5. 面對移動方向</button>
+                    <button onclick="showDuty(6)" id="btn-duty-6" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">6. 適當施力不勉強</button>
+                    <button onclick="showDuty(7)" id="btn-duty-7" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">7. 負重自我限制</button>
+                    <button onclick="showDuty(8)" id="btn-duty-8" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700">8. 適時安排休息</button>
+                </div>
+
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-6 shadow-md flex flex-col justify-between">
+                    <div>
+                        <h3 id="duty-title" class="text-xl font-bold text-ems-blue mb-3 border-b border-slate-700 pb-2">1. 保持良好姿勢 (維持脊椎自然挺直)</h3>
+                        <div id="duty-content" class="text-sm text-slate-300 leading-relaxed">
+                            <p class="mb-2 font-bold text-white">【重要觀念：課本圖 3-3 脊椎受力影響】</p>
+                            <p>搬運時應隨時保持背部挺直，避免彎腰或扭轉身體。不良的彎腰姿勢會使脊椎承受嚴重的剪力與集中高壓，極易造成肌肉拉傷或椎間盤突出。請利用髖關節與膝關節屈伸，而非彎曲腰椎。</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-slate-800 rounded border border-slate-700 text-xs text-ems-orange font-bold">
+                        💡 臨床實務建議：多利用現代化輔助搬運裝備（如電動擔架床，研究顯示可降低整體傷害率 14%、與搬運相關的重傷率降低 50.4%）。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-infection" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.70 - P.71</div>
+                <h2 class="text-3xl font-bold text-ems-navy">針紮感染風險與傳染病防治</h2>
+                <p class="text-ems-gray mt-2 text-lg">執行 IV、血糖監測、呼吸道處置時，存在高度生物性風險，必須落實標準防護。</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 md:col-span-2">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3">🩹 針紮感染預防措施與處置</h3>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-3">
+                        <li><b>個人防護裝備 (PPE)：</b>救護全程戴手套。戴口罩，必要時戴護目鏡、穿防護衣，在防護措施未完備前應與傷病患保持一公尺之安全距離。</li>
+                        <li><b>使用安全針具：</b>推薦使用具備安全防針紮設計的針具（如自動回縮或針頭防護罩），嚴禁單手回套針帽。</li>
+                        <li><b>立即棄置：</b>使用完畢之銳利物須立刻放入堅固、耐穿刺的「銳利物收集箱」中。</li>
+                        <li><b>暴露後處理：</b>若不慎發生針紮，應立即以清水與肥皂沖洗傷口、回報長官、並迅速至醫院接受醫學評估與暴露後預防處置（PEP）。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-2">🦠 常見傳染病四大家族</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="p-2 bg-red-50 rounded border-l-4 border-red-500">
+                            <b>1. 呼吸道傳染：</b>新冠病毒(COVID-19)、流感、肺結核（飛沫或空氣傳播）。
+                        </div>
+                        <div class="p-2 bg-red-50 rounded border-l-4 border-red-500">
+                            <b>2. 血液傳染：</b>愛滋病毒(HIV)、B型肝炎、C型肝炎（血液或體液傳播）。
+                        </div>
+                        <div class="p-2 bg-amber-50 rounded border-l-4 border-amber-500">
+                            <b>3. 消化道傳染：</b>霍亂、沙門氏菌（糞口傳染、受污染水源食物）。
+                        </div>
+                        <div class="p-2 bg-amber-50 rounded border-l-4 border-amber-500">
+                            <b>4. 接觸傳染：</b>疥瘡、麻疹、手足口病（皮膚接觸、受污染物品）。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-ambulance-safety" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.72 - P.79</div>
+                <h2 class="text-3xl font-bold text-ems-navy">救護車行駛安全與事故現場停放原則</h2>
+                <p class="text-ems-gray mt-2 text-lg">研究顯示，EMS 人員因車禍死亡的機率高達 45%。安全駕駛與科學停車是保障防線。</p>
+            </header>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 mb-6 border-l-4 border-red-600">
+                <h3 class="font-bold text-lg text-ems-navy mb-2">🥊 暴力傷害風險 (P.72)</h3>
+                <p class="text-sm text-slate-600">
+                    約有 <b>4% 的 EMT 職業傷害與暴力事件有關</b>。這些事件可能來自病人（因疾病失控）、家屬或現場目擊者情緒激動引發。EMT 應接受應對暴力的專業訓練（如危機處理小組），並要求在<b>高風險勤務中配備警力支援</b>，避免身體遭受威脅。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3">🚦 通過十字路口安全防禦 (NAEMT 建議)</h3>
+                    <p class="text-xs text-ems-gray mb-3">臺灣救護車事故大多發生在路口（佔致命路口事故 62.5%）。請落實以下步驟：</p>
+                    <div class="space-y-1.5 text-sm text-slate-600 flex-1">
+                        <p><b>1. 警示操作：</b>接近路口前，切換警報器頻率並短促按喇叭提醒他人。</p>
+                        <p><b>2. 觀察與確認：</b>確認各方交通狀況、監聽無線電，注意盲點車輛。</p>
+                        <p><b>3. 完全停止：</b>在路口停止線前「完全煞停」，與其他車輛確認眼神。</p>
+                        <p><b>4. 逐步前進：</b>進入路口後持續按喇叭與閃燈，確認車流停止後再通過。</p>
+                        <p><b>5. 每車道逐步通行：</b>逐一確認每個車道的駕駛都已讓出路權。</p>
+                        <p><b>6. 確認安全：</b>持續觀察車流，直至完全通過路口並進入計畫車道。</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3">🚒 事故現場車輛停放與區域劃分</h3>
+                    <div class="space-y-2 text-sm text-slate-600 mb-4">
+                        <div class="p-2 bg-blue-50 rounded">
+                            <b>創造安全工作區（擋車配置）：</b><br>
+                            消防車、救護車應以 <b>15 至 45 度的斜角停放</b>，將現場與其他車道安全隔離。
+                        </div>
+                        <div class="p-2 bg-amber-50 rounded">
+                            <b>提升人員辨識度與警告距離：</b><br>
+                            一般道路應在 <b>30 至 100 公尺以上</b>；高（快）速公路應在 100 公尺以上。
+                        </div>
+                    </div>
+                    <div class="mt-auto border-2 border-dashed border-slate-300 rounded-lg p-2 text-center bg-slate-50">
+                        <img src="img-3-1.png" alt="圖 3-11 事故現場車輛停放示意圖" class="mx-auto max-h-40 object-contain mix-blend-multiply" onerror="this.style.display='none'; document.getElementById('img-alt-1').style.display='block';">
+                        <span id="img-alt-1" class="text-slate-400 font-bold hidden py-8">[請在此放置圖 3-11 停放示意圖 img-3-1.png]</span>
+                        <p class="text-xs text-slate-500 mt-2 font-bold">圖 3-11 事故現場車輛停放示意圖</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-psychology-death" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.82 - P.83 & P.74</div>
+                <h2 class="text-3xl font-bold text-ems-navy">面對病人死亡之心理建設與壓力評估</h2>
+                <p class="text-ems-gray mt-2 text-lg">接受死亡是工作的一部分，唯有健康的 EMT 才能提供高質量的醫療服務。</p>
+            </header>
+
+            <div class="flex flex-col gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-ems-navy">
+                        <h3 class="font-bold text-lg text-ems-navy mb-3">🤝 與家屬溝通的應對原則</h3>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+                            <li><b>同理與尊重：</b>以明確、溫和且清晰的語言傳達病人的狀況。</li>
+                            <li><b>避免術語：</b>絕不使用過於專業或含糊不清的說法，以免增加家屬的困惑或不安。</li>
+                            <li><b>給予喘息空間：</b>應給予家屬時間與空間來接受事實，理解他們可能出現悲傷、憤怒等情緒。</li>
+                            <li><b>態度穩定：</b>保持自己的情緒與態度穩定，避免受到家屬情緒劇烈波動的影響。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-emerald-500">
+                        <h3 class="font-bold text-lg text-ems-navy mb-3">🧘 壓力調適與自我照顧</h3>
+                        <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+                            <li><b>正視失落感：</b>病人未能存活時產生失落感、自責是正常的，必須認知到 EMT 並非決定生死的唯一因素。</li>
+                            <li><b>建立支持系統：</b>積極與同事、家人分享情緒，不要獨自承受。</li>
+                            <li><b>健康生活方式：</b>規律運動、充足睡眠、均衡飲食能有效減緩壓力。</li>
+                            <li><b>尋求專業協助：</b>若長期感到沮喪，應儘早尋求心理諮商。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-2">
+                    <h3 class="font-bold text-lg text-ems-navy mb-4">📝 壓力指數測量表 (P.74)</h3>
+                    <p class="text-sm text-slate-500 mb-4">請誠實評估您最近是否經常出現以下狀況：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-6 text-sm text-slate-700 bg-slate-50 p-4 rounded-lg mb-6 border border-slate-200">
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 1. 您最近是否經常感到緊張，覺得工作做不完？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 2. 您最近是否老是睡不好，常常失眠或睡眠品質不佳？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 3. 您最近是否經常有情緒低落、焦慮、煩躁的情況？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 4. 您最近是否經常忘東忘西、變得很健忘？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 5. 您最近是否經常覺得胃口不好？或胃口特別好？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 6. 您最近六個月內是否生病不只一次了？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 7. 您最近是否經常覺得疲累，假日都在睡覺？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 8. 您最近是否經常覺得頭痛、腰痠背痛？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 9. 您最近是否經常覺得意見和別人不同？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 10. 您最近是否注意力經常難以集中？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 11. 您最近是否經常覺得未來充滿不確定感？恐懼感？</label>
+                        <label class="flex items-start gap-2 cursor-pointer hover:bg-slate-100 p-1 rounded"><input type="checkbox" class="stress-check mt-1"> 12. 有人說您最近氣色不太好嗎？</label>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-ems-navy p-4 rounded-lg">
+                        <div class="flex gap-2 w-full sm:w-auto">
+                            <button onclick="calculateStress()" class="flex-1 sm:flex-auto bg-ems-blue text-white px-6 py-2 rounded font-bold hover:bg-blue-600 transition whitespace-nowrap">開始計算</button>
+                            <button onclick="clearStress()" class="flex-1 sm:flex-auto bg-slate-600 text-white px-4 py-2 rounded font-bold hover:bg-slate-500 transition whitespace-nowrap">清除勾選</button>
+                        </div>
+                        <div id="stress-result" class="text-sm font-bold text-slate-300 w-full sm:text-right mt-2 sm:mt-0">勾選並點擊計算以檢視 P.74 評估結果</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-ptsd-safety2" class="view-section p-8 md:p-12 hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.84 - P.87 [EMT-2 核心]</div>
+                <h2 class="text-3xl font-bold text-ems-navy">創傷後壓力症候群 (PTSD) 與 進階安全文化</h2>
+                <p class="text-ems-gray mt-2 text-lg">除了個人層面的身心調適，制度上的「公正文化」與「特殊場景應對」是 EMT-2 的核心素養。</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-base text-ems-navy mb-2 flex items-center gap-1">🧠 創傷後壓力症候群 (PTSD)</h3>
+                    <p class="text-xs text-slate-500 mb-2">EMT人員因高頻率目睹慘烈現場、大量傷病患或兒童死亡，為 PTSD 的極高風險族群。</p>
+                    <div class="space-y-1.5 text-xs text-slate-600 bg-red-50 p-3 rounded border border-red-100">
+                        <p><b>• 經驗重現：</b>如夢境、閃回(Flashback)，反覆目睹病人死亡的慘烈畫面。</p>
+                        <p><b>• 逃避與麻木：</b>刻意遠離相關的人事物、封閉情感、長期情緒低落。</p>
+                        <p><b>• 過度警覺：</b>睡眠障礙、易怒、難以集中注意力、過度焦慮。</p>
+                        <p><b>• 物質濫用風險：</b>研究發現，前線救護人員常出現以「酒精或藥物」作為不良對抗壓力的手段，需密切注意。</p>
+                    </div>
+                </div>
+
+                <div class="bg-ems-navy text-white p-5 rounded-xl shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-base text-ems-blue mb-2">🛡️ 組織安全管理：公正文化與 TRM</h3>
+                        <div class="space-y-2 text-xs leading-relaxed">
+                            <p class="bg-slate-800 p-2 rounded">
+                                <b class="text-ems-orange">1. 公正文化 (Just Culture)：</b><br>
+                                鼓勵人員主動報告錯誤或潛在風險，強調<b>「系統性審查 (Systematic Review)」</b>而非一味盲目懲罰個人，藉由改善流程避免悲劇重演。
+                            </p>
+                            <p class="bg-slate-800 p-2 rounded">
+                                <b class="text-ems-orange">2. 團隊資源管理 (TRM)：</b><br>
+                                源自航空業 CRM。加強前線同仁在救護現場的清晰指令、資訊共享、防範誤解，以提升高壓環境下的應變效率。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t-2 border-slate-200 pt-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="bg-ems-orange text-white px-2 py-0.5 rounded text-sm">P.86</span> 07 「安全」的其他核心關鍵議題：特殊場景應對
+                </h3>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-ems-orange">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-700">
+                        <div>
+                            <h4 class="font-bold text-ems-navy border-b pb-1 mb-2">交通與大量傷病</h4>
+                            <p>運用救護車輛作為物理屏障（斜停擋車），並穿戴高辨識度防護裝備，縮短暴露車流的時間。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-ems-navy border-b pb-1 mb-2">暴力事件應對</h4>
+                            <p>首要確保自身安全，必要時在安全位置等待警方協助。必須熟練掌握<b>口頭降溫技巧 (De-escalation)</b> 穩定個案。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-ems-navy border-b pb-1 mb-2">政策與健康管理</h4>
+                            <p>建立完整的員工協助方案 (EAP)、健康檢查，並落實定期的情境模擬演練以提升心理韌性。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // 1. 畫面切換
+        function switchView(viewId, btnElement) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('block', 'fade-in');
+                el.classList.add('hidden');
+            });
+            const target = document.getElementById(viewId);
+            target.classList.remove('hidden');
+            void target.offsetWidth; 
+            target.classList.add('block', 'fade-in');
+
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            if (viewId === 'view-safety-intro' && !window.chartInit1) {
+                initInjuryChart();
+                window.chartInit1 = true;
+            }
+        }
+
+        // 2. 113年消防人員傷亡圖表 (Chart.js)
+        window.chartInit1 = false;
+        function initInjuryChart() {
+            const ctx = document.getElementById('injuryChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['緊急救護', '火災搶救', '其他勤務', '訓練/演練', '公路勤務', '災害搶救', '風災'],
+                    datasets: [{
+                        label: '傷亡人數 (人)',
+                        data: [182, 59, 21, 17, 17, 17, 1],
+                        backgroundColor: ['#ea580c', '#64748b', '#cbd5e1', '#cbd5e1', '#cbd5e1', '#cbd5e1', '#cbd5e1'],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#f1f5f9' } },
+                        x: { grid: { display: false }, ticks: { font: { size: 10, weight: 'bold' } } }
+                    }
+                }
+            });
+        }
+
+        // 3. 搬運核心原則細節動態替換
+        const dutiesData = {
+            1: { t: "1. 保持良好姿勢 (維持脊椎自然挺直)", c: "<p class='mb-2 font-bold text-white'>【重要觀念：課本圖 3-3 脊椎受力影響】</p><p>搬運時應隨時保持背部挺直，避免彎腰或扭轉身體。不良的彎腰姿勢會使脊椎承受嚴重的剪力與集中高壓，極易造成肌肉拉傷或椎間盤突出。請利用髖關節與膝關節屈伸，而非彎曲腰椎。</p>" },
+            2: { t: "2. 啟動核心肌群並使用腿部力量", c: "<p>彎曲膝蓋的同時啟動核心肌群，並利用腿部的大肌肉群（如股四頭肌）向上推起，而不是單純使用脆弱的背部或肩膀肌肉抬起重物，以有效分擔重量、保護脊椎。</p>" },
+            3: { t: "3. 靠近重物搬運", c: "<p>盡可能靠近要搬運的物品或病人。當物品距離身體越遠，對背部產生的槓桿壓力就越大。讓重物儘量貼近身體重心，可以用最省力、最有效率的方式進行搬運。</p>" },
+            4: { t: "4. 避免突然動作", c: "<p>移動時要流暢、平穩，嚴禁任何突然的晃動或扭轉。突然的爆發性動作會讓肌肉和韌帶承受不必要的瞬間衝擊力，大幅增加急性受傷的機率。</p>" },
+            5: { t: "5. 面對移動方向", c: "<p>在移動時，保持雙腳與雙肩同寬並直立挺胸，始終面向移動的方向。身體在負重時若任意扭轉，會對脊椎施加不均勻的扭矩與側向壓力，極度危險。</p>" },
+            6: { t: "6. 適當施力不勉強", c: "<p>確保握力穩固且適度，避免過度用力導致肌肉拉傷。長期過度用力不僅容易引發關節痛，也會讓搬運動作變得僵硬不流暢，無法應對突發狀況。</p>" },
+            7: { t: "7. 負重自我限制", c: "<p>清楚認識自己的體能極限，絕不勉強搬運超越能力的重物。在搬運前先自我評估，若遇過重個案或地形險惡，應立即尋求同仁支援或使用機械輔助器材。</p>" },
+            8: { t: "8. 適時安排休息", c: "<p>在處理長時間或大重量搬運的工作時，定期休息至關重要，以防止過度疲勞。疲勞會削弱專注力與肌肉協調能力，從而增加搬運時的受傷風險。</p>" }
+        };
+
+        function showDuty(id) {
+            document.getElementById('duty-title').innerText = dutiesData[id].t;
+            document.getElementById('duty-content').innerHTML = dutiesData[id].c;
+            document.querySelectorAll('.duty-card').forEach(el => el.classList.remove('active'));
+            document.getElementById('btn-duty-' + id).classList.add('active');
+        }
+
+        // 4. 壓力檢測計算 (完全對照 P.74 級距)
+        function calculateStress() {
+            const checkedCount = document.querySelectorAll('.stress-check:checked').length;
+            const resultDiv = document.getElementById('stress-result');
+            
+            if (checkedCount <= 3) {
+                resultDiv.innerHTML = `🟢 回答 ${checkedCount} 個「是」：您的壓力指數還在能負荷的範圍。`;
+                resultDiv.className = "text-sm font-bold text-green-400 w-full sm:text-right mt-2 sm:mt-0";
+            } else if (checkedCount <= 5) {
+                resultDiv.innerHTML = `🟡 回答 ${checkedCount} 個「是」：壓力滿負荷您，雖能勉強應付，但必認真學習壓力管理了，同時多與良師益友聊一聊。`;
+                resultDiv.className = "text-sm font-bold text-amber-400 w-full sm:text-right mt-2 sm:mt-0";
+            } else if (checkedCount <= 8) {
+                resultDiv.innerHTML = `🟠 回答 ${checkedCount} 個「是」：您的壓力很大，趕快去看心理衛生專業人員，接受系統性的心理治療。`;
+                resultDiv.className = "text-sm font-bold text-orange-400 w-full sm:text-right mt-2 sm:mt-0";
+            } else {
+                resultDiv.innerHTML = `🔴 回答 ${checkedCount} 個「是」：您的壓力已極嚴重，應該看精神專科醫師，依醫師處方用藥物與心理治療。`;
+                resultDiv.className = "text-sm font-bold text-red-500 w-full sm:text-right mt-2 sm:mt-0";
+            }
+        }
+
+        // 5. 清除勾選功能
+        function clearStress() {
+            document.querySelectorAll('.stress-check').forEach(el => el.checked = false);
+            const resultDiv = document.getElementById('stress-result');
+            resultDiv.innerHTML = '勾選並點擊計算以檢視 P.74 評估結果';
+            resultDiv.className = 'text-sm font-bold text-slate-300 w-full sm:text-right mt-2 sm:mt-0';
+        }
+
+        window.onload = function() { initInjuryChart(); window.chartInit1 = true; };
+    </script>
+</body>
+</html>
