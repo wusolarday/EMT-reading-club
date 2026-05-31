@@ -5,38 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMT 讀書會 - 第三章：緊急醫療救護職業安全 (全)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
-                    colors: {
-                        ems: {
-                            navy: '#1e293b',
-                            blue: '#0284c7',
-                            light: '#f8fafc',
-                            orange: '#ea580c',
-                            gray: '#64748b'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
-        .chart-container { position: relative; width: 100%; max-width: 600px; margin: auto; height: 260px; }
-        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .nav-item.active { background-color: #0284c7; color: white; border-left: 4px solid #ea580c; }
-        .duty-card { transition: all 0.2s; cursor: pointer; }
-        .duty-card:hover, .duty-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
-    </style>
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body class="flex h-screen">
 
@@ -267,7 +239,7 @@
                         </div>
                     </div>
                     <div class="mt-auto border-2 border-dashed border-slate-300 rounded-lg p-2 text-center bg-slate-50">
-                        <img src="img-3-1.png" alt="圖 3-11 事故現場車輛停放示意圖" class="mx-auto max-h-40 object-contain mix-blend-multiply" onerror="this.style.display='none'; document.getElementById('img-alt-1').style.display='block';">
+                        <img src="./assets/img/img-3-1.png" alt="圖 3-11 事故現場車輛停放示意圖" class="mx-auto max-h-40 object-contain mix-blend-multiply" onerror="this.style.display='none'; document.getElementById('img-alt-1').style.display='block';">
                         <span id="img-alt-1" class="text-slate-400 font-bold hidden py-8">[請在此放置圖 3-11 停放示意圖 img-3-1.png]</span>
                         <p class="text-xs text-slate-500 mt-2 font-bold">圖 3-11 事故現場車輛停放示意圖</p>
                     </div>
@@ -395,26 +367,17 @@
 
     </main>
 
+    <script src="./assets/js/chapter-nav.js"></script>
     <script>
         // 1. 畫面切換
-        function switchView(viewId, btnElement) {
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('block', 'fade-in');
-                el.classList.add('hidden');
-            });
-            const target = document.getElementById(viewId);
-            target.classList.remove('hidden');
-            void target.offsetWidth; 
-            target.classList.add('block', 'fade-in');
-
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            btnElement.classList.add('active');
-
+        /* switchView() 由共用 assets/js/chapter-nav.js 提供。
+           Chart.js 初始化掛勾用 onViewSwitch hook，於檢視第 1 頁時觸發。 */
+        window.onViewSwitch = function (viewId) {
             if (viewId === 'view-safety-intro' && !window.chartInit1) {
                 initInjuryChart();
                 window.chartInit1 = true;
             }
-        }
+        };
 
         // 2. 113年消防人員傷亡圖表 (Chart.js)
         window.chartInit1 = false;

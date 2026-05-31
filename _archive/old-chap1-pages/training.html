@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜制度與訓練基準</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="../index.html"   data-page="origins"  class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">概論與發展源起</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span></a>
+            <a href="./intro.html"    data-page="intro"    class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">歷史沿革與現況</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span></a>
+            <a href="./law.html"      data-page="law"      class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">法規與名詞定義</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span></a>
+            <a href="./training.html" data-page="training" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">制度與訓練基準</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span></a>
+            <a href="./duties.html"   data-page="duties"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">九大核心職責</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span></a>
+            <a href="./ethics.html"   data-page="ethics"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">醫學倫理與心法</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span></a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">請搭配實體書本對照閱讀</div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.18 - P.19</div>
+                <h2 class="text-3xl font-bold text-ems-navy">訓練制度與救護項目</h2>
+                <p class="text-ems-gray mt-2 text-lg">級別越高，訓練時數與可執行的侵入性/高階處置也隨之增加。</p>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-2">EMT 訓練時數比較</h3>
+                    <p class="text-sm text-slate-500 mb-4">法規明定的各級訓練時數基準 (小時)</p>
+                    <div class="chart-container flex-1">
+                        <canvas id="trainingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">得施行之救護項目比較</h3>
+                    <div class="space-y-4">
+                        <div class="border border-slate-200 rounded-lg p-4 bg-slate-50">
+                            <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                                <span>初級救護技術員 (EMT-1)</span>
+                                <span class="text-xs bg-slate-200 px-2 py-1 rounded">20 大項</span>
+                            </div>
+                            <p class="text-sm text-slate-600">包含：傷病檢視/檢傷分類、生命徵象/血氧評估、CPR、抽吸/清除呼吸道異物、使用鼻/口咽人工呼吸道、給予氧氣、止血包紮、姿勢擺位/體溫維持、頸脊椎/骨折固定、脫困搬運、送醫照護、使用心電圖監視器或AED/自動心肺復甦機、測血糖及給口服葡萄糖、心理支持、急產接生、燒燙傷處置、沖洗眼睛等。</p>
+                        </div>
+
+                        <div class="border border-ems-blue rounded-lg p-4 bg-blue-50 relative">
+                            <div class="absolute -left-[1px] top-4 w-1 h-8 bg-ems-blue"></div>
+                            <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                                <span>中級救護技術員 (EMT-2)</span>
+                                <span class="text-xs bg-blue-200 px-2 py-1 rounded text-blue-800">進階增列項目</span>
+                            </div>
+                            <p class="text-sm text-slate-600 font-medium italic mb-1">除執行初級項目外，增加下列：</p>
+                            <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1">
+                                <li>周邊靜脈血管路徑之設置及維持 (IV)</li>
+                                <li>給予注射用葡萄糖、乳酸林格氏液或生理食鹽水</li>
+                                <li>使用聲門上呼吸道 (如 LMA)</li>
+                                <li>協助使用吸入型支氣管擴張劑、自備腎上腺素注射筆及硝化甘油舌下含片</li>
+                                <li>潮氣末二氧化碳監測 (ETCO2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/training-chart.js"></script>
+</body>
+</html>

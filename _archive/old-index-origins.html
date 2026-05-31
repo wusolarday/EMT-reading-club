@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜概論與發展源起</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <!-- 左側導覽列（與 components/sidebar.html 內容一致，請同步修改） -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="./index.html" data-page="origins" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">概論與發展源起</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span>
+            </a>
+            <a href="./pages/intro.html" data-page="intro" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">歷史沿革與現況</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span>
+            </a>
+            <a href="./pages/law.html" data-page="law" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">法規與名詞定義</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span>
+            </a>
+            <a href="./pages/training.html" data-page="training" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">制度與訓練基準</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span>
+            </a>
+            <a href="./pages/duties.html" data-page="duties" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">九大核心職責</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span>
+            </a>
+            <a href="./pages/ethics.html" data-page="ethics" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
+                <span class="font-bold text-lg">醫學倫理與心法</span>
+                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span>
+            </a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./pages/chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./pages/chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./pages/chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./pages/chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./pages/chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./pages/chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./pages/chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">
+            請搭配實體書本對照閱讀
+        </div>
+    </nav>
+
+    <!-- 右側主內容區 -->
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.6 - P.9</div>
+                <h2 class="text-3xl font-bold text-ems-navy">臺灣緊急醫療救護體系概論</h2>
+                <p class="text-ems-gray mt-2 text-lg">本章節將帶領您瞭解 EMS 的起源、學習目標，以及認識代表緊急救護精神的「藍色生命之星」。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 學習目標 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🎯</span> 本章學習目標
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解緊急醫療救護的沿革與國際現況</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>簡介緊急醫療救護相關的法規</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解救護技術員在法規中的資格、職責、得施行項目與罰則</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>認識救護技術員之角色及職責</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>落實醫學倫理與病人隱私權保護</span></li>
+                    </ul>
+                </div>
+
+                <!-- 發展起源 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🌍</span> EMS 的世界起源
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">拿破崙軍隊 (1792-1797)</h4>
+                            <p class="text-sm text-slate-600">現代 EMS 概念來自「軍陣醫學」。拿破崙軍隊外科醫師拉瑞 (Larrey) 發展了「飛速救護車系統」，能在短時間內運送傷兵，為現代戰野醫療的雛形。</p>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">美國 (1968-1973)</h4>
+                            <p class="text-sm text-slate-600">1968 年急診醫學會成立；1973 年頒布《緊急醫療救護體系法 (EMS Act)》，明定消防單位負責運送受傷病人。</p>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">臺灣 (民國 84 年)</h4>
+                            <p class="text-sm text-slate-600">臺灣發展較晚，於民國 84 年制定《緊急醫療救護法》，並於消防法中將緊急救護列為消防三大任務之一。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生命之星 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-2/5 text-center flex flex-col items-center">
+                        <div class="bg-white p-4 rounded-xl mb-4 shadow-lg border-2 border-slate-200">
+                            <img src="./assets/img/img-1-1.png" alt="藍色生命之星" class="object-contain drop-shadow-md">
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">藍色生命之星</h3>
+                        <p class="text-sm text-slate-300">Star of Life (請對照課本圖 1-1)</p>
+                    </div>
+                    <div class="md:w-3/5">
+                        <p class="text-slate-300 mb-4 leading-relaxed">
+                            由美國 R. 史瓦茲 (Leo R. Schwartz) 命名，中間的蛇杖代表希臘神話神醫亞斯古尼克 (Asclepius)。這六角星的每一個角，代表著緊急醫療救護服務的「六大程序」，順時針方向依序為：
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div>
+                                <div class="text-sm font-bold">發現 <span class="text-slate-400 font-normal text-xs ml-1">(Detection)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div>
+                                <div class="text-sm font-bold">通報 <span class="text-slate-400 font-normal text-xs ml-1">(Reporting)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div>
+                                <div class="text-sm font-bold">反應/出勤 <span class="text-slate-400 font-normal text-xs ml-1">(Response)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div>
+                                <div class="text-sm font-bold">現場處置 <span class="text-slate-400 font-normal text-xs ml-1">(On Scene Care)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</div>
+                                <div class="text-sm font-bold">運送照護 <span class="text-slate-400 font-normal text-xs ml-1">(Care In Transit)</span></div>
+                            </div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
+                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</div>
+                                <div class="text-sm font-bold">確切醫療 <span class="text-slate-400 font-normal text-xs ml-1">(Definitive Care)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./assets/js/nav.js"></script>
+</body>
+</html>

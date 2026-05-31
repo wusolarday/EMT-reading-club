@@ -3,138 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMT 海栓讀書會</title>
+    <title>EMT 海栓讀書會 - 第一章 台灣緊急醫療救護體系概論</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
-                    colors: {
-                        ems: {
-                            navy: '#1e293b',
-                            blue: '#0284c7',
-                            light: '#f8fafc',
-                            orange: '#ea580c',
-                            gray: '#64748b'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* <!-- Chosen Palette: EMS Professional (Navy, Cerulean Blue, Safety Orange, Slate Gray) -->
-        <!-- Application Structure Plan: 採用左側固定導覽列、右側動態內容區的 SPA 架構。為了配合讀書會「跟著書本讀」的需求，導覽列嚴格按照課本頁次 (P.10 ~ P.31) 進行章節劃分。每個章節內部運用不同的互動元件（時間軸、翻轉卡片、長條圖、互動網格、輪播）來降低認知負荷，提升吸收效率。 -->
-        <!-- Visualization & Content Choices: 
-            1. 歷史沿革 (P.10-15): 目標為「改變/演進」，使用 HTML+CSS 互動時間軸。
-            2. 法規定義 (P.16-19): 目標為「組織」，使用點擊展開的手風琴 (Accordion) 卡片。
-            3. 訓練制度 (P.20-27): 目標為「比較」，使用 Chart.js 長條圖比較初/中/高級時數差異。
-            4. 實務職責 (P.28-29): 目標為「關係/細節」，使用 3x3 互動網格，點擊查看詳細規範。
-            5. 醫學倫理 (P.30-31): 目標為「通知/強調」，使用動態引言輪播。
-        -->
-        <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. --> */
-
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
-        
-        /* Chart Container Requirements */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) { .chart-container { height: 350px; } }
-
-        /* Animations & Transitions */
-        .fade-in { animation: fadeIn 0.3s ease-in-out forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .nav-item.active {
-            background-color: #0284c7;
-            color: white;
-            border-left: 4px solid #ea580c;
-        }
-
-        /* Timeline styling */
-        .timeline-item { border-left: 2px solid #cbd5e1; padding-left: 20px; position: relative; padding-bottom: 20px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -9px; top: 0; width: 16px; height: 16px;
-            background-color: #0284c7; border-radius: 50%; border: 3px solid white;
-        }
-
-        /* Interactive Grid */
-        .duty-card { transition: all 0.2s; cursor: pointer; }
-        .duty-card:hover, .duty-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
-<body class="flex h-screen">
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
 
-    <!-- 左側導覽列 (Side Navigation) -->
-    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
-        <div class="p-6 border-b border-slate-700">
-            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
-            <p class="text-sm text-ems-blue font-medium mt-1">Finn & Solarday 21:00 - 22:00</p>
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第一章 EMS 體系概論</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
         </div>
-        
-        <div class="flex-1 overflow-y-auto py-4">
-            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
-            
-            <button onclick="switchView('view-origins', this)" class="nav-item active w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">概論與發展源起</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">第一節：源起與沿革</div>
+            <button onclick="switchView('view-origins', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">概論與發展源起</span>
+                <span class="text-[11px] text-slate-400">P.6 - P.9 | 學習目標、藍色生命之星</span>
             </button>
-            
-            <button onclick="switchView('view-intro', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">歷史沿革與現況</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span>
+            <button onclick="switchView('view-history', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">歷史沿革與現況</span>
+                <span class="text-[11px] text-slate-400">P.10 - P.15 | 時間軸、國際體系</span>
             </button>
-            
-            <button onclick="switchView('view-law', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">法規與名詞定義</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span>
+
+            <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase border-t border-slate-700">第二節：法規與制度</div>
+            <button onclick="switchView('view-law', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">法規與名詞定義</span>
+                <span class="text-[11px] text-slate-400">P.16 - P.17 | 緊救法、大傷、運具</span>
             </button>
-            
-            <button onclick="switchView('view-training', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">制度與訓練基準</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span>
+            <button onclick="switchView('view-training', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">制度與訓練基準</span>
+                <span class="text-[11px] text-slate-400">P.18 - P.19 | 三級時數對照圖</span>
             </button>
-            
-            <button onclick="switchView('view-duties', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">九大核心職責</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span>
+
+            <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase border-t border-slate-700">第三節：實務與倫理</div>
+            <button onclick="switchView('view-duties', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">九大核心職責</span>
+                <span class="text-[11px] text-slate-400">P.28 - P.29 | 9 鍵互動詳解</span>
             </button>
-            
-            <button onclick="switchView('view-ethics', this)" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1">
-                <span class="font-bold text-lg">醫學倫理與心法</span>
-                <span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span>
+            <button onclick="switchView('view-ethics', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">醫學倫理與心法</span>
+                <span class="text-[11px] text-slate-400">P.30 - P.31 | 101 件心法輪播</span>
             </button>
         </div>
-        
-        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">
-            請搭配實體書本對照閱讀
-        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
     </nav>
 
-    <!-- 右側主內容區 (Main Content Area) -->
-    <main class="flex-1 overflow-y-auto bg-ems-light relative">
-        
-        <!-- View 0: 概論與源起 (P.6 - P.9) -->
-        <section id="view-origins" class="view-section p-8 md:p-12 fade-in block">
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- =============================================================
+             View 1: 概論與發展源起 (P.6 - P.9)
+             ============================================================= -->
+        <section id="view-origins" class="view-section fade-in block">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.6 - P.9</div>
                 <h2 class="text-3xl font-bold text-ems-navy">臺灣緊急醫療救護體系概論</h2>
@@ -142,36 +68,19 @@
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <!-- 學習目標 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
                         <span class="text-ems-orange text-2xl">🎯</span> 本章學習目標
                     </h3>
                     <ul class="space-y-3">
-                        <li class="flex items-start gap-3 text-slate-700">
-                            <span class="text-ems-blue mt-0.5">☑</span>
-                            <span>瞭解緊急醫療救護的沿革與國際現況</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-slate-700">
-                            <span class="text-ems-blue mt-0.5">☑</span>
-                            <span>簡介緊急醫療救護相關的法規</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-slate-700">
-                            <span class="text-ems-blue mt-0.5">☑</span>
-                            <span>瞭解救護技術員在法規中的資格、職責、得施行項目與罰則</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-slate-700">
-                            <span class="text-ems-blue mt-0.5">☑</span>
-                            <span>認識救護技術員之角色及職責</span>
-                        </li>
-                        <li class="flex items-start gap-3 text-slate-700">
-                            <span class="text-ems-blue mt-0.5">☑</span>
-                            <span>落實醫學倫理與病人隱私權保護</span>
-                        </li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解緊急醫療救護的沿革與國際現況</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>簡介緊急醫療救護相關的法規</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解救護技術員在法規中的資格、職責、得施行項目與罰則</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>認識救護技術員之角色及職責</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>落實醫學倫理與病人隱私權保護</span></li>
                     </ul>
                 </div>
 
-                <!-- 發展起源 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
                         <span class="text-ems-orange text-2xl">🌍</span> EMS 的世界起源
@@ -193,13 +102,11 @@
                 </div>
             </div>
 
-            <!-- 生命之星 -->
             <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
                 <div class="flex flex-col md:flex-row items-center gap-8">
                     <div class="md:w-2/5 text-center flex flex-col items-center">
-                        <!-- 圖片展示區塊：已替換為標準藍色生命之星圖檔，您也可以自行替換 src 為課本裁切圖 -->
-                        <div class="bg-white p-4 rounded-xl mb-4 shadow-lg border-2 border-slate-200">
-                            <img src="img-1-1.png" alt="" class="object-contain drop-shadow-md">
+                        <div class="bg-white p-4 rounded-xl mb-4 shadow-lg border-2 border-slate-200 aspect-square w-full max-w-xs flex items-center justify-center">
+                            <img src="./assets/img/img-1-1.png" alt="藍色生命之星" class="object-contain drop-shadow-md max-w-full max-h-full" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=&quot;text-6xl&quot;>⭐</div><div class=&quot;text-xs text-slate-500 mt-2&quot;>放置課本圖 1-1<br>於 assets/img/img-1-1.png</div>'">
                         </div>
                         <h3 class="text-2xl font-bold text-white mb-2">藍色生命之星</h3>
                         <p class="text-sm text-slate-300">Star of Life (請對照課本圖 1-1)</p>
@@ -208,39 +115,23 @@
                         <p class="text-slate-300 mb-4 leading-relaxed">
                             由美國 R. 史瓦茲 (Leo R. Schwartz) 命名，中間的蛇杖代表希臘神話神醫亞斯古尼克 (Asclepius)。這六角星的每一個角，代表著緊急醫療救護服務的「六大程序」，順時針方向依序為：
                         </p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div>
-                                <div class="text-sm font-bold">發現 <span class="text-slate-400 font-normal text-xs ml-1">(Detection)</span></div>
-                            </div>
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div>
-                                <div class="text-sm font-bold">通報 <span class="text-slate-400 font-normal text-xs ml-1">(Reporting)</span></div>
-                            </div>
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div>
-                                <div class="text-sm font-bold">反應/出勤 <span class="text-slate-400 font-normal text-xs ml-1">(Response)</span></div>
-                            </div>
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div>
-                                <div class="text-sm font-bold">現場處置 <span class="text-slate-400 font-normal text-xs ml-1">(On Scene Care)</span></div>
-                            </div>
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</div>
-                                <div class="text-sm font-bold">運送照護 <span class="text-slate-400 font-normal text-xs ml-1">(Care In Transit)</span></div>
-                            </div>
-                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3">
-                                <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</div>
-                                <div class="text-sm font-bold">確切醫療 <span class="text-slate-400 font-normal text-xs ml-1">(Definitive Care)</span></div>
-                            </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div><div class="text-sm font-bold">發現 <span class="text-slate-400 font-normal text-xs">(Detection)</span></div></div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div><div class="text-sm font-bold">通報 <span class="text-slate-400 font-normal text-xs">(Reporting)</span></div></div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div><div class="text-sm font-bold">反應/出勤 <span class="text-slate-400 font-normal text-xs">(Response)</span></div></div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div><div class="text-sm font-bold">現場處置 <span class="text-slate-400 font-normal text-xs">(On Scene)</span></div></div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</div><div class="text-sm font-bold">運送照護 <span class="text-slate-400 font-normal text-xs">(In Transit)</span></div></div>
+                            <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</div><div class="text-sm font-bold">確切醫療 <span class="text-slate-400 font-normal text-xs">(Definitive)</span></div></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- View 1: 歷史沿革 (P.10 - P.15) -->
-        <section id="view-intro" class="view-section p-8 md:p-12 hidden">
+        <!-- =============================================================
+             View 2: 歷史沿革與現況 (P.10 - P.15)
+             ============================================================= -->
+        <section id="view-history" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.10 - P.15</div>
                 <h2 class="text-3xl font-bold text-ems-navy">臺灣緊急醫療救護體系：發展與現況</h2>
@@ -248,7 +139,6 @@
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- 時間軸 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold text-ems-navy mb-6 border-b pb-2">重要歷史里程碑</h3>
                     <div class="ml-2">
@@ -275,7 +165,6 @@
                     </div>
                 </div>
 
-                <!-- 國際體系比較 -->
                 <div class="flex flex-col gap-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                         <h3 class="text-xl font-bold text-ems-navy mb-4 border-b pb-2">國際體系比較</h3>
@@ -286,7 +175,7 @@
                                 <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
                                     <li>由 <strong>救護技術員 (EMT)</strong> 主導現場。</li>
                                     <li>核心理念：將病人「送醫」。</li>
-                                    <li>著重於 Load & Go，現場僅做必要穩定。</li>
+                                    <li>著重於 Load &amp; Go，現場僅做必要穩定。</li>
                                 </ul>
                             </div>
                             <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
@@ -294,7 +183,7 @@
                                 <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
                                     <li>由 <strong>醫師</strong> 直接前往現場主導。</li>
                                     <li>核心理念：將醫療「送給病人」。</li>
-                                    <li>著重於 Stay & Play，現場進行高階處置。</li>
+                                    <li>著重於 Stay &amp; Play，現場進行高階處置。</li>
                                 </ul>
                             </div>
                         </div>
@@ -303,8 +192,10 @@
             </div>
         </section>
 
-        <!-- View 2: 法規與定義 (P.16 - P.19) -->
-        <section id="view-law" class="view-section p-8 md:p-12 hidden">
+        <!-- =============================================================
+             View 3: 法規與名詞定義 (P.16 - P.17)
+             ============================================================= -->
+        <section id="view-law" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.16 - P.17</div>
                 <h2 class="text-3xl font-bold text-ems-navy">法規與核心名詞定義</h2>
@@ -312,7 +203,6 @@
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- 互動展開卡片 -->
                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(1)">
                     <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
                         <h3 class="font-bold text-lg text-ems-navy">📜 緊急醫療救護 (法規定義)</h3>
@@ -360,8 +250,10 @@
             </div>
         </section>
 
-        <!-- View 3: 制度與訓練 (P.20 - P.27) -->
-        <section id="view-training" class="view-section p-8 md:p-12 hidden">
+        <!-- =============================================================
+             View 4: 制度與訓練基準 (P.18 - P.19)
+             ============================================================= -->
+        <section id="view-training" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.18 - P.19</div>
                 <h2 class="text-3xl font-bold text-ems-navy">訓練制度與救護項目</h2>
@@ -369,7 +261,6 @@
             </header>
 
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                <!-- Chart.js 容器 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
                     <h3 class="text-xl font-bold text-ems-navy mb-2">EMT 訓練時數比較</h3>
                     <p class="text-sm text-slate-500 mb-4">法規明定的各級訓練時數基準 (小時)</p>
@@ -378,19 +269,17 @@
                     </div>
                 </div>
 
-                <!-- 救護項目清單 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h3 class="text-xl font-bold text-ems-navy mb-4">得施行之救護項目比較</h3>
-                    
                     <div class="space-y-4">
                         <div class="border border-slate-200 rounded-lg p-4 bg-slate-50">
                             <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
                                 <span>初級救護技術員 (EMT-1)</span>
                                 <span class="text-xs bg-slate-200 px-2 py-1 rounded">20 大項</span>
                             </div>
-                            <p class="text-sm text-slate-600">包含：傷病檢視/檢傷分類、生命徵象/血氧評估、CPR、抽吸/清除呼吸道異物、使用鼻/口咽人工呼吸道、給予氧氣、止血包紮、姿勢擺位/體溫維持、頸脊椎/骨折固定、脫困搬運、送醫照護、使用心電圖監視器或AED/自動心肺復甦機、測血糖及給口服葡萄糖、心理支持、急產接生、燒燙傷處置、沖洗眼睛等。</p>
+                            <p class="text-sm text-slate-600">包含：傷病檢視/檢傷分類、生命徵象/血氧評估、CPR、抽吸/清除呼吸道異物、使用鼻/口咽人工呼吸道、給予氧氣、止血包紮、姿勢擺位/體溫維持、頸脊椎/骨折固定、脫困搬運、送醫照護、使用心電圖監視器或 AED/自動心肺復甦機、測血糖及給口服葡萄糖、心理支持、急產接生、燒燙傷處置、沖洗眼睛等。</p>
                         </div>
-                        
+
                         <div class="border border-ems-blue rounded-lg p-4 bg-blue-50 relative">
                             <div class="absolute -left-[1px] top-4 w-1 h-8 bg-ems-blue"></div>
                             <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
@@ -411,8 +300,10 @@
             </div>
         </section>
 
-        <!-- View 4: 九大職責 (P.28 - P.29) -->
-        <section id="view-duties" class="view-section p-8 md:p-12 hidden">
+        <!-- =============================================================
+             View 5: 九大核心職責 (P.28 - P.29)
+             ============================================================= -->
+        <section id="view-duties" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.28 - P.29</div>
                 <h2 class="text-3xl font-bold text-ems-navy">救護技術員 9 大核心職責</h2>
@@ -420,38 +311,18 @@
             </header>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- 互動按鈕區 -->
                 <div class="lg:col-span-5 grid grid-cols-3 gap-3">
-                    <button onclick="showDuty(1)" id="btn-duty-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">1</span>準備
-                    </button>
-                    <button onclick="showDuty(2)" id="btn-duty-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">2</span>出勤
-                    </button>
-                    <button onclick="showDuty(3)" id="btn-duty-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">3</span>評估
-                    </button>
-                    <button onclick="showDuty(4)" id="btn-duty-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">4</span>穩定
-                    </button>
-                    <button onclick="showDuty(5)" id="btn-duty-5" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">5</span>溝通
-                    </button>
-                    <button onclick="showDuty(6)" id="btn-duty-6" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">6</span>運送
-                    </button>
-                    <button onclick="showDuty(7)" id="btn-duty-7" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">7</span>紀錄
-                    </button>
-                    <button onclick="showDuty(8)" id="btn-duty-8" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">8</span>教育
-                    </button>
-                    <button onclick="showDuty(9)" id="btn-duty-9" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold">
-                        <span class="text-2xl text-ems-blue mb-1">9</span>個資
-                    </button>
+                    <button onclick="showDuty(1)" id="btn-duty-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">1</span>準備</button>
+                    <button onclick="showDuty(2)" id="btn-duty-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">2</span>出勤</button>
+                    <button onclick="showDuty(3)" id="btn-duty-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">3</span>評估</button>
+                    <button onclick="showDuty(4)" id="btn-duty-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">4</span>穩定</button>
+                    <button onclick="showDuty(5)" id="btn-duty-5" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">5</span>溝通</button>
+                    <button onclick="showDuty(6)" id="btn-duty-6" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">6</span>運送</button>
+                    <button onclick="showDuty(7)" id="btn-duty-7" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">7</span>紀錄</button>
+                    <button onclick="showDuty(8)" id="btn-duty-8" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">8</span>教育</button>
+                    <button onclick="showDuty(9)" id="btn-duty-9" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold"><span class="text-2xl text-ems-blue mb-1">9</span>個資</button>
                 </div>
 
-                <!-- 詳細說明展示區 -->
                 <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[350px]">
                     <h3 id="duty-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">1. 準備 (Preparation)</h3>
                     <div id="duty-content" class="text-slate-300 space-y-3 leading-relaxed text-lg flex-1">
@@ -467,8 +338,10 @@
             </div>
         </section>
 
-        <!-- View 5: 倫理與心法 (P.30 - P.31) -->
-        <section id="view-ethics" class="view-section p-8 md:p-12 hidden h-full">
+        <!-- =============================================================
+             View 6: 醫學倫理與心法 (P.30 - P.31)
+             ============================================================= -->
+        <section id="view-ethics" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.30 - P.31</div>
                 <h2 class="text-3xl font-bold text-ems-navy">醫學倫理與前線心法</h2>
@@ -477,22 +350,20 @@
 
             <div class="flex flex-col items-center justify-center mt-10 w-full max-w-4xl mx-auto">
                 <div class="bg-white w-full p-10 rounded-2xl shadow-lg border-t-8 border-ems-orange relative text-center">
-                    <div class="text-6xl text-slate-100 absolute top-4 left-6 leading-none">"</div>
-                    
+                    <div class="text-6xl text-slate-100 absolute top-4 left-6 leading-none">&ldquo;</div>
                     <div class="min-h-[120px] flex items-center justify-center flex-col relative z-10 px-8">
                         <p id="quote-text" class="text-2xl font-bold text-slate-800 leading-relaxed">
                             「你不知道所有的事，承認自己的錯誤。我們都會犯錯，但只有最優秀的人才會承認犯錯。」
                         </p>
                     </div>
-                    
-                    <div class="text-6xl text-slate-100 absolute bottom-4 right-6 rotate-180 leading-none">"</div>
+                    <div class="text-6xl text-slate-100 absolute bottom-4 right-6 rotate-180 leading-none">&ldquo;</div>
                 </div>
-                
+
                 <div class="flex gap-4 mt-8">
                     <button onclick="changeQuote(-1)" class="px-6 py-2 bg-slate-200 text-slate-700 font-bold rounded-lg hover:bg-slate-300 transition">◀ 前一則</button>
-                    <button onclick="changeQuote(1)" class="px-6 py-2 bg-ems-navy text-white font-bold rounded-lg shadow-md hover:bg-slate-800 transition">下一則 ▶</button>
+                    <button onclick="changeQuote(1)"  class="px-6 py-2 bg-ems-navy text-white font-bold rounded-lg shadow-md hover:bg-slate-800 transition">下一則 ▶</button>
                 </div>
-                
+
                 <div class="mt-8 text-sm text-slate-500 font-bold bg-slate-200 px-4 py-1 rounded-full">
                     節錄自課本 P.30-31《101件我們該教給 EMT 的事》
                 </div>
@@ -501,51 +372,24 @@
 
     </main>
 
-    <!-- JavaScript Interactions -->
+    <script src="./assets/js/chapter-nav.js"></script>
     <script>
-        // 1. Navigation Logic
-        function switchView(viewId, btnElement) {
-            // Hide all sections
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('block', 'fade-in');
-                el.classList.add('hidden');
-            });
-            // Show target section
-            const target = document.getElementById(viewId);
-            target.classList.remove('hidden');
-            // Trigger reflow to restart animation
-            void target.offsetWidth; 
-            target.classList.add('block', 'fade-in');
-
-            // Update nav styling
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            // Initialize chart if navigating to training section for the first time
+        /* ------------------------------------------------------------
+           switchView() 由 chapter-nav.js 提供。
+           onViewSwitch hook 用來在進入 view-training 時初始化 Chart.js
+           ------------------------------------------------------------ */
+        window.chartInit = false;
+        window.onViewSwitch = function (viewId) {
             if (viewId === 'view-training' && !window.chartInit) {
-                initChart();
+                initTrainingChart();
                 window.chartInit = true;
             }
-        }
+        };
 
-        // 2. Law Accordion Logic
-        function toggleLaw(id) {
-            const content = document.getElementById('law-content-' + id);
-            const icon = document.getElementById('law-icon-' + id);
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.innerText = '-';
-            } else {
-                content.classList.add('hidden');
-                icon.innerText = '+';
-            }
-        }
-
-        // 3. Chart.js Logic (Training Hours)
-        window.chartInit = false;
-        function initChart() {
-            const ctx = document.getElementById('trainingChart').getContext('2d');
-            new Chart(ctx, {
+        function initTrainingChart() {
+            const canvas = document.getElementById('trainingChart');
+            if (!canvas || typeof Chart === 'undefined') return;
+            new Chart(canvas.getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: ['初級 (EMT-1)', '中級 (EMT-2)', '高級 (EMTP)'],
@@ -562,17 +406,17 @@
                     plugins: {
                         legend: { display: false },
                         tooltip: {
-                            callbacks: { label: function(context) { return context.raw + ' 小時'; } },
+                            callbacks: { label: ctx => ctx.raw + ' 小時' },
                             padding: 10, titleFont: { size: 14 }, bodyFont: { size: 14 }
                         }
                     },
                     scales: {
-                        y: { 
-                            beginAtZero: true, 
+                        y: {
+                            beginAtZero: true,
                             title: { display: true, text: '訓練時數 (小時)' },
                             grid: { color: '#f1f5f9' }
                         },
-                        x: { 
+                        x: {
                             grid: { display: false },
                             ticks: { font: { weight: 'bold' } }
                         }
@@ -581,7 +425,25 @@
             });
         }
 
-        // 4. Duties Grid Logic
+        /* ------------------------------------------------------------
+           法規卡手風琴
+           ------------------------------------------------------------ */
+        function toggleLaw(id) {
+            const content = document.getElementById('law-content-' + id);
+            const icon    = document.getElementById('law-icon-' + id);
+            if (!content || !icon) return;
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '-';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        /* ------------------------------------------------------------
+           9 大職責互動網格
+           ------------------------------------------------------------ */
         const dutiesData = {
             1: { t: "1. 準備", c: "<p class='font-bold text-white mb-2'>工欲善其事，必先利其器。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>車輛出勤前後，都必須清洗及消毒。</li><li>器材及耗材數量須確保足夠及堪用。</li><li>熟悉轄區道路以掌握時效。</li><li>隨時保持體能最佳狀態，以維持身心健康。</li></ul>" },
             2: { t: "2. 出勤", c: "<p class='font-bold text-white mb-2'>平穩抵達比飆車更重要。</p><ul class='list-disc pl-5 space-y-2 text-base'><li>接獲派遣後須立即出勤、迅速著裝。</li><li>在路上行駛時，開快車不見得能省下時間，一旦發生事故反而延誤。</li><li>平安抵達比開快車來得更加重要。</li></ul>" },
@@ -595,13 +457,13 @@
         };
 
         function showDuty(id) {
-            document.getElementById('duty-title').innerText = dutiesData[id].t;
-            document.getElementById('duty-content').innerHTML = dutiesData[id].c;
-            
+            const data = dutiesData[id];
+            if (!data) return;
+            document.getElementById('duty-title').innerText = data.t;
+            document.getElementById('duty-content').innerHTML = data.c;
             document.querySelectorAll('.duty-card').forEach(el => el.classList.remove('active'));
             document.getElementById('btn-duty-' + id).classList.add('active');
 
-            // Quick fade effect
             const contentDiv = document.getElementById('duty-content');
             contentDiv.style.opacity = '0';
             setTimeout(() => {
@@ -610,7 +472,9 @@
             }, 50);
         }
 
-        // 5. Ethics Carousel Logic
+        /* ------------------------------------------------------------
+           引言輪播
+           ------------------------------------------------------------ */
         const ethicsQuotes = [
             "「你不知道所有的事，承認自己的錯誤。我們都會犯錯，但只有最優秀的人才會承認犯錯。」",
             "「把每一趟救護想成這是你人生中最後一趟救護，好好做！」",
@@ -622,12 +486,11 @@
             "「不要把病人的氣話放在心上，更不要把病人的髒話放在心上。」"
         ];
         let currentQuote = 0;
-
         function changeQuote(direction) {
             currentQuote += direction;
             if (currentQuote >= ethicsQuotes.length) currentQuote = 0;
             if (currentQuote < 0) currentQuote = ethicsQuotes.length - 1;
-            
+
             const textEl = document.getElementById('quote-text');
             textEl.style.opacity = '0';
             setTimeout(() => {

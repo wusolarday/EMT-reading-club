@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜第二章 內分泌與消化系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="../index.html"        data-page="origins"               class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">概論與發展源起</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span></a>
+            <a href="./intro.html"         data-page="intro"                 class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">歷史沿革與現況</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span></a>
+            <a href="./law.html"           data-page="law"                   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">法規與名詞定義</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span></a>
+            <a href="./training.html"      data-page="training"              class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">制度與訓練基準</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span></a>
+            <a href="./duties.html"        data-page="duties"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">九大核心職責</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span></a>
+            <a href="./ethics.html"        data-page="ethics"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">醫學倫理與心法</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span></a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">請搭配實體書本對照閱讀</div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.44 - P.47</div>
+                <h2 class="text-3xl font-bold text-ems-navy">內分泌系統 &amp; 消化系統</h2>
+                <p class="text-ems-gray mt-2 text-lg">神經系統負責「快速反應」；內分泌系統則負責「長期內在環境調節」。消化系統則是養分輸入的源頭。</p>
+            </header>
+
+            <!-- 內分泌系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.44-45</span>
+                一、內分泌系統（Endocrine System）
+            </h3>
+            <p class="text-slate-700 mb-4">
+                內分泌腺分泌<strong>荷爾蒙（激素）</strong>直接流入血液，調控其他器官或腺體，具有生長、發育、生殖、代謝及製造神經傳導物質的功能。
+            </p>
+
+            <!-- 六大內分泌腺 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-orange">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-bold text-ems-navy">1. 腦下垂體</h4>
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded font-bold">總指揮</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">位於腦底部</p>
+                    <p class="text-sm text-slate-700">分泌生長激素、抗利尿激素、黑色素刺激素、催產素；亦可分泌甲狀腺刺激素、腎上腺皮質刺激素，<strong>調控其它內分泌腺</strong>。</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-blue">
+                    <h4 class="font-bold text-ems-navy mb-2">2. 甲狀腺</h4>
+                    <p class="text-xs text-slate-500 mb-2">位於頸部</p>
+                    <p class="text-sm text-slate-700 mb-2">分泌甲狀腺素，調節<strong>全身細胞代謝速率</strong>。</p>
+                    <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1">
+                        <li>兒童不足→發育遲緩/智能不足</li>
+                        <li>成人不足→代謝率下降、水腫</li>
+                        <li>過多→緊張、煩躁、心跳血壓升高</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-blue">
+                    <h4 class="font-bold text-ems-navy mb-2">3. 副甲狀腺</h4>
+                    <p class="text-xs text-slate-500 mb-2">甲狀腺旁，豆狀，共 4 顆</p>
+                    <p class="text-sm text-slate-700 mb-2">分泌副甲狀腺素，調節血中<strong>鈣與磷</strong>濃度。</p>
+                    <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1">
+                        <li>過多→血鈣升、骨鈣下降→骨質疏鬆</li>
+                        <li>過少→肌肉抽搐，嚴重可致死</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-orange">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-bold text-ems-navy">4. 腎上腺</h4>
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded font-bold">救護重點</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">腎的上方，分皮質與髓質</p>
+                    <p class="text-sm text-slate-700 mb-1"><strong>皮質：</strong>再吸收水分與鈉、促脂肪分解、肝醣葡萄糖合成；<strong>抗發炎反應（類固醇）</strong>。</p>
+                    <p class="text-sm text-slate-700"><strong>髓質：</strong>分泌腎上腺素與正腎上腺素，<strong>協助身體應付緊急情況</strong>。</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-orange">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-bold text-ems-navy">5. 胰島</h4>
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded font-bold">糖尿病</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-2">在胰臟內</p>
+                    <p class="text-sm text-slate-700 mb-2"><strong>胰島素：</strong>促血糖進入細胞使用；形成肝糖儲存於肝臟或肌肉。</p>
+                    <p class="text-sm text-slate-700 mb-2"><strong>升糖素：</strong>使肝醣轉變為葡萄糖釋放至血液。</p>
+                    <p class="text-xs text-ems-orange italic">⚠️ 胰島素不足或細胞對胰島素產生抗性→糖尿病</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-blue">
+                    <h4 class="font-bold text-ems-navy mb-2">6. 性腺</h4>
+                    <p class="text-xs text-slate-500 mb-2">男性=睪丸；女性=卵巢</p>
+                    <p class="text-sm text-slate-700">控制第二性徵的出現與生殖系統（如喉結、胸部、體毛等）。</p>
+                </div>
+            </div>
+
+            <!-- 內分泌 vs 外分泌比較表 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.45 表 2-1</span>
+                內分泌腺 vs 外分泌腺 比較
+            </h3>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-4 py-3 text-left w-32">項目</th>
+                            <th class="px-4 py-3 text-left">內分泌腺</th>
+                            <th class="px-4 py-3 text-left">外分泌腺</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-slate-50">運輸方式</td>
+                            <td class="px-4 py-3 text-slate-700"><strong class="text-ems-blue">血液</strong></td>
+                            <td class="px-4 py-3 text-slate-700">特定的運輸管道</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-slate-50">目的地</td>
+                            <td class="px-4 py-3 text-slate-700">特定作用器官</td>
+                            <td class="px-4 py-3 text-slate-700">體外或消化管中</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-slate-50">舉例</td>
+                            <td class="px-4 py-3 text-slate-700">激素（腦垂腺、甲狀腺、腎上腺、胰島等）</td>
+                            <td class="px-4 py-3 text-slate-700">汗腺、消化酵素（唾腺、消化腺）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 消化系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.45-47</span>
+                二、消化系統（Digestive System）
+            </h3>
+            <p class="text-slate-700 mb-4">消化系統由<strong>消化道與消化腺</strong>組成，主要功能是攝食、消化、分解、吸收及排泄。</p>
+
+            <!-- 消化道結構 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h4 class="text-lg font-bold text-ems-navy mb-3">🌀 消化道（口腔至肛門的管道）</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <div class="text-xs font-bold text-ems-blue mb-1">上消化道</div>
+                        <div class="text-sm text-slate-700"><strong>口</strong>（含唾液腺、舌頭、牙齒）→ <strong>咽</strong> → <strong>食道</strong>（肌肉收縮放鬆推送食團）→ <strong>胃</strong>（賁門進入、形成食糜）→ <strong>十二指腸</strong></div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg border border-orange-100">
+                        <div class="text-xs font-bold text-ems-orange mb-1">下消化道</div>
+                        <div class="text-sm text-slate-700"><strong>小腸</strong>（空腸、迴腸；前往肝門靜脈系統，主吸收養分）→ <strong>大腸</strong>（盲腸、結腸、直腸；主吸收水分，有生成維生素 K 的細菌共存）→ <strong>肛門</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 附屬消化器官 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">🧪</span> 胰臟</h4>
+                    <p class="text-xs text-slate-500 mb-2">位於胃的後方</p>
+                    <p class="text-sm text-slate-700">幾乎都是內分泌細胞及分泌管道，主管分解<strong>脂肪、醣類、澱粉及蛋白質</strong>。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">🫀</span> 肝臟</h4>
+                    <p class="text-xs text-slate-500 mb-2">腹部最大的實質臟器</p>
+                    <p class="text-sm text-slate-700">調節代謝、調節血液和製造膽汁。消化道吸收後血液會先經由<strong>肝門靜脈</strong>進入肝臟處理，過濾毒素並儲存養分。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">💧</span> 膽囊</h4>
+                    <p class="text-xs text-slate-500 mb-2">肝臟右葉下方的小凹窩</p>
+                    <p class="text-sm text-slate-700">儲存肝臟所製造的膽汁並加以濃縮，待需要時釋放至小腸。</p>
+                </div>
+            </div>
+
+            <!-- 消化腺 / 消化液 / 功能表 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.46 表 2-2</span>
+                各消化腺分泌液與功能
+            </h3>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-4 py-3 text-left">消化腺</th>
+                            <th class="px-4 py-3 text-left">消化液</th>
+                            <th class="px-4 py-3 text-left">功能</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-blue-50" rowspan="1">唾腺<br><span class="text-xs font-normal text-slate-500">(唾液弱酸性)</span></td>
+                            <td class="px-4 py-3 text-slate-700">澱粉酶</td>
+                            <td class="px-4 py-3 text-slate-700">澱粉 → 麥芽糖</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-slate-50" rowspan="2">胃腺<br><span class="text-xs font-normal text-slate-500">(胃液強酸性)</span></td>
+                            <td class="px-4 py-3 text-slate-700">蛋白酶</td>
+                            <td class="px-4 py-3 text-slate-700">蛋白質 → 多肽</td>
+                        </tr>
+                        <tr class="bg-slate-50/30">
+                            <td class="px-4 py-3 text-slate-700">脂肪酶</td>
+                            <td class="px-4 py-3 text-slate-700">三酸甘油酯 → 脂肪酸 + 單酸甘油酯</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-blue-50">肝臟<br><span class="text-xs font-normal text-slate-500">(膽汁弱鹼性)</span></td>
+                            <td class="px-4 py-3 text-slate-700">膽汁（儲於膽囊）</td>
+                            <td class="px-4 py-3 text-slate-700">大油滴 → 小油滴（<strong>乳化作用</strong>，非分解）</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-orange-50" rowspan="5">胰臟<br><span class="text-xs font-normal text-slate-500">(胰液弱鹼性)</span></td>
+                            <td class="px-4 py-3 text-slate-700">澱粉酶</td>
+                            <td class="px-4 py-3 text-slate-700">澱粉 → 麥芽糖</td>
+                        </tr>
+                        <tr class="bg-orange-50/30">
+                            <td class="px-4 py-3 text-slate-700">脂肪酶</td>
+                            <td class="px-4 py-3 text-slate-700">三酸甘油酯 → 脂肪酸 + 單酸甘油酯</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 text-slate-700">去氧核醣核酸酶</td>
+                            <td class="px-4 py-3 text-slate-700">DNA → 去氧核醣核苷酸</td>
+                        </tr>
+                        <tr class="bg-orange-50/30">
+                            <td class="px-4 py-3 text-slate-700">核醣核酸酶</td>
+                            <td class="px-4 py-3 text-slate-700">RNA → 核醣核苷酸</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 text-slate-700">各式蛋白酶</td>
+                            <td class="px-4 py-3 text-slate-700">分解各式蛋白質 → 多肽</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy bg-blue-50" rowspan="3">腸腺<br><span class="text-xs font-normal text-slate-500">(小腸液弱鹼性<br>最後分解，拆解至最小吸收)</span></td>
+                            <td class="px-4 py-3 text-slate-700">雙醣酶</td>
+                            <td class="px-4 py-3 text-slate-700">雙醣 → 單醣</td>
+                        </tr>
+                        <tr class="bg-blue-50/30">
+                            <td class="px-4 py-3 text-slate-700">胜肽酶</td>
+                            <td class="px-4 py-3 text-slate-700">多肽 → 胺基酸</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 text-slate-700">核苷酸酶</td>
+                            <td class="px-4 py-3 text-slate-700">核苷酸 → 五碳醣 + 含氮鹼基 + 磷酸</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-orange-50 border-l-4 border-ems-orange p-4 rounded-r-lg mb-8">
+                <p class="text-sm text-slate-700">
+                    <strong class="text-ems-orange">📌 重點：</strong>礦物質、維生素、水<strong>不需消化</strong>，可直接吸收。胃液雖然強酸性，但小腸液與胰液都是<strong>弱鹼性</strong>來中和並進行下一階段消化。
+                </p>
+            </div>
+
+            <!-- 上/下頁導引 -->
+            <div class="flex justify-between mt-10">
+                <a href="./chap2-musculoskeletal.html" class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-300 transition">
+                    <span>◀</span> 上一頁：骨骼與肌肉
+                </a>
+                <a href="./chap2-other-systems.html" class="inline-flex items-center gap-2 bg-ems-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-slate-800 transition">
+                    下一頁：免疫、泌尿、生殖、感官 <span>▶</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+</html>

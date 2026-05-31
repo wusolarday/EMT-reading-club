@@ -1,0 +1,122 @@
+<!--
+   ============================================================
+   EMT 海栓讀書會 — 新章節骨架 (v2 SPA pattern)
+   位置：複製本檔到專案根目錄 chapN.html
+   ------------------------------------------------------------
+   需要取代的變數（搜尋 __XXX__ 全部取代）：
+     __CHAPTER_NUM__       章節編號（例：4）
+     __CHAPTER_TITLE__     章節主標題（瀏覽器分頁與側欄頂部）
+     __SUBTITLE__          側欄頂部副標
+     __BOOK_RANGE_TOTAL__  整章課本頁次範圍（例：P.88 - P.115）
+
+   每個小節需設定：
+     __VIEW_ID__   view-foo、view-bar 等唯一識別
+     __SECTION__   小節標題（按鈕用）
+     __PAGES__     該小節對應書本頁數（例：P.88 - P.95）
+     __HINT__      小節右下角的提示文字（例：定義、表格、案例）
+
+   重要：
+   - 本範本所有資源路徑都是 ./assets/... （在專案根目錄）
+   - chapter-nav.js 會自動注入漢堡選單、加上 .app-sidebar、處理 RWD
+   - 第一個 <section> 預設加 fade-in block；其餘加 hidden
+   - 新增章節後，務必在 index.html 補上對應章節卡
+   ============================================================
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第__CHAPTER_NUM__章 __CHAPTER_TITLE__</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <!-- 若需要 Chart.js 解除下行註解：
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+    <!-- ===================== 側邊欄 ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第__CHAPTER_NUM__章 __CHAPTER_TITLE__</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">__SUBTITLE__</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <!-- 第一節分組標籤（可選） -->
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">第一節：…</div>
+
+            <button onclick="switchView('view-1', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">__SECTION__ 1</span>
+                <span class="text-[11px] text-slate-400">__PAGES__ | __HINT__</span>
+            </button>
+            <button onclick="switchView('view-2', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">__SECTION__ 2</span>
+                <span class="text-[11px] text-slate-400">__PAGES__ | __HINT__</span>
+            </button>
+            <!-- ... 視需要加更多 -->
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== 主內容區 ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- View 1 — 預設顯示 -->
+        <section id="view-1" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">__PAGES__</div>
+                <h2 class="text-3xl font-bold text-ems-navy">__SECTION__ 1 主標題</h2>
+                <p class="text-ems-gray mt-2 text-lg">一句話導言，說明本節學什麼。</p>
+            </header>
+
+            <!-- 在這裡貼上 components.md 的元件區塊 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">範例卡片</h3>
+                    <p class="text-slate-700">把實際內容貼進來。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 2 -->
+        <section id="view-2" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">__PAGES__</div>
+                <h2 class="text-3xl font-bold text-ems-navy">__SECTION__ 2 主標題</h2>
+                <p class="text-ems-gray mt-2 text-lg">導言。</p>
+            </header>
+            <!-- ... 內容 -->
+        </section>
+
+    </main>
+
+    <!-- ===================== JS ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        /* switchView() 與漢堡選單由 chapter-nav.js 提供。
+           本檔只放章節專屬資料 / 函式。 */
+
+        // 範例：onViewSwitch hook（進入某 view 時延遲初始化）
+        // window.onViewSwitch = function (viewId) {
+        //     if (viewId === 'view-2' && !window.chartInit) {
+        //         initSomeChart();
+        //         window.chartInit = true;
+        //     }
+        // };
+
+        // 範例：手風琴
+        // function toggleX(id) { ... }
+
+        // 範例：互動網格
+        // const data = { 1: { t: "...", c: "..." } };
+        // function showX(id) { ... }
+    </script>
+</body>
+</html>

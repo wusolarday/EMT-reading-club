@@ -5,52 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EMT 海栓讀書會 - 第二章 人體基本解剖與生理學</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Noto Sans TC"', 'sans-serif'] },
-                    colors: {
-                        ems: {
-                            navy: '#1e293b',
-                            blue: '#0284c7',
-                            light: '#f8fafc',
-                            orange: '#ea580c',
-                            gray: '#64748b',
-                            danger: '#dc2626'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f1f5f9; overflow: hidden; }
-        .fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .nav-item { transition: all 0.3s ease; border-left: 4px solid transparent; }
-        .nav-item.active { background-color: #0284c7; color: white; border-left: 4px solid #ea580c; }
-        
-        /* 系統互動網格樣式 */
-        .sys-card { transition: all 0.2s; cursor: pointer; border: 1px solid #cbd5e1; }
-        .sys-card:hover, .sys-card.active { border-color: #0284c7; background-color: #e0f2fe; transform: translateY(-2px); }
-        
-        /* 結構化表格樣式 */
-        .data-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 0.5rem; overflow: hidden; border: 1px solid #e2e8f0; }
-        .data-table th { background-color: #1e293b; color: white; font-weight: 700; text-align: left; padding: 0.75rem 1rem; }
-        .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; background-color: white; color: #334155; }
-        .data-table tr:last-child td { border-bottom: none; }
-        .data-table tr:hover td { background-color: #f8fafc; }
-        
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body class="flex h-screen bg-ems-light font-sans text-slate-800">
 
@@ -133,7 +90,7 @@
                             <p class="text-sm text-slate-600 mt-1">平行於地面，可將人體分為<strong>上端（頭端）</strong>與<strong>下端（尾端）</strong>兩部分。</p>
                         </li>
                     </ul>
-                    <img src="img-2-1.png" alt="" class="mt-3 object-contain drop-shadow-md">
+                    <img src="./assets/img/img-2-1.png" alt="" class="mt-3 object-contain drop-shadow-md">
                 </div>
 
                 <div class="space-y-6">
@@ -353,7 +310,7 @@
                             <tr><td class="text-left font-bold">足背動脈點 (Dorsalis pedis pulse)</td><td class="text-ems-orange font-bold">90 mmHg</td></tr>
                         </tbody>
                     </table>
-                    <img src="img-2-2.png" alt="" class="mt-3 object-contain drop-shadow-md">
+                    <img src="./assets/img/img-2-2.png" alt="" class="mt-3 object-contain drop-shadow-md">
                 </div>
             </div>
         </section>
@@ -450,7 +407,7 @@
                         </table>
                     </div>
                     <p class="text-[11px] text-slate-500 mt-3">評估方式：用筆燈從眼睛外側水平 45 度角照射眼睛，觀察兩眼雙側光反射是否對等、有無遲鈍。</p>
-                    <img src="img-2-3.png" alt="" class="mt-3 object-contain drop-shadow-md">
+                    <img src="./assets/img/img-2-3.png" alt="" class="mt-3 object-contain drop-shadow-md">
                 </div>
             </div>
         </section>
@@ -587,21 +544,10 @@
 
     </main>
 
+    <script src="./assets/js/chapter-nav.js"></script>
     <script>
         // 側邊欄切換畫面
-        function switchView(viewId, btnElement) {
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('block', 'fade-in');
-                el.classList.add('hidden');
-            });
-            const target = document.getElementById(viewId);
-            target.classList.remove('hidden');
-            void target.offsetWidth; 
-            target.classList.add('block', 'fade-in');
-
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            btnElement.classList.add('active');
-        }
+        /* switchView() 由共用 assets/js/chapter-nav.js 提供 */
 
         // 人體各系統資料庫 (P.38 - P.49)
         const systemsData = {

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜第二章 骨骼與肌肉系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="../index.html"        data-page="origins"               class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">概論與發展源起</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span></a>
+            <a href="./intro.html"         data-page="intro"                 class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">歷史沿革與現況</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span></a>
+            <a href="./law.html"           data-page="law"                   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">法規與名詞定義</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span></a>
+            <a href="./training.html"      data-page="training"              class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">制度與訓練基準</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span></a>
+            <a href="./duties.html"        data-page="duties"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">九大核心職責</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span></a>
+            <a href="./ethics.html"        data-page="ethics"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">醫學倫理與心法</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span></a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">請搭配實體書本對照閱讀</div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.42 - P.43</div>
+                <h2 class="text-3xl font-bold text-ems-navy">骨骼與肌肉系統</h2>
+                <p class="text-ems-gray mt-2 text-lg">骨骼系統和肌肉系統關係密切，透過<strong>肌腱與韌帶</strong>連接，常合稱為「運動系統」或「肌肉骨骼系統」。</p>
+            </header>
+
+            <!-- 肌腱 vs 韌帶 概念釐清 -->
+            <div class="bg-blue-50 border-l-4 border-ems-blue p-5 rounded-r-lg mb-8">
+                <p class="text-slate-700">
+                    <strong class="text-ems-navy">📌 名詞釐清：</strong>
+                    <strong>肌腱</strong>連結「肌肉與骨骼」之間；<strong>韌帶</strong>連結「骨頭與骨頭」之間。
+                </p>
+            </div>
+
+            <!-- 骨骼系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.42</span>
+                一、骨骼系統（Skeletal System）
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-4xl font-bold text-ems-blue">206</div>
+                    <div class="text-sm text-slate-700 mt-1">成人骨骼數</div>
+                    <div class="text-xs text-ems-gray mt-2">新生兒約 300 塊，部分會隨年齡融合（如顱骨）或脫落（如牙齒）</div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="font-bold text-ems-navy mb-2">軸心骨</div>
+                    <p class="text-sm text-slate-600">顱骨、脊椎、胸骨、肋骨</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <div class="font-bold text-ems-navy mb-2">附屬骨</div>
+                    <p class="text-sm text-slate-600">四肢骨、骨盆、肩胛骨、鎖骨</p>
+                </div>
+            </div>
+
+            <!-- 脊柱結構 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h4 class="text-lg font-bold text-ems-navy mb-3">🦴 脊柱結構（支持人體、保護脊髓）</h4>
+                <div class="grid grid-cols-5 gap-2 text-center text-sm">
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3">
+                        <div class="font-bold text-ems-navy">頸椎</div>
+                        <div class="text-2xl font-bold text-ems-blue mt-1">7</div>
+                        <div class="text-xs text-slate-500">節</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3">
+                        <div class="font-bold text-ems-navy">胸椎</div>
+                        <div class="text-2xl font-bold text-ems-blue mt-1">12</div>
+                        <div class="text-xs text-slate-500">節</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3">
+                        <div class="font-bold text-ems-navy">腰椎</div>
+                        <div class="text-2xl font-bold text-ems-blue mt-1">5</div>
+                        <div class="text-xs text-slate-500">節</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3">
+                        <div class="font-bold text-ems-navy">薦椎</div>
+                        <div class="text-2xl font-bold text-ems-blue mt-1">5</div>
+                        <div class="text-xs text-slate-500">節</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded p-3">
+                        <div class="font-bold text-ems-navy">尾椎</div>
+                        <div class="text-2xl font-bold text-ems-blue mt-1">4</div>
+                        <div class="text-xs text-slate-500">節</div>
+                    </div>
+                </div>
+                <p class="text-xs text-ems-gray mt-3 italic text-center">兩節脊椎之間有椎間盤軟骨，可吸收壓力</p>
+            </div>
+
+            <!-- 骨骼五種型態表 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.42</span>
+                二、骨骼五種型態
+            </h3>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-4 py-3 text-left w-24">型態</th>
+                            <th class="px-4 py-3 text-left">特徵</th>
+                            <th class="px-4 py-3 text-left w-1/3">舉例</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">長骨</td>
+                            <td class="px-4 py-3 text-slate-700">長度遠大於寬度，分為一個骨幹和兩個骨骺。骨幹由緻密骨組成，骨髓腔中有海綿骨和骨髓。<strong>分類取決於形狀而不是大小</strong>。</td>
+                            <td class="px-4 py-3 text-slate-600">大部分四肢骨（含指骨/趾骨）、股骨</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">短骨</td>
+                            <td class="px-4 py-3 text-slate-700">呈立方狀，緻密骨較薄，中間是海綿骨。和種子骨構成腕關節和踝關節。</td>
+                            <td class="px-4 py-3 text-slate-600">腕骨、跗骨</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">扁平骨</td>
+                            <td class="px-4 py-3 text-slate-700">薄而彎曲，由平行的兩面緻密骨夾著中間一層海綿骨。</td>
+                            <td class="px-4 py-3 text-slate-600">頭骨、胸骨</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">不規則骨</td>
+                            <td class="px-4 py-3 text-slate-700">形狀複雜，不適用上面三種分類，由一層薄緻密骨包著海綿骨。</td>
+                            <td class="px-4 py-3 text-slate-600">脊椎骨、髖骨</td>
+                        </tr>
+                        <tr class="bg-orange-50">
+                            <td class="px-4 py-3 font-bold text-ems-orange">種子骨</td>
+                            <td class="px-4 py-3 text-slate-700">包在肌腱裡的骨頭。功能是使肌腱遠離關節、增加肌腱彎曲角度，以<strong>提高肌肉的收縮力</strong>。</td>
+                            <td class="px-4 py-3 text-slate-600">髕骨（膝蓋骨）、豌豆骨</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 骨骼五大功能 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.43</span>
+                三、骨骼五大功能
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🛡️</div>
+                    <h4 class="font-bold text-ems-navy text-sm">保護</h4>
+                    <p class="text-xs text-slate-600 mt-1">顱骨保護腦、肋骨保護胸腔</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🏛️</div>
+                    <h4 class="font-bold text-ems-navy text-sm">支撐</h4>
+                    <p class="text-xs text-slate-600 mt-1">為人體提供支架塑形</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🩸</div>
+                    <h4 class="font-bold text-ems-navy text-sm">造血</h4>
+                    <p class="text-xs text-slate-600 mt-1">長骨骨髓腔、海綿骨空隙</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">💎</div>
+                    <h4 class="font-bold text-ems-navy text-sm">貯存</h4>
+                    <p class="text-xs text-slate-600 mt-1">礦物質，尤其是鈣與磷</p>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                    <div class="text-3xl mb-2">🏃</div>
+                    <h4 class="font-bold text-ems-navy text-sm">運動</h4>
+                    <p class="text-xs text-slate-600 mt-1">提供肌肉支架與附著處</p>
+                </div>
+            </div>
+
+            <!-- 肌肉系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.43</span>
+                四、肌肉系統 — 三大型態
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-blue">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">💪</span> 骨骼肌</h4>
+                    <div class="text-xs text-slate-500 mb-2">隨意肌 ‧ 具橫紋</div>
+                    <p class="text-sm text-slate-700">附著在骨骼上，透過收縮放鬆牽引骨骼合作完成動作。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-slate-400">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">🫁</span> 平滑肌</h4>
+                    <div class="text-xs text-slate-500 mb-2">不隨意肌 ‧ 無橫紋</div>
+                    <p class="text-sm text-slate-700">構成內臟壁，受自律神經支配。</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-orange">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-2"><span class="text-xl">❤️</span> 心肌</h4>
+                    <div class="text-xs text-slate-500 mb-2">不隨意肌 ‧ 具橫紋</div>
+                    <p class="text-sm text-slate-700">組成心臟壁，自動規律收縮。</p>
+                </div>
+            </div>
+
+            <!-- 肌肉四特性 + 三功能 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3">三型肌肉的共通特性（Jensen &amp; Fisher, 1979）</h4>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-blue">延伸性</div>
+                            <div class="text-xs text-slate-600 mt-1">有伸展、延長的能力</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-blue">伸縮性</div>
+                            <div class="text-xs text-slate-600 mt-1">外在拉力移除後可回復原長度</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-blue">興奮性</div>
+                            <div class="text-xs text-slate-600 mt-1">可被激發或對刺激物作出回應</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-blue">收縮性</div>
+                            <div class="text-xs text-slate-600 mt-1">有繃緊、施加張力的能力</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3">肌肉系統的三大功能</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="border-l-4 border-ems-blue pl-3">
+                            <div class="font-bold text-ems-navy">1. 產生活動</div>
+                            <div class="text-slate-600 text-xs">透過肌肉收縮 (Muscular Contractions) 產生各種動作</div>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-3">
+                            <div class="font-bold text-ems-navy">2. 維持身體姿勢</div>
+                            <div class="text-slate-600 text-xs">肌肉保持一定的張力 (Muscle Tone) 維持姿勢</div>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3">
+                            <div class="font-bold text-ems-navy">3. 供能和產熱</div>
+                            <div class="text-slate-600 text-xs">肌醣元、磷酸肌酸、ATP 分解時釋能，並產生熱能<strong>維持正常體溫</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 救護應用 -->
+            <div class="bg-ems-navy text-white p-6 rounded-xl shadow-md border-t-4 border-ems-orange mb-8">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="text-ems-orange">🚑</span> 讀書會帶領小提示
+                </h3>
+                <div class="text-sm text-slate-300 space-y-2 leading-relaxed">
+                    <p><strong class="text-white">為何低體溫病人會發抖？</strong>因為骨骼肌收縮會產熱（肌肉三大功能之一），人體啟動發抖以增加產熱對抗失溫。重度低體溫時反而不再發抖，是<strong class="text-ems-orange">代謝失代償</strong>的警訊。</p>
+                    <p><strong class="text-white">為何救護員要保護自己的背？</strong>脊椎節間的椎間盤反覆受壓會退化，這也是〈醫學倫理與心法〉中提到「保護好你的背部是決定救護生涯長度的唯一因素」的解剖學基礎。</p>
+                </div>
+            </div>
+
+            <!-- 上/下頁導引 -->
+            <div class="flex justify-between mt-10">
+                <a href="./chap2-respiratory.html" class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-300 transition">
+                    <span>◀</span> 上一頁：呼吸與循環
+                </a>
+                <a href="./chap2-endocrine.html" class="inline-flex items-center gap-2 bg-ems-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-slate-800 transition">
+                    下一頁：內分泌與消化系統 <span>▶</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+</html>

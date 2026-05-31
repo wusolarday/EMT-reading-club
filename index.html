@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜章節目錄</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <style>
+        /* 目錄頁專屬樣式（不影響其他章節） */
+        body.toc-page { overflow: auto; height: auto; min-height: 100vh; display: block; }
+        body.toc-page::before { content: ''; display: block; height: 0; }
+        .chapter-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .chapter-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.25); }
+        .chapter-card:hover .chapter-cta { background-color: #ea580c; color: white; }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="toc-page font-sans text-slate-800 bg-ems-light">
+
+    <!-- ========================== HERO ========================== -->
+    <header class="bg-ems-navy text-white relative overflow-hidden">
+        <div class="hero-pattern absolute inset-0 opacity-60"></div>
+        <div class="relative max-w-6xl mx-auto px-6 py-12 md:py-20">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-12 h-12 rounded-full bg-ems-blue flex items-center justify-center font-black text-xl shadow-lg">✦</div>
+                <div class="text-xs uppercase tracking-widest text-ems-blue font-bold">EMT Study Group</div>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight">EMT 海栓讀書會</h1>
+            <p class="text-lg text-slate-300 max-w-2xl leading-relaxed">
+                跟著內政部消防署《初級救護技術員訓練教材》逐章對讀的互動式筆記。Finn &amp; Solarday 每晚 21:00–22:00。
+            </p>
+
+            <!-- 章節速覽 chip -->
+            <div class="flex flex-wrap gap-2 mt-6">
+                <a href="#chap1" class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-full text-sm transition">
+                    <span class="w-2 h-2 rounded-full bg-ems-blue"></span> 第一章
+                </a>
+                <a href="#chap2" class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-full text-sm transition">
+                    <span class="w-2 h-2 rounded-full bg-ems-blue"></span> 第二章
+                </a>
+                <a href="#chap3" class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-full text-sm transition">
+                    <span class="w-2 h-2 rounded-full bg-ems-blue"></span> 第三章
+                </a>
+                <a href="#chap4" class="inline-flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-full text-sm transition">
+                    <span class="w-2 h-2 rounded-full bg-ems-blue"></span> 第四章
+                </a>
+                <span class="inline-flex items-center gap-1.5 bg-slate-800/50 px-3 py-1.5 rounded-full text-sm text-slate-400">
+                    <span class="w-2 h-2 rounded-full bg-slate-600"></span> 第五章起 持續更新
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================== 章節清單 ========================== -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold text-ems-navy">章節目錄</h2>
+            <span class="text-sm text-ems-gray hidden sm:block">點任一章卡片進入對應頁面</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+            <!-- ----- 第一章 ----- -->
+            <a id="chap1" href="./chap1.html" class="chapter-card block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-ems-navy text-white p-6 relative">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ems-blue font-bold mb-1">Chapter 01</div>
+                            <h3 class="text-2xl font-bold text-white">台灣緊急醫療救護體系概論</h3>
+                        </div>
+                        <div class="text-5xl font-black text-ems-blue/30 leading-none">01</div>
+                    </div>
+                    <div class="mt-3 inline-block bg-ems-blue/20 text-ems-blue px-3 py-1 rounded text-xs font-bold">課本 P.6 – P.31</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        EMS 的起源、藍色生命之星、英美 vs 德法體系、緊救法名詞、EMT 三級訓練、九大職責與 101 件心法。
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 mb-5">
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 概論與發展源起</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 歷史沿革與現況</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 法規與名詞定義</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 制度與訓練基準</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 九大核心職責</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 醫學倫理與心法</li>
+                    </ul>
+                    <div class="chapter-cta inline-flex items-center gap-2 bg-slate-100 text-slate-700 font-bold px-4 py-2 rounded-lg text-sm transition">
+                        進入第一章 <span>→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ----- 第二章 ----- -->
+            <a id="chap2" href="./chap2.html" class="chapter-card block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-ems-navy text-white p-6 relative">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ems-blue font-bold mb-1">Chapter 02</div>
+                            <h3 class="text-2xl font-bold text-white">人體基本解剖與生理學</h3>
+                        </div>
+                        <div class="text-5xl font-black text-ems-blue/30 leading-none">02</div>
+                    </div>
+                    <div class="mt-3 inline-block bg-ems-blue/20 text-ems-blue px-3 py-1 rounded text-xs font-bold">課本 P.34 – P.61</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        十大系統解剖、生理基礎；八大生命徵象（含 GCS 評分表、血壓參考標準、異常呼吸型式）的完整評估流程。
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 mb-5">
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 解剖切面與體腔組織</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 人體各大系統生理</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-orange">●</span> <strong>八大生命徵象</strong>（互動切換）</li>
+                    </ul>
+                    <div class="chapter-cta inline-flex items-center gap-2 bg-slate-100 text-slate-700 font-bold px-4 py-2 rounded-lg text-sm transition">
+                        進入第二章 <span>→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ----- 第三章 ----- -->
+            <a id="chap3" href="./chap3.html" class="chapter-card block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-ems-navy text-white p-6 relative">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ems-blue font-bold mb-1">Chapter 03</div>
+                            <h3 class="text-2xl font-bold text-white">緊急醫療救護職業安全</h3>
+                        </div>
+                        <div class="text-5xl font-black text-ems-blue/30 leading-none">03</div>
+                    </div>
+                    <div class="mt-3 inline-block bg-ems-blue/20 text-ems-blue px-3 py-1 rounded text-xs font-bold">課本 P.64 – P.87</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        職業安全概論（含傷亡統計圖表）、肌肉骨骼搬運、針紮與傳染病防治、救護車安全停放、面對死亡心理、PTSD 與安全文化。
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 mb-5">
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 職業安全概論</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 肌肉骨骼與搬運</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 針紮與傳染病防治</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 救護車安全與停放</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 面對死亡與心理建設</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> PTSD 與安全文化</li>
+                    </ul>
+                    <div class="chapter-cta inline-flex items-center gap-2 bg-slate-100 text-slate-700 font-bold px-4 py-2 rounded-lg text-sm transition">
+                        進入第三章 <span>→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ----- 第四章 ----- -->
+            <a id="chap4" href="./chap4.html" class="chapter-card block bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="bg-ems-navy text-white p-6 relative">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="text-xs uppercase tracking-widest text-ems-blue font-bold mb-1">Chapter 04</div>
+                            <h3 class="text-2xl font-bold text-white">到院前五級檢傷概論</h3>
+                        </div>
+                        <div class="text-5xl font-black text-ems-blue/30 leading-none">04</div>
+                    </div>
+                    <div class="mt-3 inline-block bg-ems-blue/20 text-ems-blue px-3 py-1 rounded text-xs font-bold">課本 P.90 – P.113</div>
+                </div>
+                <div class="p-6">
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        台灣五級檢傷推動歷程、分類方式（非外傷／外傷）、首要與次要調節變數、到院前五級程序，以及三個實戰案例練習。
+                    </p>
+                    <ul class="space-y-1.5 text-xs text-slate-500 mb-5">
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 推動歷程時間軸</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 非外傷 vs 外傷分類方式</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 到院前檢傷初判五級架構</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 首要調節變數六項互動卡</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 次要調節變數（凝血／血糖／血壓）</li>
+                        <li class="flex items-center gap-2"><span class="text-ems-blue">▪</span> 到院前五級程序 + 案例練習</li>
+                    </ul>
+                    <div class="chapter-cta inline-flex items-center gap-2 bg-slate-100 text-slate-700 font-bold px-4 py-2 rounded-lg text-sm transition">
+                        進入第四章 <span>→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ----- 未來章節佔位 ----- -->
+            <div class="block bg-white/50 rounded-2xl border-2 border-dashed border-slate-300 overflow-hidden">
+                <div class="p-6 h-full flex flex-col justify-center text-center">
+                    <div class="text-4xl mb-2 opacity-40">⏳</div>
+                    <div class="text-xs uppercase tracking-widest text-slate-400 font-bold">Chapter 05+</div>
+                    <h3 class="text-lg font-bold text-slate-500 mt-1">即將推出</h3>
+                    <p class="text-xs text-slate-400 mt-2">後續章節持續整理中，<br>更新後會自動出現在此目錄。</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================== 使用說明 ========================== -->
+        <section class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-ems-navy text-lg mb-2 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">📖</span> 如何使用本站
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><span class="text-ems-blue font-bold mr-2">1.</span>從章節卡進入該章。每章是獨立頁面，內部用左側欄切換小節。</li>
+                    <li><span class="text-ems-blue font-bold mr-2">2.</span>手機點左上角漢堡圖示展開章節內部目錄。</li>
+                    <li><span class="text-ems-blue font-bold mr-2">3.</span>側邊欄底部「← 回章節目錄」可隨時回到這頁。</li>
+                    <li><span class="text-ems-blue font-bold mr-2">4.</span>請搭配實體課本對照閱讀，每段都標註對應頁次。</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-ems-navy text-lg mb-2 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">🎯</span> 讀書會帶領小提示
+                </h3>
+                <ul class="text-sm text-slate-600 space-y-2">
+                    <li><span class="text-ems-blue font-bold mr-2">▪</span>每節都有「📌 定義 / 🧪 評估 / 🔍 表徵 / 🎯 影響因素」四段固定結構，方便節奏。</li>
+                    <li><span class="text-ems-blue font-bold mr-2">▪</span>重要表格（GCS、血壓、訓練時數、消化腺）會獨立呈現，可直接截圖分享。</li>
+                    <li><span class="text-ems-blue font-bold mr-2">▪</span>互動元件（九大職責、八大生命徵象）適合做隨堂問答。</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========================== Footer ========================== -->
+    <footer class="bg-ems-navy text-slate-400 mt-10">
+        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+            <div>
+                <div class="text-white font-bold">EMT 海栓讀書會</div>
+                <div class="text-xs mt-1">Finn &amp; Solarday · 21:00 – 22:00</div>
+            </div>
+            <div class="text-xs">
+                教材來源：內政部消防署《初級救護技術員訓練教材》
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

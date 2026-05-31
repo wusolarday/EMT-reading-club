@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第四章：到院前五級檢傷概論</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <style>
+        .triage-badge-1 { background:#dc2626; color:white; }
+        .triage-badge-2 { background:#f97316; color:white; }
+        .triage-badge-3 { background:#eab308; color:#1e293b; }
+        .triage-badge-4 { background:#22c55e; color:white; }
+        .triage-badge-5 { background:#94a3b8; color:white; }
+        .timeline-line { position:relative; }
+        .timeline-line::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:#0284c7; opacity:.35; }
+        .acc-content { display:none; }
+        .acc-content.open { display:block; }
+        .duty-btn.active { background:#0284c7; color:white; border-color:#0284c7; }
+    </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+<!-- ===== 側邊欄 ===== -->
+<nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+        <h1 class="text-xl font-bold text-white tracking-wide">第四章</h1>
+        <p class="text-xs text-ems-blue font-medium mt-1">到院前五級檢傷概論</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+        <div class="px-6 pb-2 pt-3 text-[10px] font-bold tracking-widest text-slate-500 uppercase">P.90 – P.113</div>
+
+        <button onclick="switchView('view-history', this)" class="nav-item active w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">01 推動歷程</span>
+            <span class="text-[11px] text-slate-400">P.92 – P.95 · 台灣五級檢傷沿革</span>
+        </button>
+        <button onclick="switchView('view-classify', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">02 檢傷分類方式</span>
+            <span class="text-[11px] text-slate-400">P.95 – P.97 · 非外傷 vs 外傷</span>
+        </button>
+        <button onclick="switchView('view-pretriage', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">03 到院前檢傷初判</span>
+            <span class="text-[11px] text-slate-400">P.98 – P.99 · 五級架構與流程</span>
+        </button>
+        <button onclick="switchView('view-primary', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">04 首要調節變數</span>
+            <span class="text-[11px] text-slate-400">P.100 – P.101 · 呼吸／血行／意識…</span>
+        </button>
+        <button onclick="switchView('view-secondary', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">05 次要調節變數</span>
+            <span class="text-[11px] text-slate-400">P.102 – P.103 · 凝血／血糖／血壓</span>
+        </button>
+        <button onclick="switchView('view-procedure', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">06 到院前五級程序</span>
+            <span class="text-[11px] text-slate-400">P.104 – P.105 · 三級 + 五級兩模式</span>
+        </button>
+        <button onclick="switchView('view-appendix', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">07 附錄：量表速查</span>
+            <span class="text-[11px] text-slate-400">P.106 – P.110 · 非外傷／外傷大分類</span>
+        </button>
+        <button onclick="switchView('view-cases', this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 transition flex flex-col gap-0.5">
+            <span class="font-bold text-sm">08 案例練習</span>
+            <span class="text-[11px] text-slate-400">P.110 – P.113 · 三個情境演練</span>
+        </button>
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">← 回章節目錄</a>
+</nav>
+
+<!-- ===== 主內容 ===== -->
+<main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+<!-- ============================================================
+     VIEW 1: 推動歷程
+     ============================================================ -->
+<section id="view-history" class="view-section fade-in block">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.92 – P.95</div>
+        <h2 class="text-3xl font-bold text-ems-navy">台灣到院前五級檢傷推動歷程</h2>
+        <p class="text-ems-gray mt-2 text-lg">從民國 103 年的啟蒙交流，到 113 年正式全面施行，走過十年積累的制度建設之路。</p>
+    </header>
+
+    <!-- 學習目標 -->
+    <div class="bg-ems-navy text-white rounded-xl p-5 mb-8 border-t-4 border-ems-orange">
+        <h3 class="font-bold text-base mb-3 flex items-center gap-2">🎯 本章學習目標</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300">
+            <div class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span>了解我國到院前五級檢傷推動歷程</div>
+            <div class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span>認識到院前五級檢傷之架構與分類方式</div>
+            <div class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span>掌握檢傷一級與重要的二級傷病內容</div>
+            <div class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span><span class="bg-ems-blue text-white text-[10px] px-1 rounded mr-1">EMT-2</span>知道首要與重要次要調節變數的內容及分級方式</span></div>
+            <div class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span><span class="bg-ems-blue text-white text-[10px] px-1 rounded mr-1">EMT-2</span>應用檢傷程序正確判斷病人的危急程度</span></div>
+        </div>
+    </div>
+
+    <!-- 時間軸 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+        <h3 class="text-lg font-bold text-ems-navy mb-5 flex items-center gap-2">📅 推動里程碑時間軸</h3>
+        <div class="timeline-line space-y-5 pl-12">
+            <div class="relative">
+                <div class="absolute -left-12 top-0.5 w-10 h-10 rounded-full bg-ems-blue flex items-center justify-center text-white font-black text-xs">103</div>
+                <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                    <div class="font-bold text-ems-navy">啟蒙交流（民國 103 年）</div>
+                    <p class="text-sm text-slate-600 mt-1">參訪日本到院前檢傷制度，開啟台灣引入五級檢傷構想。</p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -left-12 top-0.5 w-10 h-10 rounded-full bg-ems-blue/70 flex items-center justify-center text-white font-black text-xs">104</div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                    <div class="font-bold text-ems-navy">先導計畫</div>
+                    <p class="text-sm text-slate-600 mt-1">委託台灣急診醫學會進行研究，建置急診五級檢傷量表試驗，並計劃開發到院前判斷 App。</p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -left-12 top-0.5 w-10 h-10 rounded-full bg-ems-orange flex items-center justify-center text-white font-black text-xs">107</div>
+                <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                    <div class="font-bold text-ems-navy">試辦與執行 — 臺中率先啟動</div>
+                    <p class="text-sm text-slate-600 mt-1">消防署委託臺中市政府消防局進行試辦計畫；107/05/07 消防署正式把「推動到院前急診之一之到院前五級檢傷」列為四大策略之一；108 起將五級檢傷納入救護紀錄表評估項目。</p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -left-12 top-0.5 w-10 h-10 rounded-full bg-ems-orange flex items-center justify-center text-white font-black text-xs">110</div>
+                <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                    <div class="font-bold text-ems-navy">政府／學會共同推動</div>
+                    <p class="text-sm text-slate-600 mt-1">110/11/27 消防署辦理第三屆年會正式啟航儀式；急診醫學會、台灣緊急救護指導醫師學會、中華民國急重症護理學會共同宣示。臺中市正式全面施行（113/1/1）。</p>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -left-12 top-0.5 w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-black text-xs">112+</div>
+                <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-4">
+                    <div class="font-bold text-ems-navy">系統建置與教育訓練全面展開</div>
+                    <p class="text-sm text-slate-600 mt-1">112 年導入「救急救難一站通」五級檢傷輔助判斷系統；各縣市消防局完成 EMT 技術員教育訓練課程，完整建立系統性教材。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 五級架構速覽 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h3 class="text-lg font-bold text-ems-navy mb-4">🚦 五級檢傷架構一覽（表 4-1）</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                    <tr class="bg-ems-navy text-white">
+                        <th class="px-4 py-3 text-left rounded-tl-lg">級數</th>
+                        <th class="px-4 py-3 text-left">操作型定義</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="bg-red-50">
+                        <td class="px-4 py-3 font-bold"><span class="triage-badge-1 px-2 py-1 rounded text-xs">一級</span><br><span class="text-xs text-slate-500 mt-1 block">急救危急</span></td>
+                        <td class="px-4 py-3 text-slate-700">無法在救護現場進行穩定病人，且須進行緊急或緊急性急救處置者</td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="px-4 py-3 font-bold"><span class="triage-badge-2 px-2 py-1 rounded text-xs">二級</span><br><span class="text-xs text-slate-500 mt-1 block">急危</span></td>
+                        <td class="px-4 py-3 text-slate-700">急危處置病人者，或情況雖穩定，但短時間內可能會快速惡化者</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold"><span class="triage-badge-3 px-2 py-1 rounded text-xs">三級</span><br><span class="text-xs text-slate-500 mt-1 block">緊急</span></td>
+                        <td class="px-4 py-3 text-slate-700">病情在短時間不會惡化，但現況需要緊急處置的醫療服務者</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td class="px-4 py-3 font-bold"><span class="triage-badge-4 px-2 py-1 rounded text-xs">四級</span><br><span class="text-xs text-slate-500 mt-1 block">次緊急</span></td>
+                        <td class="px-4 py-3 text-slate-700">病情短時間不會惡化，況況不影響當日常態的急救醫療服務者</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold"><span class="triage-badge-5 px-2 py-1 rounded text-xs">五級</span><br><span class="text-xs text-slate-500 mt-1 block">非緊急</span></td>
+                        <td class="px-4 py-3 text-slate-700">屬上述四級以上，但依嚴重程度可直接到醫療機構就醫者</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 2: 檢傷分類方式
+     ============================================================ -->
+<section id="view-classify" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.95 – P.97</div>
+        <h2 class="text-3xl font-bold text-ems-navy">檢傷分類方式</h2>
+        <p class="text-ems-gray mt-2 text-lg">到院前五級檢傷採用 Prehospital TTAS，依年齡與「非外傷／外傷」分為四種量表。</p>
+    </header>
+
+    <!-- 四張量表 -->
+    <div class="bg-ems-navy text-white rounded-xl p-5 mb-8">
+        <h3 class="font-bold mb-4 flex items-center gap-2">📋 四種量表分類（表 4-2）</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-600">
+                        <th class="px-4 py-2 text-left text-ems-blue">年齡層</th>
+                        <th class="px-4 py-2 text-left">分類</th>
+                        <th class="px-4 py-2 text-left">使用量表</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700">
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-ems-blue">A（≥18 歲）</td>
+                        <td class="px-4 py-3">非外傷</td>
+                        <td class="px-4 py-3">成人非外傷量表＊</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-ems-blue">A（≥18 歲）</td>
+                        <td class="px-4 py-3">外傷</td>
+                        <td class="px-4 py-3">成人外傷量表＃</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-ems-orange">P（&lt;18 歲）</td>
+                        <td class="px-4 py-3">非外傷</td>
+                        <td class="px-4 py-3">兒童非外傷量表＊</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold text-ems-orange">P（&lt;18 歲）</td>
+                        <td class="px-4 py-3">外傷</td>
+                        <td class="px-4 py-3">兒童外傷量表＃</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-slate-400 mt-3">＊包含細項的非外傷主訴名稱；＃包含部位別的外傷標準主訴名稱</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 非外傷 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="text-lg font-bold text-ems-navy mb-4 flex items-center gap-2">🏥 非外傷（表 4-3）</h3>
+            <p class="text-sm text-slate-600 mb-4">分成 <strong>14 大類</strong>，包含 119 項標準主訴名稱，含「特殊情況」（確定或疑似性侵、家庭暴力）。</p>
+            <div class="space-y-2">
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M01 呼吸系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M02 心臟血管系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M03 腸胃系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M04 神經系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M05 骨骼系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M06 泌尿系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M07 耳鼻喉科</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M08 眼科</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M09 皮膚系統</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M10 婦產科</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M11 心理健康</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M12 物質濫用</div>
+                    <div class="p-2 bg-blue-50 rounded border border-blue-100">M13 一般和其他</div>
+                    <div class="p-2 bg-orange-50 rounded border border-orange-100 font-bold">E01 環境有關之急症</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 外傷 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="text-lg font-bold text-ems-navy mb-4 flex items-center gap-2">🩹 外傷（表 4-3）</h3>
+            <p class="text-sm text-slate-600 mb-4">分成 <strong>15 大類</strong>，含 46 項標準主訴名稱。分類方式有三種（受傷形式、受傷機轉、特殊情況）。</p>
+            <div class="space-y-2 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T01 重大外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T02 頭部外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T03 臉面部外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T04 眼睛外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T05 鼻子外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T06 耳朵外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T07 頸部外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T08 胸部外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T09 腹（含骨盆）外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T10 腰、背部外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T11 會陰及生殖器外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T12 肢體外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T13 皮膚外傷</div>
+                    <div class="p-2 bg-red-50 rounded border border-red-100">T14 一般及其他傷者</div>
+                    <div class="p-2 bg-orange-50 rounded border border-orange-100 font-bold">E02 環境有關之外傷</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 外傷三種分類方式 -->
+    <div class="mt-6 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h3 class="text-lg font-bold text-ems-navy mb-4">外傷標準主訴名稱的三種分類方式</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="font-bold text-ems-blue mb-2">(1) 受傷形式</div>
+                <p class="text-slate-600">適用於部分大分類名稱外在優勢者，如「頭部外傷」可再細分「頭部撕裂傷」及「頭部撕裂傷／損傷」。</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="font-bold text-ems-blue mb-2">(2) 受傷機轉</div>
+                <p class="text-slate-600">包含昆蟲咬傷、海洋生物咬傷、動物咬傷、蛇咬傷、化學物質暴露、凍傷、電擊傷害及溺水等與環境有關之外傷。</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="font-bold text-ems-orange mb-2">(3) 特殊情況</div>
+                <p class="text-slate-600">即「一般或其他傷者」之「確定或疑似性侵」與「家庭暴力」。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 3: 到院前檢傷初判
+     ============================================================ -->
+<section id="view-pretriage" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.98 – P.99</div>
+        <h2 class="text-3xl font-bold text-ems-navy">到院前檢傷初判</h2>
+        <p class="text-ems-gray mt-2 text-lg">五級檢傷的判斷流程，從「大分類」→「標準主訴」→「判定依據」逐步收斂到檢傷級數。</p>
+    </header>
+
+    <!-- 判定流程 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+        <h3 class="text-lg font-bold text-ems-navy mb-5">📌 判定依據結構</h3>
+        <div class="flex flex-wrap items-center gap-3 justify-center mb-6">
+            <div class="bg-ems-navy text-white px-5 py-3 rounded-xl font-bold text-center text-sm shadow">大分類名稱</div>
+            <div class="text-2xl text-ems-blue">→</div>
+            <div class="bg-ems-blue text-white px-5 py-3 rounded-xl font-bold text-center text-sm shadow">標準主訴名稱</div>
+            <div class="text-2xl text-ems-blue">→</div>
+            <div class="bg-ems-orange text-white px-5 py-3 rounded-xl font-bold text-center text-sm shadow">判定依據<br><span class="text-xs font-normal">(首要+次要調節變數)</span></div>
+            <div class="text-2xl text-ems-blue">→</div>
+            <div class="bg-emerald-600 text-white px-5 py-3 rounded-xl font-bold text-center text-sm shadow">檢傷級數</div>
+        </div>
+        <p class="text-sm text-slate-600 text-center">以「皮膚外傷：燙傷」為例：無意識 GCS(3-8) → 一級；2度3度 &gt;25%體表面積 → 二級；2度3度 5-25% → 三級 ⋯</p>
+    </div>
+
+    <!-- 完整表 4-4：皮膚外傷燙傷 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h3 class="text-lg font-bold text-ems-navy mb-1">📋 表 4-4 檢傷級數量表範例（課本 P.96）</h3>
+        <p class="text-xs text-slate-400 mb-4">以「皮膚外傷：燙傷」為例，完整 17 項判定依據。標記 ＊ 為次要調節變數。</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+                <thead>
+                    <tr class="bg-ems-navy text-white">
+                        <th class="px-3 py-3 text-left w-20">大分類名稱</th>
+                        <th class="px-3 py-3 text-left w-16">標準主訴名稱</th>
+                        <th class="px-3 py-3 text-left">判定依據（首要或次要調節變數）</th>
+                        <th class="px-3 py-3 text-center w-16">檢傷<br>級數</th>
+                        <th class="px-3 py-3 text-center w-12">次要<br>調節<br>變數</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <!-- 一級：3 rows -->
+                    <tr class="bg-red-50">
+                        <td class="px-3 py-2 font-bold align-top" rowspan="17">皮膚外傷</td>
+                        <td class="px-3 py-2 font-bold align-top" rowspan="17">燙傷</td>
+                        <td class="px-3 py-2">重度呼吸窘迫（SpO₂ &lt; 90%）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-1 px-2 py-0.5 rounded font-bold">1</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-red-50">
+                        <td class="px-3 py-2">休克</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-1 px-2 py-0.5 rounded font-bold">1</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-red-100">
+                        <td class="px-3 py-2 font-bold">無意識（GCS：3-8）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-1 px-2 py-0.5 rounded font-bold">1</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <!-- 二級：6 rows -->
+                    <tr class="bg-orange-50">
+                        <td class="px-3 py-2">中度呼吸窘迫（SpO₂ &lt; 92%）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="px-3 py-2">血行動力搖擺不定</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="px-3 py-2">意識程度改變（GCS：9-13）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-orange-100">
+                        <td class="px-3 py-2 font-bold">2度3度 &gt; 25% 體表面積</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2 text-center font-bold text-ems-orange text-base">＊</td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="px-3 py-2 font-bold">手部／足部／顏面部／會陰部 2度或3度燙傷</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2 text-center font-bold text-ems-orange text-base">＊</td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="px-3 py-2">矽吸入性灼傷</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold">2</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <!-- 三級：4 rows -->
+                    <tr class="bg-yellow-50">
+                        <td class="px-3 py-2">輕度呼吸窘迫（SpO₂：92-94%）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-3 px-2 py-0.5 rounded font-bold">3</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                        <td class="px-3 py-2">血壓或心跳處於病人之平常數值，但血行動力搖擺</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-3 px-2 py-0.5 rounded font-bold">3</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                        <td class="px-3 py-2">急性周邊重度疼痛（8-10）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-3 px-2 py-0.5 rounded font-bold">3</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-yellow-100 ring-2 ring-yellow-400 ring-inset">
+                        <td class="px-3 py-2 font-bold">2度3度 5-25% 體表面積</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-3 px-2 py-0.5 rounded font-bold">3</span></td>
+                        <td class="px-3 py-2 text-center font-bold text-ems-orange text-base">＊</td>
+                    </tr>
+                    <!-- 四級：2 rows -->
+                    <tr class="bg-green-50">
+                        <td class="px-3 py-2">急性周邊中度疼痛（4-7）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-4 px-2 py-0.5 rounded font-bold">4</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                    <tr class="bg-green-50">
+                        <td class="px-3 py-2">2度3度 &lt; 5% 體表面積</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-4 px-2 py-0.5 rounded font-bold">4</span></td>
+                        <td class="px-3 py-2 text-center font-bold text-ems-orange text-base">＊</td>
+                    </tr>
+                    <!-- 五級：1 row -->
+                    <tr>
+                        <td class="px-3 py-2">急性周邊輕度疼痛（&lt; 4）</td>
+                        <td class="px-3 py-2 text-center"><span class="triage-badge-5 px-2 py-0.5 rounded font-bold">5</span></td>
+                        <td class="px-3 py-2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="text-[11px] text-slate-400 mt-3">＊ 次要調節變數：凝血機能異常、疑似電解質異常、高血壓急症等特殊情況下，此項才會被啟動參考。</p>
+    </div>
+
+    <!-- 讀書會案例：V9 黃梅 → 三級 -->
+    <div class="bg-white rounded-xl shadow-sm border-2 border-yellow-400 p-6 mb-8">
+        <div class="flex items-center gap-3 mb-4">
+            <span class="triage-badge-3 text-base font-black px-4 py-2 rounded-xl">三級</span>
+            <div>
+                <h3 class="text-lg font-bold text-ems-navy">讀書會案例：V9 黃梅（T6 工廠）</h3>
+                <p class="text-xs text-slate-400">對應判斷依據：2度3度 5-25% 體表面積（18%）＊</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- 案例卡資訊 -->
+            <div class="bg-slate-50 rounded-xl border border-slate-200 p-5">
+                <h4 class="font-bold text-ems-navy mb-3 text-sm">📋 傷情與檢核資訊（演習識別卡）</h4>
+                <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-700">
+                    <dt class="font-bold text-slate-500">姓名</dt><dd>黃梅</dd>
+                    <dt class="font-bold text-slate-500">年齡／性別</dt><dd>48 歲 女性</dd>
+                    <dt class="font-bold text-slate-500">場域</dt><dd>T6 工廠內 1 樓</dd>
+                    <dt class="font-bold text-slate-500">場域情境</dt><dd class="col-span-1">在工廠內正在做飯，地震來襲，雙腳遭熱湯燙傷，無法行走，僅能原地等待救援</dd>
+                    <dt class="font-bold text-slate-500">演員台詞</dt><dd class="col-span-1">「地震發生時，我正在煮湯，然後整鍋湯都倒了，灑在我的腳上，我的腳現在好痛，我沒有辦法走路了」</dd>
+                    <dt class="font-bold text-slate-500">傷情</dt><dd class="font-bold text-ems-orange">雙下肢 18%，2-3 度燒燙傷</dd>
+                </dl>
+                <div class="mt-4 border-t border-slate-200 pt-3">
+                    <p class="text-xs font-bold text-slate-500 mb-2">評估數值</p>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">GCS</div>
+                            <div class="font-bold">E4 V5 M6</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">呼吸</div>
+                            <div class="font-bold">24 /min</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">脈搏</div>
+                            <div class="font-bold">120 /min</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">血壓</div>
+                            <div class="font-bold">102/59</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">血氧</div>
+                            <div class="font-bold">96%</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">體溫</div>
+                            <div class="font-bold">35.3°C</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">CRT</div>
+                            <div class="font-bold">1s</div>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded p-2 text-center col-span-2">
+                            <div class="text-slate-400 text-[10px]">瞳孔</div>
+                            <div class="font-bold">實測</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 p-3 bg-blue-50 border border-blue-100 rounded-lg text-xs text-slate-600">
+                    <span class="font-bold text-ems-blue">檢測目標：</span>
+                    1.傷情評估與監測　2.燙傷處理　3.建立 IV 與輸液　4.脫困前處置（保暖）　5.疼痛管理（止痛藥給予）
+                </div>
+            </div>
+
+            <!-- 照片欄 -->
+            <div class="flex flex-col gap-4">
+                <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex-1 min-h-[180px] relative">
+                    <img src="./assets/img/v9-case-card.jpg"
+                         alt="V9 演習識別卡"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="absolute inset-0 hidden flex-col items-center justify-center text-slate-400 text-xs gap-2">
+                        <span class="text-3xl">📷</span>
+                        <span class="font-bold">請將演習識別卡照片存為</span>
+                        <code class="bg-slate-200 px-2 py-1 rounded text-[10px]">assets/img/v9-case-card.jpg</code>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex-1 min-h-[180px] relative">
+                    <img src="./assets/img/v9-case-legs.jpg"
+                         alt="V9 雙下肢燙傷傷妝"
+                         class="w-full h-full object-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="absolute inset-0 hidden flex-col items-center justify-center text-slate-400 text-xs gap-2">
+                        <span class="text-3xl">📷</span>
+                        <span class="font-bold">請將傷妝照片存為</span>
+                        <code class="bg-slate-200 px-2 py-1 rounded text-[10px]">assets/img/v9-case-legs.jpg</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 為什麼是三級？判斷步驟拆解 -->
+        <div class="bg-ems-navy text-white rounded-xl p-5">
+            <h4 class="font-bold text-ems-orange mb-4">🔍 為什麼是三級？判斷步驟拆解</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div class="bg-slate-800 rounded-lg p-4">
+                    <div class="text-ems-blue font-bold mb-2">步驟 1：排除一級</div>
+                    <ul class="text-xs text-slate-300 space-y-1">
+                        <li>✅ GCS 15（非 3-8，無意識）</li>
+                        <li>✅ SpO₂ 96%（非呼吸衰竭）</li>
+                        <li>✅ 血壓 102/59，有搏動（非休克）</li>
+                        <li class="text-emerald-400 font-bold mt-1">→ 不符合危急個案</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4">
+                    <div class="text-ems-blue font-bold mb-2">步驟 2：排除二級</div>
+                    <ul class="text-xs text-slate-300 space-y-1">
+                        <li>✅ SpO₂ 96%（非 &lt;92%）</li>
+                        <li>✅ 意識正常（GCS 非 9-13）</li>
+                        <li>✅ 燙傷面積 18%（非 &gt;25%）</li>
+                        <li>✅ 非手部／足部（雙下肢）</li>
+                        <li>✅ 非矽吸入性灼傷</li>
+                        <li class="text-emerald-400 font-bold mt-1">→ 不符合二級條件</li>
+                    </ul>
+                </div>
+                <div class="bg-yellow-900 rounded-lg p-4 border border-yellow-500">
+                    <div class="text-yellow-300 font-bold mb-2">步驟 3：確認三級 ✓</div>
+                    <ul class="text-xs text-slate-200 space-y-1">
+                        <li class="font-bold text-yellow-300">▶ 2度3度，5-25% 體表面積</li>
+                        <li class="text-slate-300">雙下肢 18% → 符合三級＊</li>
+                        <li class="mt-2">疼痛評估輔助確認：</li>
+                        <li>→ 疼痛部位「周邊」（下肢）</li>
+                        <li>→ 若 NRS 8-10 亦可到三級</li>
+                        <li class="text-yellow-300 font-bold mt-2 text-base">= 三級（緊急）</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">💡 若燙傷面積 &gt; 25%，或同時波及手部、足部、顏面、會陰 → 直接升為二級（危急）</p>
+        </div>
+    </div>
+
+    <!-- 到院前初判重點說明 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="font-bold text-ems-navy mb-3 flex items-center gap-2">💡 初判重點</h3>
+            <ul class="space-y-3 text-sm text-slate-600">
+                <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5 shrink-0">▪</span>到院前五級檢傷使用電腦輔助設備或檢傷量表才能確認級數</li>
+                <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5 shrink-0">▪</span>檢傷三、四、五級急迫程度較低，可在現場初步確認</li>
+                <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5 shrink-0">▪</span>現場時間延誤 → 建議先直接判斷，不透過快速搜索</li>
+                <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5 shrink-0">▪</span>符合「危急個案」即初判為檢傷<strong>一級</strong></li>
+                <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5 shrink-0">▪</span>非「危急個案」初判為「可能三至五級」</li>
+            </ul>
+        </div>
+        <div class="bg-ems-navy text-white rounded-xl p-6">
+            <h3 class="font-bold text-ems-blue mb-3 flex items-center gap-2">🚨 危急個案（直接判一級）</h3>
+            <div class="grid grid-cols-1 gap-2 text-xs text-slate-300">
+                <div class="p-2 bg-slate-800 rounded">1. 呼吸或心臟停止</div>
+                <div class="p-2 bg-slate-800 rounded">2. 急性意識改變，GCS 3-8</div>
+                <div class="p-2 bg-slate-800 rounded">3. 重度呼吸窘迫（呼吸衰竭）</div>
+                <div class="p-2 bg-slate-800 rounded">4. 休克</div>
+                <div class="p-2 bg-slate-800 rounded">5. 中樞體溫 &gt;41°C 或 &lt;32°C</div>
+                <div class="p-2 bg-slate-800 rounded">6. 持續抽搐（癲癇發作）</div>
+                <div class="p-2 bg-slate-800 rounded">7-14. 暴力行為、第三孕期出血、懷孕外傷、化學性灼傷 2-3 度 &gt;25% 體表面積… 等</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 4: 首要調節變數
+     ============================================================ -->
+<section id="view-primary" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.100 – P.101</div>
+        <h2 class="text-3xl font-bold text-ems-navy">首要與次要調節變數</h2>
+        <p class="text-ems-gray mt-2 text-lg">「首要調節變數」是病情危急程度的第一道判斷門，共六項，任一符合即決定初步檢傷級數。</p>
+    </header>
+
+    <!-- 六大首要調節變數互動卡 -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div class="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-2">
+            <button onclick="showPrimary(1)" id="pbtn-1" class="duty-btn active text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">🫁 呼吸</button>
+            <button onclick="showPrimary(2)" id="pbtn-2" class="duty-btn text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">❤️ 血行動力</button>
+            <button onclick="showPrimary(3)" id="pbtn-3" class="duty-btn text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">🧠 意識</button>
+            <button onclick="showPrimary(4)" id="pbtn-4" class="duty-btn text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">🌡️ 體溫</button>
+            <button onclick="showPrimary(5)" id="pbtn-5" class="duty-btn text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">😣 疼痛程度</button>
+            <button onclick="showPrimary(6)" id="pbtn-6" class="duty-btn text-left bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold">🚗 受傷機轉</button>
+        </div>
+        <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-6 shadow-md">
+            <h3 id="p-title" class="text-xl font-bold text-ems-blue mb-3 border-b border-slate-700 pb-2">🫁 呼吸</h3>
+            <div id="p-content" class="text-sm text-slate-300 leading-relaxed space-y-3">
+                <p>評估病人是否有<strong class="text-white">呼吸窘迫</strong>現象。若有呼吸窘迫徵候，則需進一步評估呼吸窘迫程度，以決定「呼吸」這個首要調節變數的檢傷級數。</p>
+                <div class="bg-slate-800 rounded-lg p-3 text-xs space-y-1">
+                    <div class="flex items-center gap-2"><span class="triage-badge-1 px-2 py-0.5 rounded font-bold text-xs">一級</span> 重度呼吸窘迫（呼吸衰竭，SpO₂ &lt; 90%）</div>
+                    <div class="flex items-center gap-2"><span class="triage-badge-2 px-2 py-0.5 rounded font-bold text-xs">二級</span> 中度呼吸窘迫（SpO₂ &lt; 92%）</div>
+                    <div class="flex items-center gap-2"><span class="triage-badge-3 px-2 py-0.5 rounded font-bold text-xs">三級</span> 輕度呼吸窘迫（SpO₂ 92-94%）</div>
+                    <div class="flex items-center gap-2"><span class="triage-badge-5 px-2 py-0.5 rounded font-bold text-xs">無</span> 病人無呼吸窘迫現象→不以此項判定級數</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 次要調節變數補充說明 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h3 class="text-lg font-bold text-ems-navy mb-4">📌 次要調節變數的角色</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-600">
+            <div>
+                <p class="mb-3">次要調節變數標記於檢傷量表的「＊」符號，使用時機是：</p>
+                <ul class="space-y-2">
+                    <li class="flex items-start gap-2"><span class="text-ems-orange">▪</span>對首要調節變數的<strong>補充</strong>（如血糖、高血壓急症）</li>
+                    <li class="flex items-start gap-2"><span class="text-ems-orange">▪</span>該調節變數<strong>不加入一般首要調節變數</strong>（例如補充心臟血管系統），若未加入則不會因為高血壓而誤導判斷</li>
+                    <li class="flex items-start gap-2"><span class="text-ems-orange">▪</span>「被選定之次要調節變數」可進一步影響分類（胸痛／胸痛、中風、吞嚥困難、肢體外傷）</li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 rounded-lg p-4">
+                <p class="font-bold text-ems-navy mb-2">⚠️ 特定主訴</p>
+                <p>適用於首要調節變數<strong>未能涵蓋</strong>的狀況，包含：</p>
+                <ul class="mt-2 space-y-1">
+                    <li>• 懷孕問題大於 20 週</li>
+                    <li>• 心理健康（精神／行為急症）</li>
+                </ul>
+                <p class="mt-2 text-xs text-ems-gray">注意：精神行為急症依照心理健康領域，並不適用「量化」指標（如生命徵象），因此不容易評估其危急程度。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 5: 次要調節變數
+     ============================================================ -->
+<section id="view-secondary" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.102 – P.103</div>
+        <h2 class="text-3xl font-bold text-ems-navy">次要調節變數</h2>
+        <p class="text-ems-gray mt-2 text-lg">最終級數以所有判定的最高級數為準；次要調節變數（標記＊）是補充首要判定的輔助機制。</p>
+    </header>
+
+    <!-- 凝血機能 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h3 class="text-lg font-bold text-ems-navy mb-4">(一) 凝血機能異常與出血（表 4-8）</h3>
+        <p class="text-sm text-slate-600 mb-4">先天性凝血異常病患、重度肝病或長期服用抗凝血劑的病人若有出血，可能因凝血機能常導致大量出血的風險，需要快速介入治療。</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                    <tr class="bg-ems-navy text-white">
+                        <th class="px-4 py-2 text-left">檢傷級數判定依據</th>
+                        <th class="px-4 py-2 text-center"><span class="triage-badge-2 px-2 py-1 rounded">二級（危急）</span></th>
+                        <th class="px-4 py-2 text-center"><span class="triage-badge-3 px-2 py-1 rounded">三級（緊急）</span></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs">
+                    <tr>
+                        <td class="px-4 py-3 font-bold">適用對象</td>
+                        <td class="px-4 py-3" colspan="2">1. 先天性基礎異常者<br>2. 嚴重肝病者<br>3. 現正使用抗凝血劑者</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold">適用狀況</td>
+                        <td class="px-4 py-3" colspan="2">所有有伴有關於的主訴以及任何伴有出血的非外傷性主訴</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold">項目（二級）</td>
+                        <td class="px-4 py-3">頭部（腦內）＆頸部、胸部、腹部、骨盆與脊椎、大量或唱不出血、四肢的肌肉出血、骨骼或關節、深部的傷裂傷、任何無法控制的出血</td>
+                        <td class="px-4 py-3">中度或輕度的出血、鼻子（流血）、口腔（含牙齒）、輕微血血、皮膚及表膚裂傷值</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 血糖 + 高血壓 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- 血糖 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="font-bold text-ems-navy mb-4">(二) 血糖異常與檢傷分級（表 4-9）</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-3 py-2 text-left">條件</th>
+                            <th class="px-3 py-2 text-center"><span class="triage-badge-2 px-1 rounded">二級</span></th>
+                            <th class="px-3 py-2 text-center"><span class="triage-badge-3 px-1 rounded">三級</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="bg-red-50">
+                            <td class="px-3 py-2 font-bold">血糖 &lt;60 mg/dL<br>或顯示 "Low"</td>
+                            <td class="px-3 py-2 text-center">伴隨：混亂、冒汗、虛弱、顫抖 任一症狀</td>
+                            <td class="px-3 py-2 text-center text-slate-400">無前述症狀</td>
+                        </tr>
+                        <tr class="bg-orange-50">
+                            <td class="px-3 py-2 font-bold">血糖 &gt;324 mg/dL<br>或顯示 "High"</td>
+                            <td class="px-3 py-2 text-center">伴隨：呼吸喘難、脫水、虛弱 任一症狀</td>
+                            <td class="px-3 py-2 text-center text-slate-400">無前述症狀</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 高血壓 -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="font-bold text-ems-navy mb-4">(三) 高血壓急症與檢傷分級（表 4-10）</h3>
+            <p class="text-xs text-slate-500 mb-3">高血壓部分因無法判定對主訴的因果關係，故將高血壓區塊作為獨立主訴項目（歸於心臟血管系統），不加入一般首要調節變數。</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-3 py-2 text-left">狀況</th>
+                            <th class="px-3 py-2 text-center"><span class="triage-badge-2 px-1 rounded">二級</span></th>
+                            <th class="px-3 py-2 text-center"><span class="triage-badge-3 px-1 rounded">三級</span></th>
+                            <th class="px-3 py-2 text-center"><span class="triage-badge-4 px-1 rounded">四級</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="px-3 py-2 font-bold">有任一症狀</td>
+                            <td class="px-3 py-2 text-center text-xs">SBP≥220<br>DBP≥130</td>
+                            <td class="px-3 py-2 text-center text-xs">SBP 200-220<br>DBP 110-130</td>
+                            <td class="px-3 py-2 text-center text-xs">SBP 200-220<br>DBP 110-130</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="px-3 py-2 font-bold">無症狀</td>
+                            <td class="px-3 py-2"></td>
+                            <td class="px-3 py-2 text-center text-xs">SBP≥220<br>DBP≥130</td>
+                            <td class="px-3 py-2 text-center text-xs">SBP 200-220<br>DBP 110-130</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 被選定之次要調節變數 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h3 class="font-bold text-ems-navy mb-4">(四) 被選定之次要調節變數（P.102）</h3>
+        <p class="text-sm text-slate-600 mb-4">包括胸腔／胸痛、中風症狀、吞嚥困難／喉嚨痛以及肢體外傷。有助於確定首要調節變數可能不足以分辨的外傷等級。</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                    <tr class="bg-ems-navy text-white">
+                        <th class="px-4 py-2 text-left">主訴類別</th>
+                        <th class="px-4 py-2 text-center"><span class="triage-badge-1 px-2 py-0.5 rounded text-xs">一級</span></th>
+                        <th class="px-4 py-2 text-center"><span class="triage-badge-2 px-2 py-0.5 rounded text-xs">二級</span></th>
+                        <th class="px-4 py-2 text-center"><span class="triage-badge-3 px-2 py-0.5 rounded text-xs">三級</span></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs">
+                    <tr>
+                        <td class="px-4 py-3 font-bold">胸悶／胸痛</td>
+                        <td class="px-4 py-3 text-center">—</td>
+                        <td class="px-4 py-3 text-center">急性撕裂性胸痛</td>
+                        <td class="px-4 py-3 text-center">—</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td class="px-4 py-3 font-bold">中風症狀</td>
+                        <td class="px-4 py-3 text-center">—</td>
+                        <td class="px-4 py-3 text-center">症狀發作 &lt;6 小時</td>
+                        <td class="px-4 py-3 text-center">症狀發作 ≥ 6 小時</td>
+                    </tr>
+                    <tr>
+                        <td class="px-4 py-3 font-bold">吞嚥困難／喉嚨痛</td>
+                        <td class="px-4 py-3 text-center">—</td>
+                        <td class="px-4 py-3 text-center">流口水、喘鳴、聲音或近不下去</td>
+                        <td class="px-4 py-3 text-center">無上述症狀</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td class="px-4 py-3 font-bold">肢體外傷</td>
+                        <td class="px-4 py-3 text-center">—</td>
+                        <td class="px-4 py-3 text-center">1. 股骨骨折<br>2. 開放性骨折</td>
+                        <td class="px-4 py-3 text-center">其他閉鎖性骨折</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 6: 到院前五級程序
+     ============================================================ -->
+<section id="view-procedure" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.104 – P.105</div>
+        <h2 class="text-3xl font-bold text-ems-navy">到院前五級檢傷程序</h2>
+        <p class="text-ems-gray mt-2 text-lg">採用「三級檢傷」與「五級檢傷」兩模式，先判斷「危急個案」再逐步確認三至五級。</p>
+    </header>
+
+    <!-- 流程圖 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+        <h3 class="font-bold text-ems-navy mb-6 text-center">圖 4-4 到院前檢傷程序（P.104）</h3>
+        <div class="flex flex-col items-center gap-0">
+            <!-- 步驟 1 -->
+            <div class="bg-ems-blue text-white rounded-xl px-6 py-3 font-bold text-sm text-center shadow">初級評估、輔助檢查與詢問病史</div>
+            <div class="text-2xl text-ems-blue my-1">↓</div>
+            <!-- 步驟 2 -->
+            <div class="border-2 border-ems-orange rounded-xl px-6 py-3 font-bold text-sm text-center bg-orange-50 text-ems-orange">是否屬急危個案？</div>
+            <div class="flex gap-16 my-1 text-sm font-bold">
+                <span class="text-emerald-600">否 ↙</span>
+                <span class="text-red-600">是 ↘</span>
+            </div>
+            <!-- 分叉 -->
+            <div class="flex gap-8 mb-2">
+                <div class="flex flex-col items-center gap-1">
+                    <div class="bg-slate-100 border border-slate-300 rounded-xl px-5 py-3 text-sm font-bold text-slate-700 text-center">可能三至五級</div>
+                    <div class="text-ems-blue text-lg">↓</div>
+                    <div class="border border-ems-blue rounded-xl px-4 py-2 text-xs text-center text-ems-blue font-bold">是否有可直接判定<br>之檢傷二級狀況？</div>
+                    <div class="text-ems-blue text-lg">↓</div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs text-center">依據選定的求救原因<br>使用分級量表或檢傷輔助工具搜索</div>
+                </div>
+                <div class="flex flex-col items-center gap-1">
+                    <div class="bg-red-100 border border-red-400 rounded-xl px-5 py-3 text-sm font-bold text-red-700 text-center">是否符合<br>檢傷狀況</div>
+                </div>
+            </div>
+            <!-- 結果 -->
+            <div class="flex gap-4 mt-2 flex-wrap justify-center">
+                <div class="triage-badge-5 px-4 py-2 rounded-xl font-bold text-sm">五級</div>
+                <div class="triage-badge-4 px-4 py-2 rounded-xl font-bold text-sm">四級</div>
+                <div class="triage-badge-3 px-4 py-2 rounded-xl font-bold text-sm">三級</div>
+                <div class="triage-badge-2 px-4 py-2 rounded-xl font-bold text-sm">二級</div>
+                <div class="triage-badge-1 px-4 py-2 rounded-xl font-bold text-sm">一級</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 結語 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-ems-navy text-white rounded-xl p-6">
+            <h3 class="font-bold text-ems-orange mb-4">採用急診一致的五級檢傷框架之效益</h3>
+            <ol class="text-sm text-slate-300 space-y-3 list-decimal list-inside">
+                <li>急診五級檢傷效能已獲肯定</li>
+                <li>急診五級檢傷成為衛生福利部公告，具公信力，可避免民眾質疑</li>
+                <li>救護技術員與急診護護人員可在此共同語言下進行聯繫與溝通</li>
+                <li>急診五級檢傷所提供之再評估時間可作為縣市 EMS 單位送醫路程遠近及送醫方式之參考</li>
+                <li>縣市 EMS 與衛生單位可進一步掌握目前轄內所有病人需求，並同時衡量是否有醫療資源不足</li>
+            </ol>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h3 class="font-bold text-ems-navy mb-4">🔧 兩種操作模式</h3>
+            <div class="space-y-4 text-sm">
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="font-bold text-ems-blue mb-1">三級檢傷</p>
+                    <p class="text-slate-600">救護員到達現場藉由初級評估、輔助檢查與詢問病史後，符合「危急個案」→ <strong>一級</strong>；符合「二級傷病情況」→ <strong>二級</strong>；其餘 → <strong>可能三至五級</strong>。</p>
+                </div>
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <p class="font-bold text-emerald-700 mb-1">五級檢傷（使用輔助系統）</p>
+                    <p class="text-slate-600">開啟一站通五級檢傷輔助系統，確認檢傷級數。建議在前往醫院途中或到達醫院後再搜索確認，以避免現場時間延誤。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 7: 附錄量表速查
+     ============================================================ -->
+<section id="view-appendix" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.106 – P.110</div>
+        <h2 class="text-3xl font-bold text-ems-navy">附錄：量表速查</h2>
+        <p class="text-ems-gray mt-2 text-lg">非外傷量表大分類求救原因、外傷大分類，以及高危險性受傷機轉、心理健康分級。</p>
+    </header>
+
+    <!-- 手風琴：非外傷量表 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h3 class="font-bold text-ems-navy mb-4">一、非外傷量表大分類（P.106）</h3>
+        <div class="space-y-2 text-sm">
+            <div class="acc-item border border-slate-200 rounded-lg overflow-hidden">
+                <button onclick="toggleAcc(this)" class="w-full text-left px-4 py-3 font-bold bg-slate-50 hover:bg-slate-100 flex justify-between items-center">
+                    <span>M01 呼吸系統</span><span class="text-ems-blue">▾</span>
+                </button>
+                <div class="acc-content px-4 py-3 text-slate-600 text-xs">
+                    呼吸短促＊、呼吸停止、呼吸困難、咳嗽、嗆咳、呼吸道內異物、鼻血、呼吸道內分泌物、氣道堵塞、哮鳴＊
+                </div>
+            </div>
+            <div class="acc-item border border-slate-200 rounded-lg overflow-hidden">
+                <button onclick="toggleAcc(this)" class="w-full text-left px-4 py-3 font-bold bg-slate-50 hover:bg-slate-100 flex justify-between items-center">
+                    <span>M02 心臟血管系統</span><span class="text-ems-blue">▾</span>
+                </button>
+                <div class="acc-content px-4 py-3 text-slate-600 text-xs">
+                    心跳停止、胸痛／胸悶、心悸、心律不整、高血壓急症＃、全身虛弱／無力、暈厥、全身性水腫、肢體腫水、冰冷四肢或腿部靜脈紅熱
+                </div>
+            </div>
+            <div class="acc-item border border-slate-200 rounded-lg overflow-hidden">
+                <button onclick="toggleAcc(this)" class="w-full text-left px-4 py-3 font-bold bg-slate-50 hover:bg-slate-100 flex justify-between items-center">
+                    <span>M03 腸胃系統</span><span class="text-ems-blue">▾</span>
+                </button>
+                <div class="acc-content px-4 py-3 text-slate-600 text-xs">
+                    噁心、嘔吐、便秘、腹脹、直腸內異物、嘔血（吐血）、腹痛、腹瀉、腹部腫塊、腸胃道出血、嘔吐異物、吞嚥困難、胃管道出血、牙問題、腹部腫脹、腹腔出血、直腸出血等
+                </div>
+            </div>
+            <div class="acc-item border border-slate-200 rounded-lg overflow-hidden">
+                <button onclick="toggleAcc(this)" class="w-full text-left px-4 py-3 font-bold bg-slate-50 hover:bg-slate-100 flex justify-between items-center">
+                    <span>M04 神經系統</span><span class="text-ems-blue">▾</span>
+                </button>
+                <div class="acc-content px-4 py-3 text-slate-600 text-xs">
+                    意識程度改變、混亂、眩暈、頭痛、頭部、抽搐、步態不穩、運動失調、震顫、肢體無力、知覺喪失、感覺異常、中風症狀
+                </div>
+            </div>
+            <div class="acc-item border border-slate-200 rounded-lg overflow-hidden">
+                <button onclick="toggleAcc(this)" class="w-full text-left px-4 py-3 font-bold bg-slate-50 hover:bg-slate-100 flex justify-between items-center">
+                    <span>M11 心理健康</span><span class="text-ems-blue">▾</span>
+                </button>
+                <div class="acc-content px-4 py-3 text-slate-600 text-xs">
+                    憂鬱／自殺、焦慮／激動、幻覺／妄想、失眠、暴力行為／傷害他人、社會／社交問題、怪異行為、破壞性行為。<br><em class="text-ems-orange">注：精神急症因無量化指標，使用「心理健康特定主訴評估表」判斷。</em>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 高危險性受傷機轉 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h3 class="font-bold text-ems-navy mb-4">三、高危險性受傷機轉（表 4-10，二級）</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <div class="font-bold text-ems-orange mb-2">一般外傷</div>
+                <ul class="text-xs text-slate-600 space-y-1">
+                    <li>• 汽車：從車內被彈出、車體嚴重變形、衝擊時間 &gt;20 分鐘、同車有人死亡、撞擊速度 &gt;40 公里（未繫安全帶）或 &gt;60 公里（已繫安全帶）</li>
+                    <li>• 機車：車速 &gt;30 公里衝擊、尤其撞擊後人車分離</li>
+                    <li>• 行人或腳踏車：車速 &gt;30 公里</li>
+                </ul>
+            </div>
+            <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <div class="font-bold text-ems-orange mb-2">高處墜落</div>
+                <ul class="text-xs text-slate-600 space-y-1">
+                    <li>• 成人：大於 6 公尺以上高處落</li>
+                    <li>• 兒童：大於兒童身高 2 倍以上高度落下</li>
+                    <li>• 穿刺傷（頭、頸部、腦幹或近端肢體的穿刺傷）</li>
+                    <li>• 槍傷</li>
+                </ul>
+            </div>
+            <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <div class="font-bold text-ems-orange mb-2">頸部外傷</div>
+                <ul class="text-xs text-slate-600 space-y-1">
+                    <li>• 汽車：被彈出車外、未繫安全帶的乘客撞上風擋玻璃</li>
+                    <li>• 行人被撞擊</li>
+                    <li>• 高處落下（成人 &gt;1公尺或 5 階樓梯、兒童 &gt;兒童身高 2 倍）</li>
+                    <li>• 攻擊：被人使用鈍器攻擊（拳腳除外）</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 心理健康檢傷分級 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <h3 class="font-bold text-ems-navy mb-4">六、心理健康與檢傷分級（P.108）<span class="bg-ems-blue text-white text-[10px] px-1 rounded ml-2">EMT-2</span></h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+                <thead>
+                    <tr class="bg-ems-navy text-white">
+                        <th class="px-3 py-2 text-left">主訴類別</th>
+                        <th class="px-3 py-2 text-left">調節項目</th>
+                        <th class="px-3 py-2 text-center"><span class="triage-badge-1 px-1 rounded">一</span></th>
+                        <th class="px-3 py-2 text-center"><span class="triage-badge-2 px-1 rounded">二</span></th>
+                        <th class="px-3 py-2 text-center"><span class="triage-badge-3 px-1 rounded">三</span></th>
+                        <th class="px-3 py-2 text-center"><span class="triage-badge-4 px-1 rounded">四</span></th>
+                        <th class="px-3 py-2 text-center"><span class="triage-badge-5 px-1 rounded">五</span></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="bg-red-50">
+                        <td class="px-3 py-2 font-bold" rowspan="2">憂鬱／自殺</td>
+                        <td class="px-3 py-2">急性失眠</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-emerald-600">4</td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr class="bg-red-50">
+                        <td class="px-3 py-2">慢性失眠</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-slate-500">5</td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 font-bold" rowspan="4">暴力行為／自殺</td>
+                        <td class="px-3 py-2">即將傷害自己或他人；有明確的計畫</td>
+                        <td class="px-3 py-2 text-center font-bold text-red-600">1</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">不確定的想法或做出可能危害自身或他人安全的行為</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-orange-600">2</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">有使用暴力／傷害他人的念頭，但不確定計畫</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-yellow-600">3</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2">脾氣暴躁，但不一定有自殺念頭</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-emerald-600">4</td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td class="px-3 py-2 font-bold">怪異行為</td>
+                        <td class="px-3 py-2">無法控制的行為</td>
+                        <td class="px-3 py-2 text-center font-bold text-red-600">1</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-2 font-bold">怪異行為</td>
+                        <td class="px-3 py-2">騷擾的行為</td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center"></td>
+                        <td class="px-3 py-2 text-center font-bold text-emerald-600">4</td>
+                        <td class="px-3 py-2 text-center"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     VIEW 8: 案例練習
+     ============================================================ -->
+<section id="view-cases" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.110 – P.113</div>
+        <h2 class="text-3xl font-bold text-ems-navy">案例練習</h2>
+        <p class="text-ems-gray mt-2 text-lg">三個情境案例，練習使用「臺灣到院前急救五級檢傷急迫度量表」及輔助工具判定級數。</p>
+    </header>
+
+    <!-- 情境 1 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
+        <div class="bg-ems-navy text-white p-5">
+            <div class="text-xs text-ems-blue font-bold mb-1">情境案例一 · 使用分級量表</div>
+            <h3 class="text-lg font-bold">30 歲女性，有憂鬱症病史，企圖自殺</h3>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-bold text-ems-navy mb-2">📋 案情</h4>
+                <p class="text-sm text-slate-600 mb-3">近日情緒低落，一直有輕生的念頭，現坐在頂樓外上哭泣。家屬發現時，目前警察及救護員均已到達現場。</p>
+                <h4 class="font-bold text-ems-navy mb-2">🔍 判斷流程</h4>
+                <ol class="text-sm text-slate-600 space-y-2">
+                    <li><span class="font-bold text-ems-blue">步驟 1：</span>本案例並無危急個案（一級）及重要的二級傷病情況</li>
+                    <li><span class="font-bold text-ems-blue">步驟 2：</span>選擇大分類名稱 →「心理健康」；標準主訴名稱 →「憂鬱／自殺」</li>
+                    <li><span class="font-bold text-ems-blue">步驟 3：</span>選擇符合案例之「判定依據（次要調節變數）」→「企圖自殺者有明顯的計畫」，對應級數為<strong class="text-ems-orange">二級</strong></li>
+                </ol>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-3">
+                <div class="text-center">
+                    <div class="text-sm text-slate-500 mb-1">最終檢傷級數</div>
+                    <div class="triage-badge-2 text-3xl font-black px-8 py-4 rounded-2xl shadow-lg inline-block">二級</div>
+                    <div class="text-xs text-slate-400 mt-2">（危急）</div>
+                </div>
+                <div class="text-xs text-slate-500 text-center mt-2 bg-slate-50 p-3 rounded-lg border">
+                    <span class="text-ems-orange font-bold">重點：</span>精神急症使用心理健康量表，「企圖自殺有明顯計畫」→ 二級
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 情境 2 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
+        <div class="bg-ems-navy text-white p-5">
+            <div class="text-xs text-ems-blue font-bold mb-1">情境案例二 · 使用一站通五級檢傷輔助系統</div>
+            <h3 class="text-lg font-bold">75 歲女性，獨居老人，因廁所不清楚摔倒</h3>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-bold text-ems-navy mb-2">📋 案情</h4>
+                <p class="text-sm text-slate-600 mb-3">中午 12:30 在右側股體無力，講話不清楚，因而摔打到牆上。救護員到達現場，評估 6 點病人都很好的。現場生命徵象：呼吸 18 次/分、脈搏 76 次/分、GCS：E4V5M6、血氧 99%、血量 194 mg/dL；送醫途中生命徵象：呼吸 18 次/分、脈搏 75 次/分、血壓 140/65、GCS：E4V5M6、血氧 99%、體溫 36.5°C。</p>
+                <h4 class="font-bold text-ems-navy mb-2">🔍 判斷流程</h4>
+                <ol class="text-sm text-slate-600 space-y-2">
+                    <li><span class="font-bold text-ems-blue">步驟 1：</span>無一級及重要二級，初判「可能三至五級」</li>
+                    <li><span class="font-bold text-ems-blue">步驟 2：</span>開啟一站通五級輔助系統，選「心理健康」→「憂鬱/自殺」→「肢體無力」</li>
+                    <li><span class="font-bold text-ems-blue">步驟 3：</span>點選符合案例之次要調節變數（中風症狀發作 &lt; 6 小時）</li>
+                    <li><span class="font-bold text-ems-blue">步驟 4：</span>輸入相關生命徵象，系統判斷檢傷級數</li>
+                </ol>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-3">
+                <div class="text-center">
+                    <div class="text-sm text-slate-500 mb-1">最終檢傷級數</div>
+                    <div class="triage-badge-3 text-3xl font-black px-8 py-4 rounded-2xl shadow-lg inline-block">三級</div>
+                    <div class="text-xs text-slate-400 mt-2">（緊急）</div>
+                </div>
+                <div class="text-xs text-slate-500 text-center mt-2 bg-slate-50 p-3 rounded-lg border">
+                    <span class="text-ems-orange font-bold">重點：</span>中風症狀 &lt; 6 小時 → 二級，但 GCS 正常、血行穩定，最終確認三級
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 情境 3 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="bg-ems-navy text-white p-5">
+            <div class="text-xs text-ems-blue font-bold mb-1">情境案例三 · 使用快速查詢手冊</div>
+            <h3 class="text-lg font-bold">63 歲機車女騎士，與汽車發生碰撞事故</h3>
+        </div>
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-bold text-ems-navy mb-2">📋 案情</h4>
+                <p class="text-sm text-slate-600 mb-3">救護員到達發現，評估發現有右小腿明顯腫脹及變形。生命徵象：呼吸 18 次/分、脈搏 80 次/分、血壓 153/98 mmHg、GCS：E4V5M6、血氧 96%、體溫 36.9°C、疼痛分數 7 分，沒有慢性疾病或過去病史。</p>
+                <h4 class="font-bold text-ems-navy mb-2">🔍 判斷流程（快速查詢手冊）</h4>
+                <ol class="text-sm text-slate-600 space-y-2">
+                    <li><span class="font-bold text-ems-blue">步驟 1：</span>先針對首要及次要調節變數適用項目（P.46）確認，無一級二級危急</li>
+                    <li><span class="font-bold text-ems-blue">步驟 2：</span>從創傷分類「肢體創傷」→ 受傷區域「肢（P.52）」查詢是否符合步驟 1（首傷四級）更高的級數</li>
+                    <li><span class="font-bold text-ems-blue">步驟 3：</span>選擇符合案例之次要調節變數（肢體骨折：「除大腿外，其他部位腫脹變形、砷位骨折／脫臼」→ 三級）</li>
+                    <li><span class="font-bold text-ems-blue">步驟 4：</span>確認檢傷級數為三級</li>
+                </ol>
+            </div>
+            <div class="flex flex-col justify-center items-center gap-3">
+                <div class="text-center">
+                    <div class="text-sm text-slate-500 mb-1">最終檢傷級數</div>
+                    <div class="triage-badge-3 text-3xl font-black px-8 py-4 rounded-2xl shadow-lg inline-block">三級</div>
+                    <div class="text-xs text-slate-400 mt-2">（緊急）</div>
+                </div>
+                <div class="text-xs text-slate-500 text-center mt-2 bg-slate-50 p-3 rounded-lg border">
+                    <span class="text-ems-orange font-bold">重點：</span>非股骨骨折 → 三級。若是股骨骨折或開放性骨折 → 二級
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 情境 4：夜店爆炸 -->
+    <div class="bg-white rounded-xl shadow-sm border-2 border-orange-400 overflow-hidden mb-6">
+        <div class="bg-ems-navy text-white p-5">
+            <div class="text-xs text-ems-orange font-bold mb-1">情境案例四 · 大量傷亡事故（MCI）</div>
+            <h3 class="text-lg font-bold">夜店爆炸：王建仁 — 臉部＋雙手燙傷</h3>
+        </div>
+        <div class="p-6">
+
+            <!-- 場景說明 -->
+            <div class="bg-slate-900 text-slate-200 rounded-xl p-5 mb-6 text-sm leading-relaxed">
+                <p class="text-ems-orange font-bold mb-2">🔥 場域情境</p>
+                <p>週六凌晨 1:30，某夜店地下一樓舞池中央發生不明原因爆炸，現場約有 200 名民眾。爆炸引發短暫閃燃與局部火災，大量煙霧充滿室內，玻璃碎片四散。消防救護同步進入，現場進行 START 大量傷亡分類。</p>
+                <p class="mt-2">王建仁，32 歲男性，站在靠近爆炸源的吧台區。爆炸當下面向爆炸方向，雙手扶在吧台上，臉部與雙手直接受到閃燃波及。事後自行移動至角落，主訴臉部與手部劇烈灼熱疼痛，自述有吸入大量黑煙，持續咳嗽，耳鳴明顯。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- 評估數值 -->
+                <div>
+                    <h4 class="font-bold text-ems-navy mb-3 text-sm">📋 現場評估數值</h4>
+                    <div class="grid grid-cols-3 gap-2 text-xs mb-4">
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">意識 GCS</div>
+                            <div class="font-bold">E4 V5 M6<br><span class="text-slate-400 font-normal">= 15</span></div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">呼吸</div>
+                            <div class="font-bold">22 /min</div>
+                        </div>
+                        <div class="bg-yellow-50 border border-yellow-300 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">血氧 SpO₂</div>
+                            <div class="font-bold text-yellow-700">95%</div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">脈搏</div>
+                            <div class="font-bold">108 /min</div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">血壓</div>
+                            <div class="font-bold">118/74</div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">體溫</div>
+                            <div class="font-bold">36.8°C</div>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded p-2 text-center">
+                            <div class="text-slate-400 text-[10px]">CRT</div>
+                            <div class="font-bold">&lt; 2s</div>
+                        </div>
+                        <div class="bg-orange-50 border border-orange-300 rounded p-2 text-center col-span-2">
+                            <div class="text-slate-400 text-[10px]">疼痛 NRS（臉＋手）</div>
+                            <div class="font-bold text-ems-orange">8 / 10</div>
+                        </div>
+                    </div>
+
+                    <h4 class="font-bold text-ems-navy mb-2 text-sm">傷情描述</h4>
+                    <ul class="text-xs text-slate-600 space-y-1.5 bg-orange-50 border border-orange-100 rounded-lg p-4">
+                        <li>🔥 臉部（顏面部）：2-3 度燒燙傷，眉毛燒焦，皮膚泛紅、起水泡</li>
+                        <li>🤲 雙手：手背、手指 2 度燙傷，皮膚破皮、有滲液</li>
+                        <li>💨 呼吸道：有吸入黑煙史，持續咳嗽，聲音略沙啞</li>
+                        <li>🩸 身體多處：玻璃碎片造成淺層撕裂傷，出血已趨緩</li>
+                        <li>👂 耳朵：雙側耳鳴，聲音聽起來悶悶的</li>
+                        <li>🚶 行動：可自行行走，定向感正常</li>
+                    </ul>
+                </div>
+
+                <!-- 判斷步驟 -->
+                <div class="bg-ems-navy text-white rounded-xl p-5">
+                    <h4 class="font-bold text-ems-orange mb-4">🔍 為什麼是二級？判斷步驟</h4>
+                    <div class="space-y-3 text-xs">
+                        <div class="bg-slate-800 rounded-lg p-3">
+                            <div class="font-bold text-slate-300 mb-1">步驟 1：排除一級</div>
+                            <ul class="text-slate-400 space-y-0.5">
+                                <li>✅ GCS 15（無意識改變）</li>
+                                <li>✅ SpO₂ 95%（≥ 90%，非重度窘迫）</li>
+                                <li>✅ 血壓、心跳穩定（非休克）</li>
+                                <li class="text-emerald-400">→ 非危急個案</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-900 rounded-lg p-3 border border-orange-500">
+                            <div class="font-bold text-orange-300 mb-1">步驟 2：確認二級 ✓</div>
+                            <ul class="text-slate-200 space-y-1.5">
+                                <li class="font-bold text-orange-300">▶ 顏面部 2-3 度燙傷 ＊ → 二級</li>
+                                <li class="font-bold text-orange-300">▶ 手部 2-3 度燙傷 ＊ → 二級</li>
+                                <li class="font-bold text-orange-300">▶ 矽吸入性灼傷疑慮 → 二級</li>
+                                <li class="text-slate-300 text-[11px] mt-1">（三項條件任一即可判二級）</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-800 rounded-lg p-3">
+                            <div class="font-bold text-slate-300 mb-1">SpO₂ 95% 補充說明</div>
+                            <p class="text-slate-400">95% 未達輕度呼吸窘迫（&lt;94%）門檻，故呼吸這一項僅參考，不獨立帶來三級。最終主要判定依據仍為<span class="text-orange-300 font-bold">顏面部＋手部燙傷</span>。</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-slate-400 text-xs">最終檢傷級數</span>
+                        <span class="triage-badge-2 text-2xl font-black px-6 py-2 rounded-xl">二級（危急）</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 處置重點 -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                <h4 class="font-bold text-ems-navy mb-3 text-sm">🚑 到院前處置重點（讀書會討論）</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white border border-orange-200 rounded-lg p-3">
+                        <div class="font-bold text-ems-orange mb-1">① 呼吸道優先</div>
+                        <p class="text-slate-600">吸入性損傷可能在 24-48 小時內惡化導致上呼吸道水腫阻塞，需嚴密監控呼吸音及聲音變化，早期通知醫院備氣管插管。</p>
+                    </div>
+                    <div class="bg-white border border-blue-200 rounded-lg p-3">
+                        <div class="font-bold text-ems-blue mb-1">② 高流量氧氣</div>
+                        <p class="text-slate-600">爆炸現場可能有 CO 中毒，給予高流量 O₂（≥15L/min 非再吸入面罩），SpO₂ 即使正常仍需給氧。</p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3">
+                        <div class="font-bold text-ems-navy mb-1">③ 燙傷處理</div>
+                        <p class="text-slate-600">移除臉部與手部殘留熱源（飾品、衣物），流動清水沖洗 15-20 分鐘，覆蓋清潔敷料，避免冰敷。</p>
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg p-3">
+                        <div class="font-bold text-ems-navy mb-1">④ IV 輸液＋疼痛控制</div>
+                        <p class="text-slate-600">建立靜脈通路（避開燒傷肢體），依體重計算輸液量；NRS 8 → 應積極疼痛管理。</p>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-3">⚠️ MCI 情境提醒：大量傷亡事故下，此患者雖能自行行走，但不可因此降低其二級判定——<strong>顏面部及吸入性灼傷隨時可能快速惡化</strong>，必須優先送醫。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 結語提醒 -->
+    <div class="mt-8 bg-ems-navy text-white rounded-xl p-6 border-t-4 border-ems-orange">
+        <h3 class="font-bold text-ems-orange mb-3">💡 案例練習總結</h3>
+        <p class="text-sm text-slate-300">除使用「臺灣到院前急救五級檢傷急迫度量表」確認檢傷級數外，台灣急診醫學會、台灣緊急救護指導醫師學會及中華民國急重症護理學會亦共同出版《到院前五級檢傷快速查詢手冊》，提供救護技術員以快速搜索、確認級數。消防署已於 112 年度在「救急救難一站通」成立一站五級檢傷輔助系統，消防局救護技術員可以利用此系統在救護平板執行五級檢傷。</p>
+    </div>
+</section>
+
+</main>
+
+<script src="./assets/js/chapter-nav.js"></script>
+<script>
+// 首要調節變數互動資料
+const primaryData = {
+    1: {
+        title: '🫁 呼吸',
+        html: `<p>評估病人是否有<strong class="text-white">呼吸窘迫</strong>現象。若有呼吸窘迫徵候，則需進一步評估呼吸窘迫程度，以決定「呼吸」這個首要調節變數的檢傷級數。</p>
+<div class="bg-slate-800 rounded-lg p-3 text-xs space-y-1 mt-3">
+    <div class="flex items-center gap-2"><span class="inline-block bg-red-600 text-white px-2 py-0.5 rounded font-bold">一級</span> 重度呼吸窘迫（呼吸衰竭，SpO₂ &lt; 90%）</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> 中度呼吸窘迫（SpO₂ &lt; 92%）</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-yellow-500 text-slate-900 px-2 py-0.5 rounded font-bold">三級</span> 輕度呼吸窘迫（SpO₂ 92-94%）</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-slate-500 text-white px-2 py-0.5 rounded font-bold">無</span> 病人無呼吸窘迫現象→不以此項判定級數</div>
+</div>`
+    },
+    2: {
+        title: '❤️ 血行動力',
+        html: `<p>評估病人是否有<strong class="text-white">血行動力異常</strong>現象（如血壓、心跳異常或血行動力不穩定）。</p>
+<div class="bg-slate-800 rounded-lg p-3 text-xs space-y-1 mt-3">
+    <div class="flex items-center gap-2"><span class="inline-block bg-red-600 text-white px-2 py-0.5 rounded font-bold">一級</span> 休克</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> 血行動力不足（有發炎反應等）</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-yellow-500 text-slate-900 px-2 py-0.5 rounded font-bold">三級</span> 血壓或心跳處於病人平常水平，但血行動力標定三級</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-slate-500 text-white px-2 py-0.5 rounded font-bold">無</span> 血壓心跳正常且血行動力穩定→不以此項判定級數</div>
+</div>
+<p class="mt-3 text-xs text-slate-400">敗血症：感染失衡的宿主反應，造成危及生命的器官功能障礙。</p>`
+    },
+    3: {
+        title: '🧠 意識',
+        html: `<p>評估病人是否有<strong class="text-white">急性意識改變</strong>情況。「急性意識改變」指在 7 天內意識急性惡化，且與情況進展時當意識是有差異的。</p>
+<div class="bg-slate-800 rounded-lg p-3 text-xs space-y-1 mt-3">
+    <div class="flex items-center gap-2"><span class="inline-block bg-red-600 text-white px-2 py-0.5 rounded font-bold">一級</span> GCS 3-8</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> GCS 9-13</div>
+    <div class="flex items-center gap-2"><span class="inline-block bg-slate-500 text-white px-2 py-0.5 rounded font-bold">無</span> GCS 14-15 或只是感覺不好、沒有急性惡化→不以此判定</div>
+</div>
+<p class="mt-3 text-xs text-slate-400">許多原發性主訴（「器官疾病」）可能構成精神健康問題，例如感染起來像是精神急症的病人，是因為病人低血糖的緣故。</p>`
+    },
+    4: {
+        title: '🌡️ 體溫（表 4-6）',
+        html: `<p>體溫測量取和中樞體溫接近之測量結果，如耳溫及肛溫等方法。即便測量到時體溫正常，若只要發燒之主訴或病史（7 日內），就可使用此調節變數。</p>
+<div class="bg-slate-800 rounded-lg p-3 mt-3">
+    <p class="text-xs text-ems-blue font-bold mb-2">體溫過高</p>
+    <div class="text-xs space-y-1">
+        <div class="flex items-center gap-2"><span class="inline-block bg-red-600 text-white px-2 py-0.5 rounded font-bold">一級</span> 中樞體溫 &gt; 41°C（歸為急救危急個案）</div>
+        <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> 免疫功能缺陷或疑似白血病、腫瘤或感染相關，或看起來有病容者</div>
+        <div class="flex items-center gap-2"><span class="inline-block bg-yellow-500 text-slate-900 px-2 py-0.5 rounded font-bold">三級</span> 體溫 &gt; 38°C</div>
+    </div>
+    <p class="text-xs text-ems-orange font-bold mt-3 mb-1">體溫過低（中樞體溫）</p>
+    <div class="text-xs space-y-1">
+        <div class="flex items-center gap-2"><span class="inline-block bg-red-600 text-white px-2 py-0.5 rounded font-bold">一級</span> &lt; 32°C</div>
+        <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> 32-35°C（≥3月）、32-36°C（&lt;3月）</div>
+    </div>
+</div>`
+    },
+    5: {
+        title: '😣 疼痛程度（表 4-7）',
+        html: `<p>疼痛評估應在詢問主訴後進行。先詢問病人是否有疼痛狀況，若有，則以完成疼痛評估作為優先。若沒有則以其他方式評估。</p>
+<div class="bg-slate-800 rounded-lg p-3 text-xs mt-3 space-y-2">
+    <p class="text-ems-blue font-bold">三步驟評估法：</p>
+    <div><strong class="text-white">步驟一：</strong>依病人主觀疼痛程度分級，使用 NRS 數字評量表（0-10 分）。</div>
+    <div><strong class="text-white">步驟二：</strong>依病人數述疼痛內容，加上所觀察到的反應（臉色蒼白、身體扭曲或痛苦表現），以及客觀評估後給予適當級數，最終多只能比主觀評估增加一個檢傷級數。</div>
+    <div><strong class="text-white">步驟三：</strong>依年齡（成人/兒童）、疼痛部位（中樞/周邊）及疼痛程度，分成輕中重度（表 4-7）。</div>
+</div>
+<p class="text-xs text-slate-400 mt-2">兒童 (3-8 歲) 可使用 Wong-Baker Faces Pain Scale 臉譜量表。9 歲以上者 NRS 量表。</p>`
+    },
+    6: {
+        title: '🚗 受傷機轉',
+        html: `<p>所有外傷病人，均須評估是否有<strong class="text-white">高危險性受傷機轉</strong>。只要有高危險性受傷機轉包含在內，均可能造成重大重量外傷之高能量機轉。還需評估高危險性受傷機轉以判斷傷傷程度（如頭部、頸部損傷）。懷孕婦女外傷時，可依原始判定級數再往上調高一級。</p>
+<div class="bg-slate-800 rounded-lg p-3 text-xs mt-3 space-y-2">
+    <div class="flex items-center gap-2"><span class="inline-block bg-orange-500 text-white px-2 py-0.5 rounded font-bold">二級</span> 高危險性受傷機轉（詳見附錄頁「高危險性受傷機轉表」）</div>
+    <div class="mt-2 text-slate-400">如：汽車衝擊速度 &gt;40 公里、高處墜落 &gt;6 公尺（成人）、機車車速 &gt;30 公里後人車分離⋯</div>
+</div>`
+    }
+};
+
+function showPrimary(num) {
+    document.querySelectorAll('.duty-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('pbtn-' + num).classList.add('active');
+    document.getElementById('p-title').textContent = primaryData[num].title;
+    document.getElementById('p-content').innerHTML = primaryData[num].html;
+}
+
+function toggleAcc(btn) {
+    const content = btn.nextElementSibling;
+    content.classList.toggle('open');
+}
+</script>
+</body>
+</html>

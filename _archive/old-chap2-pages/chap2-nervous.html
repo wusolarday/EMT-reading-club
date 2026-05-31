@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜第二章 神經系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="../index.html"        data-page="origins"               class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">概論與發展源起</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span></a>
+            <a href="./intro.html"         data-page="intro"                 class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">歷史沿革與現況</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span></a>
+            <a href="./law.html"           data-page="law"                   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">法規與名詞定義</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span></a>
+            <a href="./training.html"      data-page="training"              class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">制度與訓練基準</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span></a>
+            <a href="./duties.html"        data-page="duties"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">九大核心職責</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span></a>
+            <a href="./ethics.html"        data-page="ethics"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">醫學倫理與心法</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span></a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">請搭配實體書本對照閱讀</div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.38 - P.39</div>
+                <h2 class="text-3xl font-bold text-ems-navy">神經系統（Nervous System）</h2>
+                <p class="text-ems-gray mt-2 text-lg">負責思考、溝通、控制和協調的網路系統。分為「中樞」與「周邊」兩大區塊，是判讀意識狀態、頭部外傷、中風等急症的關鍵基礎。</p>
+            </header>
+
+            <!-- 神經系統二分法概念圖 -->
+            <div class="bg-gradient-to-br from-blue-50 to-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+                <div class="text-center mb-4">
+                    <div class="inline-block bg-ems-navy text-white px-4 py-2 rounded-lg font-bold shadow-md">神經系統 Nervous System</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-2 border-ems-blue text-center">
+                        <div class="text-xs text-ems-blue font-bold mb-1">CNS</div>
+                        <h4 class="font-bold text-ems-navy mb-2">中樞神經系統</h4>
+                        <p class="text-sm text-slate-600">腦 + 脊髓（被顱骨與脊椎包覆保護）</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-2 border-ems-orange text-center">
+                        <div class="text-xs text-ems-orange font-bold mb-1">PNS</div>
+                        <h4 class="font-bold text-ems-navy mb-2">周邊神經系統</h4>
+                        <p class="text-sm text-slate-600">12 對腦神經 + 31 對脊神經</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中樞神經 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.38</span>
+                一、中樞神經系統（CNS）
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- 腦的六大區域 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🧠</span> 腦的六大區域
+                    </h4>
+                    <p class="text-xs text-ems-gray italic mb-4">中腦、橋腦、延腦三者合稱<strong class="text-ems-orange">腦幹</strong></p>
+
+                    <div class="space-y-2">
+                        <div class="border-l-4 border-ems-blue pl-3 py-1">
+                            <div class="font-bold text-ems-navy text-sm">大腦（Cerebrum）</div>
+                            <div class="text-xs text-slate-600">記憶、思考、情感、感覺接收、運動指令；兩側半球可接收感覺訊息及產生與身體對側有關的運動指令。</div>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-3 py-1">
+                            <div class="font-bold text-ems-navy text-sm">小腦（Cerebellum）</div>
+                            <div class="text-xs text-slate-600">調節細微運動、平衡；維持身體姿勢的肌肉。</div>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-3 py-1">
+                            <div class="font-bold text-ems-navy text-sm">間腦（Diencephalon）</div>
+                            <div class="text-xs text-slate-600">含視丘、下視丘，<strong>調節體溫、食慾及意識</strong>。</div>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3 py-1 bg-orange-50">
+                            <div class="font-bold text-ems-navy text-sm">中腦（Midbrain）<span class="text-xs text-ems-orange ml-1">[腦幹]</span></div>
+                            <div class="text-xs text-slate-600">處理視覺和聽覺訊息，並產生不隨意的運動反應。</div>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3 py-1 bg-orange-50">
+                            <div class="font-bold text-ems-navy text-sm">橋腦（Pons）<span class="text-xs text-ems-orange ml-1">[腦幹]</span></div>
+                            <div class="text-xs text-slate-600">位於延髓與中腦之間，含有涉及身體運動和內臟運動控制的神經。</div>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3 py-1 bg-orange-50">
+                            <div class="font-bold text-ems-navy text-sm">延腦（Medulla Oblongata）<span class="text-xs text-ems-orange ml-1">[腦幹]</span></div>
+                            <div class="text-xs text-slate-600"><strong>生命中樞</strong>。連結脊髓，控制心搏率、心收縮力及循環血流量、呼吸節律、吞嚥、嘔吐等中樞。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 脊髓 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🦴</span> 脊髓（Spinal Cord）
+                    </h4>
+                    <p class="text-sm text-slate-700 mb-4">由腦幹向下延伸，主要功能是將腦的運動指令往下傳，將感覺訊息傳回腦。</p>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <p class="text-sm font-bold text-ems-navy mb-3 text-center">人體脊髓分為 <span class="text-ems-orange text-lg">31</span> 個脊髓節</p>
+                        <div class="grid grid-cols-5 gap-2 text-center text-xs">
+                            <div class="bg-white p-2 rounded shadow-sm border border-slate-200">
+                                <div class="font-bold text-ems-blue">頸神經</div>
+                                <div class="text-slate-600 mt-1"><strong>8 對</strong></div>
+                                <div class="text-slate-500">頸椎 7 節</div>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm border border-slate-200">
+                                <div class="font-bold text-ems-blue">胸神經</div>
+                                <div class="text-slate-600 mt-1"><strong>12 對</strong></div>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm border border-slate-200">
+                                <div class="font-bold text-ems-blue">腰神經</div>
+                                <div class="text-slate-600 mt-1"><strong>5 對</strong></div>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm border border-slate-200">
+                                <div class="font-bold text-ems-blue">薦神經</div>
+                                <div class="text-slate-600 mt-1"><strong>5 對</strong></div>
+                            </div>
+                            <div class="bg-white p-2 rounded shadow-sm border border-slate-200">
+                                <div class="font-bold text-ems-blue">尾神經</div>
+                                <div class="text-slate-600 mt-1"><strong>1 對</strong></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-ems-gray italic mt-3 text-center">💡 口訣：「頸 8、胸 12、腰 5、薦 5、尾 1」</p>
+                    </div>
+
+                    <div class="mt-4 bg-orange-50 border-l-4 border-ems-orange p-3 rounded-r text-sm text-slate-700">
+                        <strong class="text-ems-orange">救護重點：</strong>頸椎共 7 節但頸神經卻有 8 對。兩節脊椎之間有椎間盤軟骨吸收壓力，是脊椎損傷時要保護的重點構造。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 周邊神經系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.39</span>
+                二、周邊神經系統（PNS）— 12 對腦神經
+            </h3>
+            <p class="text-slate-700 mb-4">腦神經總管五官感覺、觸覺、視覺、聽覺、嗅覺、味覺及眼睛的活動，面部的表情都由 12 對腦神經傳遞訊息。</p>
+
+            <!-- 12 對腦神經分類表 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-4 py-3 text-left">類別</th>
+                            <th class="px-4 py-3 text-left">編號</th>
+                            <th class="px-4 py-3 text-left">名稱</th>
+                            <th class="px-4 py-3 text-left">記憶口訣</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-blue-50">
+                            <td rowspan="3" class="px-4 py-3 font-bold text-ems-blue align-top">
+                                感覺神經<br><span class="text-xs font-normal text-slate-500">Sensory</span>
+                            </td>
+                            <td class="px-4 py-2"><strong>I</strong></td>
+                            <td class="px-4 py-2">嗅神經 Olfactory</td>
+                            <td rowspan="3" class="px-4 py-2 text-xs text-slate-600 align-top">嗅、視、聽</td>
+                        </tr>
+                        <tr class="bg-blue-50"><td class="px-4 py-2"><strong>II</strong></td><td class="px-4 py-2">視神經 Optic</td></tr>
+                        <tr class="bg-blue-50"><td class="px-4 py-2"><strong>VIII</strong></td><td class="px-4 py-2">聽神經 Vestibulocochlear</td></tr>
+
+                        <tr class="bg-orange-50">
+                            <td rowspan="5" class="px-4 py-3 font-bold text-ems-orange align-top">
+                                運動神經<br><span class="text-xs font-normal text-slate-500">Motor</span>
+                            </td>
+                            <td class="px-4 py-2"><strong>III</strong></td>
+                            <td class="px-4 py-2">動眼神經 Oculomotor</td>
+                            <td rowspan="5" class="px-4 py-2 text-xs text-slate-600 align-top">動眼、滑車、外旋、副、舌下</td>
+                        </tr>
+                        <tr class="bg-orange-50"><td class="px-4 py-2"><strong>IV</strong></td><td class="px-4 py-2">滑車神經 Trochlear</td></tr>
+                        <tr class="bg-orange-50"><td class="px-4 py-2"><strong>VI</strong></td><td class="px-4 py-2">外旋神經 Abducens</td></tr>
+                        <tr class="bg-orange-50"><td class="px-4 py-2"><strong>XI</strong></td><td class="px-4 py-2">副神經 Accessory</td></tr>
+                        <tr class="bg-orange-50"><td class="px-4 py-2"><strong>XII</strong></td><td class="px-4 py-2">舌下神經 Hypoglossal</td></tr>
+
+                        <tr class="bg-slate-50">
+                            <td rowspan="4" class="px-4 py-3 font-bold text-slate-700 align-top">
+                                混合神經<br><span class="text-xs font-normal text-slate-500">Mixed</span>
+                            </td>
+                            <td class="px-4 py-2"><strong>V</strong></td>
+                            <td class="px-4 py-2">三叉神經 Trigeminal</td>
+                            <td rowspan="4" class="px-4 py-2 text-xs text-slate-600 align-top">三叉、顏面、舌咽、迷走</td>
+                        </tr>
+                        <tr class="bg-slate-50"><td class="px-4 py-2"><strong>VII</strong></td><td class="px-4 py-2">顏面神經 Facial</td></tr>
+                        <tr class="bg-slate-50"><td class="px-4 py-2"><strong>IX</strong></td><td class="px-4 py-2">舌咽神經 Glossopharyngeal</td></tr>
+                        <tr class="bg-slate-50"><td class="px-4 py-2"><strong>X</strong></td><td class="px-4 py-2">迷走神經 Vagus</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 自律神經對照 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.39</span>
+                三、自律神經系統（Autonomic）— 不可隨意控制
+            </h3>
+            <p class="text-slate-700 mb-4">周邊神經依功能可分為可隨意控制的<strong>體神經系統</strong>，與不可隨意控制的<strong>自主神經系統</strong>。自主神經分為交感與副交感，兩者作用<strong>互為拮抗</strong>。</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- 交感 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-ems-orange">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xl font-bold text-ems-navy">⚔️ 交感神經</h4>
+                        <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded font-bold">Fight or Flight</span>
+                    </div>
+                    <p class="text-sm text-slate-700 mb-3">面對壓力或危險的反應 — <strong>戰鬥或逃跑</strong>。</p>
+                    <ul class="space-y-1 text-sm text-slate-700">
+                        <li class="flex gap-2"><span class="text-ems-orange">↑</span>心跳加快</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↑</span>心收縮力增加</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↑</span>瞳孔擴張</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↑</span>腎上腺素分泌</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↑</span>氣管舒張</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↓</span>腸胃蠕動減少</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↓</span>消化液分泌減少</li>
+                        <li class="flex gap-2"><span class="text-ems-orange">↓</span>停止唾液分泌</li>
+                    </ul>
+                </div>
+
+                <!-- 副交感 -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-ems-blue">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xl font-bold text-ems-navy">🛏️ 副交感神經</h4>
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded font-bold">Rest and Digest</span>
+                    </div>
+                    <p class="text-sm text-slate-700 mb-3">使身體放鬆、消化食物、吸收能量 — <strong>休息和消化</strong>。</p>
+                    <ul class="space-y-1 text-sm text-slate-700">
+                        <li class="flex gap-2"><span class="text-ems-blue">↓</span>心跳放慢</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">↓</span>瞳孔縮小</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">↓</span>氣管收縮</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">↑</span>消化液分泌增加</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">↑</span>腸蠕動增加</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">↑</span>分泌唾液</li>
+                        <li class="flex gap-2"><span class="text-ems-blue">→</span>大腸排空、膀胱排尿</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 救護應用提示 -->
+            <div class="bg-ems-navy text-white p-6 rounded-xl shadow-md border-t-4 border-ems-orange mb-8">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="text-ems-orange">🚑</span> 救護現場應用
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-300">
+                    <div>
+                        <div class="font-bold text-white mb-1">壓力下的生命徵象</div>
+                        <p>劇烈疼痛或情緒激動 → 交感神經興奮 → 脈搏與呼吸速率上升、血壓上升、瞳孔放大。</p>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-1">脊髓損傷警訊</div>
+                        <p>頸椎損傷可能傷及交感神經幹，造成「神經性休克」— 血壓下降但心跳變慢，與一般失血性休克不同。</p>
+                    </div>
+                    <div>
+                        <div class="font-bold text-white mb-1">腦幹病變徵兆</div>
+                        <p>延腦受損會直接影響呼吸節律與心跳，這也是為什麼「腦幹反射消失」是判斷腦死的重要依據之一。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上/下頁導引 -->
+            <div class="flex justify-between mt-10">
+                <a href="./chap2-overview.html" class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-300 transition">
+                    <span>◀</span> 上一頁：章節導論
+                </a>
+                <a href="./chap2-respiratory.html" class="inline-flex items-center gap-2 bg-ems-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-slate-800 transition">
+                    下一頁：呼吸與循環系統 <span>▶</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+</html>

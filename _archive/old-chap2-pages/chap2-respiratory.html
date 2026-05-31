@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會｜第二章 呼吸與循環系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="flex h-screen">
+
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700">
+            <h1 class="text-2xl font-bold text-white tracking-wide">EMT 海栓讀書會</h1>
+            <p class="text-sm text-ems-blue font-medium mt-1">Finn &amp; Solarday 21:00 - 22:00</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-6 pb-2 text-xs font-bold tracking-wider text-slate-500">第一章〈台灣緊急醫療救護體系概論〉</div>
+            <a href="../index.html"        data-page="origins"               class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">概論與發展源起</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.6 - P.9</span></a>
+            <a href="./intro.html"         data-page="intro"                 class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">歷史沿革與現況</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.10 - P.15</span></a>
+            <a href="./law.html"           data-page="law"                   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">法規與名詞定義</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.16 - P.17</span></a>
+            <a href="./training.html"      data-page="training"              class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">制度與訓練基準</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.18 - P.19</span></a>
+            <a href="./duties.html"        data-page="duties"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">九大核心職責</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.28 - P.29</span></a>
+            <a href="./ethics.html"        data-page="ethics"                class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">醫學倫理與心法</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.30 - P.31</span></a>
+
+            <div class="px-6 pt-6 pb-2 text-xs font-bold tracking-wider text-slate-500 border-t border-slate-700 mt-2">第二章〈人體基本解剖與生理學〉</div>
+            <a href="./chap2-overview.html"        data-page="chap2-overview"        class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">章節導論與人體構造</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.34 - P.37</span></a>
+            <a href="./chap2-nervous.html"         data-page="chap2-nervous"         class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">神經系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.38 - P.39</span></a>
+            <a href="./chap2-respiratory.html"     data-page="chap2-respiratory"     class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">呼吸與循環系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.40 - P.41</span></a>
+            <a href="./chap2-musculoskeletal.html" data-page="chap2-musculoskeletal" class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">骨骼與肌肉系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.42 - P.43</span></a>
+            <a href="./chap2-endocrine.html"       data-page="chap2-endocrine"       class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">內分泌與消化系統</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.44 - P.47</span></a>
+            <a href="./chap2-other-systems.html"   data-page="chap2-other-systems"   class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">免疫、泌尿、生殖、感官</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.47 - P.50</span></a>
+            <a href="./chap2-vitals.html"          data-page="chap2-vitals"          class="nav-item w-full text-left px-6 py-4 hover:bg-slate-800 transition flex flex-col gap-1"><span class="font-bold text-lg">八大生命徵象</span><span class="text-xs bg-slate-700 w-max px-2 py-0.5 rounded text-slate-300">課本 P.51 - P.61</span></a>
+        </div>
+        <div class="p-6 border-t border-slate-700 text-xs text-slate-500">請搭配實體書本對照閱讀</div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-ems-light relative">
+        <section class="p-8 md:p-12 fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.40 - P.41</div>
+                <h2 class="text-3xl font-bold text-ems-navy">呼吸系統 &amp; 循環系統</h2>
+                <p class="text-ems-gray mt-2 text-lg">兩個系統共同擔負「氣體交換 + 養分輸送」。EMT 評估時的 ABC（Airway-Breathing-Circulation）正是基於這兩系統的運作。</p>
+            </header>
+
+            <!-- 呼吸系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.40</span>
+                一、呼吸系統（Respiratory System）
+            </h3>
+            <p class="text-slate-700 mb-4">
+                氣體從<strong>口鼻 → 咽 → 喉 → 氣管 → 支氣管 → 肺 → 肺泡</strong>進行氣體交換。肺屬於海綿狀組織，左肺二葉、右肺三葉；<strong>肺泡呈囊狀，是氣體交換的單位</strong>。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 外呼吸 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-blue">
+                    <h4 class="text-lg font-bold text-ems-navy mb-2">1. 外呼吸（肺呼吸）</h4>
+                    <p class="text-sm text-slate-700 mb-2">在肺中進行，空氣進入肺泡後，由於氣體分壓不同：</p>
+                    <ul class="space-y-1 text-sm text-slate-700 list-disc pl-5">
+                        <li>肺泡內<strong class="text-ems-blue">O₂</strong> 擴散進入血液</li>
+                        <li>血液<strong class="text-slate-600">CO₂</strong> 擴散至肺泡排出體外</li>
+                    </ul>
+                </div>
+
+                <!-- 內呼吸 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-t-ems-orange">
+                    <h4 class="text-lg font-bold text-ems-navy mb-2">2. 內呼吸（組織呼吸）</h4>
+                    <p class="text-sm text-slate-700 mb-2">微血管攜帶含氧血在組織內進行氣體交換：</p>
+                    <ul class="space-y-1 text-sm text-slate-700 list-disc pl-5">
+                        <li>紅血球釋出<strong class="text-ems-blue">O₂</strong> 擴散至組織</li>
+                        <li>組織<strong class="text-slate-600">CO₂</strong> 擴散至血液帶走</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 呼吸的關鍵數據 -->
+            <div class="bg-ems-navy text-white p-6 rounded-xl shadow-md mb-8">
+                <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange">📊</span> 呼吸的關鍵數值（成人標準）
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-xs text-ems-blue font-bold mb-1">潮氣量（Tidal Volume）</div>
+                        <div class="text-2xl font-bold text-white">300 ~ 700 mL</div>
+                        <div class="text-xs text-slate-400 mt-1">即 6~8 mL/kg</div>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-xs text-ems-blue font-bold mb-1">呼吸速率（清醒休息）</div>
+                        <div class="text-2xl font-bold text-white">10 ~ 20 次/分</div>
+                        <div class="text-xs text-slate-400 mt-1">呼吸:脈搏 ≈ 1 : 4</div>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700 border-l-4 border-l-ems-orange">
+                        <div class="text-xs text-ems-orange font-bold mb-1">⚠️ 瀕死/喘息式 Agonal</div>
+                        <div class="text-base font-bold text-white">極慢、不規則、長之深呼吸</div>
+                        <div class="text-xs text-slate-400 mt-1">常為突然心跳停止之徵候</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 循環系統 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.40-41</span>
+                二、循環系統（Circulatory System）
+            </h3>
+            <p class="text-slate-700 mb-6">
+                由<strong>血液、血管、心臟</strong>組成，負責輸送養分到組織、將代謝物送到肺或泌尿系統排出。心臟約一個拳頭大，位於胸腔內偏左。
+            </p>
+
+            <!-- 心臟四腔室 + 兩大循環 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-2xl">❤️</span> 心臟四腔室
+                    </h4>
+                    <p class="text-sm text-slate-700 mb-4">正常時不相通，由瓣膜（二尖瓣、三尖瓣）防止逆流。</p>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-blue-50 p-3 rounded border border-blue-100">
+                            <div class="font-bold text-ems-navy">左心房</div>
+                            <div class="text-xs text-slate-600 mt-1">接收肺靜脈來的充氧血</div>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-100">
+                            <div class="font-bold text-ems-navy">左心室</div>
+                            <div class="text-xs text-slate-600 mt-1">收縮把充氧血送至<strong>主動脈</strong></div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-navy">右心房</div>
+                            <div class="text-xs text-slate-600 mt-1">接收上/下腔靜脈來的缺氧血</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                            <div class="font-bold text-ems-navy">右心室</div>
+                            <div class="text-xs text-slate-600 mt-1">收縮把缺氧血送至<strong>肺動脈</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="text-lg font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🔄</span> 兩大循環
+                    </h4>
+
+                    <div class="border-l-4 border-ems-blue pl-4 mb-4">
+                        <div class="font-bold text-ems-navy">小循環 / 肺循環</div>
+                        <p class="text-sm text-slate-600 mt-1">
+                            右心室 → 肺動脈 → 肺微血管（氣體交換）→ 肺靜脈 → 左心房
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-ems-orange pl-4">
+                        <div class="font-bold text-ems-navy">大循環 / 體循環</div>
+                        <p class="text-sm text-slate-600 mt-1">
+                            左心室 → 主動脈 → 全身微血管（氣體交換 + 養分輸送）→ 上/下腔靜脈 → 右心房
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常用動脈點與最低收縮壓對照表 -->
+            <h3 class="text-2xl font-bold text-ems-navy mb-4 flex items-center gap-2 border-b-2 border-ems-orange pb-2">
+                <span class="bg-ems-orange text-white text-sm font-bold px-2 py-1 rounded">P.41 重點</span>
+                常用動脈點 — 預估收縮壓
+            </h3>
+            <p class="text-slate-700 mb-4">
+                血壓值可作為評估循環系統健全與否的指標。當無血壓計可用時，可依「摸得到哪條動脈搏動」來<strong>預估收縮壓最低值</strong>。
+            </p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-6">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="bg-ems-navy text-white">
+                            <th class="px-4 py-3 text-left">動脈點</th>
+                            <th class="px-4 py-3 text-left">觸診位置</th>
+                            <th class="px-4 py-3 text-center">代表收縮壓<br>至少為</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="bg-orange-50">
+                            <td class="px-4 py-3 font-bold text-ems-navy">頸動脈</td>
+                            <td class="px-4 py-3 text-slate-700">氣管與胸鎖乳突肌間輕觸探知</td>
+                            <td class="px-4 py-3 text-center font-bold text-ems-orange text-lg">≥ 60 mmHg</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">肱動脈</td>
+                            <td class="px-4 py-3 text-slate-700">兩手肘窩內側輕觸探知</td>
+                            <td class="px-4 py-3 text-center font-bold text-ems-blue text-lg">≥ 70 mmHg</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">股動脈</td>
+                            <td class="px-4 py-3 text-slate-700">腹股溝中間處輕觸探知</td>
+                            <td class="px-4 py-3 text-center font-bold text-ems-blue text-lg">≥ 70 mmHg</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">橈動脈</td>
+                            <td class="px-4 py-3 text-slate-700">大拇指根部之手腕近心端兩指幅處</td>
+                            <td class="px-4 py-3 text-center font-bold text-ems-blue text-lg">≥ 80 mmHg</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-bold text-ems-navy">足背動脈</td>
+                            <td class="px-4 py-3 text-slate-700">腳食拇指縫至內踝關節下緣延伸線</td>
+                            <td class="px-4 py-3 text-center font-bold text-ems-blue text-lg">≥ 90 mmHg</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 救護應用 key takeaway -->
+            <div class="bg-ems-navy text-white p-6 rounded-xl shadow-md border-t-4 border-ems-orange mb-8">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="text-ems-orange">🚑</span> 讀書會帶領小提示
+                </h3>
+                <div class="text-sm text-slate-300 space-y-2 leading-relaxed">
+                    <p><strong class="text-white">記憶口訣：</strong>「頸 60、肱股 70、橈 80、足背 90」— 數字越往末梢越大，因為末梢需要更高壓力才能保有搏動。</p>
+                    <p><strong class="text-white">臨床應用：</strong>休克病人若<strong class="text-ems-orange">摸不到橈動脈</strong>，即代表收縮壓可能 &lt; 80 mmHg，是重度休克的警訊。若連<strong class="text-ems-orange">頸動脈都摸不到</strong>，等同心跳停止，應立即啟動 CPR。</p>
+                </div>
+            </div>
+
+            <!-- 上/下頁導引 -->
+            <div class="flex justify-between mt-10">
+                <a href="./chap2-nervous.html" class="inline-flex items-center gap-2 bg-slate-200 text-slate-700 px-6 py-3 rounded-lg font-bold hover:bg-slate-300 transition">
+                    <span>◀</span> 上一頁：神經系統
+                </a>
+                <a href="./chap2-musculoskeletal.html" class="inline-flex items-center gap-2 bg-ems-navy text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-slate-800 transition">
+                    下一頁：骨骼與肌肉系統 <span>▶</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+</html>
