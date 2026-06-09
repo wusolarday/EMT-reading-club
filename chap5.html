@@ -119,6 +119,11 @@
             <span class="text-[11px] text-slate-400">P.132 - P.135 | BVM、抽吸操作</span>
         </button>
 
+        <button onclick="switchView('view-resp-airway', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">五–七 輔助呼吸道器材</span>
+            <span class="text-[11px] text-slate-400">P.136 - P.139 | 口咽、鼻咽、聲門上</span>
+        </button>
+
         <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase border-t border-slate-700">第四節：止血、包紮與骨折固定 (P.140)</div>
         <button onclick="switchView('view-hemorrhage', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
             <span class="font-bold text-sm">一 止血</span>
@@ -301,33 +306,43 @@
                     <span>🔗 生命之鏈</span>
                     <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
-                <div class="acc-content px-4 pb-4 bg-slate-50">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div>
-                            <div class="text-xs font-bold text-ems-blue mb-2 uppercase tracking-wide">成人生命之鏈</div>
-                            <div class="space-y-1.5">
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-blue text-white flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>盡早察覺並啟動緊急醫療系統</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-blue text-white flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>盡早施行 CPR，強調胸部按壓</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-blue text-white flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>盡早電擊去顫</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-blue text-white flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>盡早提供有效的高級救命術</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-blue text-white flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>心跳停止後整合性治療</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-ems-orange mb-2 uppercase tracking-wide">小兒生命之鏈</div>
-                            <div class="space-y-1.5">
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-orange text-white flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>預防</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-orange text-white flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>盡早施行 CPR</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-orange text-white flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>盡早啟動緊急醫療系統</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-orange text-white flex items-center justify-center text-xs font-bold flex-shrink-0">4</span>盡早電擊去顫</div>
-                                <div class="flex items-center gap-2 text-sm text-slate-700"><span class="w-5 h-5 rounded-full bg-ems-orange text-white flex items-center justify-center text-xs font-bold flex-shrink-0">5</span>心跳停止後整合性治療</div>
-                            </div>
+                <div class="acc-content px-4 pb-6 bg-slate-50">
+                    <!-- 成人生命之鏈 -->
+                    <div class="pt-3 mb-5">
+                        <div class="text-xs font-bold text-ems-blue mb-3 uppercase tracking-wide">成人生命之鏈（圖 5-1-1）</div>
+                        <div class="flex flex-wrap items-center gap-1">
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">📞</span><span class="text-[9px] font-bold leading-tight">緊急醫療<br>系統啟動</span></div><span class="text-[9px] text-slate-500 font-bold">1</span></div>
+                            <div class="text-ems-blue font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🫀</span><span class="text-[9px] font-bold leading-tight">高品質<br>CPR</span></div><span class="text-[9px] text-slate-500 font-bold">2</span></div>
+                            <div class="text-ems-blue font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">⚡</span><span class="text-[9px] font-bold leading-tight">去顫</span></div><span class="text-[9px] text-slate-500 font-bold">3</span></div>
+                            <div class="text-ems-blue font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🩺</span><span class="text-[9px] font-bold leading-tight">高級心肺<br>復甦</span></div><span class="text-[9px] text-slate-500 font-bold">4</span></div>
+                            <div class="text-ems-blue font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🏥</span><span class="text-[9px] font-bold leading-tight">心臟停止<br>後照護</span></div><span class="text-[9px] text-slate-500 font-bold">5</span></div>
+                            <div class="text-ems-blue font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-blue flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">💪</span><span class="text-[9px] font-bold leading-tight">復原</span></div><span class="text-[9px] text-slate-500 font-bold">6</span></div>
                         </div>
                     </div>
+                    <!-- 小兒生命之鏈 -->
+                    <div class="border-t border-slate-200 pt-4">
+                        <div class="text-xs font-bold text-ems-orange mb-3 uppercase tracking-wide">小兒生命之鏈（圖 5-1-2）</div>
+                        <div class="flex flex-wrap items-center gap-1">
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🛡️</span><span class="text-[9px] font-bold leading-tight">預防</span></div><span class="text-[9px] text-slate-500 font-bold">1</span></div>
+                            <div class="text-ems-orange font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">📞</span><span class="text-[9px] font-bold leading-tight">緊急醫療<br>系統啟動</span></div><span class="text-[9px] text-slate-500 font-bold">2</span></div>
+                            <div class="text-ems-orange font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🫀</span><span class="text-[9px] font-bold leading-tight">高品質<br>CPR</span></div><span class="text-[9px] text-slate-500 font-bold">3</span></div>
+                            <div class="text-ems-orange font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🩺</span><span class="text-[9px] font-bold leading-tight">高級心肺<br>復甦</span></div><span class="text-[9px] text-slate-500 font-bold">4</span></div>
+                            <div class="text-ems-orange font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">🏥</span><span class="text-[9px] font-bold leading-tight">心臟停止<br>後照護</span></div><span class="text-[9px] text-slate-500 font-bold">5</span></div>
+                            <div class="text-ems-orange font-black">→</div>
+                            <div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full bg-ems-orange flex flex-col items-center justify-center text-white text-center shadow border-2 border-white"><span class="text-base">💪</span><span class="text-[9px] font-bold leading-tight">復原</span></div><span class="text-[9px] text-slate-500 font-bold">6</span></div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-3 bg-orange-50 border border-orange-100 rounded-lg px-3 py-2">⚠️ 與成人差異：小兒以「<strong class="text-ems-orange">預防</strong>」為第一環，「啟動急救體系」在第二環（CPR 之前）；成人則以「辨識/通報」開始。</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- ============================================================
@@ -558,7 +573,7 @@
                 <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="acc-content px-5 pb-4 bg-white text-sm text-slate-700 pt-3">
-                <p>同成人流程：檢查<strong>頸動脈搏</strong>（≤10 秒）→ 有脈搏檢查呼吸 → 無脈搏繼續 CPR → 準備轉送醫院。</p>
+                <p>CPR 2 分鐘後，得檢查<strong>頸動脈搏或股動脈搏</strong>（評估時間不超過 <strong class="text-ems-danger">10 秒</strong>）；若脈搏每分鐘 <strong class="text-ems-orange">60 次以上</strong>則繼續呼吸，無脈搏則繼續 CPR；CPR 達 2 分鐘或按壓者疲憊應更換按壓者；不論有無脈搏均應開始準備轉送醫院。</p>
             </div>
         </div>
     </div>
@@ -571,7 +586,7 @@
     <header class="mb-8">
         <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.120 – P.121</div>
         <h2 class="text-3xl font-bold text-ems-navy">三　基本心肺復甦術（嬰兒）</h2>
-        <p class="text-ems-gray mt-2 text-lg">採兩拇指環抱法（雙人）或兩指法（單人），脈搏改查股動脈。</p>
+        <p class="text-ems-gray mt-2 text-lg">採兩拇指環抱法（雙人）或單手掌根法（單人），脈搏改查<strong>肱動脈</strong>；每分鐘 60 次以上才可繼續呼吸支援。</p>
     </header>
 
     <!-- 關鍵數字 -->
@@ -589,7 +604,7 @@
         <div class="ratio-card border-t-4 border-ems-orange shadow-sm">
             <div class="ratio-label">脈搏檢查</div>
             <div class="ratio-val text-ems-orange" style="font-size:1rem;padding-top:0.5rem">肱動脈</div>
-            <div class="ratio-sub">上臂內側 ≤10 秒</div>
+            <div class="ratio-sub">上臂內側 ≤10 秒<br><span class="font-bold text-ems-orange">≥60 次/分才可停CPR</span></div>
         </div>
     </div>
 
@@ -686,7 +701,7 @@
         <div class="flow-step">
             <div class="flow-num">1</div>
             <div class="text-sm text-slate-700">
-                <strong>手部姿勢</strong>：兩手環抱新生兒使兩拇指並排（2 人），或單手兩指法（1 人）；按壓胸骨正中央略低於兩乳頭連線處。操作前先以<strong>墊肩姿勢</strong>維持呼吸道暢通。
+                <strong>手部姿勢</strong>：<strong>兩拇指環抱法</strong>（2 人首選），或<strong>單手掌根法</strong>（1 人）；按壓胸骨正中央略低於兩乳頭連線處。操作前先以<strong>墊肩姿勢</strong>維持呼吸道暢通。（注意：不使用二指法，掌根法可確保更穩定的按壓深度與充分胸廓回彈。）
             </div>
         </div>
         <div class="flow-step">
@@ -698,7 +713,20 @@
         <div class="flow-step">
             <div class="flow-num">3</div>
             <div class="text-sm text-slate-700">
-                <strong>CPR 2 分鐘後</strong>：得檢查股動脈搏（≤10 秒）；若脈搏每分鐘小於 60 次以上則繼續 CPR。
+                <strong>CPR 2 分鐘後</strong>：得檢查<strong>臍動脈搏或股動脈搏</strong>（評估時間不超過 10 秒）；若脈搏每分鐘 <strong class="text-ems-orange">60 次以上</strong>則繼續呼吸，<strong class="text-ems-danger">少於 60 次</strong>則繼續 CPR；不論有無脈搏均應開始準備轉送醫院。
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div class="text-sm text-slate-700">
+                <strong>心肺復甦術操作重點補充</strong>：
+                <ul class="mt-1.5 space-y-1 text-slate-600">
+                    <li>・心肺復甦術（CPR）操作時，每次按壓後允許充分<strong>胸腔回彈</strong>，施壓與釋壓時間各佔 50%。</li>
+                    <li>・利用袋瓣罩甦醒球人工呼吸時，建議氣流量調至每分鐘 <strong class="text-ems-blue">15 公升（L/min）</strong>，每次呼吸約 <strong>0.5 秒</strong>，觀察胸部是否有起伏。</li>
+                    <li>・胸部按壓 <strong>90 次 / 分</strong>，呼吸 <strong>30 次 / 分</strong>（3:1 比例，全程維持）。</li>
+                    <li>・若多人急救：1 名進行胸部按壓、1 名取出並操作去顫器、1 名置入聲門上呼吸道提供每 <strong>2 秒 1 次</strong>袋瓣罩甦醒球人工呼吸。</li>
+                    <li>・在開始胸外按壓之前，以<strong>墊肩</strong>的方式確保鼻嗅位來維持呼吸道暢通，以俯視方式確認胸部中央胸骨按壓之位置。</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -760,12 +788,19 @@
                         <td class="px-3 py-2 text-center font-bold">15:2</td>
                         <td class="px-3 py-2 text-center font-bold text-ems-orange">3:1</td>
                     </tr>
+                    <tr>
+                        <td class="px-3 py-2 font-bold text-ems-navy">有脈搏無自發<br>呼吸時輔助次數</td>
+                        <td class="px-3 py-2 text-center">10次<br><span class="text-slate-400">（每6秒1次）</span></td>
+                        <td class="px-3 py-2 text-center">20–30次<br><span class="text-slate-400">（每2–3秒1次）</span></td>
+                        <td class="px-3 py-2 text-center">20–30次<br><span class="text-slate-400">（每2–3秒1次）</span></td>
+                        <td class="px-3 py-2 text-center font-bold text-ems-orange">40–60次<br><span class="text-slate-400 font-normal">（每1秒1次）</span></td>
+                    </tr>
                     <tr class="bg-slate-50">
                         <td class="px-3 py-2 font-bold text-ems-navy">脈搏檢查部位</td>
                         <td class="px-3 py-2 text-center">頸動脈</td>
                         <td class="px-3 py-2 text-center">頸動脈</td>
                         <td class="px-3 py-2 text-center font-bold text-ems-orange">肱動脈</td>
-                        <td class="px-3 py-2 text-center">股動脈</td>
+                        <td class="px-3 py-2 text-center">臍動脈或股動脈</td>
                     </tr>
                 </tbody>
             </table>
@@ -786,10 +821,37 @@
     <!-- 五：AED 操作流程 ≥1 歲 -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-8">
         <h3 class="text-base font-bold text-ems-navy mb-4 flex items-center gap-2">⚡ 五　AED 操作流程（適用 1 歲以上）</h3>
+        <!-- AED 口訣 -->
+        <div class="flex flex-wrap gap-2 mb-5">
+            <div class="flex-1 min-w-[80px] bg-ems-blue text-white rounded-xl p-3 text-center shadow">
+                <div class="text-2xl font-black">開</div>
+                <div class="text-[11px] mt-1 text-blue-200">開機</div>
+            </div>
+            <div class="flex items-center text-ems-blue font-black text-xl">→</div>
+            <div class="flex-1 min-w-[80px] bg-ems-blue text-white rounded-xl p-3 text-center shadow">
+                <div class="text-2xl font-black">貼</div>
+                <div class="text-[11px] mt-1 text-blue-200">貼電極片</div>
+            </div>
+            <div class="flex items-center text-ems-blue font-black text-xl">→</div>
+            <div class="flex-1 min-w-[80px] bg-ems-blue text-white rounded-xl p-3 text-center shadow">
+                <div class="text-2xl font-black">插</div>
+                <div class="text-[11px] mt-1 text-blue-200">插電極接頭</div>
+            </div>
+            <div class="flex items-center text-ems-blue font-black text-xl">→</div>
+            <div class="flex-1 min-w-[80px] bg-ems-danger text-white rounded-xl p-3 text-center shadow">
+                <div class="text-2xl font-black">電</div>
+                <div class="text-[11px] mt-1 text-red-200">分析 / 電擊</div>
+            </div>
+            <div class="flex items-center text-ems-navy font-black text-xl">→</div>
+            <div class="flex-1 min-w-[80px] bg-ems-navy text-white rounded-xl p-3 text-center shadow">
+                <div class="text-2xl font-black">壓</div>
+                <div class="text-[11px] mt-1 text-slate-300">繼續 CPR</div>
+            </div>
+        </div>
         <div class="space-y-3">
             <div class="flow-step">
                 <div class="flow-num">1</div>
-                <p class="text-sm text-slate-700">病人在急救流程中若發現 <strong>10 分鐘內沒有偵測到動脈搏動</strong>，應立即給予胸部按壓，開始進行單人 CPR。</p>
+                <p class="text-sm text-slate-700">病人在急救流程中若發現 <strong class="text-ems-danger">10 秒內</strong>沒有偵測到動脈搏動（或脈搏不確定），應立即給予胸部按壓，開始進行單人 CPR。</p>
             </div>
             <div class="flow-step">
                 <div class="flow-num">2</div>
@@ -797,7 +859,7 @@
             </div>
             <div class="flow-step">
                 <div class="flow-num">3</div>
-                <p class="text-sm text-slate-700">靜待 AED 語音指示，至聽到「<strong>不要靠近病人</strong>」，接著心肺復甦術繼續並等候指示，不斷影響病人的分析動作。</p>
+                <p class="text-sm text-slate-700">靜待 AED 語音指示至聽到「<strong>不要靠近病人</strong>」時，<strong class="text-ems-danger">立即中止 CPR</strong>，確認無人接觸病人，等候 AED 分析完成後遵從後續語音指示。</p>
             </div>
             <div class="flow-step">
                 <div class="flow-num">4</div>
@@ -834,6 +896,26 @@
                 <span class="text-sm">不具有劑量衰減器的 AED，以成人貼片貼於<strong class="text-white">前胸及後背</strong></span>
             </div>
         </div>
+        <!-- 貼法圖示說明（圖 5-1-34） -->
+        <div class="mt-5 bg-white/10 rounded-xl p-4">
+            <div class="text-xs font-bold text-ems-orange mb-3">📍 前胸 ／ 後背貼片位置說明（圖 5-1-34）</div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white/10 rounded-lg p-3 text-center">
+                    <div class="text-2xl mb-1">👶</div>
+                    <div class="text-xs font-bold text-white mb-1">前方貼片</div>
+                    <p class="text-[11px] text-slate-300">置於嬰兒<strong class="text-white">胸骨前方</strong>（胸口正中央位置），確保貼片平整貼合皮膚。</p>
+                </div>
+                <div class="bg-white/10 rounded-lg p-3 text-center">
+                    <div class="text-2xl mb-1">🔙</div>
+                    <div class="text-xs font-bold text-white mb-1">後方貼片</div>
+                    <p class="text-[11px] text-slate-300">置於嬰兒<strong class="text-white">後背肩胛骨之間</strong>，與前方貼片形成前後夾心，確保電流路徑通過心臟。</p>
+                </div>
+            </div>
+            <div class="bg-amber-500/20 border border-amber-400/30 rounded-lg p-3 mt-3 text-[11px] text-amber-200">
+                ⚠️ 確保兩片電極片<strong class="text-white">不互相接觸</strong>；若嬰兒體型太小導致前後貼片重疊，可考慮採用左右側面貼法。（課本圖 5-1-33 / 5-1-34 / 5-1-35）
+            </div>
+        </div>
+    </div>
     </div>
 </section>
 
@@ -986,7 +1068,7 @@
                 </div>
                 <div class="flex gap-3 items-start">
                     <span class="sub-num">⑤</span>
-                    <p>隨時留意是否有異物吐出，重複步驟 1–5 直到嬰兒有反應或異物排除為止。</p>
+                    <p>隨時留意是否有異物吐出，重複步驟 1–5 直到嬰兒無反應或異物排除為止。</p>
                 </div>
             </div>
         </div>
@@ -1063,9 +1145,10 @@
                     <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="acc-content open px-4 pb-4 bg-slate-50 text-sm text-slate-700 space-y-2 pt-3">
-                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">①</span><p>氧氣筒常見容量分別為 <strong class="text-ems-blue">1,500 公升</strong>與 <strong class="text-ems-blue">400 公升</strong>；救護車裝載標準及管理辦法要求攜帶式氧氣容量最大約 400 公升，使用時應配有壓力表（表）、流量調節裝置及氧氣導管接頭。</p></div>
-                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">②</span><p>固定式氧氣組有加入潤水或蒸餾水的濕潤瓶，以增加吸入氣體的濕氣，防止呼吸道黏膜乾燥；有 <strong>2 個接頭</strong>用以連接抽吸組及正壓組的接頭。</p></div>
-                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">③</span><p>攜帶式氧氣組有專門存放空間；拆裝氣瓶務必使用專用板子，避免氣氣筒近沾染油污造成危險。</p></div>
+                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">①</span><p>氧氣筒常見容量分別為 <strong class="text-ems-blue">1,500 公升</strong>與 <strong class="text-ems-blue">400 公升</strong>；使用時應配有<strong>壓力表、流量計（表）、流量調節裝置</strong>及<strong>氧氣導管接頭</strong>。</p></div>
+                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">②</span><p>固定式氧氣組有加入潤水或蒸餾水的<strong>濕潤瓶</strong>，以增加吸入氣體的濕氣，防止呼吸道黏膜乾燥。</p></div>
+                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">③</span><p>攜帶式氧氣組有 <strong>2 個接頭</strong>用以連接<strong>抽吸組</strong>及<strong>正壓組</strong>的接頭。</p></div>
+                    <div class="flex gap-3 items-start"><span class="sub-num flex-shrink-0">④</span><p>攜帶式氧氣組有專門存放空間；拆裝氣瓶務必使用<strong class="text-ems-danger">專用板手</strong>，避免氧氣筒沾染油汙造成危險。</p></div>
                 </div>
             </div>
 
@@ -1087,7 +1170,7 @@
                             </thead>
                             <tbody class="divide-y divide-slate-100">
                                 <tr class="bg-slate-50">
-                                    <td class="px-3 py-2 font-bold text-ems-navy">鼻氧管<br><span class="font-normal text-slate-500">Nasal Cannula</span></td>
+                                    <td class="px-3 py-2 font-bold text-ems-navy">氧氣鼻導管<br><span class="font-normal text-slate-500">Nasal Cannula</span></td>
                                     <td class="px-3 py-2 text-center font-bold text-ems-blue">1 – 6</td>
                                     <td class="px-3 py-2 text-center">24 – 44%</td>
                                 </tr>
@@ -1110,7 +1193,7 @@
                         </table>
                     </div>
                     <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-slate-700">
-                        <strong class="text-ems-navy">BVM 結構（3 部分）：</strong>球囊（呼吸囊）・閥門・面罩。擠球時每次擠壓體積約 <strong class="text-ems-blue">1/3</strong>（約 7 mL/kg 潮氣量），氣囊容積不能完全壓縮，需看胸部起伏評估效果。
+                        <strong class="text-ems-navy">BVM 結構（3 部分）：</strong>球體・儲氣袋・面罩。擠球時每次擠壓體積約 <strong class="text-ems-blue">1/3</strong>（約 7 mL/kg 吹氣量）。
                     </div>
                 </div>
             </div>
@@ -1183,8 +1266,8 @@
                 </button>
                 <div class="acc-content px-4 pb-4 bg-white text-sm text-slate-700 pt-3">
                     <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                        <p>大拇指和食指面罩向病人的前額，食指扣往面罩邊緣，形成 <strong class="text-ems-blue">E、C 手勢</strong>（EC手勢）打開呼吸道並使面罩緊貼；在未給予呼吸道處置前，施救者應盡量在病人正側面並採有效呼吸道姿勢。</p>
-                        <p class="mt-2">若病人身體情況需要以 EC 手勢打開呼吸道並維持姿勢時，另一手應以有效抬頜撐開呼吸道（如有面罩密封需求者，可用手腕或上抬脖子等下壓下巴）後再擠壓氣瓶球。</p>
+                        <p>大拇指和食指面罩向病人的前額，食指扣往面罩邊緣，形成 <strong class="text-ems-blue">E、C 手勢</strong>（EC手勢）打開呼吸道並使面罩緊貼。</p>
+                        <p class="mt-2">無頸椎傷害問題者可可慮另一手壓額或上抬脖子使下巴上抬協助暢通呼吸道。</p>
                     </div>
                 </div>
             </div>
@@ -1201,7 +1284,7 @@
                             <div class="font-bold text-ems-danger mb-2">❌ 無脈搏（配合 CPR）</div>
                             <ul class="space-y-1.5 text-xs text-slate-700">
                                 <li>・成人：30:2 中 <strong>4 秒內完成 2 次</strong>吹氣</li>
-                                <li>・若有聲門上呼吸道，成人每 <strong>6 秒 1 次</strong></li>
+                                <li>・若有聲門上呼吸道，，不中斷胸部按壓，成人每 <strong>6 秒 1 次</strong></li>
                                 <li>・兒童至青春期：每 <strong>2–3 秒 1 次</strong></li>
                                 <li>・新生兒：每 <strong>1 秒 1 次</strong></li>
                             </ul>
@@ -1210,8 +1293,8 @@
                         <div class="bg-green-50 border border-green-200 rounded-lg p-4">
                             <div class="font-bold text-emerald-700 mb-2">✅ 有脈搏（輔助呼吸）</div>
                             <ul class="space-y-1.5 text-xs text-slate-700">
-                                <li>・成人與青少年：每 <strong>2–3 秒 1 次</strong>（約 20–30 次/分）</li>
-                                <li>・青春期以下兒童：每 <strong>2 秒 1 次</strong>（約 30 次/分）</li>
+                                <li>・成人與青少年：每 <strong>6 秒 1 次</strong>（約 10 次/分）</li>
+                                <li>・青春期以下兒童：每 <strong>2-3 秒 1 次</strong>（約 20-30 次/分）</li>
                                 <li>・新生兒：每 <strong>1 秒 1 次</strong>（約 60 次/分）</li>
                             </ul>
                         </div>
@@ -1225,7 +1308,7 @@
                     <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="acc-content px-4 pb-4 bg-white text-sm text-slate-700 pt-3">
-                    <p>利用空氣打開氧氣筒開關並控制壓力，將氧氣導管接至氧氣筒和甦醒球；調整流量為 <strong class="text-ems-blue">15 L/min</strong>。</p>
+                    <p>利用空檔打開氧氣筒開關並檢查壓力，將氧氣導管接至氧氣筒和甦醒球；調整流量為 <strong class="text-ems-blue">15 L/min</strong>。</p>
                 </div>
             </div>
         </div>
@@ -1278,11 +1361,156 @@
                         <div class="flow-step"><div class="flow-num">A</div><p class="text-sm text-slate-700">測量吸道導管深入之適當長度（嘴角至耳垂）。</p></div>
                         <div class="flow-step"><div class="flow-num">B</div><p class="text-sm text-slate-700">移開氧氣設備，將抽吸導管深入口腔做吸控制。</p></div>
                         <div class="flow-step"><div class="flow-num">C</div><p class="text-sm text-slate-700">抽吸時間：成人 ≤ <strong class="text-ems-danger">15 秒</strong>，小兒 ≤ <strong class="text-ems-danger">10 秒</strong>。</p></div>
-                        <div class="flow-step"><div class="flow-num">D</div><p class="text-sm text-slate-700">移開抽吸導管，重新評估是否繼續抽吸；若無則進行感染控制。</p></div>
-                        <div class="flow-step"><div class="flow-num">E</div><p class="text-sm text-slate-700">重新評估及繼續給予氧氣，若無問題進行感染控制。</p></div>
+                        <div class="flow-step"><div class="flow-num">D</div><p class="text-sm text-slate-700">移開抽吸導管，給予氧氣。</p></div>
+                        <div class="flow-step"><div class="flow-num">E</div><p class="text-sm text-slate-700">重新評估是否繼續抽吸，若無問題進行感染控制。</p></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     VIEW: 03 輔助呼吸道器材 (P.136–P.139)
+     ============================================================ -->
+<section id="view-resp-airway" class="view-section hidden">
+    <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.136 – P.139</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03　呼吸與呼吸道處置 — 輔助呼吸道器材</h2>
+        <p class="text-ems-gray mt-2 text-lg">口咽呼吸道、鼻咽呼吸道及聲門上呼吸道（LMA / I-GEL）的選擇與置入操作。</p>
+    </header>
+
+    <!-- 五 口咽呼吸道 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <h3 class="text-base font-bold text-ems-navy mb-4 flex items-center gap-2">🫁 五　使用口咽呼吸道</h3>
+        <p class="text-sm text-slate-600 mb-4">適用於對呼喚、輕拍與痛刺激皆<strong>無反應的意識昏迷病人</strong>。意識昏迷病人下顎肌肉失去張力，舌頭及會厭後垂造成上呼吸道阻塞，口咽呼吸道可維持通暢。</p>
+        <div class="space-y-3">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <p class="text-sm text-slate-700">將口咽呼吸道<strong>凸面朝病人臉頰</strong>，測量<strong>嘴角至耳垂</strong>的面距，選擇適當尺寸之口咽呼吸道。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <p class="text-sm text-slate-700">以<strong>拇食指交叉法</strong>打開病人嘴巴，將口咽呼吸道凸面朝上，溫和推至硬顎處；再將呼吸道<strong>旋轉 180°</strong>，繼續下推至嘴唇處。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <p class="text-sm text-slate-700">視情況可用<strong>壓舌板</strong>輔助口咽呼吸道直接置入（適用於口腔空間不足或小兒舌頭比例較大者）。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 六 鼻咽呼吸道 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <h3 class="text-base font-bold text-ems-navy mb-4 flex items-center gap-2">👃 六　使用鼻咽呼吸道</h3>
+        <p class="text-sm text-slate-600 mb-4">適用於<strong>意識不清但仍有咳嗽和嘔吐反射</strong>之病人（口咽呼吸道可能引發嘔吐反射時的替代選擇）。</p>
+        <div class="space-y-3">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <p class="text-sm text-slate-700">將鼻咽呼吸道<strong>凹面朝下</strong>，測量<strong>鼻尖至耳垂</strong>的距離，選擇長度適當且鼻孔內徑所能容納之最大鼻咽呼吸道。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <p class="text-sm text-slate-700">以<strong>潤滑劑</strong>潤滑鼻咽呼吸道，將病人鼻尖上推，選擇<strong>較大鼻孔</strong>之一邊。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <p class="text-sm text-slate-700">將鼻咽呼吸道凸面朝下，<strong>垂直推入</strong>直至鼻孔底部。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 七 聲門上呼吸道 -->
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
+        <div class="flex items-center gap-3 mb-4">
+            <h3 class="text-base font-bold text-ems-navy flex items-center gap-2">🔬 七　使用聲門上呼吸道</h3>
+            <span class="inline-block bg-ems-orange text-white text-xs font-bold px-2 py-0.5 rounded">EMT-2</span>
+        </div>
+
+        <!-- 適用對象 -->
+        <div class="bg-ems-blue/5 border border-ems-blue/20 rounded-lg p-4 mb-5">
+            <p class="text-sm font-bold text-ems-navy mb-1">（一）適用對象</p>
+            <p class="text-sm text-slate-700">對呼喚、輕拍與痛刺激皆無反應的病人，需使用甦醒球人工呼吸時，且可使病人口部張開（<strong>最少上下齒齦空間為 2 公分寬</strong>）。</p>
+        </div>
+
+        <!-- LMA / I-GEL tabs -->
+        <div class="flex gap-2 mb-4" id="airway-tab-btns">
+            <button onclick="switchAirwayTab('lma')" id="tab-lma"
+                class="px-4 py-1.5 rounded-full text-xs font-bold border-2 border-ems-blue bg-ems-blue text-white transition">
+                （二）LMA 操作規範
+            </button>
+            <button onclick="switchAirwayTab('igel')" id="tab-igel"
+                class="px-4 py-1.5 rounded-full text-xs font-bold border-2 border-slate-300 text-slate-500 hover:border-ems-blue hover:text-ems-blue transition">
+                （三）I-GEL 操作規範
+            </button>
+        </div>
+
+        <!-- LMA Panel -->
+        <div id="panel-lma" class="space-y-3">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <p class="text-sm text-slate-700">選擇<strong>適當大小</strong>之聲門上呼吸道（LMA）。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <p class="text-sm text-slate-700">以適當方式<strong>潤滑</strong>聲門上呼吸道（必要時將聲門上呼吸道空氣抽光、塑形）。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <p class="text-sm text-slate-700">將面罩前端緊貼<strong>上硬顎</strong>，再順著硬顎、軟顎滑入至<strong>咽喉部</strong>（必要時用注射針筒將面罩充氣）。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">4</div>
+                <p class="text-sm text-slate-700">接上甦醒球給予吹氣，確定有<strong>可見的胸部升起</strong>後，不論有無脈搏每分鐘給予 <strong class="text-ems-blue">10 次</strong>（每 6 秒 1 次）之人工呼吸；若為<strong>1 人 CPR</strong> 時，與胸部按壓依 <strong>30:2</strong> 之比例進行。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">5</div>
+                <p class="text-sm text-slate-700">利用空檔以<strong>固定帶</strong>將聲門上呼吸道固定。</p>
+            </div>
+        </div>
+
+        <!-- I-GEL Panel -->
+        <div id="panel-igel" class="space-y-3 hidden">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <p class="text-sm text-slate-700">選擇<strong>適當大小</strong>之聲門上呼吸道（I-GEL）。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <p class="text-sm text-slate-700">以適當方式<strong>潤滑</strong>聲門上呼吸道。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <p class="text-sm text-slate-700">將面罩前端緊貼<strong>上硬顎</strong>，再順著硬顎、軟顎滑入至<strong>咽喉部</strong>。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">4</div>
+                <p class="text-sm text-slate-700">接上甦醒球給予吹氣，確定有<strong>可見的胸部升起</strong>後，不論有無脈搏每分鐘給予 <strong class="text-ems-blue">10 次</strong>（每 6 秒 1 次）之人工呼吸；若為<strong>1 人 CPR</strong> 時，與胸部按壓依 <strong>30:2</strong> 之比例進行。</p>
+            </div>
+            <div class="flow-step">
+                <div class="flow-num">5</div>
+                <p class="text-sm text-slate-700">利用<strong>空橡皮以固定帶</strong>將聲門上呼吸道固定。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 比較卡 -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-ems-navy text-white rounded-xl p-4 text-center shadow-sm">
+            <div class="text-2xl mb-1">👄</div>
+            <div class="font-bold text-sm">口咽呼吸道</div>
+            <div class="text-xs text-slate-300 mt-1">無意識、無咳嗽反射<br>嘴角→耳垂測量尺寸</div>
+        </div>
+        <div class="bg-ems-blue text-white rounded-xl p-4 text-center shadow-sm">
+            <div class="text-2xl mb-1">👃</div>
+            <div class="font-bold text-sm">鼻咽呼吸道</div>
+            <div class="text-xs text-blue-200 mt-1">仍有咳嗽/嘔吐反射<br>鼻尖→耳垂測量長度</div>
+        </div>
+        <div class="bg-ems-orange text-white rounded-xl p-4 text-center shadow-sm">
+            <div class="text-2xl mb-1">🔬</div>
+            <div class="font-bold text-sm">聲門上呼吸道 <span class="text-xs font-normal opacity-80">EMT-2</span></div>
+            <div class="text-xs text-orange-200 mt-1">無反應 + 齒齦開口 ≥2 cm<br>LMA / I-GEL 兩種規範</div>
         </div>
     </div>
 </section>
@@ -1311,8 +1539,8 @@
             </button>
             <div class="acc-content open px-5 pb-5 bg-white text-sm text-slate-700 space-y-2">
                 <p class="pt-3">以適當量的壓力對傷口進行止血，為最有效且最常用的方式。</p>
-                <div class="flex gap-3 items-start"><span class="sub-num">①</span><p>若傷患持續出血時，應直接以無菌紗布放置於血處，並以直接加壓止血；以彈性繃帶或三角巾等包紮教科加壓；若仍繼續出血，<strong>不要移除有紗布及數料，在其上加更多紗布等包紮材料持加壓</strong>，仍繼續出血時應首要考慮使用外傷止血帶。</p></div>
-                <div class="flex gap-3 items-start"><span class="sub-num">②</span><p>若傷患持續出血且無法以直接加壓或彈性繃帶，必須帶固定並，以彈性繃帶或三角巾加固固定。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">①</span><p>若傷口持續出血時，應直接以無菌紗布放置於血處，並以直接加壓止血；以彈性繃帶或三角巾等包紮教科加壓；若仍繼續出血，<strong>不要移除有紗布及數料，在其上加更多紗布等包紮材料持加壓</strong>，仍繼續出血時應首要考慮使用外傷止血帶。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">②</span><p>若傷口無持續出血，可以放置無菌紗布，以膠帶固定，以彈性繃帶或三角巾加固固定。</p></div>
             </div>
         </div>
 
@@ -1327,7 +1555,7 @@
             </button>
             <div class="acc-content px-5 pb-5 bg-white text-sm text-slate-700 space-y-3">
                 <div class="bg-red-50 border border-red-200 rounded-lg p-3 mt-3 text-xs">
-                    <strong>適用時機：</strong>肢體動脈性或持續大量出血・手腕或膝蓋以下截肢・肢體直接加壓無效
+                    <strong>適用時機：</strong>肢體動脈性或持續大量出血・手腕或腳踝以上截肢・肢體直接加壓無效・衣服或地上積有紅色的血液
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center">
@@ -1336,9 +1564,9 @@
                         <div class="text-xs text-slate-500 mt-1">5–8 公分（約 4 指寬）</div>
                     </div>
                     <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-center">
-                        <div class="text-xs text-slate-500 mb-1">止血帶層數</div>
-                        <div class="font-bold text-ems-navy text-sm">避免單層</div>
-                        <div class="text-xs text-slate-500 mt-1">過緊可能造成傷害</div>
+                        <div class="text-xs text-slate-500 mb-1">確認止血效果</div>
+                        <div class="font-bold text-ems-navy text-sm">確認遠端脈搏</div>
+                        <div class="text-xs text-slate-500 mt-1">確認遠端脈搏消失，代表有效加壓</div>
                     </div>
                     <div class="bg-orange-50 border border-orange-200 rounded-lg p-3 text-center">
                         <div class="text-xs text-slate-500 mb-1">記錄時間</div>
@@ -1346,8 +1574,21 @@
                         <div class="text-xs text-slate-500 mt-1">加壓開始時刻</div>
                     </div>
                 </div>
+                <!-- High & Tight 原則 -->
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm">
+                    <p class="font-bold text-ems-danger mb-2">⚠️ High &amp; Tight 原則</p>
+                    <ul class="space-y-1 text-slate-700 text-xs">
+                        <li><strong>High（高）</strong>：止血帶應盡量放置於傷口近端、靠近軀幹處，避免放置在關節上。</li>
+                        <li><strong>Tight（緊）</strong>：收緊至<strong>遠端脈搏消失</strong>為止；若遠端仍可觸及脈搏，應繼續旋緊直至消失。</li>
+                    </ul>
+                </div>
+                <!-- 操作前準備 -->
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-slate-700">
+                    <strong>操作前注意：</strong>置放止血帶前，應先<strong>確認並移除口袋內物品</strong>（鑰匙、手機等），並避免在較厚衣物上直接施作，以確保止血帶與皮膚緊密貼合、均勻加壓。
+                </div>
+                <!-- 第2條止血帶 -->
                 <div class="text-xs text-slate-500 bg-slate-50 rounded-lg p-3">
-                    <strong>注意：</strong>若止血帶上級出血仍搏動時，可考慮使用第 2 條止血帶（並排）以避免止血帶間隔過大，避免生產和局部感染。止血帶使用時，患者應填寫在右側肘部上面上。不使用止血帶時，不可使用扭結或繩帶。止血帶應選擇止血帶放置在更靠近心端，以避免對較軟的肌肉組織造成壓傷。止血帶操作時患者在右後上。
+                    <strong>第 2 條止血帶：</strong>若第 1 條止血帶收緊後遠端脈搏仍未消失，可在其<strong>近端</strong>並排加上第 2 條止血帶，以確保有效止血；避免兩條止血帶間距過大，以防形成<strong class="text-ems-danger">腔室症候群（Compartment Syndrome）</strong>。非緊急情況下，不得使用扭結或細繩代替止血帶。
                 </div>
             </div>
         </div>
@@ -1362,9 +1603,9 @@
                 <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="acc-content px-5 pb-5 bg-white text-sm text-slate-700 space-y-2">
-                <div class="flex gap-3 items-start pt-3"><span class="sub-num">①</span><p>安撫病人並保持<strong>抬頭坐姿</strong>，身體稍微往前傾，以吸收力強的柔軟布料捏緊鼻樑（高且緊 High and Tight 為原則），施打在鼻翼骨最少心端。</p></div>
-                <div class="flex gap-3 items-start"><span class="sub-num">②</span><p>若有鼻骨骨折，可用手指按壓兩側鼻翼（注意力道）；轉院後讓止血帶收緊貼緊，位置需先完全接觸 C 型固定裸露繃帶固定貼上，並趁出止血帶的時間。</p></div>
-                <div class="flex gap-3 items-start"><span class="sub-num">③</span><p>止血帶位置應放置移除，若無法止血遠端嘴巴部位，可應使用手指按壓兩側鼻翼處理，避免抱壓病人鼻孔。</p></div>
+                <div class="flex gap-3 items-start pt-3"><span class="sub-num">①</span><p>安撫病人，協助保持<strong>坐姿並使頭部稍微前傾</strong>（避免血液流入咽喉或氣管）。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">②</span><p>以拇指與食指<strong>捏緊兩側鼻翼（軟骨部位）</strong>，持續加壓約 <strong class="text-ems-danger">10 分鐘</strong>，期間改以口呼吸，勿中途放開檢查。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">③</span><p>若持續出血，可以浸有<strong>生理食鹽水的紗布</strong>輕輕填塞鼻腔，並盡速送醫；若疑似顱底骨折（耳鼻流出清澈液體），<strong>切勿填塞</strong>，維持自然引流。</p></div>
             </div>
         </div>
 
@@ -1382,8 +1623,8 @@
                 <p class="pt-3 text-slate-500">適用於身軀與四肢的交界處（腋下、鼠蹊部）及無法使用止血帶的肢體近端大量出血。</p>
                 <div class="flex gap-3 items-start"><span class="sub-num">①</span><p>立即直接加壓傷口，在不影響止血的情況下，拿出填塞紗布。</p></div>
                 <div class="flex gap-3 items-start"><span class="sub-num">②</span><p>將填塞紗布的一端保護手指，將指頭伸入傷口，往近心端探尋出血位置，並加壓出血處。</p></div>
-                <div class="flex gap-3 items-start"><span class="sub-num">③</span><p>另一支手指源塞入填塞紗布，同時持續保持對傷口的加壓（若含有止血劑加壓至少 3 分鐘，若無則至少 10 分鐘）。</p></div>
-                <div class="flex gap-3 items-start"><span class="sub-num">④</span><p>反覆填塞直至將傷口填滿，並持續雙手加壓（填塞紗布若含有止血劑加壓至少 3 分鐘）。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">③</span><p>另一支手指塞入填塞紗布，同時持續保持對傷口的加壓。</p></div>
+                <div class="flex gap-3 items-start"><span class="sub-num">④</span><p>反覆填塞直至將傷口填滿，並持續雙手加壓（若含有止血劑加壓至少 3 分鐘，若無則至少 10 分鐘）。</p></div>
                 <div class="flex gap-3 items-start"><span class="sub-num">⑤</span><p>使用加壓數料包紮填塞的傷口。</p></div>
             </div>
         </div>
@@ -1415,7 +1656,7 @@
     <!-- 繃帶包紮 -->
     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
         <h3 class="text-base font-bold text-ems-navy mb-4">🩹 （二）繃帶包紮法</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
                 <div class="font-bold text-ems-navy mb-2">① 定帶</div>
                 <p class="text-sm text-slate-600">從傷口遠心端，利用繃帶之一角，將折角蓋於內，固定繃帶起點。</p>
@@ -1426,7 +1667,11 @@
             </div>
             <div class="bg-orange-50 border border-orange-200 rounded-xl p-4">
                 <div class="font-bold text-ems-navy mb-2">③ 螺旋包紮</div>
-                <p class="text-sm text-slate-600">大而長的傷口無法進行一次性包覆，從遠心端往近心端，以圖 1/2 或 2/3 為原則，適用於相相似的肢體。</p>
+                <p class="text-sm text-slate-600">大而長的傷口無法進行一次性包覆，從遠心端往近心端，以上圈覆蓋下圈 1/2 或 2/3 為原則，適用於粗細相似的肢體。</p>
+            </div>
+            <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                <div class="font-bold text-ems-navy mb-2">④ 八字包紮</div>
+                <p class="text-sm text-slate-600">以數字「8」形纏繞方式包紮，最常用於肘、腕、膝、踝等<strong>關節部位</strong>；露出遠端關節以便評估循環與感覺。</p>
             </div>
         </div>
     </div>
@@ -1446,16 +1691,7 @@
             </div>
             <div class="border border-slate-200 rounded-lg overflow-hidden">
                 <button class="acc-btn w-full flex items-center justify-between px-4 py-3 text-left font-bold text-sm text-ems-navy bg-white hover:bg-slate-50 transition" onclick="toggleAcc(this)">
-                    <span>② 局部包紮法（八字包紮）</span>
-                    <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="acc-content px-4 pb-3 bg-white text-sm text-slate-700 pt-2">
-                    <p>適用於固定局部傷處之敷料。最常用於肘、腕、膝蓋及踝處，以數字 8 為纏繞方式，露出另一端關節以方便關節活動。</p>
-                </div>
-            </div>
-            <div class="border border-slate-200 rounded-lg overflow-hidden">
-                <button class="acc-btn w-full flex items-center justify-between px-4 py-3 text-left font-bold text-sm text-ems-navy bg-white hover:bg-slate-50 transition" onclick="toggleAcc(this)">
-                    <span>③ 懸臂吊帶包紮法</span>
+                    <span>② 懸臂吊帶包紮法</span>
                     <svg class="w-4 h-4 text-slate-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div class="acc-content px-4 pb-3 bg-white text-sm text-slate-700 pt-2">
@@ -1492,7 +1728,6 @@
                 <li>・若有外出血應<strong>先給予止血</strong></li>
                 <li>・儘量減少受傷部位移動</li>
                 <li>・將傷肢之物品移除</li>
-                <li>・避免因腫脹而造成不易取下</li>
                 <li>・若是開放性骨折應以敷料適當保護骨頭突出處</li>
             </ul>
         </div>
@@ -1503,7 +1738,7 @@
         <h3 class="text-base font-bold text-ems-navy mb-4">🦴 （四）肢體骨折固定操作規範</h3>
         <div class="space-y-3">
             <div class="flow-step"><div class="flow-num">1</div><p class="text-sm text-slate-700">評估遠端<strong>脈搏、感覺和運動</strong>的功能。</p></div>
-            <div class="flow-step"><div class="flow-num">2</div><p class="text-sm text-slate-700">選擇適當的<strong>固定器材</strong>（搭筒式護木或抽氣式護木，注意須有柔軟物與接觸面隔離）。</p></div>
+            <div class="flow-step"><div class="flow-num">2</div><p class="text-sm text-slate-700">選擇適當的<strong>固定器材</strong>（捲筒式護木或抽氣式護木，注意須有柔軟物與接觸面隔離）。</p></div>
             <div class="flow-step"><div class="flow-num">3</div><p class="text-sm text-slate-700">將傷肢固定於<strong>原來的姿勢</strong>；若傷肢不正常位置且會阻礙運送時，可嘗試拉直肢體後再固定。</p></div>
             <div class="flow-step"><div class="flow-num">4</div><p class="text-sm text-slate-700">必要時於<strong>骨突處</strong>加以鋪墊，避免壓傷。</p></div>
             <div class="flow-step"><div class="flow-num">5</div><p class="text-sm text-slate-700">固定範圍須超過骨折<strong>近端和遠端關節</strong>。</p></div>
@@ -1516,7 +1751,7 @@
         <h3 class="text-base font-bold text-ems-navy mb-4">🛏️ （五）骨折固定器材</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                <div class="font-bold text-ems-navy mb-2">搭筒式護木</div>
+                <div class="font-bold text-ems-navy mb-2">捲筒式護木</div>
                 <p class="text-sm text-slate-600 mb-2">使用時注意須有柔軟物與接觸面隔離，以避免壓傷。</p>
                 <div class="text-xs text-slate-500 space-y-1">
                     <div>・手腕骨折（未包覆 / 包覆）</div>
@@ -2336,6 +2571,17 @@
         btn.classList.toggle('open', !isOpen);
     }
 
+    function switchAirwayTab(tab) {
+        const isLma = tab === 'lma';
+        document.getElementById('panel-lma').classList.toggle('hidden', !isLma);
+        document.getElementById('panel-igel').classList.toggle('hidden', isLma);
+        document.getElementById('tab-lma').className = isLma
+            ? 'px-4 py-1.5 rounded-full text-xs font-bold border-2 border-ems-blue bg-ems-blue text-white transition'
+            : 'px-4 py-1.5 rounded-full text-xs font-bold border-2 border-slate-300 text-slate-500 hover:border-ems-blue hover:text-ems-blue transition';
+        document.getElementById('tab-igel').className = !isLma
+            ? 'px-4 py-1.5 rounded-full text-xs font-bold border-2 border-ems-blue bg-ems-blue text-white transition'
+            : 'px-4 py-1.5 rounded-full text-xs font-bold border-2 border-slate-300 text-slate-500 hover:border-ems-blue hover:text-ems-blue transition';
+    }
     function switchCprTab(tab) {
         const isAdult = tab === 'adult';
         document.getElementById('panel-adult').classList.toggle('hidden', !isAdult);
@@ -2362,4 +2608,4 @@
 </script>
 </body>
 </html>
-                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
