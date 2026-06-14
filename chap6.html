@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第六章：病人評估</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <style>
+        /* ── 手風琴 ── */
+        .acc-content { display: none; }
+        .acc-content.open { display: block; }
+        .acc-btn svg { transition: transform 0.25s; }
+        .acc-btn.open svg { transform: rotate(180deg); }
+
+        /* ── XABCDE 互動卡 ── */
+        .xcard { cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+        .xcard:hover { transform: translateY(-3px); box-shadow: 0 8px 20px -4px rgba(15,23,42,0.20); }
+        .xcard-detail { display: none; }
+        .xcard.active .xcard-detail { display: block; }
+        .xcard.active { box-shadow: 0 8px 24px -4px rgba(2,132,199,0.30); }
+
+        /* ── 流程圖箭頭 ── */
+        .flow-arrow::after {
+            content: '▼';
+            display: block;
+            text-align: center;
+            color: #0284c7;
+            font-size: 1.1rem;
+            margin: 0.15rem 0;
+        }
+
+        /* ── 評估步驟 ── */
+        .assess-step {
+            display: flex; gap: 1rem; align-items: flex-start;
+            background: white; border: 1px solid #e2e8f0;
+            border-radius: 0.75rem; padding: 1rem 1.25rem;
+        }
+        .step-num {
+            min-width: 2rem; height: 2rem;
+            background: #0284c7; color: white;
+            border-radius: 9999px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 0.85rem; flex-shrink: 0;
+        }
+
+        /* ── 身體部位檢查格 ── */
+        .body-region {
+            background: white; border: 1px solid #e2e8f0;
+            border-radius: 0.75rem; padding: 1rem;
+        }
+        .body-region h4 {
+            font-weight: 700; color: #1e293b; font-size: 0.875rem;
+            margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+        }
+
+        /* ── 通報格式方框 ── */
+        .report-box {
+            background: #0f172a; color: #e2e8f0;
+            border-radius: 0.75rem; padding: 1.25rem;
+            font-family: monospace; font-size: 0.85rem; line-height: 1.7;
+        }
+        .report-box .lbl { color: #38bdf8; font-weight: 700; }
+
+        /* ── 危急度色卡 ── */
+        .urgency-card {
+            border-left: 4px solid; border-radius: 0.5rem;
+            padding: 0.75rem 1rem; background: white;
+        }
+    </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+<!-- ===== 側邊欄 ===== -->
+<nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+        <h1 class="text-xl font-bold text-white tracking-wide">第六章 病人評估</h1>
+        <p class="text-xs text-ems-blue font-medium mt-1">《救護技術員教科書》P.190–P.215</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+
+        <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節總覽</div>
+        <button onclick="switchView('view-intro', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">章節介紹與學習目標</span>
+            <span class="text-[11px] text-slate-400">P.190 - P.191</span>
+        </button>
+
+        <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase border-t border-slate-700">三大節</div>
+
+        <button onclick="switchView('view-scene', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">01 現場評估</span>
+            <span class="text-[11px] text-slate-400">P.191 - P.195｜PPE・環境・流程選擇</span>
+        </button>
+
+        <button onclick="switchView('view-nontrauma', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">02a 非外傷評估</span>
+            <span class="text-[11px] text-slate-400">P.196 - P.202｜通用流程初級評估</span>
+        </button>
+
+        <button onclick="switchView('view-trauma', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">02b 外傷評估</span>
+            <span class="text-[11px] text-slate-400">P.203 - P.210｜XABCDE 外傷通用流程</span>
+        </button>
+
+        <button onclick="switchView('view-report', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <span class="font-bold text-sm">03 院前通報與紀錄表</span>
+            <span class="text-[11px] text-slate-400">P.210 - P.215｜無線電通報・救護記錄</span>
+        </button>
+
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">← 回章節目錄</a>
+</nav>
+
+<!-- ===== 主內容區 ===== -->
+<main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+<!-- ══════════════════════════════════════════════
+     VIEW 1：章節介紹與學習目標
+══════════════════════════════════════════════ -->
+<section id="view-intro" class="view-section fade-in block">
+    <!-- 章節 header 三件套 -->
+    <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">課本 P.190 – P.215</div>
+    <h2 class="text-3xl font-bold text-ems-navy mb-2">病人評估</h2>
+    <p class="text-ems-gray text-lg mb-8">救護技術員抵達現場後，首要任務是有系統地評估病人、正確判斷急迫性，並妥善完成院前通報與紀錄。</p>
+
+    <!-- 前言 -->
+    <div class="bg-ems-navy text-white rounded-2xl p-6 mb-8 border-t-4 border-ems-orange">
+        <h3 class="text-lg font-bold mb-3 flex items-center gap-2">📋 前言</h3>
+        <p class="text-slate-300 text-sm leading-relaxed">
+            救護技術員抵達救護現場的目的是執行病人之評估與必要處置，給予及時急救處置，並將其送往就近適當的醫療機構。要達到以上目的，必須透過對現場環境的判斷以及對病人的初步評估，以決定自救護現場周圍以及對病人的處理—是否啟動大量或多數病人機制，以及選用適當流程執行個別病人之現場救護。
+        </p>
+        <p class="text-slate-300 text-sm leading-relaxed mt-3">
+            為使接收醫院能夠知道即將送達病人的情況，應以無線電或通訊軟體進行病情通報，並透過無線電或通訊軟體記錄救護措施，做為救護依據。
+        </p>
+    </div>
+
+    <!-- 學習目標 -->
+    <h3 class="text-lg font-bold text-ems-navy mb-4">🎯 學習目標</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm">
+            <span class="text-2xl">🛡️</span>
+            <div><p class="text-sm font-semibold text-ems-navy">瞭解救護現場安全及防護措施評估</p></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm">
+            <span class="text-2xl">🧭</span>
+            <div><p class="text-sm font-semibold text-ems-navy">知悉非外傷病人初級與次級評估</p></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm">
+            <span class="text-2xl">🩺</span>
+            <div><p class="text-sm font-semibold text-ems-navy">熟練病人初級與次級評估</p></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm">
+            <span class="text-2xl">📖</span>
+            <div><p class="text-sm font-semibold text-ems-navy">熟悉詢問病史的方式和原則</p></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm">
+            <span class="text-2xl">📻</span>
+            <div><p class="text-sm font-semibold text-ems-navy">熟練無線電通報技巧和救護紀錄表填寫</p></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-start gap-3 shadow-sm border-l-4 border-ems-orange">
+            <span class="text-2xl">🔬</span>
+            <div>
+                <span class="inline-block bg-ems-orange text-white text-[10px] font-bold px-2 py-0.5 rounded mb-1">EMT-2</span>
+                <p class="text-sm font-semibold text-ems-navy">熟悉進階處置與操作及相關進階學理運用</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 三大節導覽 -->
+    <h3 class="text-lg font-bold text-ems-navy mb-4">📚 本章三大節</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <button onclick="switchView('view-scene', document.querySelectorAll('.nav-item')[1])"
+                class="text-left bg-ems-navy text-white rounded-xl p-5 hover:bg-slate-700 transition">
+            <div class="text-3xl font-black text-ems-blue/40 mb-2">01</div>
+            <div class="font-bold text-base">現場評估</div>
+            <div class="text-xs text-slate-400 mt-1">P.191 – P.195</div>
+            <div class="text-sm text-slate-300 mt-2">到達現場・PPE・環境安全・流程選擇</div>
+        </button>
+        <button onclick="switchView('view-nontrauma', document.querySelectorAll('.nav-item')[2])"
+                class="text-left bg-ems-navy text-white rounded-xl p-5 hover:bg-slate-700 transition">
+            <div class="text-3xl font-black text-ems-blue/40 mb-2">02</div>
+            <div class="font-bold text-base">病人現場評估與處置</div>
+            <div class="text-xs text-slate-400 mt-1">P.196 – P.210</div>
+            <div class="text-sm text-slate-300 mt-2">XABCDE・外傷流程・危急度判斷</div>
+        </button>
+        <button onclick="switchView('view-report', document.querySelectorAll('.nav-item')[4])"
+                class="text-left bg-ems-navy text-white rounded-xl p-5 hover:bg-slate-700 transition">
+            <div class="text-3xl font-black text-ems-blue/40 mb-2">03</div>
+            <div class="font-bold text-base">院前通報與紀錄表</div>
+            <div class="text-xs text-slate-400 mt-1">P.210 – P.215</div>
+            <div class="text-sm text-slate-300 mt-2">無線電原則・救護紀錄表各欄位</div>
+        </button>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     VIEW 2：01 現場評估 P.191–195
+══════════════════════════════════════════════ -->
+<section id="view-scene" class="view-section hidden">
+    <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">課本 P.191 – P.195</div>
+    <h2 class="text-3xl font-bold text-ems-navy mb-2">01 現場評估</h2>
+    <p class="text-ems-gray text-lg mb-8">接觸病人前的七大評估步驟——從安全確認到流程選定，是後續一切評估的基礎。</p>
+
+    <div class="mb-10">
+        <h3 class="text-base font-bold text-ems-navy mb-4 flex items-center gap-2">
+            <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded">現場評估七步驟</span>
+        </h3>
+
+        <!-- 一、到達現場 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-ems-blue">
+                <div class="step-num">一</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">到達現場</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-2">到達現場後，應將救護車停放於安全、隨時可開離的位置，離開救護現場時視現況鎖上車門。</p>
+                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1.5">道路交通事故現場停放建議</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-2.5">
+                            <div class="font-bold text-blue-700 text-xs mb-1">✅ 有交通管制人員</div>
+                            <p class="text-sm text-slate-600">救護車可停在事故現場之正前方處，<strong>車後門朝向病人</strong>，以利救護行進。</p>
+                        </div>
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-2.5">
+                            <div class="font-bold text-orange-700 text-xs mb-1">⚠️ 無交通管制人員</div>
+                            <p class="text-sm text-slate-600">應停在事故現場正後方之適當位置，<strong>車頭斜放角度約 15–45 度</strong>，人員以安全方式下車，提升現場安全環境並建立安全工作區（圖 6-1）。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 二、自我保護 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-ems-orange">
+                <div class="step-num" style="background:#ea580c">二</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">自我保護（PPE）</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-3">救護技術員的職責是救治病人，若自我保護不住可能會陷入危害，「自我保護」是每一趟救護前必須落實的事項。</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2">
+                        <!-- 標準防護 -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <div class="font-bold text-blue-700 text-xs mb-2">🛡️ 標準防護措施（一般個案皆適用）</div>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>① 評估現場安全並採取適當防護措施。</li>
+                                <li>② 一般個案戴手套、外科口罩；必要時加護目鏡、防護衣、N95。</li>
+                                <li>③ 防護未完備前與病人保持 1 公尺安全距離。</li>
+                                <li>④ 法定傳染病依疾管署公告穿著防護裝備。</li>
+                                <li>⑥ 疑呼吸道傳染病患若未戴口罩，提供外科口罩並避免從正面接觸病人。</li>
+                                <li>⑦ 化學危害現場須提升至化學防護裝備，判斷環境不安全即請求支援，除污後再行處置。</li>
+                            </ul>
+                        </div>
+                        <!-- 視情況加強 -->
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-3">
+                            <div class="font-bold text-orange-700 text-xs mb-2">⚠️ 視情況加強（依疾管署 PPE 建議著裝）</div>
+                            <div class="text-sm text-slate-600 space-y-2">
+                                <div>
+                                    <span class="font-semibold text-slate-700">N95 口罩：</span>
+                                    已知接觸高傳播風險病人、或疫情流行期間。
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-700">防水隔離衣：</span>
+                                    高傳播性接觸傳染疾病（如 SARS）、侵入性呼吸道處置、皮膚傳染性疾病（如疥瘡）、緊急接生、可能接觸有毒物質。
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-700">護目鏡／全罩面罩：</span>
+                                    同防水隔離衣情境，另執行進階呼吸道建立（可能被飛沫噴濺）時。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 三、現場環境評估 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-slate-400">
+                <div class="step-num" style="background:#64748b">三</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">現場環境評估</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-2">現場環境安全評估是每一趟救護最首要的事項，包括救護事件本質為何、是否外傷或非外傷等，關切現場可能不安全的情況（共 7 點）：</p>
+                    <div class="grid grid-cols-2 gap-1.5 text-sm mb-2">
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">1.</span><span>交通事故現場</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">2.</span><span>火災、爆炸或建築物倒塌現場</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">3.</span><span>門毆事件或病人有暴力攻擊可能之現場</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">4.</span><span>有危害物質、不明氣體洩漏或有發生二次危害之虞的環境</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">5.</span><span>表面不穩的環境（例如斜坡或水中）</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5"><span class="text-ems-blue font-bold shrink-0">6.</span><span>群眾圍觀等致妨礙救護進行的環境</span></div>
+                        <div class="flex items-start gap-1.5 bg-slate-50 border border-slate-200 rounded p-1.5 col-span-2"><span class="text-ems-blue font-bold shrink-0">7.</span><span>其他可能危及現場救護技術員及病人安全之環境</span></div>
+                    </div>
+                    <p class="text-sm text-slate-500">若有以上狀況，應回報救指中心，並視現場狀況請求警察或相關專業人士、特殊救護或救援工具支援。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 四、救援能量評估 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-slate-400">
+                <div class="step-num" style="background:#64748b">四</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">救援能量評估</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-2">若為大量或多重傷病患事件，現場救護能量不足以應付時，應通報救指中心請求人力及裝備支援。</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <div class="font-bold text-blue-700 text-sm mb-1">大量傷病患事件</div>
+                            <p class="text-sm text-slate-600">當傷病患人數或嚴重度超過地區或系統所能負荷的能量，即使採取最有效的應變措施，病人預後也無法達到原本應有水準。依緊急醫療救護法施行細則第 2 條第 3 項，<strong>係指單一事故、災害傷病患人數達 15 人以上，或預判可能達 15 人以上者</strong>。</p>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                            <div class="font-bold text-purple-700 text-sm mb-1">多重傷病患事件</div>
+                            <p class="text-sm text-slate-600">傷病患人數超過 1 人，但未超過該地區或系統所能負荷的能量。一旦發生，現場指揮官應依災害之規模及類別，建立現場指揮協調系統、施行救護相關工作，救護技術員及運輸工具均應依指揮協調系統施行救護。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 五、救護或搬運協助評估 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-slate-400">
+                <div class="step-num" style="background:#64748b">五</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">救護或搬運協助評估</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-2">即使現場病人僅一人，若進行脫困、困難搬運或執行救護有疑難時，應及時通報救指中心，並視現場狀況請求下列人力或裝備的支援：</p>
+                    <div class="space-y-1 text-sm text-slate-600">
+                        <div class="flex gap-2 items-start"><span class="text-ems-blue font-bold shrink-0">1.</span><span>加派救護車、救護技術員與援救人員（如脫困或因難搬運病人）</span></div>
+                        <div class="flex gap-2 items-start"><span class="text-ems-blue font-bold shrink-0">2.</span><span>警察或衛生局人員到場（如暴力攻擊或行為急症病人）</span></div>
+                        <div class="flex gap-2 items-start"><span class="text-ems-blue font-bold shrink-0">3.</span><span>請求醫師到達現場（救護技術員無法現場處置之特殊救護狀況）</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 六、專業展示 -->
+        <div class="flow-arrow">
+            <div class="assess-step border-l-4 border-ems-blue">
+                <div class="step-num">六</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">專業展示</div>
+                    <p class="text-sm text-slate-600 mt-1">一旦完成前列事項後，應開始準備對病人施行評估。根據一開始對事件性質的分析，可初步將案件區分為「非外傷」或「外傷」，藉由簡單的自我介紹並快速掃瞄臨近病人，初步判定病人的急迫性。</p>
+                    <p class="text-sm text-slate-600 mt-1">若無法確定事件性質時，則先視同外傷事件進行評估，在接觸病人前，應將適當救護器材放置於適當之位置（圖 6-2、6-3）。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 七、選用適當流程 -->
+        <div>
+            <div class="assess-step border-l-4 border-ems-blue">
+                <div class="step-num">七</div>
+                <div class="flex-1">
+                    <div class="font-bold text-sm text-ems-navy">選用適當流程（關鍵決策）</div>
+                    <p class="text-sm text-slate-600 mt-1 mb-4">根據前列通用流程（圖 6-4），決定病人屬性。原則上若為「非外傷」，先選擇「非外傷」通用流程；若為「外傷」，則選擇「外傷」通用流程。若屬兒童、新生兒、緊急接生、溺水或灼燙傷等特殊救護案件，亦可直接以各章節該流程進行病人評估與處置。</p>
+
+                    <!-- 圖 6-4 通用流程 -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 mt-2">
+                        <img src="./assets/img/chap6-flow.jpg" alt="圖 6-4 通用流程" class="mx-auto rounded-lg" style="max-width:360px; width:100%;">
+                        <p class="text-center text-xs text-slate-400 mt-2">圖 6-4 通用流程</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     VIEW 3：02a 非外傷 XABCDE 評估 P.196–202
+══════════════════════════════════════════════ -->
+<section id="view-nontrauma" class="view-section hidden">
+    <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">課本 P.196 – P.202</div>
+    <h2 class="text-3xl font-bold text-ems-navy mb-2">02a 非外傷通用流程</h2>
+    <p class="text-ems-gray text-lg mb-8">初級評估依序進行：意識 → A（呼吸道）→ B（呼吸）→ C（循環）→ 輔助檢查。</p>
+
+    <!-- 流程橫排 -->
+    <div class="flex items-center gap-1 mb-8 flex-wrap">
+        <div class="bg-ems-navy text-white text-sm font-bold px-3 py-1.5 rounded-lg">意識評估</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white text-sm font-bold px-3 py-1.5 rounded-lg">A 呼吸道</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white text-sm font-bold px-3 py-1.5 rounded-lg">B 呼吸</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white text-sm font-bold px-3 py-1.5 rounded-lg">C 循環</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-orange text-white text-sm font-bold px-3 py-1.5 rounded-lg">輔助檢查</div>
+    </div>
+
+    <!-- STEP 1: 意識評估 -->
+    <div class="bg-white border-l-4 border-ems-navy rounded-xl p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ems-navy text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">STEP 1</span>
+            <h3 class="text-lg font-bold text-ems-navy">意識評估</h3>
+        </div>
+        <div class="space-y-3 text-sm text-slate-600">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                <p>以<strong>呼喚、輕拍肩膀</strong>立即確認意識；必要時以痛覺刺激（捏斜方肌、刺激甲床或指頭）確認意識程度。</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-2">AVPU 意識分級</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <div class="bg-green-50 border border-green-200 rounded p-2 text-center">
+                        <div class="font-black text-green-700 text-lg">A</div>
+                        <div class="font-bold text-green-800 text-xs">清醒 Alert</div>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded p-2 text-center">
+                        <div class="font-black text-yellow-700 text-lg">V</div>
+                        <div class="font-bold text-yellow-800 text-xs">對聲音有反應 Voice</div>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded p-2 text-center">
+                        <div class="font-black text-orange-700 text-lg">P</div>
+                        <div class="font-bold text-orange-800 text-xs">對疼痛有反應 Pain</div>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded p-2 text-center">
+                        <div class="font-black text-red-700 text-lg">U</div>
+                        <div class="font-bold text-red-800 text-xs">無反應 Unresponsive</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                <p class="font-bold text-ems-danger mb-1">⚠ 發現無脈搏及無適當呼吸（無呼吸或瀕死呼吸）</p>
+                <p>→ 立即進入<strong>非外傷 OHCA 流程</strong></p>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p class="font-bold text-ems-blue mb-1">有脈搏且有適當呼吸</p>
+                <p>→ 繼續進行初評（A → B → C）；若<strong>非對痛無反應</strong>，則依序針對呼吸道、呼吸、循環評估。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 2: A 呼吸道 -->
+    <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">STEP 2</span>
+            <h3 class="text-lg font-bold text-ems-navy">A — 評估呼吸道 <span class="text-sm font-normal text-slate-500">（可與呼吸一同評估）</span></h3>
+        </div>
+        <div class="space-y-3 text-sm text-slate-600">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                <p>以<strong>看、聽</strong>方式評估呼吸道是否阻塞，若有阻塞應立即以通暢方法打開呼吸道。</p>
+            </div>
+            <div class="space-y-2">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <p class="font-bold text-green-800 mb-1">① 呼吸道通暢</p>
+                    <p>病人清醒且能正常說話，通常呼吸道無異常。非清醒時，若評估中無明顯雜音或嘴角分泌物等現象，基於保護呼吸道，若病人對痛無反應，可提早建立輔助呼吸道以免舌根後墜塞阻呼吸道。</p>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                    <p class="font-bold text-yellow-800 mb-1">② 呼吸道有聲音</p>
+                    <p>非清醒時常見聲音為痰聲、鼾音或喘鳴聲（Stridor）。注意上呼吸道是否有液痰、異物阻塞（脫落牙齒、固狀物體）或舌頭後墜阻礙氣道；必要時給予<strong>壓額抬下頷法</strong>徒手暢通呼吸道，或輔助呼吸道或抽吸等處置。對於過敏性急性吸水腫所產生的喘鳴聲，因初中級救護技術員無法有效處置前，應盡速送往鄰近醫療院所。</p>
+                </div>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <p class="font-bold text-red-800 mb-1">③ 完全異物阻塞</p>
+                    <p>病人因異物哽塞無法說話，須立即進行<strong>哈姆立克法</strong>處理；詳細流程請參考相關章節。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 3: B 呼吸 -->
+    <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">STEP 3</span>
+            <h3 class="text-lg font-bold text-ems-navy">B — 評估呼吸 <span class="text-sm font-normal text-slate-500">（可與呼吸道一同評估）</span></h3>
+        </div>
+        <div class="space-y-3 text-sm text-slate-600">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                <p>以<strong>看、聽</strong>方式評估呼吸：深、淺、快、慢及有無明顯異常呼吸聲，評估時間<strong>不超過 10 秒</strong>（圖 6-9）。對於評估呼吸來說，呼吸道及呼吸可同時評估，觀察病人呼吸的型態及胸部呼吸起伏，也可以同時使用血氧機輔助評估。</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-2">處置原則</p>
+                <ul class="space-y-1">
+                    <li>• 呼吸可施行之必要處置：觀察呼吸況來決定，尚能使用鼻腔呼吸則可考慮給予鼻管；呼吸費力且張口呼吸等可考慮給予氧氣面罩或非再呼吸型面罩；氣切病人可考慮使用氣切面罩。</li>
+                    <li>• 如果病人已失去呼吸動力，應考慮給予人工呼吸協助病人呼吸。</li>
+                    <li>• SpO₂ &lt; 94% 或病人仍有呼吸不適症狀，應給予適當氧氣治療。</li>
+                    <li><span class="font-bold text-ems-danger">血氧小於 90% 為危急個案。</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 4: C 循環 -->
+    <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">STEP 4</span>
+            <h3 class="text-lg font-bold text-ems-navy">C — 評估循環</h3>
+        </div>
+        <div class="space-y-3 text-sm text-slate-600">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-2">脈搏評估</p>
+                <div class="space-y-2">
+                    <div class="flex gap-2">
+                        <span class="bg-ems-navy text-white text-xs font-bold px-2 py-0.5 rounded shrink-0 h-fit">對痛無反應</span>
+                        <p>應查<strong>頸動脈搏</strong>（評估時間不超過 10 秒）。</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shrink-0 h-fit">其餘病人</span>
+                        <p>應檢查<strong>兩側橈動脈搏</strong>（評估時間不超過 10 秒）；兩側同時檢查也是確認是否有脈壓差之狀況，進而思考有無主動脈剝離之可能性。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">① 目視膚色</p>
+                    <p>是否蒼白、發紺或異常；蒼白是血液循環異常的微兆之一，遠膚色較深者可注意其紅潤嘴唇是否變為蒼白。</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">② 末梢肢體溫度</p>
+                    <p>是否濕冷；可以觸碰病人雙手掌察覺其溫度差異，濕冷狀況可能代表病人正處於末梢循環不良。</p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">③ 微血管回充時間</p>
+                    <p>按壓病人大拇指之指甲一秒後放開，觀察血液回充時間。<strong>大於 2 秒</strong>可能代表病人正處於休克狀態；注意此項檢查會受到環境影響。</p>
+                </div>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <p class="text-sm text-slate-600">對於評估循環而言，快速判斷病人是否處於休克狀況是相當重要的，也可同時使用血壓機輔助評估；但應以處置病人症狀為主，而非治療機器數值。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 5: 輔助檢查 -->
+    <div class="bg-white border-l-4 border-ems-orange rounded-xl p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3">
+            <span class="bg-ems-orange text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">STEP 5</span>
+            <h3 class="text-lg font-bold text-ems-navy">輔助檢查 <span class="text-sm font-normal text-slate-500">（視況量測）</span></h3>
+        </div>
+        <p class="text-sm text-slate-600 mb-4">輔助查分為兩部分，一部分應視情況需要利用輔助器材量測；另一部分為重點式身體檢查，主要是針對病人主訴，執行相關部位的檢查以利後續處置。</p>
+        <div class="space-y-2 mb-4">
+            <!-- 生命徵象量測 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>生命徵象量測（7 項）</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm pt-2">
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">① 血壓</div>
+                            <p class="text-slate-600">以血壓計量測收縮壓及舒張壓。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">② 脈搏</div>
+                            <p class="text-slate-600">以儀器量測為主，動脈點觸摸量每分鐘次數為輔。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">③ 血氧濃度</div>
+                            <p class="text-slate-600">以血氧濃度分析儀量測；SpO₂ &lt; 94% 給予氧氣。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">④ 體溫</div>
+                            <p class="text-slate-600">以體溫計量測。發燒、疑似低熱急症或意識不清之非外傷病人建議量測。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">⑤ 血糖</div>
+                            <p class="text-slate-600">有下列症狀、徵候或病情時應考慮量測血糖：急性意識改變、混亂、冒冷汗、虛弱、顫抖、呼吸困難、低體溫或嚴重脫水；或懷疑急性腦中風；有糖尿病病史。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">⑥ 瞳孔</div>
+                            <p class="text-slate-600">評估兩側瞳孔大小及對光反應；當病人有神經學症狀時，應檢查瞳孔、GCS 昏迷指數。</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                            <div class="font-bold text-ems-blue mb-1">⑦ 特殊急症相關檢查</div>
+                            <p class="text-slate-600">當懷疑病人有特殊急症，應進行相關特別檢查，如 12 導程心電圖及辛那提到院前中風指數等數值，請參考第七章所述。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 重點式身體檢查 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>重點式身體檢查</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4">
+                    <p class="text-sm text-slate-600 pt-2 mb-3">其目的在於及時檢查出造成病人急症的原因，以利執行相對應的處置。各項檢查有其輕重緩急，應依主訴針對對應部位執行。</p>
+                    <div class="space-y-3">
+                        <!-- 意識 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            <p class="font-bold text-sm text-ems-navy mb-2">🧠 意識有問題</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• 檢查 GCS 昏迷指數及瞳孔大小與對光反應</li>
+                                <li>• 比較上下肢感覺及運動功能是否對稱</li>
+                                <li>• 檢查上下肢是否有異常針孔</li>
+                            </ul>
+                        </div>
+                        <!-- 呼吸 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            <p class="font-bold text-sm text-ems-navy mb-2">🫁 呼吸有問題</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• 評估呼吸次數</li>
+                                <li>• 頸靜脈是否怒張或塌陷</li>
+                                <li>• 氣管是否偏移</li>
+                                <li>• 視診胸部呼吸時起伏是否對稱</li>
+                                <li>• 聽診兩側肺音</li>
+                                <li>• 檢查上下肢是否有浮腫、紅疹、紫斑或異常針孔</li>
+                            </ul>
+                        </div>
+                        <!-- 腹部 -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            <p class="font-bold text-sm text-ems-navy mb-2">🫄 腹部有問題</p>
+                            <ul class="text-sm text-slate-600 space-y-1">
+                                <li>• 視診腹部是否有腫脹</li>
+                                <li>• 詢問腹部不舒服的位置</li>
+                                <li>• 觸診是否有壓痛、反彈痛；從疼痛部位對側開始，以順時針方向評估</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 病史詢問 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>病史詢問</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4">
+                    <p class="text-sm text-slate-600 pt-2 mb-3">以<strong>主訴、之前、吃、過、藥、敏、感</strong>方式詢問病史。</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>主訴：</strong>哪裡不舒服或發生什麼事、怎麼不舒服、什麼時候開始</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>之前：</strong>不舒服的症狀之前在做什麼</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>吃：</strong>最近一次進食（用餐）時間</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>過：</strong>過去疾病史</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>藥：</strong>長期或近期有無服用任何藥物</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600"><strong>敏：</strong>有無對食物或藥物過敏</div>
+                        <div class="bg-slate-50 border rounded p-2 text-slate-600 col-span-2"><strong>感：</strong>有無其他感覺不舒服的地方</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     VIEW 4：02b 外傷通用流程 P.203–210
+══════════════════════════════════════════════ -->
+<section id="view-trauma" class="view-section hidden">
+    <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">課本 P.203 – P.210</div>
+    <h2 class="text-3xl font-bold text-ems-navy mb-2">02b 外傷通用流程</h2>
+    <p class="text-ems-gray text-lg mb-8">外傷初級評估著重大量出血控制與頸椎保護，依序完成 X → 意識 → A → B → C → D → E → 輔助檢查。</p>
+
+    <!-- 流程橫排 -->
+    <div class="flex items-center gap-1 mb-8 flex-wrap text-xs">
+        <div class="bg-red-600 text-white font-bold px-3 py-1.5 rounded-lg">X 大量出血</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-navy text-white font-bold px-3 py-1.5 rounded-lg">意識</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white font-bold px-3 py-1.5 rounded-lg">A 呼吸道</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white font-bold px-3 py-1.5 rounded-lg">B 呼吸</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white font-bold px-3 py-1.5 rounded-lg">C 循環</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white font-bold px-3 py-1.5 rounded-lg">D 失能</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-blue text-white font-bold px-3 py-1.5 rounded-lg">E 身體</div>
+        <div class="text-ems-gray font-bold">→</div>
+        <div class="bg-ems-orange text-white font-bold px-3 py-1.5 rounded-lg">輔助檢查</div>
+    </div>
+
+    <div class="space-y-4">
+
+        <!-- X 大量出血 -->
+        <div class="bg-white border-l-4 border-red-600 rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">X</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估有無大量出血（最優先）</h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                    <p>快速查看全身是否有立即可見且持續之外出血情形，若有則直接加壓止血或進行止血帶綁紮。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                        <p class="font-bold text-red-800 mb-1">四肢大量出血 → 止血帶</p>
+                        <p>應盡早使用止血帶（圖 6-31）。</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">頭頸、軀幹出血 → 乾紗布加壓</p>
+                        <ul class="space-y-1">
+                            <li>• 加壓止血；如初步處置無法止血則考慮增加壓力，並盡快送醫。</li>
+                            <li>• 軀幹與肢體交界處加壓無效，可利用紗布或其他敷料傷口填塞，含止血製劑敷料至少加壓 <strong>3 分鐘</strong>，一般敷料至少 <strong>10 分鐘</strong>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 意識 + 頸椎 -->
+        <div class="bg-white border-l-4 border-ems-navy rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-navy text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">意識</span>
+                <h3 class="text-lg font-bold text-ems-navy">意識評估 + 頸椎減移</h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">意識評估（AVPU）</p>
+                    <ul class="space-y-1">
+                        <li>• 依序以呼喚、輕拍肩膀及痛覺刺激方式區分意識為清、聲、痛、否四種等級。</li>
+                        <li>• 疼痛刺激方式以單手按壓斜方肌為優先。</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-blue mb-2">頸椎減移（外傷病人應儘早考慮）</p>
+                    <p class="mb-2">第一時間遇到病人，除了目視有無大出血並立即止血外，也應於接觸病人前進行頸椎減移。建議以有效的頸椎減移技術限制病人頸部活動。</p>
+                    <p class="font-bold text-ems-navy mb-1">加拿大頸椎法則 — 確認低危因子（須全符合才可排除頸椎減移）：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm mt-1">
+                        <div class="bg-white border border-blue-200 rounded-lg p-2">
+                            <p class="font-bold text-ems-blue mb-1">① 確認以下高危因子</p>
+                            <ul class="space-y-0.5">
+                                <li>• 年齡超過 65 歲</li>
+                                <li>• 四肢麻木或疼痛</li>
+                                <li>• 危險外傷機轉（從 ≥ 90 公分或 5 階樓梯高跌落、頭部系受上下的撞擊如跳水、機動車輛碰撞或自行車與物體碰撞）</li>
+                            </ul>
+                            <p class="text-ems-danger mt-1 text-xs">如有任一高危因子 → 進行頸椎減移，不進行第二步。</p>
+                        </div>
+                        <div class="bg-white border border-blue-200 rounded-lg p-2">
+                            <p class="font-bold text-ems-blue mb-1">② 確認以下低危因子</p>
+                            <ul class="space-y-0.5">
+                                <li>• 輕微後方追撞車禍（不包含被大車或卡車撞擊、翻車或時速 &gt;100km 高速車輛撞擊）</li>
+                                <li>• 事故發現場任何時間病人能行走</li>
+                                <li>• 病史詢問無頸部疼痛</li>
+                                <li>• 頸椎中線繞診無按壓疼痛</li>
+                            </ul>
+                            <p class="text-slate-500 mt-1 text-xs">如上述因子皆符合 → 進行第三步，否則進行頸椎減移。</p>
+                        </div>
+                        <div class="bg-white border border-blue-200 rounded-lg p-2">
+                            <p class="font-bold text-ems-blue mb-1">③ 確認能否主動旋轉頸部</p>
+                            <p>病人如能自行將頭部向左或向右旋轉 45°，則可不進行頸椎減移，讓副手可以繼續限移動作，協助主手進行後續處置。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- A 呼吸道 -->
+        <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">A</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估呼吸道 <span class="text-sm font-normal text-slate-500">（可與呼吸一同評估）</span></h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 flex gap-4 items-start">
+                    <div class="flex-1">
+                        <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                        <p>以看、聽方式評估呼吸道是否阻塞，若有阻塞應先以通暢方法打開呼吸道。<strong>外傷病人優先使用下頷推拿法。</strong></p>
+                        <p class="text-xs text-slate-500 mt-2">圖 6-34 下頷推拿法徒手打開呼吸道</p>
+                    </div>
+                    <img src="./assets/img/chap6-fig6-34.jpg" alt="圖 6-34 下頷推拿法" class="rounded-lg w-36 shrink-0">
+                </div>
+                <div class="space-y-2">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                        <p class="font-bold text-green-800 mb-1">① 呼吸道通暢</p>
+                        <p>同非外傷，但嘗試降低延遲性腦傷風險；雖然無明顯呼吸道阻塞情形，若 GCS &lt; 9 分，建議例行性放置輔助呼吸道。</p>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                        <p class="font-bold text-yellow-800 mb-1">② 呼吸道出現血水、鼾音等部分阻塞情形</p>
+                        <p>注意上呼吸道是否有血水或舌頭後壓塞阻氣道；必要時給予<strong>下顎推舉法</strong>暢通呼吸道；如無法施行可採壓額抬下顎法；如同時有血水及鼾音，需進行口咽部抽吸後再放置輔助呼吸道。</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">③ 頸圍造成呼吸道處置困難</p>
+                        <p>可於頸椎減移下完成呼吸道處置，再放置頸圍。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- B 呼吸 -->
+        <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">B</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估呼吸 <span class="text-sm font-normal text-slate-500">（可與呼吸道一同評估）</span></h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                    <p>以看、聽方式評估呼吸深、淺、快、慢及有無明顯異常呼吸聲，評估時間<strong>不超過 10 秒</strong>（圖 6-9）。</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-blue mb-1">外傷版處置重點</p>
+                    <p>同非外傷，但針對<strong>意識不清（GCS &lt; 9 分）</strong>之病人，即使血氧濃度未小於 94%，也應積極給予氧氣治療及呼吸道建立，嘗試降低延遲性腦傷風險。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- C 循環 -->
+        <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">C</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估循環</h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">① 對痛無反應病人</p>
+                        <p>應查<strong>頸動脈搏</strong>（評估時間不超過 10 秒）。</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">② 其餘病人</p>
+                        <p>應查兩側橈動脈搏（不超過 10 秒），並評估週邊循環：目視膚色是否蒼白、發紺，觸摸末梢是否濕冷，微血管回充時間是否 &gt; 2 秒。</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                        <p class="font-bold text-red-800 mb-1">③ 外傷病人：骨盆穩固性</p>
+                        <p>機械檢查骨盆是否穩固，不穩固時應<strong>立即給予固定</strong>（骨盆固定帶、三角巾或被單等），以向內側擠壓一次為限（圖 6-35）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- D 失能 -->
+        <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">D</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估失能（Disability）</h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">① GCS 昏迷指數</p>
+                        <p>評估睜眼（E）、說話（V）、動作（M）三階段分數；識請不清的病人建議以按壓指甲來查看各項分數。</p>
+                        <div class="grid grid-cols-3 gap-1 mt-2 text-center text-xs">
+                            <div class="bg-red-100 rounded p-1"><div class="font-bold text-red-700">3–8</div><div>重度</div><div class="text-slate-500">建議送醫學中心</div></div>
+                            <div class="bg-orange-100 rounded p-1"><div class="font-bold text-orange-700">9–12</div><div>中度</div><div class="text-slate-500">中度責任醫院</div></div>
+                            <div class="bg-green-100 rounded p-1"><div class="font-bold text-green-700">13–15</div><div>輕度</div><div class="text-slate-500">區域責任醫院</div></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">② 瞳孔</p>
+                        <p>評估兩側瞳孔大小及對光是否有反應。瞳孔反應及顱內壓升高注意事項請參考第八章所述。</p>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                        <p class="font-bold text-ems-navy mb-1">③ 上下肢感覺與運動功能</p>
+                        <p>比較兩側上肢和下肢的感覺和運動功能。對清醒病人可詢問或讓其配合指令動作；意識不清者若無脫臼骨折或嚴重傷勢，可先用手將病人雙上肢高舉後鬆開，接著將病人兩膝彎曲後放開，觀察肢體運動失調程度（圖 6-21）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- E 身體評估 -->
+        <div class="bg-white border-l-4 border-ems-blue rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-blue text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">E</span>
+                <h3 class="text-lg font-bold text-ems-navy">評估病人身體（Expose）</h3>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600">
+                <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-navy mb-1">評估方式</p>
+                    <ul class="space-y-1">
+                        <li>① 快速視診頭、頸、胸、腹、骨盆與肢體是否有救命性傷口。</li>
+                        <li>② 檢查頸靜脈是否怒張或塌陷（圖 6-22），氣管是否偏移（圖 6-23），有無皮下氣腫。</li>
+                        <li>③ 在保護病人隱私下視情況將病人衣物移除，並注意保管。</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <p class="font-bold text-ems-blue mb-1">臨床意義</p>
+                    <ul class="space-y-1">
+                        <li>• <strong>頸靜脈怒張或塌陷</strong>：代表病人血液循環的問題。</li>
+                        <li>• <strong>氣管偏移 + 頸靜脈怒張</strong>：代表病人可能有<strong>張力性氣胸</strong>的問題。</li>
+                        <li>• <strong>皮下氣腫</strong>：應考慮有氣管損傷的可能性，積極給予氧氣治療、監測並送醫。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 輔助檢查 -->
+        <div class="bg-white border-l-4 border-ems-orange rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="bg-ems-orange text-white text-xs font-bold px-2 py-0.5 rounded shadow-sm">輔助</span>
+                <h3 class="text-lg font-bold text-ems-navy">輔助檢查</h3>
+            </div>
+            <p class="text-sm text-slate-600 mb-3">完成 XABCDE 初級評估後，應視病情需要利用輔助器材量測；另一部分為重點式身體檢查。</p>
+            <div class="space-y-2">
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                    <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                        <span>生命徵象量測</span>
+                        <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="acc-content px-5 pb-4">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm pt-2">
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                                <div class="font-bold text-ems-blue mb-1">① 血壓、脈搏、血氧（SpO₂）</div>
+                                <p class="text-slate-600">同非外傷。</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                                <div class="font-bold text-ems-blue mb-1">② 體溫</div>
+                                <p class="text-slate-600">現場環境如有失溫風險，建議量測體溫。</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                                <div class="font-bold text-ems-blue mb-1">③ 血糖</div>
+                                <p class="text-slate-600">有下列情形應考慮量測：症狀或機轉不符（無明顯外傷機轉）；意識清楚病人表示外傷前即有暈眩、虛弱、冒冷汗；有糖尿病病史。</p>
+                            </div>
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                                <div class="font-bold text-ems-blue mb-1">④ 疼痛評估</div>
+                                <p class="text-slate-600">同非外傷。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                    <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                        <span>重點式身體檢查</span>
+                        <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="acc-content px-5 pb-4">
+                        <p class="text-sm text-slate-600 pt-2">其目的在於及時檢查出造成病人初評異常的傷勢，以利執行相對應的處置；譬如病人有頸部外傷時，可先行檢查頭頸部及臉部是否有耳漏、鼻漏之問題。各式檢查的輕重緩急，建議學員應熟練次級評估之身體檢查，並參考後續章節討論各式外傷的重點式身體檢查項目，依傷勢適當運用。</p>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                    <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                        <span>病史詢問</span>
+                        <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="acc-content px-5 pb-4">
+                        <p class="text-sm text-slate-600 pt-2 mb-2">以<strong>主訴、之前、吃、過、藥、敏、感</strong>方式詢問。</p>
+                        <p class="text-sm text-slate-600">應先瞭解事故機轉，建議直接詢問「剛剛發生什麼事？」再接續詢問病人主訴「哪裡不舒服？怎麼不舒服？不舒服多久？」其餘詢問內容同非外傷。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     VIEW 5：03 院前通報與紀錄表 P.210–215
+══════════════════════════════════════════════ -->
+<section id="view-report" class="view-section hidden">
+    <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">課本 P.211 – P.215</div>
+    <h2 class="text-3xl font-bold text-ems-navy mb-2">03 院前病情通報與救護紀錄表填寫</h2>
+    <p class="text-ems-gray text-lg mb-8">準確的無線電通報和完整的紀錄表，是接續院內治療的橋樑，也是救護技術員的法律義務。</p>
+
+    <!-- 一、院前病情通報 -->
+    <div class="bg-white border-l-4 border-ems-navy rounded-xl p-5 mb-4">
+        <h3 class="text-lg font-bold text-ems-navy mb-3">一、院前病情通報技巧</h3>
+        <p class="text-sm text-slate-600 mb-3">緊急救護現場主要通訊設備為無線電，運用其立即、迅速之優點，可將現場狀況及病人處置回報救指中心。轉送途中若病人病情變化危急時，應即時回報並通知醫院準備。</p>
+        <div class="space-y-3 text-sm text-slate-600">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-1">通話原則</p>
+                <p>內容需簡扼要，說話話調分明，發話速度讓接報的值動人員得以記錄。</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <p class="font-bold text-ems-navy mb-2">救護技術員無線電通報內容（四項）</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-white border rounded p-2">① 救護車代號、病人之性別、大約年齡、主訴及主要問題</div>
+                    <div class="bg-white border rounded p-2">② 對病人已做之主要處置</div>
+                    <div class="bg-white border rounded p-2">③ 病人目前的異常生命徵象</div>
+                    <div class="bg-white border rounded p-2">④ 送達目的醫院及預估到達醫院時間</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 二、救護紀錄表填寫原則 -->
+    <div class="bg-white border-l-4 border-ems-navy rounded-xl p-5 mb-4">
+        <h3 class="text-lg font-bold text-ems-navy mb-3">二、救護紀錄表填寫原則</h3>
+        <p class="text-sm text-slate-600 mb-3">依緊急醫療救護法第 14 條規定，救護技術員執行救護時應填具救護紀錄表。填寫必須確實，且須經醫護人員簽章確認。急救勤務均為 24 小時制填寫，流水號格式為：<strong>YYYYMMDDHHMMSS＋勤務序號</strong>（例如 20190101235959001）。</p>
+
+        <div class="space-y-2">
+
+            <!-- （一）派遣資料 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（一）派遣資料</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>• 各項時間點依 24 小時制如實填寫；若接觸病人時間與到達現場時間不一致，須補述欄位說明。</li>
+                        <li>• 填寫送往醫院或地點，以下列 3 個原則<strong>單一勾選</strong>：<br>
+                            ① 就近適當（優先以 EMT 建議為主）；② 指揮中心（依救指中心指示送醫）；③ 病人或家屬要求。若建議就近適當，也應向病人或家屬解說。</li>
+                        <li>• 若未能送醫，應勾選原因；若病人拒送，需完成初級評估及生命徵象，以客觀數據向病人或家屬解說。</li>
+                        <li>• 現場死亡定義（衛生福利部緊急醫療救護委員會）：人體遭到屍腐、屍僵、屍體焦黑、無首、內臟外溢或軀幹斷肢之一，且無意識、無呼吸、無脈搏之情形。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- （二）病人資料 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（二）病人資料</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>• 病人意識不清無法告知或拒絕提供證件者，則勾選不詳，性別及年齡可依病人外表評估後填寫。</li>
+                        <li>• 有任何金錢及重要物品須在財物欄位詳細填寫，並請本人、家屬或關係人等保管人簽名，記載與病人關係。</li>
+                        <li>• 若無家屬或關係人在場，至醫院後轉交接續處理人員代保管及簽名；若仍無法交接，以公函移送警察後續處理。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- （三）現場狀況 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（三）現場狀況</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>① 接觸病人後分「外傷」及「非外傷」二類，以勾選 1 項主要原因為原則；如有次要原因（「病人主訴：還有其他地方不舒服嗎？」），填寫在分項中，依病人主訴、家屬代訴、EMT 判斷勾選；若中途取消，依派遣命令填寫。</li>
+                        <li>② 現場病人所述身體狀況及曾有醫療紀錄用文字登載；補述欄補充主訴及其他不舒服之處，讓 EMT 更易掌握病人狀況。</li>
+                        <li>③ 過去病史及過敏依病人及家屬所述勾選，亦可於該項後文字注記（例如勾選精神疾病並注記憂鬱症），也可藉由病人用藥得知過去病史。</li>
+                        <li>④ 特殊案件僅針對：OHCA 病人（記錄是否使用 PAD、ROSC 時間）、疑似心肌梗塞（登錄相關選項）、疑似腦中風（記載腦中風指標、最後正常時間，回報救指中心轉報責任醫院）。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- （四）處置項目 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（四）處置項目</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>① 處置項目區分基本呼吸處置、呼吸處置、外傷處置、搬運、特定後送姿勢、心肺復甦術、藥物處置及其他處置。依據單項技術確實有實施於病人者填寫勾選；未操作完成則勾也可以文字填寫，並注意各項處置之合理性。</li>
+                        <li>② 藥物處置注意使用時機及禁忌症，例如協助使用 NTG 含片項，須留意病人之血壓等事項。</li>
+                        <li>③ 全身傷勢記錄：於人形圖上標記受傷位置（左右方向須注意）、傷口類別（撕裂傷 L/W；擦傷 A/W 等）、傷口尺寸（公分為單位，如 3x5），灼燙傷另填程度及面積（以 ％ 單位，如 2% 或 18%）。</li>
+                        <li>④ 補充欄位：重要事項或對病人有幫助之事項，若紀錄表未有可供勾選或填寫欄位，則於補充欄位填記。</li>
+                        <li>⑤ ALS 處置：EMT-P 執行時填寫，並依各消防機關所訂核簽時間及方式，交由醫療指導醫師核簽；若醫師親自至現場指導或執行，則於補述欄以文字說明。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- （五）簽名欄 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（五）簽名欄</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>① <strong>救護技術員簽名</strong>：為同車實際出勤人員。除了簽名外，需勾選病人到院前五級檢傷級數（若縣市未使用五級檢傷則免填）及急症或非急症的二級檢傷。</li>
+                        <li>② <strong>拒絕送醫簽名</strong>：病人拒絕送醫或拒絕接受救護處置時，應填寫拒絕處置之項目，要求病人簽名並填具聯絡電話。</li>
+                        <li>③ <strong>病人意識不清</strong>，家屬表示拒絕送醫或拒絕接受救護處置者，應填寫拒絕處置之項目，由家屬簽名並具明關係及聯絡電話。若病人或家屬拒絕簽名或不能簽名，則由關係人、鄰區員警、村里幹事等公務性第三人簽名，填具聯絡電話並記與病人關係。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- （六）生命徵象 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <button class="acc-btn w-full text-left px-5 py-3 flex items-center justify-between font-bold text-sm text-ems-navy" onclick="toggleAcc(this)">
+                    <span>（六）生命徵象記錄</span>
+                    <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="acc-content px-5 pb-4 text-sm text-slate-600">
+                    <ul class="mt-2 space-y-2">
+                        <li>• 生命徵象依到達現場、送醫途中及到院後等時間次序測量並填寫；若後送時間較長或病情進展快，送醫途中可多次監測，並於補述欄填寫註記。</li>
+                        <li>• 有接觸病人而未送醫時，第一欄位生命徵象應填寫；除病人不願意接受量血壓、摸脈搏可免除填具並記錄拒測，但<strong>意識狀態應以觀察所得登載</strong>。</li>
+                        <li>• 「八大生命徵象」係指意識、呼吸、脈搏、血壓及瞳孔、體溫、膚色、血氧等八項，是救護病人是否穩定的數值量化，也是車上監測病人的重要指標。</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div><!-- end space-y-2 -->
+    </div><!-- end border-l-4 -->
+</section>
+
+
+</main>
+
+<!-- ===== JS ===== -->
+<script src="./assets/js/chapter-nav.js"></script>
+<script>
+    function toggleAcc(btn) {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('open');
+        content.classList.toggle('open', !isOpen);
+        btn.classList.toggle('open', !isOpen);
+    }
+
+
+    function toggleXCard(el) {
+        el.classList.toggle('expanded');
+    }
+
+    window.onViewSwitch = function(viewId) {};
+</script>
+</body>
+</html>
