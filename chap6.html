@@ -957,7 +957,14 @@
 
     <!-- 二、救護紀錄表填寫原則 -->
     <div class="bg-white border-l-4 border-ems-navy rounded-xl p-5 mb-4">
-        <h3 class="text-lg font-bold text-ems-navy mb-3">二、救護紀錄表填寫原則</h3>
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-bold text-ems-navy">二、救護紀錄表填寫原則</h3>
+            <button onclick="document.getElementById('pdf-dialog').showModal()"
+                    class="flex items-center gap-2 bg-ems-blue text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-sky-700 transition shadow-sm">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                瀏覽紀錄表
+            </button>
+        </div>
         <p class="text-sm text-slate-600 mb-3">依緊急醫療救護法第 14 條規定，救護技術員執行救護時應填具救護紀錄表。填寫必須確實，且須經醫護人員簽章確認。急救勤務均為 24 小時制填寫，流水號格式為：<strong>YYYYMMDDHHMMSS＋勤務序號</strong>（例如 20190101235959001）。</p>
 
         <div class="space-y-2">
@@ -1020,7 +1027,7 @@
                     <ul class="mt-2 space-y-2">
                         <li>① 處置項目區分基本呼吸處置、呼吸處置、外傷處置、搬運、特定後送姿勢、心肺復甦術、藥物處置及其他處置。依據單項技術確實有實施於病人者填寫勾選；未操作完成則勾也可以文字填寫，並注意各項處置之合理性。</li>
                         <li>② 藥物處置注意使用時機及禁忌症，例如協助使用 NTG 含片項，須留意病人之血壓等事項。</li>
-                        <li>③ 全身傷勢記錄：於人形圖上標記受傷位置（左右方向須注意）、傷口類別（撕裂傷 L/W；擦傷 A/W 等）、傷口尺寸（公分為單位，如 3x5），灼燙傷另填程度及面積（以 ％ 單位，如 2% 或 18%）。</li>
+                        <li>③ 全身傷勢記錄：於人形圖上標記受傷位置（左右方向須注意）、傷口類別（撕裂傷 L/W；擦傷 A/W 等）、傷口尺寸（公分為單位，如 3x5），灼燙傷另填程度及面積（以 ％ 單位，如 2度 18%）。</li>
                         <li>④ 補充欄位：重要事項或對病人有幫助之事項，若紀錄表未有可供勾選或填寫欄位，則於補充欄位填記。</li>
                         <li>⑤ ALS 處置：EMT-P 執行時填寫，並依各消防機關所訂核簽時間及方式，交由醫療指導醫師核簽；若醫師親自至現場指導或執行，則於補述欄以文字說明。</li>
                     </ul>
@@ -1062,6 +1069,29 @@
 </section>
 
 
+<!-- ===== PDF DIALOG ===== -->
+<dialog id="pdf-dialog" style="padding:0;border:none;border-radius:1rem;box-shadow:0 25px 60px rgba(0,0,0,.4);width:90vw;max-width:90vw;background:#1e293b;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:#1e293b;border-radius:1rem 1rem 0 0;gap:.5rem;">
+        <span style="color:#f8fafc;font-weight:700;font-size:.9rem;">消防機關救護紀錄表</span>
+        <div style="display:flex;align-items:center;gap:.5rem;">
+            <button id="pdf-zoom-out" title="縮小"
+                style="background:#334155;color:#f8fafc;border:none;border-radius:.5rem;width:2rem;height:2rem;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
+            <span id="pdf-zoom-label" style="color:#94a3b8;font-size:.8rem;min-width:3rem;text-align:center;">100%</span>
+            <button id="pdf-zoom-in" title="放大"
+                style="background:#334155;color:#f8fafc;border:none;border-radius:.5rem;width:2rem;height:2rem;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">＋</button>
+            <button onclick="document.getElementById('pdf-dialog').close()" title="關閉"
+                style="background:#ef4444;color:#fff;border:none;border-radius:.5rem;padding:.25rem .75rem;font-weight:700;font-size:.85rem;cursor:pointer;margin-left:.25rem;">✕ 關閉</button>
+        </div>
+    </div>
+    <div style="overflow:auto;height:85vh;background:#374151;">
+        <div id="pdf-scale-wrap" style="transform-origin:top left;transition:transform .2s;">
+            <iframe id="pdf-frame" src="./消防機關救護紀錄表.pdf"
+                style="width:89vw;height:85vh;border:none;display:block;">
+            </iframe>
+        </div>
+    </div>
+</dialog>
+
 </main>
 
 <!-- ===== JS ===== -->
@@ -1078,6 +1108,28 @@
     function toggleXCard(el) {
         el.classList.toggle('expanded');
     }
+
+    // PDF dialog zoom
+    (function() {
+        var scale = 1;
+        var step  = 0.2;
+        var min   = 0.4;
+        var max   = 3;
+        function applyScale() {
+            var wrap = document.getElementById('pdf-scale-wrap');
+            if (wrap) wrap.style.transform = 'scale(' + scale + ')';
+            var lbl = document.getElementById('pdf-zoom-label');
+            if (lbl) lbl.textContent = Math.round(scale * 100) + '%';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var btnIn  = document.getElementById('pdf-zoom-in');
+            var btnOut = document.getElementById('pdf-zoom-out');
+            if (btnIn)  btnIn.addEventListener('click',  function() { scale = Math.min(max, +(scale + step).toFixed(1)); applyScale(); });
+            if (btnOut) btnOut.addEventListener('click', function() { scale = Math.max(min, +(scale - step).toFixed(1)); applyScale(); });
+            var dlg = document.getElementById('pdf-dialog');
+            if (dlg) dlg.addEventListener('close', function() { scale = 1; applyScale(); });
+        });
+    })();
 
     window.onViewSwitch = function(viewId) {};
 </script>
