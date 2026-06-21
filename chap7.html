@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第七章 常見非外傷的評估、處置與情境操作</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <style>
+        /* ── 手風琴 ── */
+        .acc-content { display: none; }
+        .acc-content.open { display: block; }
+        .acc-btn .acc-icon { transition: transform 0.25s; }
+        .acc-btn.open .acc-icon { transform: rotate(45deg); }
+
+        /* ── 互動網格詳細區 ── */
+        .grid-btn { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s; }
+        .grid-btn:hover { transform: translateY(-2px); }
+        .grid-btn.active { background-color: #0284c7; color: #fff; border-color: #0284c7; box-shadow: 0 8px 20px -6px rgba(2,132,199,0.45); }
+        .grid-btn.active .grid-btn-num { color: #fff; }
+
+        /* ── 流程圖節點 ── */
+        .flow-node { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; padding:.85rem 1rem; text-align:center; font-weight:700; color:#1e293b; }
+        .flow-node.head { background:#1e293b; color:#fff; border-color:#1e293b; }
+        .flow-node.act  { background:#e0f2fe; border-color:#0284c7; color:#075985; }
+        .flow-node.warn { background:#fef2f2; border-color:#dc2626; color:#991b1b; }
+        .flow-node.dark { background:#334155; border-color:#475569; color:#e2e8f0; }
+        .flow-arrow::after { content:'▼'; display:block; text-align:center; color:#0284c7; font-size:1rem; margin:.2rem 0; }
+
+        /* ── 體溫帶 ── */
+        .chart-container { position: relative; width: 100%; height: 300px; }
+    </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+    <!-- ===================== 側邊欄 ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第七章 常見非外傷的評估、處置與情境操作</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">Finn &amp; 51先 &amp; 米歇 &amp; 倚安 · 週二 21:00–22:00</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+            <button onclick="switchView('view-intro', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">本章總覽</span>
+                <span class="text-[11px] text-slate-400">P.216 - P.217 | 學習目標 · 十大主題</span>
+            </button>
+
+            <div class="px-6 py-1 mt-2 text-xs font-bold tracking-wider text-slate-500 uppercase">十大急症</div>
+            <button onclick="switchView('view-ohca', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01 到院前心跳停止</span>
+                <span class="text-[11px] text-slate-400">P.218 - P.222 | 生命之鏈 · OHCA</span>
+            </button>
+            <button onclick="switchView('view-consc', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02 意識不清</span>
+                <span class="text-[11px] text-slate-400">P.222 - P.224 | AEIOUTIPS · 腦中風</span>
+            </button>
+            <button onclick="switchView('view-breath', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03 呼吸困難</span>
+                <span class="text-[11px] text-slate-400">P.224 - P.226 | 喘鳴 · 哮鳴 · 過度換氣</span>
+            </button>
+            <button onclick="switchView('view-shock', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04 低血壓、休克</span>
+                <span class="text-[11px] text-slate-400">P.226 - P.230 | 四型休克 · EpiPen</span>
+            </button>
+            <button onclick="switchView('view-chest', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">05 胸痛、心悸</span>
+                <span class="text-[11px] text-slate-400">P.230 - P.234 | ACS · 12導程 · NTG</span>
+            </button>
+            <button onclick="switchView('view-temp', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">06 發燒、低體溫</span>
+                <span class="text-[11px] text-slate-400">P.234 - P.236 | 體溫帶 · 分級</span>
+            </button>
+            <button onclick="switchView('view-abdomen', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">07 非外傷腹部急症</span>
+                <span class="text-[11px] text-slate-400">P.236 - P.238 | 四象限互動</span>
+            </button>
+            <button onclick="switchView('view-diabetes', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">08 糖尿病相關急症</span>
+                <span class="text-[11px] text-slate-400">P.238 - P.240 | 低血糖 · DKA · HHS</span>
+            </button>
+            <button onclick="switchView('view-poison', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">09 藥物過量與中毒</span>
+                <span class="text-[11px] text-slate-400">P.240 - P.242 | 三大途徑 · 諮詢專線</span>
+            </button>
+            <button onclick="switchView('view-infect', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">10 傳染病的預防與控制</span>
+                <span class="text-[11px] text-slate-400">P.242 - P.251 | 五類 · 防護 · 扎傷</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== 主內容區 ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ========== View: 本章總覽 ========== -->
+        <section id="view-intro" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.216 - P.217</div>
+                <h2 class="text-3xl font-bold text-ems-navy">常見非外傷的評估、處置與情境操作</h2>
+                <p class="text-ems-gray mt-2 text-lg">救護技術員在急救現場快速評估、判斷緊急程度、執行標準流程。本章把十大常見急症拆成「初判 → 重點檢查 → 必要處置」三步節奏，輔以流程圖學習。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🎯</span> 學習目標</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>熟悉<strong>到院前心肺功能停止</strong>急救流程。</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解常見的<strong>基礎急症處置</strong>。</span></li>
+                        <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>熟悉<strong>傳染病預防與控制</strong>的處置流程。</span></li>
+                    </ul>
+                    <div class="mt-6 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                        <p class="text-sm text-slate-600 leading-relaxed">本章依民國 113 年 5 月 15 日新修訂《救護技術員管理辦法》初級模組六「常見急症的處置」與中級模組四「常見急症的評估、處置與情境操作」編撰，全章以流程圖輔助學習。</p>
+                    </div>
+                </div>
+                <div class="bg-ems-navy text-white p-6 rounded-xl shadow-md border-t-4 border-ems-orange flex flex-col justify-center">
+                    <div class="text-5xl mb-3">🚑</div>
+                    <h3 class="text-lg font-bold text-white mb-2">共通三步節奏</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">每一種急症都先進入「非外傷現場救護流程」判定主訴，再依本章對應流程：<strong class="text-ems-blue">重點式身體檢查 → 輔助檢查（血壓/血氧/血糖）→ 必要處置 → 上擔架床 → 救護車內救護流程</strong>。</p>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-ems-navy mb-4">十大主題快速進入</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <button onclick="switchView('view-ohca', document.querySelectorAll('.nav-item')[1])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">❤️</div>01 心跳停止</button>
+                <button onclick="switchView('view-consc', document.querySelectorAll('.nav-item')[2])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🧠</div>02 意識不清</button>
+                <button onclick="switchView('view-breath', document.querySelectorAll('.nav-item')[3])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🫁</div>03 呼吸困難</button>
+                <button onclick="switchView('view-shock', document.querySelectorAll('.nav-item')[4])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">💧</div>04 低血壓休克</button>
+                <button onclick="switchView('view-chest', document.querySelectorAll('.nav-item')[5])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">💓</div>05 胸痛心悸</button>
+                <button onclick="switchView('view-temp', document.querySelectorAll('.nav-item')[6])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🌡️</div>06 發燒低體溫</button>
+                <button onclick="switchView('view-abdomen', document.querySelectorAll('.nav-item')[7])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🩹</div>07 腹部急症</button>
+                <button onclick="switchView('view-diabetes', document.querySelectorAll('.nav-item')[8])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🩸</div>08 糖尿病急症</button>
+                <button onclick="switchView('view-poison', document.querySelectorAll('.nav-item')[9])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">⚗️</div>09 中毒</button>
+                <button onclick="switchView('view-infect', document.querySelectorAll('.nav-item')[10])" class="grid-btn bg-white border border-slate-300 rounded-xl p-4 text-center font-bold text-slate-700"><div class="text-3xl mb-1">🦠</div>10 傳染病</button>
+            </div>
+        </section>
+
+        <!-- ========== View 01: 到院前心跳停止 ========== -->
+        <section id="view-ohca" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.218 - P.222</div>
+                <h2 class="text-3xl font-bold text-ems-navy">01 到院前心跳停止病人（OHCA）</h2>
+                <p class="text-ems-gray mt-2 text-lg">美國與加拿大每年每 10 萬人約 50–55 例 OHCA。能否復甦取決於「生命之鏈」六個環節是否環環相扣，其中前四環與 EMS 直接相關。</p>
+            </header>
+
+            <!-- 生命之鏈 圖 7-1（課本擷取圖） -->
+            <figure class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 border-b pb-2 flex items-center gap-2"><span class="text-ems-orange">🔗</span> 圖 7-1 生命之鏈（六環）</h3>
+                <img src="./assets/img/chap7-fig7-1.png" alt="圖 7-1 生命之鏈：緊急應變系統啟動 → 高品質CPR → 去顫 → 高級心肺復甦 → 心臟停止後照顧 → 復原"
+                     class="w-full max-w-3xl mx-auto block rounded-lg"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                <div style="display:none" class="text-center text-sm text-slate-500 bg-slate-50 border border-dashed border-slate-300 rounded-lg py-10 px-4">
+                    圖片尚未放入。請將生命之鏈圖存成 <code class="text-ems-blue font-bold">assets/img/chap7-fig7-1.png</code> 即可自動顯示。
+                </div>
+                <figcaption class="text-xs text-slate-500 mt-4 text-center">前四環（啟動 → CPR → 去顫 → 高級心肺復甦）與 EMS 直接相關，是 OHCA 病人能否存活的關鍵。</figcaption>
+            </figure>
+
+            <!-- 生命之鏈 時間軸（六環詳解） -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 border-b pb-2 flex items-center gap-2"><span class="text-ems-orange">🔗</span> 六環詳解</h3>
+                <div class="ml-2">
+                    <div class="timeline-item"><span class="text-sm font-bold text-ems-orange">第一環（EMS）</span><h4 class="font-bold text-lg text-slate-800">📞 儘早辨識心跳停止及啟動緊急醫療系統</h4><p class="text-slate-600 text-sm mt-1">辨識倒地、撥打 119、啟動 EMS。</p></div>
+                    <div class="timeline-item"><span class="text-sm font-bold text-ems-orange">第二環（EMS）</span><h4 class="font-bold text-lg text-slate-800">🤲 儘早給予高品質 CPR</h4><p class="text-slate-600 text-sm mt-1">減少按壓中斷、足夠深度與速度。</p></div>
+                    <div class="timeline-item"><span class="text-sm font-bold text-ems-orange">第三環（EMS）</span><h4 class="font-bold text-lg text-slate-800">⚡ 儘快去顫（AED）</h4><p class="text-slate-600 text-sm mt-1">越早電擊可電擊心律，存活率越高。</p></div>
+                    <div class="timeline-item"><span class="text-sm font-bold text-ems-orange">第四環（EMS）</span><h4 class="font-bold text-lg text-slate-800">🚑 有效的高級心肺復甦</h4><p class="text-slate-600 text-sm mt-1">進階呼吸道、給藥與整合處置。</p></div>
+                    <div class="timeline-item"><span class="text-sm font-bold text-ems-blue">第五環（醫院）</span><h4 class="font-bold text-lg text-slate-800">🏥 整合心跳停止後的照護</h4><p class="text-slate-600 text-sm mt-1">ROSC 後低溫治療、循環支持等。</p></div>
+                    <div class="timeline-item border-l-transparent"><span class="text-sm font-bold text-ems-blue">第六環（長期）</span><h4 class="font-bold text-lg text-slate-800">💪 病人及其照護者的復原</h4><p class="text-slate-600 text-sm mt-1">生理、心理與社會功能的康復。</p></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 到院前心跳停止流程 圖7-2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">🩺 到院前心跳停止流程（圖 7-2）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為到院前心臟停止</div>
+                        <div class="flow-node act flow-arrow">胸部按壓中斷最少之 CPR · 使用 AED</div>
+                        <div class="flow-node flow-arrow">AED 分析：是否建議去顫？</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flow-node warn">建議 → 去顫後<br>立即胸部按壓</div>
+                            <div class="flow-node act">不建議 →<br>立即胸部按壓</div>
+                        </div>
+                        <div class="flow-arrow"></div>
+                        <div class="flow-node act flow-arrow">給氧、輔助呼吸道、考慮監測 EtCO₂</div>
+                        <div class="flow-node flow-arrow">持續一人 CPR、收拾器材上擔架床</div>
+                        <div class="flow-node">上救護車（或開車前）再操作 AED 一次</div>
+                    </div>
+                </div>
+
+                <!-- 關鍵觀念手風琴 -->
+                <div class="space-y-4">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden border-l-4 border-l-ems-danger">
+                        <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)">
+                            <span class="font-bold text-lg text-ems-navy">⚠️ 現場死亡的定義與判定</span>
+                            <span class="acc-icon text-ems-blue font-bold text-xl">+</span>
+                        </button>
+                        <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">
+                            台灣只有醫師與法院可判定死亡，消防／救護技術員無判定權。但依緊救委員會第 7 次會議：<strong>屍腐、屍僵、焦黑、無首、內臟外溢、軀幹斷體</strong>且無意識、無呼吸及無脈搏，可視為現場死亡。遇此情形應與家屬溝通、通知警方，<strong class="text-ems-danger">不可隨意移動現場病人</strong>。家屬未表達意願時皆須積極急救，不為確認有無 DNR 而延遲。
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)">
+                            <span class="font-bold text-lg text-ems-navy">📈 EtCO₂（Capnography）監測重點</span>
+                            <span class="acc-icon text-ems-blue font-bold text-xl">+</span>
+                        </button>
+                        <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">
+                            裝設於人工鼻與延伸管之間，確認聲門上呼吸道位置與 CPR 品質。<strong>EtCO₂ &lt; 10 mmHg 應改善 CPR 品質</strong>；數值急遽提升（如 10–20 → 40 mmHg 並維持 &gt;40）合併結構性心律，可提早暫停按壓檢查脈搏（ROSC 徵兆）。波形或數值消失時立即評估氣道是否脫落或移位。
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)">
+                            <span class="font-bold text-lg text-ems-navy">🤖 機械胸部按壓裝置（LUCAS）</span>
+                            <span class="acc-icon text-ems-blue font-bold text-xl">+</span>
+                        </button>
+                        <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">
+                            相對於徒手按壓<strong>無證據顯示更有效</strong>，徒手仍為準則。但在難以維持高品質徒手按壓或特殊情境（施救人數有限、長時間 CPR、行駛中救護車內 CPR）可使用。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ECPR 強調卡 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
+                <h3 class="text-2xl font-bold text-ems-blue mb-2">🫀 院前啟動體外心肺復甦術（ECPR / ECMO）</h3>
+                <p class="text-slate-300 mb-5 leading-relaxed">篩選適合的 OHCA 患者於到院後儘速放置葉克膜，對存活率與神經學預後有幫助。以新北市、臺北市為例，符合下列<strong class="text-white">全部六項要件</strong>可預先通報醫院準備：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div><div class="text-sm font-bold">年齡 &lt; 70 歲</div></div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div><div class="text-sm font-bold">目擊倒地</div></div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div><div class="text-sm font-bold">有旁觀者立即進行 CPR</div></div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div><div class="text-sm font-bold">初始心律為可電擊心律</div></div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</div><div class="text-sm font-bold">無明顯外傷、臥床、癌末等不可逆末期疾病</div></div>
+                    <div class="bg-slate-800 p-3 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</div><div class="text-sm font-bold">預估現場至醫院 &lt; 8 分鐘路程</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 02: 意識不清 ========== -->
+        <section id="view-consc" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.222 - P.224</div>
+                <h2 class="text-3xl font-bold text-ems-navy">02 意識不清</h2>
+                <p class="text-ems-gray mt-2 text-lg">急性意識改變（GCS&lt;14）原因眾多。用 <strong>A-E-I-O-U-T-I-P-S</strong> 系統性思考成因，並以瞳孔、神經學檢查找出最可能原因。長期臥床者意識與平常相同則不算急性改變。</p>
+            </header>
+
+            <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange">🔠</span> AEIOUTIPS — 意識不清成因（點擊展開）</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">A</span>酒精 / 酸中毒</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Alcohol / Acidosis。酒精中毒、代謝性酸中毒（如 DKA）。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">E</span>腦病變 / 電解質 / 內分泌</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Encephalopathy / Electrolytes / Endocrinopathy。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">I</span>血糖相關</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Insulin / Hypoglycemia / DKA / HHNK。低血糖與高血糖都會意識不清。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">O</span>缺氧 / 藥物過量</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Oxygen（缺氧）/ Overdose / Opiates（鴉片類）。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">U</span>尿毒症</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Uremia。腎衰竭代謝廢物累積。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">T</span>外傷</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Trauma。頭部外傷等。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">I</span>感染 / 顱內出血 / 梗塞型中風</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Infection / Intracranial Hemorrhage / Ischemic stroke。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">P</span>精神疾病</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Psychogenic causes。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden md:col-span-2">
+                    <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy"><span class="text-ems-blue font-black mr-2">S</span>抽搐 / 昏厥 / 顱內佔位病變</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-4 text-slate-700 text-sm">Seizure / Syncope / Space occupied lesion。</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 瞳孔 + 神經學 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">👁️ 重點檢查：瞳孔與神經學</h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-slate-300 pl-4"><h4 class="font-bold text-ems-navy">正常瞳孔</h4><p class="text-sm text-slate-600">兩側等大、約 2–4 mm，對光有反應。</p></div>
+                        <div class="border-l-4 border-ems-orange pl-4"><h4 class="font-bold text-ems-navy">針狀瞳孔（Pinpoint）</h4><p class="text-sm text-slate-600">疑鴉片類（海洛因/嗎啡）過量、有機磷中毒、腦幹中風。</p></div>
+                        <div class="border-l-4 border-ems-danger pl-4"><h4 class="font-bold text-ems-navy">兩側不等大</h4><p class="text-sm text-slate-600">單側放大且對光無收縮 → 第三對腦神經受壓，常為該側<strong class="text-ems-danger">腦疝脫、腦出血或腫瘤</strong>。</p></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">疑似中風者後送姿勢建議頭部抬高 30 度半坐臥；可用疼痛刺激測試神經反應。</p>
+                </div>
+
+                <!-- 腦中風 8Ds -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">🧠 缺血性腦中風的生命之鏈 8Ds（表 7-1）</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="py-1.5 font-bold text-ems-blue w-28">Detection 辨識</td><td class="py-1.5 text-slate-600">辨識徵兆與症狀（FAST）</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Dispatch 派遣</td><td class="py-1.5 text-slate-600">撥 119、啟動 EMS、優先派遣</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Delivery 運送</td><td class="py-1.5 text-slate-600">快速送醫並院前通報</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Door 抵達急診</td><td class="py-1.5 text-slate-600">檢傷分類與初步處置</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Data 資料收集</td><td class="py-1.5 text-slate-600">急診評估、檢驗、影像</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Decision 決策</td><td class="py-1.5 text-slate-600">醫師診斷與治療策略</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Drug 給藥</td><td class="py-1.5 text-slate-600">儘快給藥或介入治療</td></tr>
+                                <tr><td class="py-1.5 font-bold text-ems-blue">Disposition 後續</td><td class="py-1.5 text-slate-600">收治中風單位或專責病房</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中風指標 + 流程 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                    <h3 class="text-lg font-bold text-ems-navy mb-3">⏱️ 中風時間窗與後送決策</h3>
+                    <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2">
+                        <li>院前中風指標（辛辛那提）：<strong>嘴角歪斜、口齒不清/失語、單側肢體無力或麻木</strong>三項。</li>
+                        <li>症狀發生 <strong>4.5 小時內</strong> → 轉送有能力施行<strong>靜脈血栓溶解</strong>之急救責任醫院。</li>
+                        <li>症狀 24 小時內且疑似<strong>大血管阻塞中風</strong> → 轉送有能力施行<strong>動脈內取栓術</strong>醫院。</li>
+                        <li><strong>G-FAST</strong>：辛辛那提三項 + 眼球運動受限/偏向，4 項中 ≥3 項異常 → 疑大血管阻塞。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 非外傷意識不清救護流程（圖 7-3）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">突發或原因不明之意識不清</div>
+                        <div class="flow-node flow-arrow">量測血糖：&lt; 60 mg/dL 或顯示 "Low"？</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flow-node act">是 → 口服葡萄糖<br>或葡萄糖水靜注</div>
+                            <div class="flow-node">否 → 考慮其他<br>意識改變原因</div>
+                        </div>
+                        <div class="flow-arrow"></div>
+                        <div class="flow-node flow-arrow">檢查瞳孔等重點式身體檢查</div>
+                        <div class="flow-node flow-arrow">量測血壓及血氧等輔助檢查</div>
+                        <div class="flow-node act">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 03: 呼吸困難 ========== -->
+        <section id="view-breath" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.224 - P.226</div>
+                <h2 class="text-3xl font-bold text-ems-navy">03 呼吸困難</h2>
+                <p class="text-ems-gray mt-2 text-lg">主訴喘、呼吸不順或困難，評估呼吸異常（深淺快慢）、呼吸作功增加（張口呼吸、使用輔助呼吸肌、肋間/鎖骨上內縮）或異常呼吸音，即進入本流程。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 異常呼吸音對照 -->
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-ems-blue text-white px-2 py-1 rounded-bl-lg text-xs font-bold">上呼吸道</div>
+                        <h4 class="font-bold text-ems-navy text-lg">🔊 喘鳴音 Stridor</h4>
+                        <p class="text-sm text-slate-700 mt-2">空氣通過阻塞狹窄的<strong>上呼吸道</strong>所形成，如張口用力吸氣發出「ㄏㄜ」聲，多於<strong>吸氣期</strong>聽到，有時不需聽診器可直接聽到。</p>
+                    </div>
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                        <h4 class="font-bold text-ems-navy text-lg">🌬️ 哮鳴音 Wheezing</h4>
+                        <p class="text-sm text-slate-700 mt-2">空氣通過收縮狹窄的<strong>小支氣管</strong>形成，如多人吹口哨聲，原則上出現在<strong>吐氣期</strong>；嚴重氣喘可同時出現在吸氣與吐氣期。</p>
+                    </div>
+                    <div class="border border-ems-blue rounded-lg p-4 bg-blue-50 relative">
+                        <div class="font-bold text-ems-navy flex justify-between items-center mb-2"><span>💨 支氣管擴張劑協助</span><span class="text-xs bg-blue-200 px-2 py-1 rounded text-blue-800">EMT-2</span></div>
+                        <p class="text-sm text-slate-700">疑氣喘或慢性阻塞性肺病突發、病人自備短效型吸入性支氣管擴張劑且意識清醒時，可協助病人或家屬給予。</p>
+                    </div>
+                </div>
+
+                <!-- 呼吸困難流程 圖7-6 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 呼吸困難救護流程（圖 7-6）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為喘或呼吸困難</div>
+                        <div class="flow-node flow-arrow">聽診兩側肺音等重點式身體檢查</div>
+                        <div class="flow-node flow-arrow">量測血氧濃度等輔助檢查</div>
+                        <div class="flow-node flow-arrow">血氧濃度是否 &lt; 94%？</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flow-node act">是 → 給予氧氣</div>
+                            <div class="flow-node">否 → 續評估</div>
+                        </div>
+                        <div class="flow-arrow"></div>
+                        <div class="flow-node act">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">慢性阻塞性肺病病人 SpO₂ 應 &lt;90%、或老年人 SpO₂ &lt;92% 才給氧。意識清醒可採半坐臥或病人覺舒適姿勢。</p>
+                </div>
+            </div>
+
+            <!-- 過度換氣 強調卡 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-ems-orange border-y border-r border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange">⚠️</span> 過度換氣症候群</h3>
+                <p class="text-sm text-slate-700 leading-relaxed mb-3">快速呼吸伴隨恐慌、胸痛、心悸、肢體麻木、甚至窒息感時須懷疑。處置上安慰病人、減輕壓力、請其深呼吸放慢速率。腦病變、肺栓塞、心肌梗塞、酸血症或氣胸也可能以過度換氣表現。</p>
+                <div class="bg-red-50 border border-red-100 rounded p-3 text-sm text-red-800"><strong>❌ 目前不建議</strong>給紙袋或塑膠袋罩口鼻（可能導致低血氧而惡化病情），也無實證支持以氧氣面罩降低氧流量（1L/min）的做法。</div>
+            </div>
+        </section>
+
+        <!-- ========== View 04: 低血壓、休克 ========== -->
+        <section id="view-shock" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.226 - P.230</div>
+                <h2 class="text-3xl font-bold text-ems-navy">04 低血壓、休克</h2>
+                <p class="text-ems-gray mt-2 text-lg">低血壓：成人收縮壓 &lt; 90 mmHg 或 MAP &lt; 65 mmHg。休克是全身性循環衰竭、組織灌流不足，與心臟、血管與血量有關，可分四大類。</p>
+            </header>
+
+            <!-- 四型休克 互動網格 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4">🔄 四型休克（點選查看）</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+                <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+                    <button data-grid="shock" class="grid-btn active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center font-bold text-slate-700" onclick="showInfo('shock','cardio',this)"><span class="grid-btn-num text-2xl mb-1">💔</span>心因性</button>
+                    <button data-grid="shock" class="grid-btn bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center font-bold text-slate-700" onclick="showInfo('shock','obstruct',this)"><span class="grid-btn-num text-2xl mb-1">🚧</span>阻塞性</button>
+                    <button data-grid="shock" class="grid-btn bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center font-bold text-slate-700" onclick="showInfo('shock','hypo',this)"><span class="grid-btn-num text-2xl mb-1">💧</span>低血容性</button>
+                    <button data-grid="shock" class="grid-btn bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center font-bold text-slate-700" onclick="showInfo('shock','distrib',this)"><span class="grid-btn-num text-2xl mb-1">🩻</span>分佈性</button>
+                </div>
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[300px]">
+                    <h3 id="shock-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">💔 心因性休克 (Cardiogenic)</h3>
+                    <div id="shock-body" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 低血容休克分級 Chart.js -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-2">📊 低血容性休克臨床分級（表 7-2）</h3>
+                    <p class="text-sm text-slate-500 mb-4">各級約略失血量（%），Class III 起需要輸血、Class IV 為大量輸血流程。</p>
+                    <div class="chart-container flex-1"><canvas id="shockChart"></canvas></div>
+                </div>
+                <!-- 低血容休克流程 圖7-7 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">🩺 非外傷低血壓、休克救護流程（圖 7-7）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為低血壓、休克</div>
+                        <div class="flow-node flow-arrow">呼吸及脈搏速率等重點式身體檢查</div>
+                        <div class="flow-node flow-arrow">量測血壓及血氧濃度等輔助檢查</div>
+                        <div class="flow-node act flow-arrow">給予氧氣及抬高下肢等必要處置</div>
+                        <div class="flow-node">上救護車 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">徵候：低血壓、冒冷汗、膚色蒼白、手腳濕冷或微血管充填 &gt; 2 秒。孕婦疑休克可子宮左推或左側躺（圖 7-8）。</p>
+                </div>
+            </div>
+
+            <!-- EpiPen 強調 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+                <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                    <h3 class="text-2xl font-bold text-ems-orange">💉 協助使用腎上腺素注射筆（EpiPen）</h3>
+                    <span class="text-xs bg-blue-200 px-3 py-1 rounded text-blue-900 font-bold">EMT-2</span>
+                </div>
+                <p class="text-slate-300 mb-5 leading-relaxed">初級評估與病史詢問後，判斷為嚴重過敏反應引起之<strong class="text-white">過敏性休克</strong>，且救護車配置注射筆時，可於現場協助施打，到院後與醫護交接。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700"><div class="text-ems-blue font-bold mb-1">1. 施打部位</div><p class="text-sm text-slate-300">以肌肉注射打入<strong>大腿前外側</strong>，必要時可隔著衣物施打。</p></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700"><div class="text-ems-blue font-bold mb-1">2. 可再追加</div><p class="text-sm text-slate-300">不穩定過敏反應持續存在，必要時每 <strong>10 分鐘</strong>再追加一次。</p></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700"><div class="text-ems-blue font-bold mb-1">3. 單次使用</div><p class="text-sm text-slate-300">每支注射筆為<strong>單次使用</strong>。</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 05: 胸痛、心悸 ========== -->
+        <section id="view-chest" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.230 - P.234</div>
+                <h2 class="text-3xl font-bold text-ems-navy">05 胸痛、心悸</h2>
+                <p class="text-ems-gray mt-2 text-lg">胸痛最需排除的是急性冠心症（ACS），因死亡率高、可能演變成 VT/VF/AV block 甚至 PEA/asystole。越早溶解血栓、恢復冠狀動脈血流，預後越好。</p>
+            </header>
+
+            <!-- ACS 四階段 手風琴 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange">❤️</span> 急性冠心症（ACS）光譜（點擊展開）</h3>
+            <div class="space-y-3 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">穩定型狹心症 Stable Angina</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">冠狀動脈在活動、情緒或壓力下短暫阻塞或痙攣，休息片刻或使用 NTG 舌下含片後改善，<strong>沒有心肌永久性傷害</strong>。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden border-l-4 border-l-ems-orange">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">不穩定型狹心症 UA / NSTEMI</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">血栓造成冠狀動脈部分或間歇性阻塞，遠側心肌缺血壞死。胸痛常持續超過 20 分鐘、伴冒冷汗及噁心，休息或 NTG 也不改善。二者症狀與心電圖相似，唯一區別是 <strong>NSTEMI 會有上升的心臟生化標記</strong>。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden border-l-4 border-l-ems-danger">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">⚡ ST 節段上升心肌梗塞 STEMI</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">血栓<strong class="text-ems-danger">完全阻塞</strong>冠狀動脈，心肌急性壞死，十二導程呈現 ST 段上升。依 AHA 建議，STEMI 病人 <strong>FMC2B time（首次醫療接觸到氣球擴張）&lt; 90 分鐘</strong>預後最佳。確認疑似 STEMI 時，於到院前通報接收醫院、早啟動心導管室是黃金救援時刻。</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- OPQRST -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">🔍 胸痛評估 OPQRST</h3>
+                    <div class="space-y-2">
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">O</span><p class="text-sm text-slate-700"><strong>Onset</strong>：突然或慢慢發生？</p></div>
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">P</span><p class="text-sm text-slate-700"><strong>Provocation</strong>：如何緩解/加劇？</p></div>
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">Q</span><p class="text-sm text-slate-700"><strong>Quality</strong>：壓迫緊縮、悶痛、刺痛、撕裂感？</p></div>
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">R</span><p class="text-sm text-slate-700"><strong>Region/Radiation</strong>：位置？有無轉移（下巴/肩膀/上臂）？</p></div>
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">S</span><p class="text-sm text-slate-700"><strong>Severity</strong>：1–10 分幾分？頻率/程度增加？</p></div>
+                        <div class="flex gap-3 items-start"><span class="bg-ems-blue text-white w-7 h-7 rounded font-bold flex items-center justify-center shrink-0 text-sm">T</span><p class="text-sm text-slate-700"><strong>Time</strong>：痛多久？何時開始？</p></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-amber-50 border border-amber-100 p-3 rounded">⚠️ 撕裂痛由前胸轉移到背部 → 懷疑<strong>主動脈剝離</strong>，常伴高血壓或休克、肢體脈搏減弱。老年、糖尿病、婦女可能為非典型表現（呼吸困難、消化不良）。</p>
+                </div>
+
+                <!-- NTG 禁忌 強調 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-ems-danger border-y border-r border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-danger">💊</span> 硝化甘油（NTG）給藥要點 <span class="text-xs bg-blue-200 px-2 py-0.5 rounded text-blue-900">EMT-2</span></h3>
+                    <p class="text-sm text-slate-700 mb-3">血氧 &lt;90% 給氧。中級以上可協助病人服用 NTG 舌下含片，每 5 分鐘一次、最多 3 次（含病人已自行服用次數）。</p>
+                    <div class="bg-red-50 border border-red-100 rounded p-4">
+                        <p class="font-bold text-red-800 mb-2">🚫 下列禁忌症不可使用：</p>
+                        <ul class="list-disc pl-5 text-sm text-red-800 space-y-1">
+                            <li>收縮壓 &lt; 90 mmHg</li>
+                            <li>脈搏 &lt; 50 次/分 或 &gt; 100 次/分</li>
+                            <li>24 小時內服用威而鋼，或 48 小時內服用犀利士</li>
+                            <li>對硝化甘油過敏</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 胸痛流程 圖7-11 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 胸痛救護處置流程（圖 7-11）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為胸痛</div>
+                        <div class="flow-node flow-arrow">詢問病史、身體檢查、量血壓血氧、執行 12 導程心電圖</div>
+                        <div class="flow-node flow-arrow">是否為缺血性胸痛？</div>
+                        <div class="flow-node act flow-arrow">給予氧氣或 NTG 等必要處置</div>
+                        <div class="flow-node">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">12 導程：肢體導程（RA/RL/LA/LL）+ 六個胸前導程 V1–V6。判讀 STEMI 時於到院前通報並早啟動心導管室。</p>
+                </div>
+                <!-- 心悸流程 圖7-13 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">💓 心悸救護處置流程（圖 7-13）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為心悸</div>
+                        <div class="flow-node flow-arrow">詢問病史及身體檢查</div>
+                        <div class="flow-node flow-arrow">量測體溫、血壓及脈搏次數等輔助檢查</div>
+                        <div class="flow-node act flow-arrow">給予必要處置</div>
+                        <div class="flow-node">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">成因：甲狀腺亢進、發燒、貧血、低血容、焦慮、咖啡因/酒精、心律不整等。心跳 &gt;100 或 &lt;60 須考慮是否符合檢傷「一級」。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 06: 發燒、低體溫 ========== -->
+        <section id="view-temp" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.234 - P.236</div>
+                <h2 class="text-3xl font-bold text-ems-navy">06 發燒、低體溫</h2>
+                <p class="text-ems-gray mt-2 text-lg">正常中心體溫 36–37.8°C。判斷以<strong>核心體溫</strong>為依據（腦、心臟、腎等重要器官溫度）。發燒（Fever）是體溫調節中樞設定改變；體溫過高（Hyperthermia）是排熱不良。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- 體溫帶 Chart.js -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-2">🌡️ 體溫帶與臨床分級</h3>
+                    <p class="text-sm text-slate-500 mb-4">各區間代表溫度（°C）。藍＝低體溫、綠＝正常、橘＝發燒、紅＝體溫過高。</p>
+                    <div class="chart-container flex-1"><canvas id="tempChart"></canvas></div>
+                </div>
+
+                <!-- 低體溫分級 + 量測 -->
+                <div class="space-y-4">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-ems-navy mb-3">❄️ 低體溫分級（核心 &lt; 35°C）</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between items-center bg-blue-50 p-3 rounded border border-blue-100"><span class="font-bold text-ems-navy">輕度 32–35°C</span><span class="text-slate-600">身體發抖增加產熱</span></div>
+                            <div class="flex justify-between items-center bg-blue-100 p-3 rounded border border-blue-200"><span class="font-bold text-ems-navy">中度 28–32°C</span><span class="text-slate-600">意識改變、發抖減少</span></div>
+                            <div class="flex justify-between items-center bg-blue-200 p-3 rounded border border-blue-300"><span class="font-bold text-ems-navy">重度 &lt; 28°C</span><span class="text-slate-700">意識昏迷、不再發抖</span></div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-3">保暖：蓋毛毯、脫除浸濕衣物、換乾燥衣服。需詢問代謝疾病史（甲狀腺、腎上腺低下、低血糖）與用藥。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-lg font-bold text-ems-navy mb-3">📏 核心體溫量測</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                            <div class="border-l-4 border-slate-300 pl-3"><h4 class="font-bold text-ems-navy">肛溫</h4><p class="text-slate-600">正常約 36.5°C，量測 2–3 分鐘，較不適合救護勤務。</p></div>
+                            <div class="border-l-4 border-ems-blue pl-3"><h4 class="font-bold text-ems-navy">耳溫</h4><p class="text-slate-600">耳鼓膜溫度約 36.5°C，最方便；加耳套、拉直耳道避免錯誤。</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-orange-50 p-6 rounded-xl border border-orange-100">
+                    <h3 class="text-lg font-bold text-ems-navy mb-3">🔥 發燒重點</h3>
+                    <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2">
+                        <li>核心體溫 <strong>≥ 38°C</strong> 判定；占急診就診原因 6–15%。</li>
+                        <li>成因：發炎、感染、惡性腫瘤、藥物或麻醉、自體免疫或內分泌疾病。</li>
+                        <li>詢問 TOCC（旅遊/職業/接觸/群聚）找可能感染或新興傳染病。</li>
+                        <li>體溫 &gt; 41°C 多屬<strong>體溫過高</strong>而非發燒；發燒合併呼吸道症狀應戴外科口罩。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 發燒、低體溫救護處置流程（圖 7-14）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為發燒、低體溫</div>
+                        <div class="flow-node flow-arrow">詢問病史及身體檢查</div>
+                        <div class="flow-node flow-arrow">量測血壓及血氧濃度等輔助檢查</div>
+                        <div class="flow-node act flow-arrow">給予必要處置（保暖/降溫）</div>
+                        <div class="flow-node">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-red-50 border border-red-100 p-3 rounded text-red-800">⚠️ 中樞體溫 &gt; 41°C 或 &lt; 32°C，符合檢傷「一級」，儘速處置並送醫前通報。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 07: 非外傷腹部急症 ========== -->
+        <section id="view-abdomen" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.236 - P.238</div>
+                <h2 class="text-3xl font-bold text-ems-navy">07 非外傷腹部急症</h2>
+                <p class="text-ems-gray mt-2 text-lg">院前能做的處置有限，以維持生命徵象穩定為第一優先。最致命的是出血相關急症（主動脈瘤破裂、主動脈剝離、腹內腫瘤破裂、子宮外孕）。育齡女性急性腹痛須列入產科急症考量。</p>
+            </header>
+
+            <!-- 四象限 互動網格 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4">🩹 腹部四象限對照（點選象限 · 表 7-3）</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+                <div class="lg:col-span-5">
+                    <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                        <button data-grid="abd" class="grid-btn active bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','ru',this)">右上腹<br><span class="text-xs font-normal text-slate-500">RUQ</span></button>
+                        <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','lu',this)">左上腹<br><span class="text-xs font-normal text-slate-500">LUQ</span></button>
+                        <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','rl',this)">右下腹<br><span class="text-xs font-normal text-slate-500">RLQ</span></button>
+                        <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','ll',this)">左下腹<br><span class="text-xs font-normal text-slate-500">LLQ</span></button>
+                    </div>
+                    <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-3 font-bold text-slate-700 text-center w-full max-w-md mx-auto mt-3 block" onclick="showInfo('abd','full',this)">全腹（瀰漫性）</button>
+                </div>
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[300px]">
+                    <h3 id="abd-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">右上腹 (RUQ)</h3>
+                    <div id="abd-body" class="text-slate-300 leading-relaxed flex-1"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-3">🔍 評估重點</h3>
+                    <ul class="list-disc pl-5 text-sm text-slate-700 space-y-2">
+                        <li>病史可參 7.5 胸痛 OPQRST；詢問噁心、嘔吐、腹瀉或<strong>糞便顏色改變（黑便/血便）</strong>。</li>
+                        <li>腹部重點檢查讓病人<strong>平躺屈膝</strong>；視診是否腫脹、眼睛/膚色是否黃疸；觸診四象限是否壓痛。</li>
+                        <li>不典型心肌梗塞可表現上腹痛，高度懷疑時可做 12 導程心電圖。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 非外傷腹部急症救護處置流程（圖 7-16）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為腹部急症</div>
+                        <div class="flow-node flow-arrow">腹部重點式身體檢查</div>
+                        <div class="flow-node flow-arrow">量測體溫、血壓及血氧濃度等輔助檢查</div>
+                        <div class="flow-node act flow-arrow">給予必要處置</div>
+                        <div class="flow-node">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-amber-50 border border-amber-100 p-3 rounded">💡 主訴腹部裂性痛且兩側血壓差 ≥ 20 mmHg，懷疑<strong>主動脈剝離</strong>，應儘速送醫。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 08: 糖尿病相關急症 ========== -->
+        <section id="view-diabetes" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.238 - P.240</div>
+                <h2 class="text-3xl font-bold text-ems-navy">08 糖尿病相關急症</h2>
+                <p class="text-ems-gray mt-2 text-lg">糖尿病因胰島素缺乏或作用變差，伴吃多、喝多、尿多與體重減輕。任何行為改變、意識錯亂、神經異常或意識不清的糖尿病人都應懷疑低血糖，立即給葡萄糖以防永久腦損傷。</p>
+            </header>
+
+            <!-- 三大急性併發症 手風琴 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange">🩸</span> 三大急性併發症（點擊展開）</h3>
+            <div class="space-y-3 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden border-l-4 border-l-ems-danger">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">🔻 低血糖（最緊急）</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">血糖 &lt; 70 mg/dL 相關，常 &lt; 60 mg/dL 發生。症狀：顫抖、心悸、冒冷汗、飢餓感；嚴重影響中樞 → 頭痛、躁動、嗜睡、神經學症狀（類中風）、抽搐、昏迷。成因：胰島素過多、延遲/錯過進食、進食太少、劇烈運動。<strong class="text-ems-danger">立即給予葡萄糖以防永久性腦損傷或死亡。</strong></div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden border-l-4 border-l-ems-orange">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">🔺 糖尿病酮酸血症（DKA）</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">胰島素缺乏 → 葡萄糖無法進入細胞，改代謝脂肪產生酮酸 → 酸中毒。病人出現<strong>快而深的呼吸（Kussmaul）</strong>代償，呼氣可聞到<strong>水果發酵的丙酮味</strong>；高血糖利尿造成大量脫水、休克。意識不清時仍須考慮頭部外傷、中風或藥物中毒等其他原因。</div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <button class="acc-btn w-full p-5 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-lg text-ems-navy">🔺 高滲透壓高血糖狀態（HHS）</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                    <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">多見於第二型糖尿病老年人或未診斷者。血糖通常比 DKA 更高但<strong>較少酮體</strong>。形成需數日，早期症狀與水分流失有關：姿勢性低血壓、心悸、疲累、混亂甚至昏迷。治療為補充胰島素與充足水分、監控電解質，並治療誘發因素。</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 血糖閾值 Chart.js -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-2">📊 血糖處置決策閾值</h3>
+                    <p class="text-sm text-slate-500 mb-4">院前關鍵血糖切點（mg/dL）。&lt; 60 給葡萄糖；偏高合併脫水徵候考慮生理食鹽水靜注。</p>
+                    <div class="chart-container flex-1"><canvas id="glucoseChart"></canvas></div>
+                </div>
+                <!-- 糖尿病流程 圖7-17 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">🩺 糖尿病急症救護流程（圖 7-17）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">糖尿病史 + 意識不清或身體不適</div>
+                        <div class="flow-node flow-arrow">量測血糖值</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flow-node warn">&lt; 60 或 "Low" →<br>口服葡萄糖／<br>葡萄糖水靜注</div>
+                            <div class="flow-node act">"High" →<br>考慮生理食鹽水<br>靜脈注射</div>
+                        </div>
+                        <div class="flow-arrow"></div>
+                        <div class="flow-node flow-arrow">檢查瞳孔等重點式檢查、量血壓血氧</div>
+                        <div class="flow-node">上擔架床 → 救護車內救護流程</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 09: 藥物過量與中毒 ========== -->
+        <section id="view-poison" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.240 - P.242</div>
+                <h2 class="text-3xl font-bold text-ems-navy">09 藥物過量與中毒</h2>
+                <p class="text-ems-gray mt-2 text-lg">發現藥物過量或中毒即進入本流程。詢問服藥<strong>時間、種類、大約數量</strong>。疑氣體中毒（如一氧化碳）使用警示裝置（CO 探測器、五用氣體探測器）並確認現場安全；化學物質中毒須預防自己受污染。</p>
+            </header>
+
+            <!-- 三大途徑 互動網格 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4">⚗️ 三大中毒途徑與處置（點選）</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+                <div class="lg:col-span-5 grid grid-cols-1 gap-3">
+                    <button data-grid="pois" class="grid-btn active bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 font-bold text-slate-700 text-left" onclick="showInfo('pois','oral',this)"><span class="text-2xl">💊</span>口服中毒</button>
+                    <button data-grid="pois" class="grid-btn bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 font-bold text-slate-700 text-left" onclick="showInfo('pois','skin',this)"><span class="text-2xl">🧴</span>皮膚／眼睛暴露</button>
+                    <button data-grid="pois" class="grid-btn bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 font-bold text-slate-700 text-left" onclick="showInfo('pois','inhale',this)"><span class="text-2xl">💨</span>吸入中毒</button>
+                </div>
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[260px]">
+                    <h3 id="pois-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">💊 口服中毒</h3>
+                    <div id="pois-body" class="text-slate-300 leading-relaxed flex-1"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 流程 圖7-18 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 藥物過量與中毒救護流程（圖 7-18）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為藥物過量與中毒</div>
+                        <div class="flow-node warn flow-arrow">現場是否仍處於安全？必要時將病人移至安全處</div>
+                        <div class="flow-node act flow-arrow">依中毒途徑施行必要處置後上擔架床</div>
+                        <div class="flow-node">救護車內救護流程</div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">將毒物或瓶罐、藥袋（或拍照）帶至醫院。疑食入毒物且 1 小時內發生者，建議以側躺姿勢後送。</p>
+                </div>
+                <!-- 諮詢專線 強調 -->
+                <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-orange flex flex-col justify-center">
+                    <div class="text-4xl mb-2">☎️</div>
+                    <h3 class="text-xl font-bold text-ems-orange mb-2">臺北榮總毒藥物防治諮詢中心</h3>
+                    <p class="text-slate-300 text-sm mb-3">24 小時諮詢服務電話：</p>
+                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+                        <p class="text-2xl font-black text-white tracking-wide">02-2871-7121</p>
+                        <p class="text-lg font-bold text-slate-300 mt-1">02-2875-7525 #85500</p>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-3">疑一氧化碳中毒應給 <strong class="text-white">100% 氧氣治療</strong>；化學物質送醫途中打開救護車窗戶通風。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== View 10: 傳染病的預防與控制 ========== -->
+        <section id="view-infect" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.242 - P.251</div>
+                <h2 class="text-3xl font-bold text-ems-navy">10 傳染病的預防與控制</h2>
+                <p class="text-ems-gray mt-2 text-lg">傳染病三要素：<strong>病原體、傳染途徑、易感受宿主</strong>。控制方法：消滅病原體、切斷傳染途徑、降低宿主易感受性。最新分類依疾管署公告為主。</p>
+            </header>
+
+            <!-- 法定五類 互動網格 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4">🦠 法定傳染病五大類（點選 · 表 7-4）</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+                <div class="lg:col-span-5 grid grid-cols-1 gap-3">
+                    <button data-grid="inf" class="grid-btn active bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c1',this)"><span>第一類</span><span class="text-xs font-normal">24 小時內</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c2',this)"><span>第二類</span><span class="text-xs font-normal">24 小時內</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c3',this)"><span>第三類</span><span class="text-xs font-normal">一週內</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c4',this)"><span>第四類</span><span class="text-xs font-normal">依公告</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c5',this)"><span>第五類</span><span class="text-xs font-normal">24 小時內</span></button>
+                </div>
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[260px]">
+                    <h3 id="inf-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">第一類</h3>
+                    <div id="inf-body" class="text-slate-300 leading-relaxed flex-1"></div>
+                </div>
+            </div>
+
+            <!-- 傳播途徑防護 對照 -->
+            <h3 class="text-xl font-bold text-ems-navy mb-4">🛡️ 三大傳播途徑與防護（表 7-5）</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-blue text-white p-4 font-bold">接觸傳染</div>
+                    <div class="p-4 text-sm text-slate-700"><p class="font-bold text-ems-navy mb-1">PPE：手套、隔離衣</p><p class="text-slate-600">常見：膿瘡、諾羅病毒、輪狀病毒、疥瘡</p></div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-orange text-white p-4 font-bold">飛沫傳染</div>
+                    <div class="p-4 text-sm text-slate-700"><p class="font-bold text-ems-navy mb-1">PPE：外科口罩</p><p class="text-slate-600">常見：百日咳、流感、腮腺炎、德國麻疹、SARS</p></div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-danger text-white p-4 font-bold">空氣傳染</div>
+                    <div class="p-4 text-sm text-slate-700"><p class="font-bold text-ems-navy mb-1">PPE：N95／高效能口罩（須密合度檢查）</p><p class="text-slate-600">常見：肺結核、麻疹、水痘</p></div>
+                </div>
+            </div>
+
+            <!-- 標準防護 + 流程 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="space-y-3">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy">🧼 手部衛生五時機</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                        <div class="acc-content p-4 text-slate-700 text-sm">接觸病人前、無菌操作前、暴觸體液風險後、接觸病人後、接觸病人周遭環境後。WHO 建議乾洗手液優於肥皂（除非有明顯髒污或沾血液體液）。指甲長度 ≤ 0.5 cm、不戴人工指甲。</div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy">🥽 個人防護裝備 PPE</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                        <div class="acc-content p-4 text-slate-700 text-sm">手套：預期接觸血液/體液/黏膜/不完整皮膚時穿戴，脫除避免污染、不重複使用。隔離衣保護皮膚與衣服。口鼻眼防護：可能噴濺或飛沫時，用口罩、護目鏡、臉部防護具。N95 前須 Fit check。</div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <button class="acc-btn w-full p-4 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition" onclick="toggleAcc(this)"><span class="font-bold text-ems-navy">😷 COVID-19 載運要點（經驗傳承）</span><span class="acc-icon text-ems-blue font-bold text-xl">+</span></button>
+                        <div class="acc-content p-4 text-slate-700 text-sm">COVID-19 已於民國 113 年 5 月降為第四類。載運疑似病人：駕駛艙與醫療艙密封隔離、不用「再循環」模式、形成由前向後氣流；穿防水隔離衣、N95、護目/全面罩；病人戴口罩。脫除防護裝備後立即手部衛生。</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 傳染病病人的救護處置流程（圖 7-19）</h3>
+                    <div class="space-y-0">
+                        <div class="flow-node head flow-arrow">判定為傳染病病患</div>
+                        <div class="flow-node act flow-arrow">採取標準防護措施</div>
+                        <div class="flow-node flow-arrow">判定可能傳染途徑</div>
+                        <div class="grid grid-cols-3 gap-2 text-xs">
+                            <div class="flow-node">接觸<br>手套·隔離衣</div>
+                            <div class="flow-node">飛沫<br>外科口罩</div>
+                            <div class="flow-node">空氣<br>N95</div>
+                        </div>
+                        <div class="flow-arrow"></div>
+                        <div class="flow-node act flow-arrow">上擔架床</div>
+                        <div class="flow-node">救護車內救護流程</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 扎傷暴觸 強調流程 圖7-20 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-danger">
+                <h3 class="text-2xl font-bold text-ems-orange mb-4">🩹 扎傷及血液、體液暴觸後建議處理流程（圖 7-20）</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="font-bold text-ems-blue mb-2">① 尖銳物扎傷或割傷</div>
+                        <p class="text-sm text-slate-300">立即擠壓傷口、沖水清洗傷口 5 分鐘。</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="font-bold text-ems-blue mb-2">① 破損皮膚/黏膜接觸體液</div>
+                        <p class="text-sm text-slate-300">口鼻或皮膚以流動水、眼睛以 0.9% 生理食鹽水沖洗 5 分鐘。</p>
+                    </div>
+                </div>
+                <div class="space-y-0">
+                    <div class="flow-node dark flow-arrow">② 儘速至感染科門診追蹤，確認來源者血清 B/C 肝、HIV、梅毒反應之報告</div>
+                    <div class="flow-node dark flow-arrow">③ 立即至適當醫院就醫，依工作機構流程通報主管單位</div>
+                    <div class="flow-node dark">④ 依醫師指示進行預防性治療、疫苗注射及定期追蹤（HIV 預防性投藥可申請費用補助）</div>
+                </div>
+                <div class="mt-5 bg-red-900/40 border border-red-700 rounded p-4 text-sm">
+                    <p class="font-bold text-white mb-1">⏰ 時效重點</p>
+                    <p class="text-slate-200">應於發生暴觸 <strong>24 小時內</strong>向工作單位通報，一週內將「扎傷及血液、體液暴觸通報單」（員工扎傷通報單 表 7-7）送往在地衛生局備查。HIV 預防性投藥越早越好、<strong>勿超過 72 小時</strong>。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== JS ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        /* ---------- 手風琴 ---------- */
+        function toggleAcc(btn) {
+            const content = btn.nextElementSibling;
+            const open = content.classList.toggle('open');
+            btn.classList.toggle('open', open);
+            const icon = btn.querySelector('.acc-icon');
+            if (icon) icon.textContent = open ? '−' : '+';
+        }
+
+        /* ---------- 互動網格 ---------- */
+        const infoData = {
+            shock: {
+                cardio:   { t: '💔 心因性休克 (Cardiogenic)', c: '<p class="font-bold text-white mb-2">心輸出量不足。</p><p>因心肌梗塞、嚴重心律不整、心臟衰竭導致心輸出量不足引起休克。</p><p class="mt-2 text-ems-blue font-bold">臨床表徵</p><ul class="list-disc pl-5 space-y-1"><li>低血壓、呼吸困難</li><li>肺部濕囉音（肺水腫）</li><li>頸靜脈怒張</li></ul>' },
+                obstruct: { t: '🚧 阻塞性休克 (Obstructive)', c: '<p class="font-bold text-white mb-2">血液輸出過程受阻。</p><p>心包填塞、張力性氣胸、肺栓塞等，導致心臟無法有效輸血。</p><p class="mt-2 text-ems-blue font-bold">臨床表徵</p><ul class="list-disc pl-5 space-y-1"><li>低血壓、呼吸急促</li><li>頸靜脈怒張</li><li>無脈性電氣活動 (PEA)</li></ul>' },
+                hypo:     { t: '💧 低血容性休克 (Hypovolemic)', c: '<p class="font-bold text-white mb-2">失血或脫水使血量不足。</p><p>內/外出血或脫水（嘔吐、腹瀉、大量出汗、燒燙傷）造成血量不足。</p><p class="mt-2 text-ems-blue font-bold">臨床表徵</p><ul class="list-disc pl-5 space-y-1"><li>低血壓、心跳加快（代償）</li><li>皮膚蒼白冰冷</li><li>少尿</li></ul>' },
+                distrib:  { t: '🩻 分佈性休克 (Distributive)', c: '<p class="font-bold text-white mb-2">血管擴張造成相對性低血容。</p><p class="mt-2 text-ems-blue font-bold">三種型態</p><ul class="list-disc pl-5 space-y-1"><li><strong>敗血性</strong>：細菌感染 → 血管擴張、血壓下降</li><li><strong>神經性</strong>：脊髓損傷 → 交感功能喪失、血管擴張</li><li><strong>過敏性</strong>：嚴重過敏 → 血管擴張、氣道水腫</li></ul><p class="mt-2">表徵：皮膚潮紅、血壓下降、呼吸困難、意識改變。</p>' }
+            },
+            abd: {
+                ru:   { t: '右上腹 (RUQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>膽囊炎 / 膽結石</li><li>肝炎</li><li>胰臟炎</li><li>腎臟結石 / 腎盂腎炎</li></ul>' },
+                lu:   { t: '左上腹 (LUQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>胃炎</li><li>胰臟炎</li><li>腎臟結石 / 腎盂腎炎</li></ul><p class="mt-2 text-slate-400 text-sm">上腹（中）：心肌梗塞或心絞痛、胃炎、消化性潰瘍、早期盲腸炎。</p>' },
+                rl:   { t: '右下腹 (RLQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>盲腸炎</li><li>疝氣</li><li>泌尿道結石 / 腎盂腎炎</li><li>卵巢囊腫、卵巢/睪丸扭轉</li><li>骨盆腔發炎、子宮外孕</li></ul>' },
+                ll:   { t: '左下腹 (LLQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>憩室炎</li><li>疝氣</li><li>泌尿道結石 / 腎盂腎炎</li><li>卵巢囊腫、卵巢/睪丸扭轉</li><li>骨盆腔發炎、子宮外孕</li></ul>' },
+                full: { t: '全腹（瀰漫性）', c: '<ul class="list-disc pl-5 space-y-1.5"><li>腸胃炎</li><li>腹膜炎</li><li>腸阻塞</li><li>腹腔內出血</li><li class="text-ems-orange font-bold">腹主動脈瘤破裂</li><li class="text-ems-orange font-bold">腹主動脈剝離</li><li>糖尿病酮酸中毒</li></ul>' }
+            },
+            pois: {
+                oral:   { t: '💊 口服中毒', c: '<p>將毒物或可能服用的瓶罐、藥袋（或拍照）帶至醫院。</p><p class="mt-2"><strong class="text-white">如懷疑食入毒藥物且 1 小時內發生者</strong>，建議以側躺姿勢後送，降低吸入風險。</p>' },
+                skin:   { t: '🧴 皮膚／眼睛暴露', c: '<p>受波及的皮膚或眼睛應以大量清水或生理食鹽水沖洗 <strong class="text-white">至少 15 分鐘</strong>。</p><p class="mt-2">若有污染衣物應隨時移除。</p><p class="mt-2 text-ems-orange">⚠️ 注意：金屬性化學物（如鈉、鉀、鋰等）不可用水沖洗，避免劇烈反應。</p>' },
+                inhale: { t: '💨 吸入中毒', c: '<p>先將病人移至<strong class="text-white">新鮮空氣處</strong>，並密切注意呼吸窘迫情形，必要時給氧。</p><p class="mt-2 text-ems-danger font-bold">一氧化碳中毒 → 給予 100% 氧氣治療。</p>' }
+            },
+            inf: {
+                c1: { t: '第一類（24 小時內通報）', c: '<p>天花、鼠疫、狂犬病、嚴重急性呼吸道症候群（SARS）。</p><p class="mt-2 text-ems-blue">處置：應於指定隔離治療機構施行隔離治療。</p>' },
+                c2: { t: '第二類（24 小時內通報）', c: '<p>白喉、炭疽病、麻疹、德國麻疹、登革熱、傷寒、霍亂、小兒麻痺、急性病毒性 A 型肝炎、桿菌性痢疾、M 痘（猴痘）等。</p><p class="mt-2 text-ems-blue">處置：必要時得於指定治療機構隔離治療。</p>' },
+                c3: { t: '第三類（一週內通報）', c: '<p>百日咳、破傷風、結核病、日本腦炎、急性病毒性肝炎（B/C/D/E 及未定型）、退伍軍人病、梅毒、淋病、先天性梅毒、腸病毒感染併發重症等。</p>' },
+                c4: { t: '第四類（依中央公告處置）', c: '<p>人類免疫缺乏病毒感染（HIV）、後天免疫缺乏症候群（AIDS）、疱疹 B 病毒感染症、鉤端螺旋體病、肉毒桿菌中毒、李斯特菌症、侵襲性肺炎鏈球菌感染症、Q 熱、萊姆病、流感併發重症、新冠（COVID-19）併發重症等。</p>' },
+                c5: { t: '第五類（24 小時內通報）', c: '<p>裂谷熱、拉薩熱、馬堡病毒出血熱、伊波拉病毒感染、黃熱病、中東呼吸症候群冠狀病毒感染症（MERS）、新型 A 型流感。</p><p class="mt-2 text-ems-blue">處置：依中央主管機關公告之防治措施處置。</p>' }
+            }
+        };
+        function showInfo(group, id, btn) {
+            const d = infoData[group] && infoData[group][id];
+            if (!d) return;
+            document.getElementById(group + '-title').innerHTML = d.t;
+            document.getElementById(group + '-body').innerHTML = d.c;
+            document.querySelectorAll('[data-grid="' + group + '"]').forEach(e => e.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+        }
+        // 各互動網格預設第一項
+        ['shock','abd','pois','inf'].forEach(g => {
+            const first = document.querySelector('[data-grid="' + g + '"]');
+            if (first) first.click ? showInfo(g, {shock:'cardio',abd:'ru',pois:'oral',inf:'c1'}[g], first) : null;
+        });
+
+        /* ---------- Chart.js（lazy init via hook） ---------- */
+        const charted = {};
+        window.onViewSwitch = function (viewId) {
+            if (viewId === 'view-shock' && !charted.shock) { initShockChart(); charted.shock = true; }
+            if (viewId === 'view-temp'  && !charted.temp)  { initTempChart();  charted.temp  = true; }
+            if (viewId === 'view-diabetes' && !charted.glu) { initGlucoseChart(); charted.glu = true; }
+        };
+
+        function initShockChart() {
+            const c = document.getElementById('shockChart'); if (!c || typeof Chart === 'undefined') return;
+            new Chart(c.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Class I', 'Class II', 'Class III', 'Class IV'],
+                    datasets: [{
+                        label: '約略失血量上限 (%)',
+                        data: [15, 30, 40, 50],
+                        backgroundColor: ['#94a3b8', '#0284c7', '#ea580c', '#dc2626'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false },
+                        tooltip: { callbacks: { label: (x) => ['<15%','15–30%','31–40%','>40%'][x.dataIndex] + ' 失血' } } },
+                    scales: { y: { beginAtZero: true, max: 55, title: { display: true, text: '失血量 (%)' } } }
+                }
+            });
+        }
+        function initTempChart() {
+            const c = document.getElementById('tempChart'); if (!c || typeof Chart === 'undefined') return;
+            new Chart(c.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['重度低溫', '中度低溫', '輕度低溫', '正常', '發燒', '體溫過高'],
+                    datasets: [{
+                        label: '代表體溫 (°C)',
+                        data: [27, 30, 33.5, 37, 39, 42],
+                        backgroundColor: ['#1e40af', '#0284c7', '#38bdf8', '#22c55e', '#ea580c', '#dc2626'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false },
+                        tooltip: { callbacks: { label: (x) => ['<28°C','28–32°C','32–35°C','36–37.8°C','≥38°C','>41°C'][x.dataIndex] } } },
+                    scales: { x: { min: 20, max: 45, title: { display: true, text: '°C' } } }
+                }
+            });
+        }
+        function initGlucoseChart() {
+            const c = document.getElementById('glucoseChart'); if (!c || typeof Chart === 'undefined') return;
+            new Chart(c.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['嚴重低血糖警戒', '低血糖門檻', '正常空腹上限'],
+                    datasets: [{
+                        label: '血糖 (mg/dL)',
+                        data: [60, 70, 99],
+                        backgroundColor: ['#dc2626', '#ea580c', '#22c55e'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, max: 120, title: { display: true, text: 'mg/dL' } } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
