@@ -147,8 +147,11 @@
         <section id="view-ohca" class="view-section hidden">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.218 - P.222</div>
-                <h2 class="text-3xl font-bold text-ems-navy">01 到院前心跳停止病人（OHCA）</h2>
+                <h2 class="text-3xl font-bold text-ems-navy">01 到院前心跳停止病人（OHCA, Out-of-Hospital Cardiac Arrest）</h2>
                 <p class="text-ems-gray mt-2 text-lg">美國與加拿大每年每 10 萬人約 50–55 例 OHCA。能否復甦取決於「生命之鏈」六個環節是否環環相扣，其中前四環與 EMS 直接相關。</p>
+                <button onclick="openMeme()" class="mt-3 inline-flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 text-amber-800 text-sm font-bold px-3 py-1.5 rounded-full border border-amber-300 transition">
+                    ⚠️ 地獄梗警報
+                </button>
             </header>
 
             <!-- 生命之鏈 圖 7-1（課本擷取圖） -->
@@ -182,15 +185,16 @@
                     <h3 class="text-xl font-bold text-ems-navy mb-4">🩺 到院前心跳停止流程（圖 7-2）</h3>
                     <div class="space-y-0">
                         <div class="flow-node head flow-arrow">判定為到院前心臟停止</div>
-                        <div class="flow-node act flow-arrow">胸部按壓中斷最少之 CPR · 使用 AED</div>
-                        <div class="flow-node flow-arrow">AED 分析：是否建議去顫？</div>
+                        <div class="flow-node act flow-arrow cursor-pointer hover:ring-2 hover:ring-ems-blue transition" onclick="openRoles('ohca1')">胸部按壓中斷最少之 CPR · 使用 AED <span class="text-xs opacity-70">👥</span></div>
+                        <div class="flow-node flow-arrow cursor-pointer hover:ring-2 hover:ring-ems-blue transition" onclick="openRoles('ohca2')">AED 分析：是否建議去顫？ <span class="text-xs opacity-70">🔄</span></div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="flow-node warn">建議 → 去顫後<br>立即胸部按壓</div>
                             <div class="flow-node act">不建議 →<br>立即胸部按壓</div>
                         </div>
                         <div class="flow-arrow"></div>
-                        <div class="flow-node act flow-arrow">給氧、輔助呼吸道、考慮監測 EtCO₂</div>
-                        <div class="flow-node flow-arrow">持續一人 CPR、收拾器材上擔架床</div>
+                        <div class="flow-node act flow-arrow cursor-pointer hover:ring-2 hover:ring-ems-blue transition" onclick="openRoles('ohca3')">給氧、輔助呼吸道、考慮監測 EtCO₂ <span class="text-xs opacity-70">👥</span></div>
+                        <div class="flow-arrow text-center"><button onclick="openRoles('ohca4')" title="AED 再次分析，再次進行主副手換手" class="text-lg hover:scale-125 transition">🔄</button></div>
+                        <div class="flow-node flow-arrow cursor-pointer hover:ring-2 hover:ring-ems-blue transition" onclick="openRoles('ohca5')">持續一人 CPR、收拾器材上擔架床 <span class="text-xs opacity-70">👥</span></div>
                         <div class="flow-node">上救護車（或開車前）再操作 AED 一次</div>
                     </div>
                 </div>
@@ -212,7 +216,12 @@
                             <span class="acc-icon text-ems-blue font-bold text-xl">+</span>
                         </button>
                         <div class="acc-content p-5 text-slate-700 text-sm leading-relaxed">
-                            裝設於人工鼻與延伸管之間，確認聲門上呼吸道位置與 CPR 品質。<strong>EtCO₂ &lt; 10 mmHg 應改善 CPR 品質</strong>；數值急遽提升（如 10–20 → 40 mmHg 並維持 &gt;40）合併結構性心律，可提早暫停按壓檢查脈搏（ROSC 徵兆）。波形或數值消失時立即評估氣道是否脫落或移位。
+                            <ul class="list-disc pl-5 space-y-1.5">
+                                <li>裝設於人工鼻與延伸管之間，確認聲門上呼吸道位置與 CPR 品質。</li>
+                                <li><strong>EtCO₂ &lt; 10 mmHg</strong>：應改善 CPR 品質。</li>
+                                <li>數值急遽提升（如 10–20 → 40 mmHg 並維持 &gt;40）合併結構性心律：可提早暫停按壓檢查脈搏（ROSC 徵兆）。</li>
+                                <li>波形或數值消失：立即評估氣道是否脫落或移位。</li>
+                            </ul>
                         </div>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -857,9 +866,63 @@
 
     </main>
 
+    <!-- 救護梗圖彩蛋 Modal -->
+    <div id="meme-modal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onclick="closeMeme(event)">
+        <div class="relative max-w-md sm:max-w-lg max-h-[85vh] flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeMeme(event)" class="absolute -top-9 right-0 text-white text-3xl font-bold leading-none hover:text-amber-300">&times;</button>
+            <img src="./assets/img/chap7-2.png" alt="救護梗圖" class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-xl shadow-2xl">
+        </div>
+    </div>
+
+    <!-- 主手／副手分工 Modal -->
+    <div id="roles-modal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onclick="closeRoles(event)">
+        <div class="relative max-w-md w-full bg-white rounded-xl shadow-2xl p-6" onclick="event.stopPropagation()">
+            <button onclick="closeRoles(event)" class="absolute top-3 right-4 text-slate-400 text-2xl font-bold leading-none hover:text-ems-blue">&times;</button>
+            <h3 id="roles-title" class="text-lg font-bold text-ems-navy mb-4 pr-6"></h3>
+            <div class="space-y-3">
+                <div class="bg-sky-50 border border-sky-200 rounded-lg p-3">
+                    <span class="text-xs font-bold text-sky-700">🤚 主手動作</span>
+                    <div id="roles-lead" class="text-slate-700 mt-1 text-sm leading-relaxed"></div>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <span class="text-xs font-bold text-amber-700">🙌 副手動作</span>
+                    <div id="roles-assist" class="text-slate-700 mt-1 text-sm leading-relaxed"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===================== JS ===================== -->
     <script src="./assets/js/chapter-nav.js"></script>
     <script>
+        /* ---------- 救護梗圖彩蛋 ---------- */
+        function openMeme() {
+            document.getElementById('meme-modal').classList.remove('hidden');
+        }
+        function closeMeme(e) {
+            document.getElementById('meme-modal').classList.add('hidden');
+        }
+
+        /* ---------- 主手／副手分工 ---------- */
+        const roleData = {
+            ohca1: { title: '胸部按壓中斷最少之 CPR · 使用 AED', lead: '開始 CPR。', assist: '拿出甦醒球給主手，準備 AED，開貼片插電。' },
+            ohca2: { title: 'AED 分析：是否建議去顫？', lead: 'AED 開始分析時與副手互換位置。', assist: 'AED 開始分析時與主手互換位置，換到壓胸位置。' },
+            ohca3: { title: '給氧、輔助呼吸道、考慮監測 EtCO₂', lead: '<ul class="list-disc pl-4 space-y-1"><li>給氧作業（開、看、接、調、測、戴）</li><li>建立呼吸道（口/鼻）</li><li>詢問家屬病史（主訴／之前／吃／過／藥／敏／感）</li><li>病情危急度告知</li></ul>', assist: '電擊後專心壓胸（30:2 / 15:2）。' },
+            ohca4: { title: 'AED 再次分析，再次進行主副手換手', lead: '與副手簡短交接病史與危急度後，互換位置，換到壓胸位置。', assist: '與主手簡短交接病史與危急度後，互換位置，開始收拾救護器材。' },
+            ohca5: { title: '持續一人 CPR、收拾器材上擔架床', lead: '進行單人 CPR。', assist: '開始收拾救護器材；並於每 30 下給氣的空檔，指示主手「背創傷包、上長背板、上車」。' }
+        };
+        function openRoles(key) {
+            const d = roleData[key];
+            if (!d) return;
+            document.getElementById('roles-title').textContent = d.title;
+            document.getElementById('roles-lead').innerHTML = d.lead;
+            document.getElementById('roles-assist').innerHTML = d.assist;
+            document.getElementById('roles-modal').classList.remove('hidden');
+        }
+        function closeRoles(e) {
+            document.getElementById('roles-modal').classList.add('hidden');
+        }
+
         /* ---------- 手風琴 ---------- */
         function toggleAcc(btn) {
             const content = btn.nextElementSibling;
