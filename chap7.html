@@ -421,6 +421,28 @@
                 <p class="text-ems-gray mt-2 text-lg">低血壓：成人收縮壓 &lt; 90 mmHg 或 MAP &lt; 65 mmHg。休克是全身性循環衰竭、組織灌流不足，與心臟、血管與血量有關，可分四大類。</p>
             </header>
 
+            <!-- 休克指數 SI（課堂筆記補充） -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 border-l-4 border-l-ems-orange">
+                <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange">🧮</span> 休克指數（Shock Index, SI）課堂筆記</h3>
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <div class="text-center shrink-0">
+                        <div class="inline-flex items-center gap-3 text-2xl font-bold text-slate-800">
+                            <span>SI =</span>
+                            <span class="inline-flex flex-col items-center leading-tight">
+                                <span class="px-2">HR</span>
+                                <span class="border-t-2 border-slate-800 w-full px-2"></span>
+                                <span class="px-2">Systolic BP</span>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                        <li>正常值：<strong class="text-ems-blue">0.5 ～ 0.7</strong></li>
+                        <li><strong class="text-ems-danger">SI &gt; 1</strong>：提示可能有休克（常用於<strong>血容性休克</strong>、<strong>感染性休克</strong>的早期辨識）</li>
+                        <li>休克早期身體會先用心跳加快代償血壓下降，單看血壓有時還在正常範圍；以 HR 與收縮壓的比值評估，能比單看血壓更早抓到休克徵象。</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- 四型休克 互動網格 -->
             <h3 class="text-xl font-bold text-ems-navy mb-4">🔄 四型休克（點選查看）</h3>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
@@ -438,7 +460,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <!-- 低血容休克分級 Chart.js -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col opacity-10 hover:opacity-100 transition-opacity duration-300">
                     <h3 class="text-xl font-bold text-ems-navy mb-2">📊 低血容性休克臨床分級（表 7-2）</h3>
                     <p class="text-sm text-slate-500 mb-4">各級約略失血量（%），Class III 起需要輸血、Class IV 為大量輸血流程。</p>
                     <div class="chart-container flex-1"><canvas id="shockChart"></canvas></div>
@@ -455,6 +477,49 @@
                     </div>
                     <p class="text-xs text-slate-500 mt-4 bg-slate-50 p-3 rounded">徵候：低血壓、冒冷汗、膚色蒼白、手腳濕冷或微血管充填 &gt; 2 秒。孕婦疑休克可子宮左推或左側躺（圖 7-8）。</p>
                 </div>
+            </div>
+
+            <!-- 表 7-2 低血容休克常用之臨床分級（完整表格＋課堂筆記） -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8 overflow-x-auto">
+                <h3 class="text-xl font-bold text-ems-navy mb-4">📋 表 7-2 低血容休克常用之臨床分級</h3>
+                <table class="w-full text-sm text-center border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-sky-600 text-white">
+                            <th class="p-3 font-bold text-left">指標</th>
+                            <th class="p-3 font-bold">CLASS I</th>
+                            <th class="p-3 font-bold">CLASS II（普通）</th>
+                            <th class="p-3 font-bold">CLASS III（中等）</th>
+                            <th class="p-3 font-bold">CLASS IV（嚴重）</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">約略失血量</td><td class="p-3">&lt;15%</td><td class="p-3">15～30%</td><td class="p-3">31～40%</td><td class="p-3">&gt;40%</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">心率</td><td class="p-3">↔</td><td class="p-3">↔ / <span class="bg-pink-300 px-1 rounded">↑</span></td><td class="p-3">↑</td><td class="p-3">↑ / ↑↑</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">血壓</td><td class="p-3">↔</td><td class="p-3">↔</td><td class="p-3">↔ / <span class="bg-pink-300 px-1 rounded">↓</span></td><td class="p-3">↓</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">脈搏壓</td><td class="p-3">↔</td><td class="p-3"><span class="bg-pink-300 px-1 rounded">↓</span></td><td class="p-3">↓</td><td class="p-3">↓</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">呼吸速度</td><td class="p-3">↔</td><td class="p-3">↔</td><td class="p-3">↔ / <span class="bg-pink-300 px-1 rounded">↑</span></td><td class="p-3">↑</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">尿量</td><td class="p-3">↔</td><td class="p-3">↔</td><td class="p-3">↓</td><td class="p-3">↓↓</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">GCS 意識評估</td><td class="p-3">↔</td><td class="p-3">↔</td><td class="p-3"><span class="bg-pink-300 px-1 rounded">↓</span></td><td class="p-3">↓</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">鹼基缺乏</td><td class="p-3">0 至 -2 mEg/L</td><td class="p-3">-2 至 -6 mEg/L</td><td class="p-3">-6 至 -10 mEg/L</td><td class="p-3">-10 mEg/L 或更少</td></tr>
+                        <tr><td class="p-3 text-left font-bold bg-slate-50">是否需輸血</td><td class="p-3">觀察</td><td class="p-3">可能</td><td class="p-3">需要</td><td class="p-3">大量輸血流程</td></tr>
+                    </tbody>
+                </table>
+                <p class="text-xs text-blue-700 mt-3 italic">課堂筆記：（心率上升，脈壓下降）／（心率異常、血壓下降、呼吸變快、GCS 下降）</p>
+                <div class="text-xs text-slate-500 mt-4 space-y-2 leading-relaxed">
+                    <p><strong class="text-slate-700">註 3：</strong>對於心率和血壓應存有相對性心搏過慢和相對性低血壓的觀念，心率的適當與否取決於病人的臨床狀況，例如病人已確認血壓為 70/50 mmHg 並有周邊灌流不足徵候時，若心率每分鐘為 80 下即為相對性心搏過慢而不應視為正常心律，臨床上如休克指數（Shock index，每分鐘心率除以收縮壓）&gt;1 時即應懷疑有休克。</p>
+                    <p><strong class="text-slate-700">註 4：</strong>血氧濃度 &lt;94% 之休克病人應給予氧氣，若下肢沒有外傷或損傷時，應將病人平躺並把下肢抬高約 15～30 公分或 30°～60° 之角度後送，當移動或此種姿勢會使病人疼痛時就不要操作；若為大於 20 週之休克孕婦，須用雙手把子宮推向左側或左側躺（圖 7-8），以解除子宮壓迫下腔靜脈導致靜脈回流不足之現象。判定病人有低血壓休克時，應施予靜脈注射生理食鹽水，聽診肺音清晰者可調整較高之流速。</p>
+                </div>
+
+                <!-- 圖 7-8 孕婦左側子宮位移（解除主動脈腔靜脈壓迫） -->
+                <figure class="mt-5">
+                    <img src="./assets/img/chap7-fig7-8.JPG" alt="圖 7-8 孕婦左側子宮位移：解鎖下腔靜脈的血流封鎖，Aortocaval compression 與 Left lateral uterine displacement 比較圖"
+                         class="w-full max-w-2xl mx-auto block rounded-lg border border-slate-200"
+                         onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                    <div style="display:none" class="text-center text-sm text-slate-500 bg-slate-50 border border-dashed border-slate-300 rounded-lg py-10 px-4">
+                        圖片尚未放入。請將圖存成 <code class="text-ems-blue font-bold">assets/img/chap7-fig7-8.JPG</code> 即可自動顯示。
+                    </div>
+                    <figcaption class="text-xs text-slate-500 mt-2 text-center">圖 7-8 孕婦左側子宮位移：執行左側子宮位移可解除增大子宮對下腔靜脈與主動脈的壓迫，恢復靜脈回流。</figcaption>
+                </figure>
             </div>
 
             <!-- EpiPen 強調 -->
@@ -477,7 +542,7 @@
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.230 - P.234</div>
                 <h2 class="text-3xl font-bold text-ems-navy">05 胸痛、心悸</h2>
-                <p class="text-ems-gray mt-2 text-lg">胸痛最需排除的是急性冠心症（ACS），因死亡率高、可能演變成 VT/VF/AV block 甚至 PEA/asystole。越早溶解血栓、恢復冠狀動脈血流，預後越好。</p>
+                <p class="text-ems-gray mt-2 text-lg">胸痛最需排除的是急性冠心症（ACS），因死亡率高、可能演變成 VT（心室頻脈）/VF（心室顫動）/AV block（房室傳導阻滯）甚至 PEA（無脈性電氣活動）/asystole（心電靜止）。越早溶解血栓、恢復冠狀動脈血流，預後越好。</p>
             </header>
 
             <!-- ACS 四階段 手風琴 -->
@@ -514,7 +579,7 @@
 
                 <!-- NTG 禁忌 強調 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-ems-danger border-y border-r border-slate-200">
-                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-danger">💊</span> 硝化甘油（NTG）給藥要點 <span class="text-xs bg-blue-200 px-2 py-0.5 rounded text-blue-900">EMT-2</span></h3>
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-danger">💊</span> 急性缺血性胸痛處置要點（給氧、給藥） <span class="text-xs bg-blue-200 px-2 py-0.5 rounded text-blue-900">EMT-2</span></h3>
                     <p class="text-sm text-slate-700 mb-3">血氧 &lt;90% 給氧。中級以上可協助病人服用 NTG 舌下含片，每 5 分鐘一次、最多 3 次（含病人已自行服用次數）。</p>
                     <div class="bg-red-50 border border-red-100 rounded p-4">
                         <p class="font-bold text-red-800 mb-2">🚫 下列禁忌症不可使用：</p>
@@ -534,7 +599,11 @@
                     <h3 class="text-lg font-bold text-ems-navy mb-4">🩺 胸痛救護處置流程（圖 7-11）</h3>
                     <div class="space-y-0">
                         <div class="flow-node head flow-arrow">判定為胸痛</div>
-                        <div class="flow-node flow-arrow">詢問病史、身體檢查、量血壓血氧、執行 12 導程心電圖</div>
+                        <div class="flow-node flow-arrow">詢問病史、身體檢查、量血壓血氧、執行 12 導程心電圖 <button onclick="event.stopPropagation();openImgModal(
+                            {src:'./assets/img/chap7-ecg12.png', alt:'十二導程心電圖貼片位置示意圖', placeholder:'圖片尚未放入。請將圖存成 assets/img/chap7-ecg12.png 即可自動顯示。'},
+                            {src:'./assets/img/chap7-ecg12-photo.jpg', alt:'十二導程心電圖實際貼片照片', placeholder:'圖片尚未放入。請將圖存成 assets/img/chap7-ecg12-photo.jpg 即可自動顯示。', credit:'照片提供：花蓮和仁分隊葉學長'},
+                            {src:'./assets/img/chap7-ecg12-photo-2.jpg', alt:'十二導程心電圖實際貼片照片 2', placeholder:'圖片尚未放入。請將圖存成 assets/img/chap7-ecg12-photo-2.jpg 即可自動顯示。', credit:'照片提供：花蓮和仁分隊葉學長'}
+                        )" title="查看十二導程心電圖貼片位置" class="text-xs opacity-70 hover:opacity-100 hover:scale-125 transition">📷</button></div>
                         <div class="flow-node flow-arrow">是否為缺血性胸痛？</div>
                         <div class="flow-node act flow-arrow">給予氧氣或 NTG 等必要處置</div>
                         <div class="flow-node">上擔架床 → 救護車內救護流程</div>
@@ -629,9 +698,12 @@
             <h3 class="text-xl font-bold text-ems-navy mb-4">🩹 腹部四象限對照（點選象限 · 表 7-3）</h3>
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
                 <div class="lg:col-span-5">
-                    <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                    <div class="grid grid-cols-3 gap-3 max-w-md mx-auto">
                         <button data-grid="abd" class="grid-btn active bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','ru',this)">右上腹<br><span class="text-xs font-normal text-slate-500">RUQ</span></button>
+                        <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','mid',this)">上腹（中）<br><span class="text-xs font-normal text-slate-500">Epigastric</span></button>
                         <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','lu',this)">左上腹<br><span class="text-xs font-normal text-slate-500">LUQ</span></button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 max-w-md mx-auto mt-3">
                         <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','rl',this)">右下腹<br><span class="text-xs font-normal text-slate-500">RLQ</span></button>
                         <button data-grid="abd" class="grid-btn bg-white border-2 border-slate-300 rounded-lg p-6 font-bold text-slate-700 text-center" onclick="showInfo('abd','ll',this)">左下腹<br><span class="text-xs font-normal text-slate-500">LLQ</span></button>
                     </div>
@@ -778,8 +850,8 @@
                 <div class="lg:col-span-5 grid grid-cols-1 gap-3">
                     <button data-grid="inf" class="grid-btn active bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c1',this)"><span>第一類</span><span class="text-xs font-normal">24 小時內</span></button>
                     <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c2',this)"><span>第二類</span><span class="text-xs font-normal">24 小時內</span></button>
-                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c3',this)"><span>第三類</span><span class="text-xs font-normal">一週內</span></button>
-                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c4',this)"><span>第四類</span><span class="text-xs font-normal">依公告</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c3',this)"><span>第三類</span><span class="text-xs font-normal">一週內／HIV 24hr</span></button>
+                    <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c4',this)"><span>第四類</span><span class="text-xs font-normal">24hr～1個月</span></button>
                     <button data-grid="inf" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 flex justify-between items-center font-bold text-slate-700" onclick="showInfo('inf','c5',this)"><span>第五類</span><span class="text-xs font-normal">24 小時內</span></button>
                 </div>
                 <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[260px]">
@@ -859,7 +931,7 @@
                 </div>
                 <div class="mt-5 bg-red-900/40 border border-red-700 rounded p-4 text-sm">
                     <p class="font-bold text-white mb-1">⏰ 時效重點</p>
-                    <p class="text-slate-200">應於發生暴觸 <strong>24 小時內</strong>向工作單位通報，一週內將「扎傷及血液、體液暴觸通報單」（員工扎傷通報單 表 7-7）送往在地衛生局備查。HIV 預防性投藥越早越好、<strong>勿超過 72 小時</strong>。</p>
+                    <p class="text-slate-200">應於發生暴觸 <strong>24 小時內</strong>向工作單位通報，一週內將「扎傷及血液、體液暴觸通報單」（員工扎傷通報單 表 7-7 <button onclick="event.stopPropagation();openImgModal({src:'./assets/img/chap7-table7-7.png', alt:'員工扎傷通報單 表 7-7', placeholder:'圖片尚未放入。請將圖存成 assets/img/chap7-table7-7.png 即可自動顯示。'})" title="查看員工扎傷通報單範本" class="text-xs opacity-70 hover:opacity-100 hover:scale-125 transition">📷</button>）送往在地衛生局備查。HIV 預防性投藥越早越好、<strong>勿超過 72 小時</strong>。</p>
                 </div>
             </div>
         </section>
@@ -871,6 +943,14 @@
         <div class="relative max-w-md sm:max-w-lg max-h-[85vh] flex flex-col items-center" onclick="event.stopPropagation()">
             <button onclick="closeMeme(event)" class="absolute -top-9 right-0 text-white text-3xl font-bold leading-none hover:text-amber-300">&times;</button>
             <img src="./assets/img/chap7-2.png" alt="救護梗圖" class="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-xl shadow-2xl">
+        </div>
+    </div>
+
+    <!-- 通用圖片彈窗 Modal -->
+    <div id="img-modal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onclick="closeImgModal(event)">
+        <div class="relative max-w-[63rem] max-h-[85vh] flex flex-col items-center gap-3 overflow-y-auto" onclick="event.stopPropagation()">
+            <button onclick="closeImgModal(event)" class="absolute -top-9 right-0 text-white text-3xl font-bold leading-none hover:text-amber-300">&times;</button>
+            <div id="img-modal-slots" class="flex flex-col items-center gap-3"></div>
         </div>
     </div>
 
@@ -901,6 +981,35 @@
         }
         function closeMeme(e) {
             document.getElementById('meme-modal').classList.add('hidden');
+        }
+
+        /* ---------- 通用圖片彈窗 ---------- */
+        function openImgModal(...images) {
+            const wrap = document.getElementById('img-modal-slots');
+            wrap.innerHTML = '';
+            images.forEach(({ src, alt, placeholder, credit }) => {
+                const img = document.createElement('img');
+                img.className = 'max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-xl shadow-2xl bg-white';
+                img.alt = alt || '';
+                const fb = document.createElement('div');
+                fb.style.display = 'none';
+                fb.className = 'text-center text-sm text-slate-200 bg-slate-800 border border-dashed border-slate-400 rounded-lg py-10 px-6 max-w-md';
+                fb.textContent = placeholder || '';
+                img.onerror = () => { img.style.display = 'none'; fb.style.display = 'block'; };
+                img.src = src;
+                wrap.appendChild(img);
+                wrap.appendChild(fb);
+                if (credit) {
+                    const cap = document.createElement('p');
+                    cap.className = 'text-xs text-slate-300 -mt-2';
+                    cap.textContent = credit;
+                    wrap.appendChild(cap);
+                }
+            });
+            document.getElementById('img-modal').classList.remove('hidden');
+        }
+        function closeImgModal(e) {
+            document.getElementById('img-modal').classList.add('hidden');
         }
 
         /* ---------- 主手／副手分工 ---------- */
@@ -942,7 +1051,8 @@
             },
             abd: {
                 ru:   { t: '右上腹 (RUQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>膽囊炎 / 膽結石</li><li>肝炎</li><li>胰臟炎</li><li>腎臟結石 / 腎盂腎炎</li></ul>' },
-                lu:   { t: '左上腹 (LUQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>胃炎</li><li>胰臟炎</li><li>腎臟結石 / 腎盂腎炎</li></ul><p class="mt-2 text-slate-400 text-sm">上腹（中）：心肌梗塞或心絞痛、胃炎、消化性潰瘍、早期盲腸炎。</p>' },
+                mid:  { t: '上腹（中）Epigastric', c: '<ul class="list-disc pl-5 space-y-1.5"><li>心肌梗塞或心絞痛</li><li>胃炎</li><li>消化性潰瘍</li><li>早期盲腸炎</li></ul>' },
+                lu:   { t: '左上腹 (LUQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>胃炎</li><li>胰臟炎</li><li>腎臟結石 / 腎盂腎炎</li></ul>' },
                 rl:   { t: '右下腹 (RLQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>盲腸炎</li><li>疝氣</li><li>泌尿道結石 / 腎盂腎炎</li><li>卵巢囊腫、卵巢/睪丸扭轉</li><li>骨盆腔發炎、子宮外孕</li></ul>' },
                 ll:   { t: '左下腹 (LLQ)', c: '<ul class="list-disc pl-5 space-y-1.5"><li>憩室炎</li><li>疝氣</li><li>泌尿道結石 / 腎盂腎炎</li><li>卵巢囊腫、卵巢/睪丸扭轉</li><li>骨盆腔發炎、子宮外孕</li></ul>' },
                 full: { t: '全腹（瀰漫性）', c: '<ul class="list-disc pl-5 space-y-1.5"><li>腸胃炎</li><li>腹膜炎</li><li>腸阻塞</li><li>腹腔內出血</li><li class="text-ems-orange font-bold">腹主動脈瘤破裂</li><li class="text-ems-orange font-bold">腹主動脈剝離</li><li>糖尿病酮酸中毒</li></ul>' }
@@ -954,9 +1064,9 @@
             },
             inf: {
                 c1: { t: '第一類（24 小時內通報）', c: '<p>天花、鼠疫、狂犬病、嚴重急性呼吸道症候群（SARS）。</p><p class="mt-2 text-ems-blue">處置：應於指定隔離治療機構施行隔離治療。</p>' },
-                c2: { t: '第二類（24 小時內通報）', c: '<p>白喉、炭疽病、麻疹、德國麻疹、登革熱、傷寒、霍亂、小兒麻痺、急性病毒性 A 型肝炎、桿菌性痢疾、M 痘（猴痘）等。</p><p class="mt-2 text-ems-blue">處置：必要時得於指定治療機構隔離治療。</p>' },
-                c3: { t: '第三類（一週內通報）', c: '<p>百日咳、破傷風、結核病、日本腦炎、急性病毒性肝炎（B/C/D/E 及未定型）、退伍軍人病、梅毒、淋病、先天性梅毒、腸病毒感染併發重症等。</p>' },
-                c4: { t: '第四類（依中央公告處置）', c: '<p>人類免疫缺乏病毒感染（HIV）、後天免疫缺乏症候群（AIDS）、疱疹 B 病毒感染症、鉤端螺旋體病、肉毒桿菌中毒、李斯特菌症、侵襲性肺炎鏈球菌感染症、Q 熱、萊姆病、流感併發重症、新冠（COVID-19）併發重症等。</p>' },
+                c2: { t: '第二類（24 小時內通報）', c: '<p>白喉、炭疽病、麻疹、德國麻疹、流行性腦脊髓膜炎、登革熱、傷寒、副傷寒、小兒麻痺症／急性無力肢體麻痺、桿菌性痢疾、阿米巴性痢疾、霍亂、急性病毒性 A 型肝炎、腸道出血性大腸桿菌感染症、漢他病毒症候群、瘧疾、屈公病、流行性斑疹傷寒、西尼羅熱、多重抗藥性結核病、茲卡病毒感染症、M 痘（即猴痘）。</p><p class="mt-2 text-ems-blue">處置：必要時得於指定隔離治療機構施行隔離治療。</p>' },
+                c3: { t: '第三類（一週內通報，HIV／AIDS 為 24 小時內）', c: '<p class="text-ems-blue font-bold mb-1">一週內通報</p><p>百日咳、破傷風、新生兒破傷風、日本腦炎、結核病、先天性德國麻疹症候群、急性病毒性肝炎（B、C、D、E 型與其他未定型，除 A 型外）、流行性腮腺炎、漢生病、退伍軍人病、侵襲性 b 型嗜血桿菌感染症、梅毒、先天性梅毒、淋病、腸病毒感染併發重症。</p><p class="mt-3 text-ems-danger font-bold mb-1">24 小時內通報</p><p>人類免疫缺乏病毒感染（HIV 感染）、後天免疫缺乏症候群（AIDS）。</p><p class="mt-2 text-ems-blue">處置：必要時得於指定隔離治療機構施行隔離治療。</p>' },
+                c4: { t: '第四類（依病名分 24hr ～ 1 個月通報）', c: '<p class="text-ems-blue font-bold mb-1">24 小時內通報</p><p>疱疹 B 病毒感染症、鉤端螺旋體病、類鼻疽、肉毒桿菌中毒、發熱伴血小板減少綜合症、嚴重特殊傳染性肺炎。</p><p class="mt-3 text-ems-blue font-bold mb-1">72 小時內通報</p><p>李斯特菌症。</p><p class="mt-3 text-ems-blue font-bold mb-1">一週內通報</p><p>侵襲性肺炎鏈球菌感染症、Q 熱、地方性斑疹傷寒、萊姆病、兔熱病、恙蟲病、水痘併發症、弓形蟲感染症、流感併發重症、布氏桿菌病、新冠（COVID-19）併發重症。</p><p class="mt-3 text-ems-blue font-bold mb-1">一個月內通報</p><p>庫賈氏病。</p><p class="mt-2 text-ems-blue">處置：依中央主管機關公告之防治措施處置。</p>' },
                 c5: { t: '第五類（24 小時內通報）', c: '<p>裂谷熱、拉薩熱、馬堡病毒出血熱、伊波拉病毒感染、黃熱病、中東呼吸症候群冠狀病毒感染症（MERS）、新型 A 型流感。</p><p class="mt-2 text-ems-blue">處置：依中央主管機關公告之防治措施處置。</p>' }
             }
         };
