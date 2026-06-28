@@ -329,8 +329,10 @@
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="card">
-          <div class="section-label">九的原則比例盤</div>
-          <div class="chart-container"><canvas id="burnAreaChart"></canvas></div>
+          <div class="section-label">圖 8-6 九的原則評估成人及小兒灼燙傷面積</div>
+          <figure class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <img src="./assets/img/chap8-fig8-6-rule-of-nines.jpg" alt="圖 8-6 九的原則評估成人及小兒灼燙傷面積" class="w-full max-h-[560px] object-contain rounded">
+          </figure>
         </div>
         <div class="card">
           <div class="section-label">面積估算</div>
@@ -343,14 +345,24 @@
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card">
-          <div class="section-label">到院前處置</div>
-          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
-            <li>排除熱源與不穩定因素，離開火災、爆炸或危險環境。</li>
-            <li>化學或輻射傷需穿戴防護；移除受污染衣物與粉末，用大量清水沖洗。黏在皮膚上的衣物不要撕開。</li>
-            <li>維持呼吸道通暢與給氧；密閉空間傷者給非再呼吸型氧氣面罩，呼吸窘迫且意識惡化可考慮袋瓣罩甦醒球。</li>
-            <li>依單項救護技術操作傷口處理與防感染。</li>
-            <li>乳酸林格氏液為靜脈輸液首選；中度或嚴重灼傷送有處置能力醫院或燒傷中心。</li>
-          </ol>
+          <div class="section-label">灼燙傷外傷病人到院前處置流程</div>
+          <div class="space-y-0 max-w-2xl mx-auto">
+            <div class="flow-node head flow-arrow">外傷病人緊急救護現場流程：判定為灼燙傷病患，先除污處置</div>
+            <div class="flow-node act flow-arrow">排除造成灼燙傷的熱源</div>
+            <div class="flow-node orange flow-arrow">化學灼燙傷、輻射灼燙傷？</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="flow-node act">否：進入重點式身體檢查</div>
+              <div class="flow-node warn">是：先進行止血處置後，再進入重點式身體檢查</div>
+            </div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node act flow-arrow">重點式身體檢查</div>
+            <div class="flow-node act flow-arrow">測量血壓及血氧濃度等輔助檢查</div>
+            <div class="flow-node act flow-arrow">評估灼燙傷深度與範圍</div>
+            <div class="flow-node flow-arrow">給予氧氣等必要處置</div>
+            <div class="flow-node flow-arrow">灼燙傷口處置</div>
+            <div class="flow-node orange flow-arrow">靜脈輸液注射</div>
+            <div class="flow-node head">救護車內救護流程</div>
+          </div>
         </div>
         <div class="card border-t-4 border-t-ems-orange">
           <div class="section-label">輸液公式</div>
@@ -370,6 +382,12 @@
         <h2 class="chapter-title text-3xl">06 頭部外傷救護流程</h2>
         <p class="text-ems-gray mt-2 text-lg">頭部外傷要同時顧腦灌流、氧合與頸椎保護，避免低血壓、低血氧與過度換氣。</p>
       </header>
+      <div class="card mb-6">
+        <div class="section-label">圖 8-8 頭部外傷救護流程</div>
+        <figure class="bg-white rounded-lg border border-slate-200 p-4">
+          <img src="./assets/img/chap8-fig8-8-head-trauma-flow.jpg" alt="圖 8-8 頭部外傷救護流程" class="w-full max-h-[640px] object-contain">
+        </figure>
+      </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card">
           <div class="section-label">致命傷口與必要處置</div>
@@ -402,6 +420,35 @@
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><strong>ET 保四十</strong><br>EtCO2 維持 35-40 mmHg，不低於 30。</div>
           <div class="bg-red-50 border border-red-100 rounded-lg p-3"><strong>換氣莫太快</strong><br>成人約 10/min，小兒約 20/min，嬰兒約 25/min。</div>
         </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="card">
+          <div class="section-label">每五分鐘重複評估五大事項</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>生命徵象：血壓與脈搏，尤其避免低血壓。</li>
+            <li>昏迷指數：追蹤 GCS 是否下降或持續變差。</li>
+            <li>血氧 SpO2：持續確認氧合是否足夠。</li>
+            <li>通氣執行者：讓專注通氣的救護技術員穩定控制換氣。</li>
+            <li>EtCO2 數值：維持 35-40 mmHg，避免低於 30 mmHg。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">每五分鐘生命徵象追蹤</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>昏迷指數變化。</li>
+            <li>EtCO2 數值。</li>
+            <li>瞳孔大小與左右差異。</li>
+            <li>已給輸液量與血壓反應。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card mt-6 border-t-4 border-t-ems-orange">
+        <div class="section-label">上擔架床與搬運姿勢</div>
+        <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+          <li>將外傷病人以適當姿勢搬運至擔架床，依病況選擇坐臥、半坐臥、平躺或其他方式，並注意保護隱私。</li>
+          <li>若沒有頸椎受傷問題，可採半坐臥或坐姿，以減輕腦部壓力。</li>
+          <li>若頸椎受傷尚未排除，搬運時以頸椎減移與固定為優先，途中持續觀察意識、瞳孔、呼吸、循環與神經學變化。</li>
+        </ul>
       </div>
     </section>
 
@@ -756,25 +803,8 @@
 
     const charted = {};
     window.onViewSwitch = function(viewId) {
-      if (viewId === 'view-burn' && !charted.burn) { initBurnArea(); charted.burn = true; }
       if (viewId === 'view-limb' && !charted.fracture) { initFractureBleed(); charted.fracture = true; }
     };
-
-    function initBurnArea() {
-      const c = document.getElementById('burnAreaChart');
-      if (!c || typeof Chart === 'undefined') return;
-      new Chart(c.getContext('2d'), {
-        type: 'radar',
-        data: {
-          labels: ['頭頸', '前軀幹', '後軀幹', '每一上肢', '每一下肢', '外陰部'],
-          datasets: [
-            { label: '成人', data: [9,18,18,9,18,1], borderColor: '#0284c7', backgroundColor: 'rgba(2,132,199,.16)', pointBackgroundColor: '#0284c7' },
-            { label: '小兒', data: [18,18,18,9,14,0], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,.14)', pointBackgroundColor: '#16a34a' }
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { r: { beginAtZero: true, max: 20, ticks: { stepSize: 5, showLabelBackdrop: false } } } }
-      });
-    }
 
     function initFractureBleed() {
       const c = document.getElementById('fractureBleedChart');
