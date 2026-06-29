@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT 讀書會 - 第八章 常見外傷評估、處置與情境操作</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/tailwind-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    body { font-family: 'Noto Sans TC', sans-serif; overflow: hidden; }
+    .fade-in { animation: fadeIn .28s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .nav-item { transition: all .2s ease; border-left: 4px solid transparent; }
+    .nav-item.active { background: #0284c7; color: #fff; border-left-color: #ea580c; }
+    .chapter-title { color: #1e293b; font-weight: 900; letter-spacing: 0; }
+    .page-tag { display: inline-block; background: #0284c7; color: #fff; padding: .25rem .75rem; border-radius: .25rem; font-size: .875rem; font-weight: 700; margin-bottom: .75rem; }
+    .card { background: #fff; border: 1px solid #e2e8f0; border-radius: .75rem; padding: 1.25rem; box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+    .section-label { display: inline-flex; align-items: center; gap: .5rem; font-size: 1.125rem; font-weight: 800; color: #1e293b; margin-bottom: .9rem; }
+    .section-label::before { content: ''; width: .7rem; height: 1.5rem; background: #0284c7; border-radius: .125rem; display: inline-block; }
+    .flow-node { background: white; border: 1px solid #e2e8f0; border-radius: .6rem; padding: .75rem 1rem; text-align: center; font-weight: 800; color: #1e293b; }
+    .flow-node.head { background: #1e293b; color: #fff; border-color: #1e293b; }
+    .flow-node.act { background: #e0f2fe; border-color: #0284c7; color: #075985; }
+    .flow-node.warn { background: #fef2f2; border-color: #dc2626; color: #991b1b; }
+    .flow-node.orange { background: #ffedd5; border-color: #ea580c; color: #9a3412; }
+    .flow-arrow::after { content: '↓'; display: block; text-align: center; color: #0284c7; font-size: 1rem; margin: .2rem 0; }
+    .acc-content { display: none; }
+    .acc-content.open { display: block; }
+    .grid-btn { cursor: pointer; transition: transform .15s, box-shadow .15s, background-color .15s; }
+    .grid-btn:hover { transform: translateY(-2px); }
+    .grid-btn.active { background: #0284c7; color: white; border-color: #0284c7; box-shadow: 0 8px 20px -8px rgba(2,132,199,.45); }
+    .data-table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid #e2e8f0; border-radius: .5rem; overflow: hidden; }
+    .data-table th { background: #1e293b; color: white; text-align: left; padding: .7rem .9rem; font-weight: 800; }
+    .data-table td { padding: .7rem .9rem; border-bottom: 1px solid #e2e8f0; background: #fff; color: #334155; vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: 0; }
+    .chart-container { position: relative; width: 100%; min-height: 300px; height: 38vh; max-height: 380px; }
+    .pill { display: inline-flex; align-items: center; background: #f1f5f9; color: #334155; border: 1px solid #e2e8f0; border-radius: 999px; padding: .3rem .65rem; font-size: .82rem; font-weight: 700; }
+    @media (max-width: 1023px) {
+      main { padding: 1.25rem !important; }
+      .chart-container { height: 320px; }
+    }
+  </style>
+</head>
+<body class="flex h-screen bg-ems-light text-slate-800">
+  <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+      <h1 class="text-xl font-bold text-white tracking-wide">第八章 外傷救護</h1>
+      <p class="text-xs text-ems-blue font-medium mt-1">Finn &amp; 51先 &amp; 米歇 &amp; 倚安 · 週二 21:00-22:00</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+      <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+      <button onclick="switchView('view-overview', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">本章總覽</span><span class="text-[11px] text-slate-400">P.252 - P.291 | 外傷流程地圖</span></button>
+      <button onclick="switchView('view-trauma', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">01 外傷總論</span><span class="text-[11px] text-slate-400">P.252 - P.253 | 現場評估 · ALS 判斷</span></button>
+      <button onclick="switchView('view-arrest', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">02 到院前心跳停止</span><span class="text-[11px] text-slate-400">P.254 | 大出血 · AED · CPR</span></button>
+      <button onclick="switchView('view-bleeding', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">03 出血與休克</span><span class="text-[11px] text-slate-400">P.255 - P.257 | 休克評估 · 輸液</span></button>
+      <button onclick="switchView('view-wound', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">04 傷口基本處置</span><span class="text-[11px] text-slate-400">P.258 - P.262 | 辨識→止血→固定</span></button>
+      <button onclick="switchView('view-burn', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">05 灼燙傷</span><span class="text-[11px] text-slate-400">P.263 - P.266 | 深度 · 面積 · 輸液</span></button>
+      <button onclick="switchView('view-head', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">06 頭部外傷</span><span class="text-[11px] text-slate-400">P.267 - P.269 | Cushing · 神經評估</span></button>
+      <button onclick="switchView('view-face', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">07 顏面外傷</span><span class="text-[11px] text-slate-400">P.270 - P.271 | 顱底徵象 · 呼吸道</span></button>
+      <button onclick="switchView('view-ent', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">08 眼耳鼻喉急症</span><span class="text-[11px] text-slate-400">P.272 - P.273 | 眼鼻口喉重點檢查</span></button>
+      <button onclick="switchView('view-spine', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">09 脊椎外傷</span><span class="text-[11px] text-slate-400">P.274 - P.275 | 損傷徵象 · 固定後送</span></button>
+      <button onclick="switchView('view-chest', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">10 胸部外傷</span><span class="text-[11px] text-slate-400">P.276 - P.279 | 氣胸 · 血胸 · 連枷胸</span></button>
+      <button onclick="switchView('view-abdomen', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">11 腹部外傷</span><span class="text-[11px] text-slate-400">P.280 - P.282 | 臟器損傷 · FAST</span></button>
+      <button onclick="switchView('view-limb', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">12 肢體外傷</span><span class="text-[11px] text-slate-400">P.283 - P.286 | 骨折 · PRICE · 截肢</span></button>
+      <button onclick="switchView('view-multi', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">13 多重性或重大外傷</span><span class="text-[11px] text-slate-400">P.287 - P.291 | Load and Go · 檢傷分類</span></button>
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">返回章節列表</a>
+  </nav>
+
+  <main class="flex-1 overflow-y-auto p-8 md:p-12 bg-slate-50/50">
+    <section id="view-overview" class="view-section fade-in block">
+      <header class="mb-8">
+        <div class="page-tag">P.252 - P.291</div>
+        <h2 class="chapter-title text-3xl">第八章 常見外傷評估、處置與情境操作</h2>
+        <p class="text-ems-gray mt-2 text-lg">本章以外傷病人到院前救護為主軸：先穩住生命徵象，再依部位辨識致命傷口，完成必要處置、固定與後送判斷。</p>
+      </header>
+
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+        <div class="card xl:col-span-2">
+          <div class="section-label">全章判讀順序</div>
+          <div class="space-y-0 max-w-3xl mx-auto">
+            <div class="flow-node head flow-arrow">現場安全、感染控制、支援需求</div>
+            <div class="flow-node warn flow-arrow">X：立即可見且持續之外出血先止血</div>
+            <div class="flow-node act flow-arrow">A/B/C/D/E 初級評估與必要處置</div>
+            <div class="flow-node flow-arrow">依部位進入頭、臉、眼耳鼻喉、脊椎、胸、腹、肢體流程</div>
+            <div class="flow-node act flow-arrow">次級評估、重點式身體檢查與反覆評估</div>
+            <div class="flow-node head">後送適當醫院或外傷中心</div>
+          </div>
+        </div>
+        <div class="card border-t-4 border-t-ems-orange">
+          <div class="section-label">讀書會抓重點</div>
+          <ul class="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <li><strong>流程不是背圖：</strong>每個部位流程都在問「有沒有致命傷口」與「哪些必要處置不能等」。</li>
+            <li><strong>外傷先看會死的：</strong>大出血、呼吸道阻塞、呼吸困難、休克、意識變化、神經缺損。</li>
+            <li><strong>後送是處置的一部分：</strong>危急個案不要在現場追求完整治療，重點是快速穩定與轉送。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="card"><span class="pill mb-3">XABCDE</span><h3 class="font-bold text-ems-navy mb-2">初級評估</h3><p class="text-sm text-slate-600">控制致命外出血、保護頸椎、處理呼吸道與呼吸、循環、失能與暴露。</p></div>
+        <div class="card"><span class="pill mb-3">Load and Go</span><h3 class="font-bold text-ems-navy mb-2">現場處置時間</h3><p class="text-sm text-slate-600">重大外傷除必要 XABCDE 與頸椎減移外，現場處置時間儘量控制在 10 分鐘內，迅速後送適當外傷中心。</p></div>
+        <div class="card"><span class="pill mb-3">反覆評估</span><h3 class="font-bold text-ems-navy mb-2">運送途中仍會惡化</h3><p class="text-sm text-slate-600">生命徵象、意識、疼痛、遠端循環與呼吸型態須持續追蹤。</p></div>
+      </div>
+    </section>
+
+    <section id="view-trauma" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.252 - P.253</div>
+        <h2 class="chapter-title text-3xl">01 外傷總論</h2>
+        <p class="text-ems-gray mt-2 text-lg">外傷病人的處置核心，是用結構化評估快速找出致命問題，並決定是否需要立即後送。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">前言與分類</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>事故傷害是重要死因，年輕族群受影響尤其明顯；到院前處置會影響存活率與預後。</li>
+            <li>外傷可依受傷部位分類：頭、頸、胸、腹、骨盆、四肢、背部等。</li>
+            <li>也可依受傷機轉分類：加減速傷害、輾壓傷、鈍挫傷、穿刺傷、爆炸傷、能量化學傷害等。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">現場到初級評估</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>現場評估：</strong>自我防護、現場安全、受傷機轉、傷者數量、支援與特殊救援資源。</li>
+            <li><strong>初級評估：</strong>接觸前判斷是否需要頸椎減移；若不確定，一律先視為頸椎傷害。</li>
+            <li>依 XABCDE 完成初評、病史詢問、輔助檢查與重點式身體檢查，必要時聯絡指揮中心或急診。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">外傷危急個案判斷</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-red-50 border border-red-100 rounded-lg p-3"><strong class="text-ems-danger">生命徵象</strong><br>GCS≤14、呼吸過快或過慢、脈搏過快或過慢、收縮壓過高或過低、微血管回填延長、體溫異常、SpO2&lt;90%。</div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><strong class="text-ems-orange">外傷部位</strong><br>大面積燒傷、頭頸軀幹或肘膝以上穿刺傷、大量皮下氣腫、氣管支氣管損傷、內臟外露、長骨或骨盆骨折等。</div>
+            <div class="bg-blue-50 border border-blue-100 rounded-lg p-3"><strong class="text-ems-blue">外傷機轉</strong><br>高處墜落、脫困時間長、遠端肢體被輾壓、車內拋出、同車死亡、高能量撞擊等。</div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><strong class="text-ems-navy">特殊情況</strong><br>血糖過低或 high、疑似急性腦中風、缺血性胸痛、持續抽搐、中毒、小兒評估危急、孕產婦、毒蛇咬傷、溺水等。</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-label">後送依據</div>
+          <p class="text-sm leading-relaxed text-slate-700">現場評估與處置應以穩定病人為優先，並以無線電回報目前狀況。依緊急醫療救護法與各地作業程序，將緊急傷患送至急救責任醫院或就近適當醫療機構；若符合重大外傷條件，優先送外傷中心。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-arrest" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.254</div>
+        <h2 class="chapter-title text-3xl">02 外傷病人到院前心跳停止救護流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">外傷心跳停止處理原則接近心跳停止流程，但要同時處理大出血並避免延誤後送。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">流程判讀</div>
+          <div class="space-y-0">
+            <div class="flow-node head flow-arrow">外傷病人現場流程判定為到院前心跳停止</div>
+            <div class="flow-node warn flow-arrow">是否有立即可見之大出血？有則立即止血</div>
+            <div class="flow-node act flow-arrow">胸部按壓減少中斷，使用 AED</div>
+            <div class="flow-node flow-arrow">判斷是否建議去顫</div>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flow-node warn">建議去顫：去顫後高品質 CPR，給氧與輔助呼吸道</div>
+              <div class="flow-node act">不建議去顫：持續高品質 CPR，給氧與輔助呼吸道</div>
+            </div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node act flow-arrow">持續 CPR，收拾器材，上擔架床後上救護車</div>
+            <div class="flow-node head">救護車內救護流程</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-label">讀圖筆記</div>
+          <ul class="space-y-3 text-sm leading-relaxed text-slate-700">
+            <li>若大出血使血容量快速下降，心跳停止後單靠 CPR 效果有限，必須同步止血。</li>
+            <li>流程重點是減少按壓中斷、給氧與建立輔助呼吸道，並儘速轉送急救責任醫院或適當機構。</li>
+            <li>外傷心跳停止仍要注意「Load and Go」概念，避免在現場做過多非必要處置。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-bleeding" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.255 - P.257</div>
+        <h2 class="chapter-title text-3xl">03 出血與休克</h2>
+        <p class="text-ems-gray mt-2 text-lg">出血與休克的判讀，要同時看「血液是否流失」與「組織灌流是否不足」。休克指數在本章以文字判讀，不使用圖表。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">出血與休克類型</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>外出血：</strong>血液流出體外；動脈出血量多且快，不易止血；靜脈較緩慢；微血管可直接加壓。</li>
+            <li><strong>內出血：</strong>血液溢散至體內，外觀不一定明顯，需由機轉、疼痛、休克徵象推測。</li>
+            <li><strong>休克：</strong>組織灌流不足造成細胞缺氧、代謝受阻，最後導致細胞死亡。</li>
+            <li><strong>低血容性：</strong>血液或體液流失過多，外傷最常見為出血性休克。</li>
+            <li><strong>非低血容性：</strong>包含心因性、神經性、阻塞性、過敏性與敗血性休克。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">六種休克速讀</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div class="bg-red-50 border border-red-100 rounded-lg p-3"><strong>出血性</strong><br>外傷最常見，與出血量多寡有關；非外傷低血容性可見於體液喪失，如消化道出血。</div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><strong>心因性</strong><br>心臟功能受損，如心肌挫傷、心臟損傷。</div>
+            <div class="bg-blue-50 border border-blue-100 rounded-lg p-3"><strong>神經性</strong><br>神經損傷造成交感神經失效，如脊椎受傷。</div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><strong>阻塞性</strong><br>氣體或液體壓迫心臟或栓塞，如心包膜填塞、張力性氣胸、肺栓塞。</div>
+            <div class="bg-yellow-50 border border-yellow-100 rounded-lg p-3"><strong>過敏性</strong><br>嚴重過敏反應，常見於食物、藥物、蜂蛇蟲咬。</div>
+            <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-3"><strong>敗血性</strong><br>感染或嚴重發炎造成敗血症。</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="card lg:col-span-2">
+          <div class="section-label">休克評估七點</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>意識：焦慮、躁動、意識程度改變，要懷疑腦部缺氧或損傷。</li>
+            <li>呼吸道：意識不清需評估暢通，過敏性休克可能有支氣管收縮、分泌物增加、黏膜水腫或喘鳴。</li>
+            <li>呼吸：休克代償會使呼吸變快、變深，必要時給予正壓通氣與足夠氧氣。</li>
+            <li>循環：早期心搏加快與血管收縮；嚴重時灌流不足，脈搏持續快、收縮壓下降、皮膚蒼白或發紺、濕冷，微血管回填延長或周邊脈搏摸不到。</li>
+            <li>失能：以 GCS 量化腦部受傷程度，嚴重者快速送至中度或重度級急救責任醫院。</li>
+            <li>暴露：檢查是否有致命性傷害造成休克。</li>
+            <li>輔助檢查：血壓、血氧、脈搏、體溫、血糖、瞳孔、肺音等；休克指數 HR/SBP &gt; 1 應懷疑休克。</li>
+          </ol>
+        </div>
+        <div class="card border-t-4 border-t-ems-orange">
+          <div class="section-label">處置重點</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>優先處理呼吸道與呼吸，必要時建立呼吸道、正壓通氣、給氧。</li>
+            <li>減少血液喪失：止血、包紮、骨折固定。</li>
+            <li>靜脈輸液以乳酸林格氏液為首選，其次生理食鹽水；成人首次以 1 公升為限，小於 40 kg 兒童 20 ml/kg。</li>
+            <li>輸液目標是恢復灌流與供氧，維持比正常稍低的血壓並快送；未確實止血前避免大量輸液造成稀釋性凝血異常。</li>
+            <li>維持體溫，適當姿勢上擔架床並保護隱私。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-6">
+        <div class="section-label">休克指數純文字判讀</div>
+        <p class="text-sm leading-relaxed text-slate-700">休克指數 = 心跳速率 / 收縮壓。正常約小於 1；若大於 1，代表心跳相對收縮壓偏快，可能反映代償中的低灌流或休克。它不能單獨診斷休克，但適合搭配意識、皮膚、末梢循環、血壓、出血量與受傷機轉一起判讀。</p>
+      </div>
+    </section>
+
+    <section id="view-wound" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.258 - P.262</div>
+        <h2 class="chapter-title text-3xl">04 傷口基本處置</h2>
+        <p class="text-ems-gray mt-2 text-lg">傷口處理順序是傷口辨識、止血、清潔、覆蓋敷料、包紮、固定；若有立即可見且持續外出血，止血優先於清潔。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+          <button onclick="showInfo('wound','contusion',this)" data-grid="wound" class="grid-btn active bg-white border border-slate-300 rounded-lg p-3 font-bold">挫傷</button>
+          <button onclick="showInfo('wound','hematoma',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">皮下血腫</button>
+          <button onclick="showInfo('wound','abrasion',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">擦傷</button>
+          <button onclick="showInfo('wound','laceration',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">撕裂傷</button>
+          <button onclick="showInfo('wound','cut',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">切割傷</button>
+          <button onclick="showInfo('wound','penetrating',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">穿刺傷</button>
+          <button onclick="showInfo('wound','bite',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">咬傷</button>
+          <button onclick="showInfo('wound','avulsion',this)" data-grid="wound" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">剝離傷</button>
+        </div>
+        <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md">
+          <h3 id="wound-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">傷口類型</h3>
+          <div id="wound-body" class="text-slate-300 space-y-3 leading-relaxed text-sm"></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">處理原則與止血方法</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>先考慮危及生命問題，如呼吸道遇阻、大出血、休克與生命徵象不穩。</li>
+            <li>完整評估，不只依主訴檢查傷口；去除戒指、首飾等可能阻礙血流物品。</li>
+            <li><strong>加壓止血：</strong>最有效方式，至少 5 分鐘；若無法控制再考慮彈繃加壓或止血帶。</li>
+            <li><strong>止血帶：</strong>適用肢體大量、搏動性或持續性出血，位置在出血處上方 5-8 公分；拉緊、扭轉至止血並記錄時間。</li>
+            <li><strong>填塞止血：</strong>適合肢體與軀幹交界處，如鼠蹊、腋下、頸部；以含止血成分紗布優先，填至滿後加壓 3 至 10 分鐘並固定包紮。</li>
+            <li>穿刺異物不要拔除；胸部異物已拔除時，需考慮氣胸可能。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">清潔、敷料、包紮、固定</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>非乾淨傷口以生理食鹽水沖洗；不易沖洗處可用濕紗或棉棒配合清潔。</li>
+            <li>敷料可用生理食鹽水沾濕紗布；覆蓋時不要滑動，須完全覆蓋傷口。</li>
+            <li>若血滲透敷料，不拆原本敷料與固定物，由外面繼續加蓋敷料。</li>
+            <li>包紮前先控制出血，覆蓋敷料後再包紮；四肢包紮需露出末端以觀察循環。</li>
+            <li>固定前先穩定生命徵象；懷疑骨折者皆當作骨折，固定範圍超過近端與遠端關節，前後檢查遠端脈搏、感覺、運動。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-6">
+        <div class="section-label">傷口處理流程</div>
+        <div class="grid grid-cols-1 md:grid-cols-7 gap-2 text-sm">
+          <div class="flow-node">檢視傷口類型與嚴重度</div>
+          <div class="flow-node warn">立即且持續出血：加壓止血</div>
+          <div class="flow-node warn">仍出血：再加壓或止血帶</div>
+          <div class="flow-node act">無持續出血：清潔傷口</div>
+          <div class="flow-node act">覆蓋敷料</div>
+          <div class="flow-node">判斷骨折並阻礙固定或搬運</div>
+          <div class="flow-node head">固定前後檢查循環與神經</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-burn" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.263 - P.266</div>
+        <h2 class="chapter-title text-3xl">05 灼燙傷</h2>
+        <p class="text-ems-gray mt-2 text-lg">灼燙傷評估要看原因、深度、面積、部位、年齡與合併疾病；一度灼傷不列入輸液計算。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">皮膚與灼燙傷分類</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>皮膚是人體最大器官，具調節體溫、保護、感覺與代謝功能；成人皮膚面積約 1.5-2 m²。</li>
+            <li>由外而內分為表皮、真皮、皮下組織；真皮含毛囊、血管、皮脂腺、淋巴與神經感覺受體。</li>
+            <li>灼燙傷種類包含熱灼傷、電灼傷、化學灼傷、輻射灼傷、吸入性傷害與冷凍傷。</li>
+            <li>大型灼燙傷會造成休克、體溫喪失與感染風險。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">深度與嚴重度</div>
+          <div class="overflow-x-auto">
+            <table class="data-table text-sm">
+              <thead><tr><th>深度</th><th>皮膚損傷</th><th>外觀</th><th>感覺</th></tr></thead>
+              <tbody>
+                <tr><td>一度</td><td>表皮</td><td>紅、乾</td><td>疼痛</td></tr>
+                <tr><td>二度</td><td>表皮至真皮乳頭層或基底層</td><td>紅濕或白乾、水泡</td><td>疼痛或不敏感</td></tr>
+                <tr><td>三度</td><td>表皮至真皮全層或更深</td><td>死白、焦黑、焦痂或乾硬如皮革</td><td>消失</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">圖 8-6 九的原則評估成人及小兒灼燙傷面積</div>
+          <figure class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <img src="./assets/img/chap8-fig8-6-rule-of-nines.jpg" alt="圖 8-6 九的原則評估成人及小兒灼燙傷面積" class="w-full max-h-[560px] object-contain rounded">
+          </figure>
+        </div>
+        <div class="card">
+          <div class="section-label">面積估算</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>九的原則：</strong>成人與大於 10 歲兒童適用；二度與三度列入計算。成人：頭頸 9%、前軀幹 18%、後軀幹 18%、每上肢 9%、每下肢 18%、外陰部 1%。</li>
+            <li><strong>小兒差異：</strong>頭頸比例較大，約 18%；每下肢約 14%；外陰部 0%。</li>
+            <li><strong>手掌原則：</strong>成人或兒童小於 10% 或不規則灼傷可用；手掌表面約全身 0.5%，含五指合併約 1%。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">灼燙傷外傷病人到院前處置流程</div>
+          <div class="space-y-0 max-w-2xl mx-auto">
+            <div class="flow-node head flow-arrow">外傷病人緊急救護現場流程：判定為灼燙傷病患，先除污處置</div>
+            <div class="flow-node act flow-arrow">排除造成灼燙傷的熱源</div>
+            <div class="flow-node orange flow-arrow">化學灼燙傷、輻射灼燙傷？</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="flow-node act">否：進入重點式身體檢查</div>
+              <div class="flow-node warn">是：先進行止血處置後，再進入重點式身體檢查</div>
+            </div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node act flow-arrow">重點式身體檢查</div>
+            <div class="flow-node act flow-arrow">測量血壓及血氧濃度等輔助檢查</div>
+            <div class="flow-node act flow-arrow">評估灼燙傷深度與範圍</div>
+            <div class="flow-node flow-arrow">給予氧氣等必要處置</div>
+            <div class="flow-node flow-arrow">灼燙傷口處置</div>
+            <div class="flow-node orange flow-arrow">靜脈輸液注射</div>
+            <div class="flow-node head">救護車內救護流程</div>
+          </div>
+        </div>
+        <div class="card border-t-4 border-t-ems-orange">
+          <div class="section-label">輸液公式</div>
+          <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-center font-bold text-ems-navy mb-4">24 小時靜脈輸液量 = 2 ml × 體重(kg) × 灼燙面積(%)</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>前 8 小時給一半，後 16 小時給另一半。</li>
+            <li>一度灼傷不列入計算。</li>
+            <li>若使用「十的法則」，可將灼傷面積四捨五入後換算每小時輸液量；實務上重點是依病人反應調整。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-head" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.267 - P.269</div>
+        <h2 class="chapter-title text-3xl">06 頭部外傷救護流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">頭部外傷要同時顧腦灌流、氧合與頸椎保護，避免低血壓、低血氧與過度換氣。</p>
+      </header>
+      <div class="card mb-6">
+        <div class="section-label">圖 8-8 頭部外傷救護流程</div>
+        <figure class="bg-white rounded-lg border border-slate-200 p-4">
+          <img src="./assets/img/chap8-fig8-8-head-trauma-flow.jpg" alt="圖 8-8 頭部外傷救護流程" class="w-full max-h-[640px] object-contain">
+        </figure>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">致命傷口與必要處置</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>致命頭部傷口包含槍傷、刀傷、穿刺傷、腦部組織外露等；處理時注意是否影響腦部運作、心跳與呼吸速率。</li>
+            <li>大而深或嚴重撕裂傷可能因頭皮血供豐富導致大量出血，應避免污染並直接加壓；若有頭骨凹陷或疑似開放性顱骨骨折，不可直接施加壓力。</li>
+            <li>異物插入不可強行移除，固定及止血後儘速送醫。</li>
+            <li>頭部血腫、腫脹、骨折或意識改變，都需高度懷疑腦部損傷。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">重點式身體檢查</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>控制致命性外出血，若低血壓要找其他低血壓原因，尤其出血。</li>
+            <li>未排除頸椎受傷前，實施頸椎減移。</li>
+            <li>評估意識與情緒焦慮程度，外傷位置或機轉不同可能造成意識改變。</li>
+            <li>維持呼吸道通暢與氧合，目標 SpO2 約 90-94%；意識不清可大口徑抽吸避免吸入性傷害。</li>
+            <li>評估呼吸：急性頭部外傷可能有 Cushing reflex，出現血壓增加、呼吸型態改變與心跳變慢。</li>
+            <li>評估循環：注意休克、血胸、腹腔出血、長骨出血、脊髓性休克；明顯凹陷處不可過度壓迫。</li>
+            <li>評估失能：GCS、瞳孔大小與對光反應、眼球活動、四肢感覺與運動功能。</li>
+            <li>暴露檢查被衣物遮蓋的傷處。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card mt-6">
+        <div class="section-label">頭部外傷處置口訣</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+          <div class="bg-blue-50 border border-blue-100 rounded-lg p-3"><strong>給氧氣</strong><br>血氧維持 &gt;90-94%。</div>
+          <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><strong>顧血壓</strong><br>維持收縮壓 &gt;110 mmHg。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><strong>ET 保四十</strong><br>EtCO2 維持 35-40 mmHg，不低於 30。</div>
+          <div class="bg-red-50 border border-red-100 rounded-lg p-3"><strong>換氣莫太快</strong><br>成人約 10/min，小兒約 20/min，嬰兒約 25/min。</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <div class="card">
+          <div class="section-label">每五分鐘重複評估五大事項</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>生命徵象：血壓與脈搏，尤其避免低血壓。</li>
+            <li>昏迷指數：追蹤 GCS 是否下降或持續變差。</li>
+            <li>血氧 SpO2：持續確認氧合是否足夠。</li>
+            <li>通氣執行者：讓專注通氣的救護技術員穩定控制換氣。</li>
+            <li>EtCO2 數值：維持 35-40 mmHg，避免低於 30 mmHg。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">每五分鐘生命徵象追蹤</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>昏迷指數變化。</li>
+            <li>EtCO2 數值。</li>
+            <li>瞳孔大小與左右差異。</li>
+            <li>已給輸液量與血壓反應。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="card mt-6 border-t-4 border-t-ems-orange">
+        <div class="section-label">上擔架床與搬運姿勢</div>
+        <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+          <li>將外傷病人以適當姿勢搬運至擔架床，依病況選擇坐臥、半坐臥、平躺或其他方式，並注意保護隱私。</li>
+          <li>若沒有頸椎受傷問題，可採半坐臥或坐姿，以減輕腦部壓力。</li>
+          <li>若頸椎受傷尚未排除，搬運時以頸椎減移與固定為優先，途中持續觀察意識、瞳孔、呼吸、循環與神經學變化。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="view-face" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.270 - P.271</div>
+        <h2 class="chapter-title text-3xl">07 顏面外傷病人緊急救護處置流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">顏面外傷常伴隨出血、嘔吐物、斷裂牙齒與顱底骨折徵象，最大風險常是呼吸道阻塞。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">致命性傷口與處置</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>顏面常見致命傷口包含槍傷、穿刺傷、刀傷、大而深傷口、嚴重撕裂、顏面骨折、眼眶瘀青、耳後瘀青、鼻漏與耳漏。</li>
+            <li>大而深或嚴重撕裂傷要避免污染並直接加壓止血；異物插入不可移除，固定止血後儘速送醫。</li>
+            <li>眼眶瘀青或鼻漏要懷疑前顱底骨折；耳漏、耳後瘀青或巴氏徵候要懷疑中顱底或後顱底骨折。</li>
+            <li>顏面外傷容易因鼻腔、口腔出血、嘔吐物與斷裂牙齒阻塞呼吸道，可用抽吸、口咽或鼻咽、聲門上呼吸道等維持通暢。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">重點檢查</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>軟組織：</strong>臉頸血供豐富，出血、嘔吐物與斷牙可能造成阻塞；必要時抽吸或輔助呼吸道。</li>
+            <li><strong>顏面骨折：</strong>下顎、臉中央骨、顴骨、眼眶、鼻骨等；徵象包括臉不對稱、咬合不正、鼻中隔移位、瘀血、麻木、紅腫與疼痛。</li>
+            <li><strong>附屬器官：</strong>耳朵、眼睛、牙齒可單獨或合併受傷；剝離組織需以潤濕生理食鹽水紗布覆蓋並包紮保存。</li>
+            <li><strong>頸椎：</strong>顏面骨折可同時合併頸椎損傷，未排除前維持減移。</li>
+            <li><strong>循環與失能：</strong>評估傷口位置、大小、深度與受傷部位；附屬器官受傷造成失能評估困難時需記錄。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-6">
+        <div class="section-label">名詞辨識</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>浣熊眼 Raccoon's eyes</strong><br>蝶骨底部骨折造成眼眶周圍瘀青，需懷疑顱底骨折。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>巴氏徵候 Battle's sign</strong><br>耳後乳突瘀青，需懷疑顱底骨折。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-ent" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.272 - P.273</div>
+        <h2 class="chapter-title text-3xl">08 眼耳鼻喉急症與外傷緊急救護處置流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">眼耳鼻喉外傷處理要兼顧功能保留、感染預防與呼吸道安全。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">眼部與耳部</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>眼部評估：</strong>病史、受傷機轉、視力、瞳孔反應與眼球運動；化學性傷害需立即大量清水沖洗。</li>
+            <li>眼球挫傷、穿刺、異物、化學傷、動物咬抓等需避免壓迫眼球；隱形眼鏡不應任意取下，化學傷可在醫師指示下取下。</li>
+            <li><strong>耳部外傷：</strong>撕裂、挫傷、低溫、化學、耳膜破裂與氣壓傷。撕裂或挫傷以直接加壓止血、冰敷降腫。</li>
+            <li>耳部組織脫落應找尋並以濕紗包覆，放乾淨塑膠袋後置於有冰塊容器，連同病人送醫。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">鼻、口、喉</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>鼻部外傷：</strong>鼻部血供好，出血不易止住；可用拇指與食指捏兩側鼻翼至少 10 分鐘，並用冰敷收縮血管。</li>
+            <li>鼻內異物可能越推越深，不建議自行取出，交由醫護處理。</li>
+            <li><strong>口部外傷：</strong>成年人 32 顆牙。下巴或顏面骨折可能造成牙齒斷裂與脫落，需防止吸入與阻塞。</li>
+            <li>脫落恆牙 2 小時內仍可能重植，放入冰牛奶或生理食鹽水送急診；只拿牙冠，不碰牙根。</li>
+            <li><strong>喉部外傷：</strong>任何傷害都可能造成出血或腫脹危及上呼吸道；頸部外傷須注意頸椎減移，異物穿刺不可自行移除。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-spine" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.274 - P.275</div>
+        <h2 class="chapter-title text-3xl">09 脊椎外傷</h2>
+        <p class="text-ems-gray mt-2 text-lg">脊椎外傷可由鈍挫或穿刺造成壓迫、直接損傷或血流中斷；第四節以上頸椎損傷可能影響呼吸。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">高風險受傷機轉</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>頭、頸、軀幹或骨盆受到劇烈撞擊，例如倒塌結構壓住或外力襲擊。</li>
+            <li>造成頸部或軀幹加速、減速或側彎旋轉，例如交通事故、行人撞擊或爆炸。</li>
+            <li>任何高度墜落或跌倒，尤其老人。</li>
+            <li>從機踏車或動力交通工具中彈出或摔落。</li>
+            <li>淺水處跳水事件。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">明顯損傷徵象</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>頭部或脊椎外傷、主訴頸部疼痛、脊椎痛、四肢麻或無力。</li>
+            <li>損傷處以下雙側癱瘓、部分癱瘓、頸部穿刺傷或鎖骨以上傷口。</li>
+            <li>意識不清、神經性休克、男性陰莖持續勃起、脊椎解剖學變形。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">必要處置</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>避免搬運中造成二次傷害，如不必要移動、缺氧、水腫與休克。</li>
+            <li>適當固定：頸圈、長背板等脊椎保護器材，給氧並維持靜脈灌流，迅速後送有能力處理之醫院。</li>
+            <li>疑似脊椎外傷檢查背部瘀傷、傷口、壓痛，並反覆評估神經功能。</li>
+            <li>若以長背板固定且途中嘔吐，病人與背板同時傾向一側，以免吸入性肺炎。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">上擔架床</div>
+          <p class="text-sm leading-relaxed text-slate-700">胸部脊椎外傷者建議平躺姿勢送醫；若使用長背板長程運送，骨突處需鋪軟墊避免壓瘡。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-chest" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.276 - P.279</div>
+        <h2 class="chapter-title text-3xl">10 胸部外傷病人緊急救護流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">胸部外傷的重點是找出呼吸困難、氣胸、血胸、心包膜填塞與連枷胸等致命問題。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+          <button onclick="showInfo('chest','openPtx',this)" data-grid="chest" class="grid-btn active bg-white border border-slate-300 rounded-lg p-3 font-bold">開放性氣胸</button>
+          <button onclick="showInfo('chest','tensionPtx',this)" data-grid="chest" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">張力性氣胸</button>
+          <button onclick="showInfo('chest','airwayTear',this)" data-grid="chest" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">氣管支氣管破裂</button>
+          <button onclick="showInfo('chest','hemo',this)" data-grid="chest" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">大量血胸</button>
+          <button onclick="showInfo('chest','tamponade',this)" data-grid="chest" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">心包膜填塞</button>
+          <button onclick="showInfo('chest','flail',this)" data-grid="chest" class="grid-btn bg-white border border-slate-300 rounded-lg p-3 font-bold">連枷胸</button>
+        </div>
+        <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md">
+          <h3 id="chest-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">胸部致命外傷</h3>
+          <div id="chest-body" class="text-slate-300 space-y-3 leading-relaxed text-sm"></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">必要處置</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>SpO2 &lt; 94% 給氧，依呼吸狀態選擇適當氧氣器材與流量。</li>
+            <li>呼吸道阻塞有鼾音時可徒手或輔助呼吸道維持暢通，有雜音可抽吸。</li>
+            <li>開放性氣胸使用不透氣敷料三邊貼一邊留孔，或通風胸部密封貼。</li>
+            <li>疑似張力性氣胸、氣管支氣管破裂、大量血胸或心包膜填塞，除給氧與必要處置外，應儘速送醫。</li>
+            <li>大量血胸給高濃度氧氣並考慮大量輸液；心包膜填塞可給輸液增加靜脈壓、改善心輸出。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">胸部重點式身體檢查</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>視診胸部起伏是否對稱、是否有傷口、胸壁不穩定或奇異式呼吸。</li>
+            <li>觸診壓痛、胸壁骨折部位不穩定、兩側是否對稱。</li>
+            <li>聽診兩側肺音，注意呼吸困難、血氧低、休克、扣診濁音或鼓音、頸靜脈怒張等。</li>
+            <li>連枷胸是兩根以上相鄰肋骨每根至少兩處骨折，造成吸氣胸壁凹陷、吐氣凸出的奇異式呼吸。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-abdomen" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.280 - P.282</div>
+        <h2 class="chapter-title text-3xl">11 腹部外傷病人緊急救護流程</h2>
+        <p class="text-ems-gray mt-2 text-lg">腹部外傷初期症狀可能不明顯，常需由機轉、休克與身體檢查推估內出血。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">評估與判定</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>腹部器官分為實質器官、中空器官與血管；鈍挫可造成肝脾破裂、中空器官破裂與腸繫膜撕裂。</li>
+            <li>穿刺傷主要併發症為血管或實質器官出血；刀傷常傷肝臟、小腸，槍傷常傷小腸與大腸。</li>
+            <li>疑似腹部實質器官傷害，外傷中心不以手術探查為主，而以觀察有無低血容性休克或腹膜炎為主。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">特定腹部外傷症候</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>脾臟：</strong>鈍挫最常見；左上腹傷口、腹痛腹脹、休克，常合併左下胸廓傷與左肩放射痛。</li>
+            <li><strong>肝臟：</strong>腹部最大實質器官，右上腹或上腹撞擊、穿刺都要懷疑；常合併右下胸廓傷與右肩放射痛。</li>
+            <li><strong>小腸：</strong>腹部槍傷最常受損器官；初期可能只有腹痛，無腹膜炎仍不能排除。</li>
+            <li><strong>胰臟、十二指腸：</strong>外力直接撞擊上腹、車把撞擊等；上腹瘀青、傷口、上腹痛放射背部。</li>
+            <li><strong>腎臟：</strong>腰背部撞擊，腰背瘀青、傷口、疼痛與血尿。</li>
+            <li><strong>骨盆：</strong>高能量撞擊，疼痛壓痛、會陰瘀青、陰囊腫脹或尿道口血；不穩定骨盆可能造成大量後腹腔出血。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">必要處置</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>血氧 &lt;94% 給氧，依呼吸狀態選擇器材。</li>
+            <li>臟器外露以潤濕無菌紗布覆蓋，再以適當敷料包紮；不可將臟器塞回腹內。</li>
+            <li>穿刺物未移除時，到院前不可切除，應在不影響送醫下妥善固定或截短。</li>
+            <li>有休克時先控制出血並給適當輸液；無外傷性腦損傷時，可維持目標收縮壓約 80-90 mmHg。</li>
+            <li>不穩定骨盆骨折應適當固定，優先使用骨盆固定帶；無產品化設備時可用 KED 或大件被單包覆。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">FAST 與上擔架床</div>
+          <p class="text-sm leading-relaxed text-slate-700">重點身體檢查包含視診腹部瘀傷、傷口或鼓脹，觸診壓痛；腰側或肚臍周圍瘀傷可能提示後腹腔出血但常延遲。FAST 可評估心包膜、肝周、脾周與骨盆區是否出血。搬運時建議平躺並屈膝。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-limb" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.283 - P.286</div>
+        <h2 class="chapter-title text-3xl">12 肢體外傷（肌肉骨骼外傷）</h2>
+        <p class="text-ems-gray mt-2 text-lg">肢體外傷雖少立即致命，但骨骼肌肉傷害可造成大量出血、肢體殘缺與後續失能。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">肌肉骨骼傷害與常見類型</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>約 85% 外傷病人有肌肉骨骼損傷，多數不是立即致命；但嚴重者可造成失血、肢體殘缺甚至危及生命。</li>
+            <li>骨骼系統由肌肉、肌腱、骨骼、韌帶構成；成人約 206 塊骨，肌肉約 650 條。</li>
+            <li>常見型態：擦傷、撕裂傷、穿刺傷、扭傷、拉傷、骨折與脫臼。</li>
+            <li>扭傷與拉傷處理原則為 PRICE：保護、休息、冰敷、壓迫、抬高；必要時夾板固定。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">骨折出血風險盤</div>
+          <div class="chart-container"><canvas id="fractureBleedChart"></canvas></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">骨折出血量表</div>
+          <div class="overflow-x-auto">
+            <table class="data-table text-sm">
+              <thead><tr><th>骨折部位</th><th>預估出血量</th><th>骨折部位</th><th>預估出血量</th></tr></thead>
+              <tbody>
+                <tr><td>肋骨</td><td>125 cc</td><td>脛、腓骨</td><td>500-1000 cc</td></tr>
+                <tr><td>橈、尺骨</td><td>250-500 cc</td><td>股骨</td><td>1000-2000 cc</td></tr>
+                <tr><td>肱骨</td><td>500-750 cc</td><td>骨盆</td><td>1000 cc-大量</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-label">固定原則</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>穩定生命徵象為第一優先；下肢、骨盆或多重骨折若不穩或危急，不採個別固定，直接固定在長背板後送。</li>
+            <li>懷疑骨折者都當作骨折處理；固定目的在限制移動、降低疼痛與軟組織再傷害，並控制出血。</li>
+            <li>儘量減少移動，告知病人即將動作；顯露傷處，固定工具加護墊。</li>
+            <li>固定範圍超過骨折近端與遠端關節；固定前後評估遠端脈搏、感覺、運動與末梢循環。</li>
+            <li>若原姿勢固定會阻礙搬運，可嘗試拉直後再固定；骨突處加護墊，固定鬆緊合宜。</li>
+          </ol>
+        </div>
+        <div class="card">
+          <div class="section-label">截（斷）肢處置</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>四肢有截肢或組織大量出血，優先止血，必要時使用止血帶。</li>
+            <li>截肢處以乳酸林格氏液或生理食鹽水輕沖，無菌紗布止血包紮固定。</li>
+            <li>斷肢以潤濕無菌紗布覆蓋包紮，置入乾淨塑膠袋，再置於含冰敷包或冰塊的第二層袋中，保持隔水保冰；不可直接冷凍或直接接觸冰塊。</li>
+            <li>袋外標記斷肢位置、時間與姓名，連同病人送至最近能處理醫療機構；不可為尋找斷肢延誤送醫。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">肢體重點檢查</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>初評暴露時注意肢體腫脹變形、骨盆或長骨骨折造成的內外出血。</li>
+            <li>次評從頭到腳、前後與洞看洞檢查，找肢體失能外傷。</li>
+            <li>比較兩側肢體是否對稱，評估遠端脈搏、感覺、運動、灌流與膚色。</li>
+            <li>局部肢體脈搏異常、冰冷、蒼白或感覺運動異常，需懷疑腔室症候群。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-multi" class="view-section hidden">
+      <header class="mb-8">
+        <div class="page-tag">P.287 - P.291</div>
+        <h2 class="chapter-title text-3xl">13 多重性或重大外傷</h2>
+        <p class="text-ems-gray mt-2 text-lg">嚴重外傷病人比例不高，但辨識與後送速度直接影響存活；原則是黃金一小時、白金十分鐘與 Load and Go。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card border-t-4 border-t-ems-orange">
+          <div class="section-label">現場評估與處置</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>嚴重外傷常不只一處受傷，處置與後送延遲會影響死亡率。</li>
+            <li>Dr. Colley 提出黃金一小時概念；到院前採 Load and Go，除了必要 XABCDE 與頸椎減移外，現場停留盡量控制在 10 分鐘內。</li>
+            <li>處置時以出血控制、呼吸道、呼吸與循環為核心；若仍無法穩定，不再浪費時間做額外處置，迅速後送有能力處理的外傷中心。</li>
+            <li>送醫途中以無線電快速、精準交接病情嚴重度，讓醫院提早啟動外傷小組。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">紅色要件：高度風險嚴重傷害</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>創傷形式：</strong>頭頸軀幹或近端肢體穿刺、顱骨變形或疑似骨折、新神經缺損或疑似脊椎傷害、胸壁不穩或連枷胸、骨盆骨折、兩處以上近端長骨骨折、肢體壓砸或無脈、手腕腳踝以上截肢、需止血帶或持續填塞加壓之出血。</li>
+            <li><strong>精神與生命徵象：</strong>GCS 運動功能 &lt;6、呼吸 &lt;10 或 &gt;29、呼吸窘迫或需支持、未給氧 SpO2 &lt;90%；0-9 歲收縮壓 &lt;70 + 2×年齡，10-64 歲收縮壓 &lt;90 或心率大於收縮壓，65 歲以上收縮壓 &lt;110 或心率大於收縮壓。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card border-t-4 border-t-yellow-400">
+          <div class="section-label">黃色要件：中度風險嚴重傷害</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>創傷機轉：</strong>高風險車禍（彈出車外、車輛凹陷、乘客位置 &gt;12 英吋或任何位置 &gt;18 英吋、同車死亡、0-9 歲未固定或無安全座椅、遙測數據符合高風險）、騎士與交通工具分離、行人或單車騎士被拋出或輾壓、10 英尺以上墜落。</li>
+            <li><strong>風險因子：</strong>兒童 &lt;5 歲、老人 &gt;65 歲低高度墜落合併頭部撞擊、抗凝血劑、疑似兒虐、需特殊或高度醫療資源、懷孕 &gt;20 週、燒傷合併創傷機轉、兒童優先送可處理兒童創傷中心。</li>
+            <li>符合黃色但不符合紅色者，應送最近創傷中心；如有疑慮，轉送創傷中心。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-label">外傷中心與結論</div>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>外傷中心除醫院組織與行政支持外，通常包含外傷小組、外傷協調者、加護病床、外傷病房、手術室、外傷登錄、夜班與大量傷患處理計畫、跨科會議與品質指標。</li>
+            <li>外傷中心約可分四級，一級為中樞，並需與二、三、四級醫院聯繫合作，形成完整外傷急救系統。</li>
+            <li>外傷病人處置以維持生命徵象穩定為原則，完成身體評估後處置致命性損傷，再處理非致命損傷；運送途中須反覆評估並依嚴重度後送。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./assets/js/chapter-nav.js"></script>
+  <script>
+    function toggleAcc(btn) {
+      const c = btn.nextElementSibling;
+      if (!c) return;
+      const open = c.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      const i = btn.querySelector('.acc-icon');
+      if (i) i.textContent = open ? '-' : '+';
+    }
+
+    const infoData = {
+      wound: {
+        contusion: { t: '挫傷 (Contusion)', c: '<p>鈍力造成腫、痛、瘀血等症狀，皮膚可完整但皮下組織受損；評估是否合併深部傷害。</p>' },
+        hematoma: { t: '皮下血腫 (Hematoma)', c: '<p>挫傷後血液堆積在皮膚組織下方，可能形成局部腫脹與壓痛。</p>' },
+        abrasion: { t: '擦傷 (Abrasion wound)', c: '<p>堅硬物摩擦使皮膚被磨除，常有砂粒或污染物，需清潔並覆蓋敷料。</p>' },
+        laceration: { t: '撕裂傷 (Laceration wound)', c: '<p>鈍力撞擊或拉扯造成不規則傷口，可能伴隨大量出血。</p>' },
+        cut: { t: '切割傷 (Cutting wound)', c: '<p>尖銳物造成邊緣較整齊的傷口，也可能伴隨大量出血。</p>' },
+        penetrating: { t: '穿刺傷 (Penetrating wound)', c: '<p>尖銳物或高速物質造成，表面傷口可能小，但深部組織或器官可能有重大傷害。</p>' },
+        bite: { t: '咬傷 (Bite)', c: '<p>由人或動物造成，因口腔污染易有感染風險。</p>' },
+        avulsion: { t: '剝離傷 (Avulsion)', c: '<p>皮膚以上組織部分或完全喪失，常由強大外力造成，例如機器拉扯。</p>' }
+      },
+      chest: {
+        openPtx: { t: '開放性氣胸', c: '<p>穿刺造成胸壁開放性傷口，當胸壁缺損直徑大於氣管直徑約 2/3 時，氣流可能快速進入胸腔形成氣胸。常見胸部開放傷口、呼吸困難、起伏不對稱、發紺、脈搏加快、休克或吸氣音。</p>' },
+        tensionPtx: { t: '張力性氣胸', c: '<p>空氣持續進入肋膜腔卻排不出，胸內壓上升造成肺塌陷、縱膈偏移與靜脈回流下降。常見呼吸困難、氣管偏向對側、肺音不對稱、頸靜脈怒張、脈搏快且弱、休克、扣診鼓音。</p>' },
+        airwayTear: { t: '氣管支氣管破裂', c: '<p>位於肺外部氣管或支氣管破裂，大量空氣可流入肋膜腔或縱膈形成張力性氣胸。雖不常見但死亡風險高，鈍挫傷也可能造成。</p>' },
+        hemo: { t: '大量血胸', c: '<p>胸部鈍傷或穿刺造成肋間血管破裂或臟器損傷，使 1500 ml 以上血液進入肋膜腔。可見心搏過速、呼吸困難、意識改變、傷側呼吸音減弱或消失、扣診濁音、頸靜脈塌陷與低血容休克。</p>' },
+        tamponade: { t: '心包膜填塞', c: '<p>血液或液體快速累積於心包膜與心臟之間，使心臟舒張受限。常見低血壓、頸靜脈怒張、心音模糊，稱貝克氏三徵。</p>' },
+        flail: { t: '連枷胸', c: '<p>兩根以上相鄰肋骨各至少兩處骨折，肋骨失去支撐，造成吸氣胸壁凹陷、呼氣胸壁凸出的奇異式呼吸並減少換氣。</p>' }
+      }
+    };
+
+    function showInfo(group, id, btn) {
+      const data = infoData[group] && infoData[group][id];
+      const title = document.getElementById(group + '-title');
+      const body = document.getElementById(group + '-body');
+      if (!data || !title || !body) return;
+      title.innerHTML = data.t;
+      body.innerHTML = data.c;
+      document.querySelectorAll('[data-grid="' + group + '"]').forEach(e => e.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    showInfo('wound', 'contusion', document.querySelector('[data-grid="wound"]'));
+    showInfo('chest', 'openPtx', document.querySelector('[data-grid="chest"]'));
+
+    const charted = {};
+    window.onViewSwitch = function(viewId) {
+      if (viewId === 'view-limb' && !charted.fracture) { initFractureBleed(); charted.fracture = true; }
+    };
+
+    function initFractureBleed() {
+      const c = document.getElementById('fractureBleedChart');
+      if (!c || typeof Chart === 'undefined') return;
+      new Chart(c.getContext('2d'), {
+        type: 'polarArea',
+        data: {
+          labels: ['肋骨 125cc', '橈尺骨 250-500cc', '肱骨 500-750cc', '脛腓骨 500-1000cc', '股骨 1000-2000cc', '骨盆 1000cc-大量'],
+          datasets: [{ data: [125,500,750,1000,2000,2500], backgroundColor: ['rgba(148,163,184,.55)','rgba(100,116,139,.55)','rgba(2,132,199,.58)','rgba(14,165,233,.58)','rgba(234,88,12,.68)','rgba(220,38,38,.72)'], borderColor: '#ffffff', borderWidth: 2 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } }, scales: { r: { beginAtZero: true, ticks: { display: false }, grid: { color: 'rgba(148,163,184,.25)' } } } }
+      });
+    }
+  </script>
+</body>
+</html>
