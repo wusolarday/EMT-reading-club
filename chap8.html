@@ -58,7 +58,7 @@
       <button onclick="switchView('view-wound', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">04 傷口基本處置</span><span class="text-[11px] text-slate-400">P.258 - P.262 | 辨識→止血→固定</span></button>
       <button onclick="switchView('view-burn', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">05 灼燙傷</span><span class="text-[11px] text-slate-400">P.263 - P.266 | 深度 · 面積 · 輸液</span></button>
       <button onclick="switchView('view-head', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">06 頭部外傷</span><span class="text-[11px] text-slate-400">P.267 - P.269 | Cushing · 神經評估</span></button>
-      <button onclick="switchView('view-face', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">07 顏面外傷</span><span class="text-[11px] text-slate-400">P.270 - P.271 | 顱底徵象 · 呼吸道</span></button>
+      <button onclick="switchView('view-face', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">07 顏面外傷</span><span class="text-[11px] text-slate-400">P.270 - P.272 | 顱底徵象 · 呼吸道</span></button>
       <button onclick="switchView('view-ent', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">08 眼耳鼻喉急症</span><span class="text-[11px] text-slate-400">P.272 - P.273 | 眼鼻口喉重點檢查</span></button>
       <button onclick="switchView('view-spine', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">09 脊椎外傷</span><span class="text-[11px] text-slate-400">P.274 - P.275 | 損傷徵象 · 固定後送</span></button>
       <button onclick="switchView('view-chest', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">10 胸部外傷</span><span class="text-[11px] text-slate-400">P.276 - P.279 | 氣胸 · 血胸 · 連枷胸</span></button>
@@ -454,35 +454,85 @@
 
     <section id="view-face" class="view-section hidden">
       <header class="mb-8">
-        <div class="page-tag">P.270 - P.271</div>
+        <div class="page-tag">P.270 - P.272</div>
         <h2 class="chapter-title text-3xl">07 顏面外傷病人緊急救護處置流程</h2>
         <p class="text-ems-gray mt-2 text-lg">顏面外傷常伴隨出血、嘔吐物、斷裂牙齒與顱底骨折徵象，最大風險常是呼吸道阻塞。</p>
       </header>
+      <div class="card mb-6">
+        <div class="section-label">顏面外傷救護流程</div>
+        <div class="flow-wrap">
+          <div class="flow-node head flow-arrow">外傷病人緊急救護現場流程判定為顏面部外傷病人</div>
+          <div class="flow-node flow-arrow">是否有致命性傷口？</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flow-node">否：進入相關受傷部位之重點式身體檢查</div>
+            <div class="flow-node act">是：先做致命性傷口之必要處理</div>
+          </div>
+          <div class="flow-node flow-arrow">相關受傷部位之重點式身體檢查，並測量血壓及血氧濃度等輔助檢查</div>
+          <div class="flow-node flow-arrow">上擔架床</div>
+          <div class="flow-node head">救護車內救護流程</div>
+        </div>
+      </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card">
-          <div class="section-label">致命性傷口與處置</div>
+          <div class="section-label">評估與判定</div>
           <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
-            <li>顏面常見致命傷口包含槍傷、穿刺傷、刀傷、大而深傷口、嚴重撕裂、顏面骨折、眼眶瘀青、耳後瘀青、鼻漏與耳漏。</li>
-            <li>大而深或嚴重撕裂傷要避免污染並直接加壓止血；異物插入不可移除，固定止血後儘速送醫。</li>
-            <li>眼眶瘀青或鼻漏要懷疑前顱底骨折；耳漏、耳後瘀青或巴氏徵候要懷疑中顱底或後顱底骨折。</li>
-            <li>顏面外傷容易因鼻腔、口腔出血、嘔吐物與斷裂牙齒阻塞呼吸道，可用抽吸、口咽或鼻咽、聲門上呼吸道等維持通暢。</li>
+            <li>發現頭部、顏面部或眼耳鼻喉部有致命性傷口，或明顯傷痕如擦傷、挫傷、切割傷、腫脹、撕裂傷等，即進入顏面外傷流程。</li>
+            <li>顏面部常見致命性傷口包含槍傷、穿刺傷、刀傷、大而深的傷口、嚴重撕裂傷、顏面骨折、眼眶瘀青、耳後瘀青、鼻漏、耳漏等。</li>
+            <li>浣熊眼是眼眶周圍瘀青，需懷疑顱底骨折；巴氏徵候是耳後乳突瘀青，需懷疑顱底骨折。</li>
           </ol>
         </div>
         <div class="card">
-          <div class="section-label">重點檢查</div>
+          <div class="section-label">顏面致命性傷口之必要處置</div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm leading-relaxed text-slate-700">
+            <li>大而深傷口或嚴重撕裂傷：避免傷口污染，使用直接加壓止血；若有異物插入，不可強行移除，應固定與止血後儘速送醫；若出現休克症狀應給予靜脈輸液。</li>
+            <li>眼眶瘀青、顏面骨折合併類似浣熊眼或鼻漏時，懷疑前顱底骨折；有耳漏、耳後瘀青或巴氏徵候時，懷疑中顱底或後顱底骨折。</li>
+            <li>顏面部外傷可能導致鼻腔、口腔出血或下顎骨骨折，血液、嘔吐物與斷裂牙齒都可能阻塞呼吸道，應以抽吸、口咽、鼻咽或聲門上呼吸道等方式維持通暢。</li>
+          </ol>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <figure class="card">
+          <img src="./assets/img/chap8-fig8-11-raccoon-eyes.jpg" alt="圖 8-11 浣熊眼 Raccoon's eyes" class="w-full max-h-[440px] object-contain">
+        </figure>
+        <figure class="card">
+          <img src="./assets/img/chap8-fig8-12-battle-sign.jpg" alt="圖 8-12 巴氏徵候 Battle's sign" class="w-full max-h-[440px] object-contain">
+        </figure>
+      </div>
+      <div class="card mt-6">
+        <div class="section-label">相關顏面部受傷之重點式身體檢查</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-sm leading-relaxed text-slate-700">
           <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
-            <li><strong>軟組織：</strong>臉頸血供豐富，出血、嘔吐物與斷牙可能造成阻塞；必要時抽吸或輔助呼吸道。</li>
-            <li><strong>顏面骨折：</strong>下顎、臉中央骨、顴骨、眼眶、鼻骨等；徵象包括臉不對稱、咬合不正、鼻中隔移位、瘀血、麻木、紅腫與疼痛。</li>
-            <li><strong>附屬器官：</strong>耳朵、眼睛、牙齒可單獨或合併受傷；剝離組織需以潤濕生理食鹽水紗布覆蓋並包紮保存。</li>
-            <li><strong>頸椎：</strong>顏面骨折可同時合併頸椎損傷，未排除前維持減移。</li>
-            <li><strong>循環與失能：</strong>評估傷口位置、大小、深度與受傷部位；附屬器官受傷造成失能評估困難時需記錄。</li>
+            <li><strong>軟組織損傷：</strong>臉頸部血液供應豐富，軟組織損傷後可能明顯出血；出血、嘔吐物及斷牙可能造成呼吸道阻塞，必要時使用抽吸或輔助呼吸道甚至插管。</li>
+            <li><strong>顏面骨折到院前處置：</strong>可能合併頸椎損傷，因此需維持頸椎減移；若有明顯且持續鼻出血，僅在意識清楚且排除頸椎受傷時，才讓病人坐起身體向前傾，意識不清則視為頸椎損傷處理。</li>
+            <li><strong>顏面附屬器官損傷：</strong>耳朵、眼睛、牙齒可能個別或合併受傷；器官破損可用潤濕生理食鹽水紗布覆蓋，剝離未完全掉落時先擺回原位再覆蓋包紮，完全剝離則以濕紗包覆後置於乾淨袋或容器再放入冰水。</li>
+            <li><strong>異物穿刺：</strong>有異物留在顏面時，絕對不可任意拔除或移除。</li>
+          </ul>
+          <ul class="space-y-2 text-sm leading-relaxed text-slate-700">
+            <li><strong>顏面外傷評估：</strong>可見瘀血、出血、咬合不正、臉部不對稱、骨頭活動聲響、下顎活動受限、鼻漏、鼻中隔移位、眼球活動受限、視力模糊、麻木、耳漏、紅腫、痛等。</li>
+            <li><strong>頸椎減移：</strong>顏面部受傷在未能排除頸椎受傷前，需高度懷疑頸椎損傷並加以減移。</li>
+            <li><strong>呼吸道與呼吸：</strong>出血、嘔吐物及斷裂牙齒可能造成阻塞，維持通暢可使用抽吸、口咽、鼻咽或聲門上呼吸道；呼吸窘迫時依呼吸次數、型態與動力給予氧氣。</li>
+            <li><strong>循環、失能與暴露：</strong>顏面血管豐富，小傷口也可能出血明顯；需詳細檢查傷口位置、大小、深度與受傷部位。眼、耳、鼻、喉受傷可能影響失能評估，無法評估時應記錄；也須暴露身體檢查被衣物遮蓋的傷處。</li>
           </ul>
         </div>
       </div>
       <div class="card mt-6">
+        <div class="section-label">顏面骨折種類與常見徵候</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 text-sm">
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>下顎骨骨折</strong><br>可見咬合不正、下巴麻木、嘴巴張不開，也可能無法吞嚥或口水過多。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>臉中央骨骨折</strong><br>包含上頷骨、顴骨、下眼眶骨及鼻骨，常由直接撞擊造成，也容易合併腦神經或脊髓損傷。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>顴骨骨折</strong><br>臉頰可能變扁平，臉頰、鼻子與上嘴唇有麻木感，並可能有流鼻血。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>眼眶骨骨折</strong><br>眼眶底部較脆弱，骨折時眼球內容物可能陷入上頷竇內。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>鼻骨骨折</strong><br>顏面最常見骨折，臨床可見鼻子變形、腫脹及流鼻血。</div>
+        </div>
+      </div>
+      <div class="card mt-6 border-t-4 border-t-ems-orange">
+        <div class="section-label">上擔架床</div>
+        <p class="text-sm leading-relaxed text-slate-700">將外傷病人以適當姿勢搬運至擔架床上，依病況給予坐臥、半坐臥、平躺或其他方式，並保護外傷病人隱私。若外傷病人無頸椎受傷問題，可採半坐臥或坐姿來減輕腦部壓力。</p>
+      </div>
+      <div class="card mt-6">
         <div class="section-label">名詞辨識</div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>浣熊眼 Raccoon's eyes</strong><br>蝶骨底部骨折造成眼眶周圍瘀青，需懷疑顱底骨折。</div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>浣熊眼 Raccoon's eyes</strong><br>蝶骨底部發生骨折造成眼眶周圍瘀青，外觀類似浣熊眼，需懷疑顱底骨折。</div>
           <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><strong>巴氏徵候 Battle's sign</strong><br>耳後乳突瘀青，需懷疑顱底骨折。</div>
         </div>
       </div>
