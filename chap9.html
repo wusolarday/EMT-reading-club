@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第九章 小兒與孕婦評估、處置與情境操作</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800 overflow-hidden">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第九章 小兒與孕婦評估</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">Finn &amp; 51先 &amp; 米歇 &amp; 倚安 · 週二 21:00–22:00</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+            
+            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">00. 本章學習重點</span>
+                <span class="text-[11px] text-slate-400">大綱摘要 | 學習目標</span>
+            </button>
+            
+            <button onclick="switchView('view-overview', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01. 兒童定義與解剖差異</span>
+                <span class="text-[11px] text-slate-400">P.294 - P.295 | 年齡與急救對比</span>
+            </button>
+            
+            <button onclick="switchView('view-principles', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02. 評估兒童與 PAT 檢查</span>
+                <span class="text-[11px] text-slate-400">P.295 - P.296 | 三角觀察與跡象</span>
+            </button>
+            
+            <button onclick="switchView('view-flow', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03. 孕婦生產與新生兒急救</span>
+                <span class="text-[11px] text-slate-400">P.298 - P.302 | 產科急症與接生</span>
+            </button>
+            
+            <button onclick="switchView('view-check', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04. 到院前五級檢傷標準</span>
+                <span class="text-[11px] text-slate-400">P.303 | 特殊病情危急分級</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ===================== VIEW 0: OBJECTIVES ===================== -->
+        <section id="view-objectives" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.292 - P.293</div>
+                <h2 class="text-3xl font-bold text-ems-navy">第九章：小兒與孕婦評估、處置與情境操作</h2>
+                <div class="mt-4 border-l-4 border-ems-orange bg-orange-50 p-4 rounded-r-xl shadow-sm">
+                    <p class="text-ems-orange font-bold text-lg italic">「兒童絕非縮小的成人；產婦與新生的黃金救援，取決於精確的初期評估與果斷的標準流程。」</p>
+                </div>
+            </header>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習重點
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-lg">✦</span>
+                        <div>
+                            <h4 class="font-bold text-ems-navy">小兒三角評估 (PAT) 核心</h4>
+                            <p class="text-sm text-slate-600 mt-1">熟練免接觸的「外觀、呼吸、循環」快速心肺功能與急迫性篩檢技術。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-lg">✦</span>
+                        <div>
+                            <h4 class="font-bold text-ems-navy">院前產科急症與無菌接生</h4>
+                            <p class="text-sm text-slate-600 mt-1">掌握妊娠急症識別（子宮外孕、子癲前症）、孕婦 CPR 差異及生產包實務操作。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-lg">✦</span>
+                        <div>
+                            <h4 class="font-bold text-ems-navy">新生兒復甦「黃金一分鐘」</h4>
+                            <p class="text-sm text-slate-600 mt-1">精確執行新生兒出生後的保暖、擺位、正壓通氣（PPV）與 3:1 進階胸部按壓流程。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-lg">✦</span>
+                        <div>
+                            <h4 class="font-bold text-ems-navy">特殊族群到院前五級檢傷</h4>
+                            <p class="text-sm text-slate-600 mt-1">理解小兒生命徵象年齡變數，以及孕婦危急徵候（臍帶脫垂、大出血）之檢傷分級基準。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 1: OVERVIEW ===================== -->
+        <section id="view-overview" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.294 - P.295</div>
+                <h2 class="text-3xl font-bold text-ems-navy">兒童定義與解剖生理學</h2>
+                <p class="text-ems-gray mt-2 text-lg">各年齡層之法定與醫學定義，以及小兒解剖生理之差異與可能之影響。</p>
+            </header>
+
+            <div class="space-y-8">
+                <!-- 1. 年齡與急救技巧處置對比表 (四欄等寬) -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-x-auto">
+                    <h3 class="text-lg font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-blue text-xl">📋</span> 小兒年齡定義與急救基本參數對比
+                    </h3>
+                    <table class="w-full text-left border-collapse text-sm table-fixed min-w-[800px]">
+                        <thead>
+                            <tr class="bg-ems-navy text-white">
+                                <th class="p-3 w-[20%] rounded-tl-lg">分類項目</th>
+                                <th class="p-3 w-[20%]">新生兒 (Newborn)</th>
+                                <th class="p-3 w-[20%]">嬰兒 (Infant)</th>
+                                <th class="p-3 w-[20%]">兒童 (Child)</th>
+                                <th class="p-3 w-[20%] rounded-tr-lg">少年 (Adolescent)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold bg-slate-50 text-ems-navy">法定與醫學定義</td>
+                                <td class="p-3">出生至 28 天內</td>
+                                <td class="p-3">
+                                    <span>出生 28 天以上至 1 歲</span>
+                                    <span class="block text-xs text-ems-orange font-bold mt-1">※ 出生後 2-3 個月大之嬰兒，仍常使用新生兒復甦術指引技巧進行急救。</span>
+                                </td>
+                                <td class="p-3">未滿 12 歲之人</td>
+                                <td class="p-3">12 歲以上至未滿 18 歲</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold bg-slate-50 text-ems-navy">最低收縮壓下限</td>
+                                <td class="p-3">60 mmHg</td>
+                                <td class="p-3">70 mmHg</td>
+                                <td class="p-3 text-ems-orange font-bold">70 + (2 × 年齡) mmHg</td>
+                                <td class="p-3">90 mmHg</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold bg-slate-50 text-ems-navy">CPR 壓胸吹氣比</td>
+                                <td class="p-3 text-ems-danger font-bold">3 : 1<br>(雙人與單人皆同)</td>
+                                <td class="p-3">單人 30:2<br>專業雙人 15:2</td>
+                                <td class="p-3">單人 30:2<br>專業雙人 15:2</td>
+                                <td class="p-3">30 : 2<br>(比照成人標準)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold bg-slate-50 text-ems-navy">CPR 按壓深度</td>
+                                <td class="p-3">胸廓前後徑的 1/3</td>
+                                <td class="p-3">胸廓前後徑的 1/3<br>(約 4 公分)</td>
+                                <td class="p-3">胸廓前後徑的 1/3<br>(約 5 公分)</td>
+                                <td class="p-3">5 ~ 6 公分<br>(比照成人)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 2. 獨立實務專卡：氣道暢通與墊肩擺位 -->
+                <div class="bg-blue-50 border-l-4 border-ems-blue p-5 rounded-r-xl shadow-sm">
+                    <h3 class="text-base font-bold text-ems-navy mb-2 flex items-center gap-2">
+                        <span>📐 打開呼吸道處置：肩胛下墊高擺位</span>
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs mt-2">
+                        <div class="text-slate-700">
+                            <span class="font-bold text-ems-blue">● 解剖學原因：</span>
+                            兒童頭部對身體比例較成人大。硬板平躺仰躺時，頸部會向前彎曲而阻塞呼吸道。
+                        </div>
+                        <div class="text-slate-700">
+                            <span class="font-bold text-ems-blue">● 臨床做法：</span>
+                            必須在病童的肩胛骨下方墊毛巾墊高，使下顎上抬，維持臉部與呼吸道平行之「嗅吸姿勢」。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 解剖生理差異與影響獨立說明卡片 -->
+                <div>
+                    <h3 class="text-lg font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🧠</span> 解剖生理的差異與可能之影響
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 卡片 1：呼吸生理 -->
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-ems-navy text-sm mb-3 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>呼吸系統
+                                </h4>
+                                <div class="space-y-2 text-xs text-slate-700">
+                                    <p><b>• 差異：</b>舌頭對口腔比例較成人大，且氣道狹小。</p>
+                                    <p><b>• 影響：</b>更容易阻塞呼吸道。組織微小腫脹或分泌物即可引發阻塞。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 卡片 2：循環系統 -->
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-ems-navy text-sm mb-3 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>循環系統
+                                </h4>
+                                <div class="space-y-2 text-xs text-slate-700">
+                                    <p><b>• 差異：</b>兒童心臟的血液輸出量主要由心跳速率來決定。</p>
+                                    <p><b>• 影響：</b>心跳小於 60 次/分且合併休克微徵候（灌流不足），即應開始急救處置。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 卡片 3：骨骼結構 -->
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-ems-navy text-sm mb-3 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>骨骼結構
+                                </h4>
+                                <div class="space-y-2 text-xs text-slate-700">
+                                    <p><b>• 差異：</b>骨骼成份比成人有較多膠質與較少礦物質，較成人骨骼有彈性。</p>
+                                    <p><b>• 影響：</b>易發生青枝骨折。若有明顯肋骨骨折，需懷疑可能伴隨內部肺部挫傷。若有新舊雜陳骨折需高度懷疑兒虐。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 卡片 4：皮膚與體溫 -->
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-ems-navy text-sm mb-3 flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>皮膚與體溫
+                                </h4>
+                                <div class="space-y-2 text-xs text-slate-700">
+                                    <p><b>• 差異：</b>細胞較薄且透性大，血管分布充沛，體表面積相對較大。</p>
+                                    <p><b>• 影響：</b>水份流失快易脫水。易受環境溫度影響，造成低體溫或中暑。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 2: EVALUATING CHILDREN ===================== -->
+        <section id="view-principles" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.295 - P.296</div>
+                <h2 class="text-3xl font-bold text-ems-navy">評估兒童</h2>
+                <p class="text-ems-gray mt-2 text-lg">包含免接觸的小兒評估三角（PAT）觀察，以及針對 EMT-2 常規之初級評估重點與現場勾選檢測。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- 左側按鈕選單：評估步驟切換 -->
+                <div class="lg:col-span-5 grid grid-cols-1 gap-2 max-h-[380px] overflow-y-auto pr-1">
+                    <div class="px-3 py-1 text-xs font-bold text-slate-400 tracking-wider uppercase">（一）小兒評估三角 (PAT)</div>
+                    
+                    <button id="btn-eval-1" onclick="switchEval(1)" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex items-center justify-between">
+                        <span>• 整體外觀 (Appearance, A)</span>
+                        <span class="text-xs text-ems-blue font-mono">詳細條文</span>
+                    </button>
+                    <button id="btn-eval-2" onclick="switchEval(2)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex items-center justify-between">
+                        <span>• 呼吸作功 (Work of Breathing, B)</span>
+                        <span class="text-xs text-ems-blue font-mono">詳細條文</span>
+                    </button>
+                    <button id="btn-eval-3" onclick="switchEval(3)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex items-center justify-between">
+                        <span>• 皮膚循環 (Circulation to Skin, C)</span>
+                        <span class="text-xs text-ems-blue font-mono">詳細條文</span>
+                    </button>
+
+                    <div class="px-3 py-1 mt-2 text-xs font-bold text-slate-400 tracking-wider uppercase">（二）小兒初級評估 (重點節錄)</div>
+                    
+                    <button id="btn-eval-4" onclick="switchEval(4)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex items-center justify-between">
+                        <span class="text-ems-orange">✦ ABCDE 初級評估路徑</span>
+                        <span class="text-xs bg-orange-100 text-ems-orange px-1.5 py-0.5 rounded font-bold scale-90">EMT-2</span>
+                    </button>
+                </div>
+
+                <!-- 右側：動態顯示內文區 -->
+                <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[380px]">
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-3 mb-4">
+                        <h3 id="eval-title" class="text-2xl font-bold text-ems-blue">整體外觀 (Appearance, A)</h3>
+                        <span class="text-xs font-mono text-slate-400 tracking-wider" id="eval-num">PAT 評估三角</span>
+                    </div>
+                    
+                    <!-- 主要內文區 -->
+                    <div id="eval-content" class="text-slate-300 space-y-3 leading-relaxed text-sm flex-1">
+                        <p><b>1. 評估特點：</b>不需接觸病人，在 30-60 秒內進行快速的視覺與聽覺觀察。</p>
+                        <p><b>2. 觀察範疇：</b>觀察肌張力、與人的互動性、是否容易安慰、眼神是否呆滯、說話/哭鬧是否持續。</p>
+                        <p><b>3. 臨床核心指標：</b>最客觀的指標為<b>肌張力</b>。觀察病童是四肢揮舞或完全不動、或順手抬起放開後像軟體動物般掉下（即喪失肌張力）。</p>
+                    </div>
+
+                    <!-- 底部提示區 -->
+                    <div id="eval-hint" class="mt-4 p-3 bg-slate-800 rounded border border-slate-700 text-xs text-slate-300">
+                        課本 P.295 說明：整體外觀主要反映病童的中樞神經系統功能、通氣及灌流狀態。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下方移入：PAT 臨床跡象檢查表 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-8 max-w-3xl mx-auto">
+                <div class="flex justify-between items-center border-b pb-4 mb-4">
+                    <span class="text-sm font-bold text-ems-navy">小兒三角 (PAT) 7 項臨床指標異常勾選 (P.303)</span>
+                    <button onclick="resetChecklist()" class="text-xs border border-slate-300 hover:bg-slate-50 px-3 py-1.5 rounded-lg text-slate-600 font-medium transition">清除勾選</button>
+                </div>
+
+                <div class="space-y-2.5 my-4" id="pat-checklist">
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[外觀 A]</strong> 病童眼神呆滯、缺乏與人互動，或出現持續哭鬧、完全無法安撫的情形？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[外觀 A]</strong> 最客觀指標：病童四肢喪失正常肌張力，呈現軟癱無力或完全不動狀態？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[呼吸 B]</strong> 病童出現異常姿勢以維持呼吸（如嗅吸姿勢、點頭式呼吸）？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[呼吸 B]</strong> 吸氣時可觀察到明顯的胸骨上凹陷、肋骨間軟組織凹陷或鼻翼搧動？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[呼吸 B]</strong> 現場可直接聽見異常呼吸音（如高亢喘鳴聲、呼氣呻吟聲或咕嚕聲）？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[循環 C]</strong> 病童的皮膚或黏膜顏色是否呈現異常的蒼白或發紺？</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-2.5 bg-slate-50 rounded-lg cursor-pointer hover:bg-slate-100 transition">
+                        <input type="checkbox" onchange="calculatePatScore()" class="pat-cb mt-1 w-4 h-4 rounded border-slate-300 text-ems-blue focus:ring-ems-blue">
+                        <span class="text-slate-700 text-xs"><strong>[循環 C]</strong> 現場是否觀察到病童皮膚表面出現如同大理石斑紋狀的網狀變化？</span>
+                    </label>
+                </div>
+
+                <div class="mt-4 p-4 bg-ems-navy rounded-xl flex flex-col justify-center items-center border-t-2 border-ems-blue shadow-inner text-white min-h-[70px]">
+                    <div id="check-result" class="text-xs font-bold text-green-400 text-center">🟢 尚未發現明顯異常指標。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 3: PREGNANCY & BIRTH ===================== -->
+        <section id="view-flow" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.298 - P.302</div>
+                <h2 class="text-3xl font-bold text-ems-navy">懷孕與生產</h2>
+                <p class="text-ems-gray mt-2 text-lg">孕婦病人緊急救護處置的重點摘要。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                
+                <!-- 左側大卡片：緊急生產救護流程 -->
+                <div class="lg:col-span-8 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-2xl font-bold text-ems-navy border-b pb-4 mb-6 flex items-center justify-between">
+                        <span class="flex items-center gap-2"><span class="text-3xl">🚨</span> 緊急生產救護流程</span>
+                        <span class="text-sm bg-slate-100 text-slate-600 px-3 py-1 rounded font-bold">常規技術</span>
+                    </h3>
+
+                    <!-- 評估口訣 -->
+                    <div class="mb-8 p-5 bg-amber-50 border border-amber-200 rounded-xl shadow-inner">
+                        <b class="text-ems-orange block mb-4 text-base">✦ 評估與詢問重點 (痛/道/歲/月/胎/次/病)</b>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">痛</span> 陣痛間隔時間 (&lt;5 分鐘即將分娩)</div>
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">道</span> 陰道出血、破水與胎頭是否露出</div>
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">歲</span> 產婦年齡</div>
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">月</span> 目前懷孕月數、週數或預產期</div>
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">胎</span> 本次懷孕幾胎，是否雙胞胎</div>
+                            <div class="flex items-start gap-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">次</span> 生產次數 (經產婦產程進展較快)</div>
+                            <div class="flex items-start gap-2 sm:col-span-2"><span class="font-bold text-white bg-ems-orange px-1.5 rounded">病</span> 過去重大病史</div>
+                        </div>
+                    </div>
+
+                    <!-- 接生步驟 -->
+                    <div class="mb-6">
+                        <b class="text-ems-navy block mb-3 text-lg">✦ 確認胎頭外露與接生步驟</b>
+                        <p class="text-slate-500 text-sm mb-4">若無胎頭露出則儘速送醫；若胎頭已露出則依序進行現場接生：</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm text-slate-600">
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">1.</span> <span>產婦平躺、兩膝彎曲、兩大腿張開。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">2.</span> <span>必要時應給予氧氣。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">3.</span> <span>確定胎頭外露，請產婦用力哈氣、深吸氣。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">4.</span> <span>打開生產包，無菌技術戴上無菌手套。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">5.</span> <span>將無菌治療巾墊於產婦臀部下方。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">6.</span> <span>保護胎頭及會陰，勿用力阻止胎兒產出。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">7.</span> <span>頭頸部產出時，注意有無臍帶繞頸並排除。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">8.</span> <span>支持頭頸部，先往下引導使上方肩膀露出。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">9.</span> <span>再往上使另一肩膀露出，順勢讓胎兒娩出。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex gap-2"><span class="text-ems-blue font-bold">10.</span> <span>懷疑分泌物過多阻礙呼吸時，抽吸口鼻。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 sm:col-span-2 flex gap-2"><span class="text-ems-blue font-bold">11.</span> <span>狀況良好則擦乾全身，無菌治療巾包覆保暖。緊迫則急救。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 sm:col-span-2 flex gap-2"><span class="text-ems-blue font-bold">12.</span> <span>產出 30 秒後，2 個臍帶夾夾 2 處 (離肚臍 5-10cm 及再隔 5-10cm)，於中間剪斷。交給母親。</span></div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 sm:col-span-2 flex gap-2"><span class="text-ems-blue font-bold">13.</span> <span>胎盤若產出應帶至醫院確認完整性，並觀察產婦有無大出血。</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 特殊處置警語 -->
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-200 flex items-start gap-3">
+                        <span class="text-2xl">✂️</span>
+                        <div>
+                            <b class="text-ems-danger block mb-1">繞頸臍帶處置原則</b>
+                            <p class="text-sm text-slate-700">若生產過程中遭遇臍帶繞頸且無法用手解除，則必須立即以兩個臍帶夾夾斷臍帶（兩夾間隔 10 公分），並從中間剪斷。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側副欄：妊娠急症 & 新生兒復甦 -->
+                <div class="lg:col-span-4 space-y-6">
+                    
+                    <!-- 常見妊娠急症 -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-base font-bold text-ems-navy border-b pb-2 mb-4 flex items-center justify-between">
+                            <span>常見妊娠急症</span>
+                            <span class="text-[10px] bg-orange-100 text-ems-orange px-2 py-0.5 rounded font-bold">EMT-2</span>
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-700">
+                            <div class="p-2.5 bg-slate-50 rounded border border-slate-100">
+                                <b class="text-ems-navy block mb-1">子宮外孕</b>
+                                懷孕前三個月若陰道出血或腹痛需高度懷疑 (約佔 10%)。給予輸液維持循環並速送醫。
+                            </div>
+                            <div class="p-2.5 bg-slate-50 rounded border border-slate-100">
+                                <b class="text-ems-navy block mb-1">子癲（前）症</b>
+                                妊娠高血壓併大量尿蛋白。若合併抽搐即為子癲症，給予高濃度氧氣、必要時正壓給氧。
+                            </div>
+                            <div class="p-2.5 bg-slate-50 rounded border border-slate-100">
+                                <b class="text-ems-navy block mb-1">產後大出血</b>
+                                產後出血大於 500 mL。以手掌按摩產婦下腹部促使子宮收縮，給予快速輸液並送醫。
+                            </div>
+                            <div class="p-2.5 bg-blue-50 border border-blue-100 rounded">
+                                <b class="text-ems-blue block mb-1">大於 20 週孕婦 OHCA</b>
+                                執行 CPR 時，<b class="text-ems-danger">必須指派一人徒手將子宮向左側推移</b>，避免壓迫下腔靜脈阻斷血液回流。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 新生兒復甦 -->
+                    <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-base font-bold text-ems-navy border-b pb-2 mb-4 flex items-center justify-between">
+                            <span>新生兒復甦 (黃金一分鐘)</span>
+                            <span class="text-[10px] bg-orange-100 text-ems-orange px-2 py-0.5 rounded font-bold">EMT-2</span>
+                        </h3>
+                        <div class="relative border-l-2 border-slate-200 pl-4 ml-2 space-y-4 text-xs text-slate-700">
+                            <div class="relative">
+                                <span class="absolute -left-[25px] top-0 bg-slate-800 text-white w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">1</span>
+                                <b class="text-ems-navy block mb-0.5">快速初步評估</b>
+                                確認：是否足月？肌張力良好？有呼吸或哭聲？任一為「否」即啟動急救。
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[25px] top-0 bg-slate-800 text-white w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">2</span>
+                                <b class="text-ems-navy block mb-0.5">常規照護與擺位</b>
+                                保溫、擦乾、墊肩胛骨呈嗅吸姿勢，必要時抽吸、給予觸覺刺激。
+                            </div>
+                            <div class="relative">
+                                <span class="absolute -left-[25px] top-0 bg-slate-800 text-white w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">3</span>
+                                <b class="text-ems-navy block mb-0.5">正壓通氣 (PPV)</b>
+                                心率 &lt;100 或無呼吸，給予 PPV (40-60下/分)。≥35週初期用 21% 氧氣。右手/右耳測血氧。
+                            </div>
+                            <div class="relative border-l-transparent">
+                                <span class="absolute -left-[25px] top-0 bg-ems-danger text-white w-5 h-5 rounded-full flex items-center justify-center font-bold text-[10px]">4</span>
+                                <b class="text-ems-danger block mb-0.5">胸部按壓 (3:1)</b>
+                                有效通氣 30 秒心率仍 &lt;60，啟動雙手環抱壓胸。氧氣調至 100%，按壓吹氣比 3:1。
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 4: TRIAGE ===================== -->
+        <section id="view-check" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.303</div>
+                <h2 class="text-3xl font-bold text-ems-navy">到院前五級檢傷標準</h2>
+                <p class="text-ems-gray mt-2 text-lg">小兒與孕婦病情危急分級基準表。</p>
+            </header>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-base font-bold text-ems-navy border-b pb-3 mb-3 flex items-center gap-2">
+                    <span>📋 小兒與孕婦特殊五級檢傷基準 (表 9-4)</span>
+                </h3>
+                <div class="space-y-2 text-xs">
+                    <div class="p-3 bg-red-50 border-l-4 border-ems-danger rounded">
+                        <b class="text-ems-danger text-sm">[一級 危急]</b><br>
+                        <div class="mt-1 space-y-1 text-slate-700">
+                            <p>• 可見胎兒露出部位、臍帶脫垂</p>
+                            <p>• 第三孕期陰道出血</p>
+                            <p>• 確定或疑似性侵害（孕婦通用）</p>
+                            <p>• 小兒：年齡愈大，每分鐘呼吸次數愈接近成人（依不同年齡層判定）</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-orange-50 border-l-4 border-ems-orange rounded">
+                        <b class="text-ems-orange text-sm">[二級 危急]</b><br>
+                        <div class="mt-1 space-y-1 text-slate-700">
+                            <p>• 孕婦 &gt;20週：急產 (宮縮≤2分鐘) / 已破水 / 沒有胎動 / 沒有胎心音</p>
+                            <p>• 孕婦 &gt;20週：高血壓合併頭痛、水腫、腹痛（子癲前症徵候）</p>
+                            <p>• 產後（胎兒已產出）大出血</p>
+                            <p>• 孕婦 &lt;20週：大量陰道出血（頭暈眼花、虛弱無力、接近過倒、躺不通氣、心跳加速、血壓降低，因而可能極度危急及生命安全）</p>
+                            <p>• 小兒：年齡愈大，每分鐘心跳次數愈接近成人（依不同年齡層判定）</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-blue-50 border-l-4 border-ems-blue rounded">
+                        <b class="text-ems-blue text-sm">[三級 緊急]</b><br>
+                        <div class="mt-1 space-y-1 text-slate-700">
+                            <p>• 孕婦 &gt;20週：急產 (宮縮&gt;2分鐘) / 可能破水</p>
+                            <p>• 孕婦 &lt;20週：中量陰道出血（臉色蒼白、虛弱、貧血）</p>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-100 border-l-4 border-slate-500 rounded">
+                        <b class="text-slate-700 text-sm">[四級/五級]</b><br>
+                        <div class="mt-1 text-slate-700">
+                            <p>• 孕婦 &lt;20週：少量陰道出血（四級）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== CORE JS ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        // ======= 評估步驟切換腳本 =======
+        const evalData = {
+            1: {
+                title: "整體外觀 (Appearance, A)",
+                num: "PAT 評估三角",
+                content: `
+                    <p class="mb-2"><b>1. 評估特點：</b>不需接觸病人，在 30-60 秒內進行快速的視覺與聽覺觀察。</p>
+                    <p class="mb-2"><b>2. 觀察範疇：</b>觀察肌張力、與人的互動性、是否容易安慰、眼神是否呆滯、說話/哭鬧是否持續。</p>
+                    <p class="mb-2"><b>3. 臨床核心指標：</b>最客觀的指標為<b>肌張力</b>。觀察病童是四肢揮舞或完全不動、或順手抬起放開後像軟體動物般掉下（即喪失肌張力）。</p>
+                `,
+                hint: "課本 P.295 說明：整體外觀主要反映病童的中樞神經系統功能、通氣及灌流狀態。"
+            },
+            2: {
+                title: "呼吸作功 (Work of Breathing, B)",
+                num: "PAT 評估三角",
+                content: `
+                    <p class="mb-2"><b>1. 評估特點：</b>藉由肉眼或聽覺，直接觀察並確認病童是否有呼吸窘迫的表徵。</p>
+                    <p class="mb-2"><b>2. 觀察範疇：</b>是否有異常姿勢（如嗅吸姿勢或點頭式呼吸）、吸氣時胸骨上或肋間軟組織凹陷、鼻翼搧動。</p>
+                    <p class="mb-2"><b>3. 異常呼吸音：</b>現場可直接聽到喘鳴音（Stridor）、哮鳴音（Wheezing）或咕嚕噥聲（Grunting）。</p>
+                `,
+                hint: "課本 P.295 說明：呼吸作功代表病童是否正透過代償機制試圖維持氣體交換。"
+            },
+            3: {
+                title: "皮膚循環 (Circulation to Skin, C)",
+                num: "PAT 評估三角",
+                content: `
+                    <p class="mb-2"><b>1. 評估特點：</b>當心輸出量減少或休克早期，身體會收縮周邊毛細血管，以維持重要器官血流。評估不需接觸病人。</p>
+                    <p class="mb-2"><b>2. 觀察範疇：</b>觀察皮膚與嘴唇的顏色表現。</p>
+                    <p class="mb-2"><b>3. 課本判定指標：</b>包含皮膚與嘴唇呈現<b>蒼白</b>、<b>發紺</b>，或四肢如同大理石斑紋狀（Mottling）的<b>網狀變化</b>。</p>
+                `,
+                hint: "課本 P.295-296 原文：藉由觀察外觀顏色，快速判定是否有微灌流不足或早期休克表徵。"
+            },
+            4: {
+                title: "小兒初級評估 (ABCDE)",
+                num: "EMT-2 核心重點節錄",
+                content: `
+                    <div class="space-y-2 text-xs">
+                        <p><b>• Airway (呼吸道)：</b>評估是否阻塞。處置包含壓額抬下顎、推下顎、抽吸、哈姆立克法或置入呼吸道輔助器材。</p>
+                        <p><b>• Breathing (呼吸)：</b>評估作功、聽診呼吸音並測血氧。給氧處置；若心率<b>小於 60 次/分且灌流不良</b>，應即介入 BVM 人工呼吸（每 2-3 秒通氣一次）。</p>
+                        <p><b>• Circulation (循環)：</b>評估心率、血壓、微血管充填時間（正常≤2秒）及膚色。可由遠端（橈動脈）至近端觸診；休克依醫囑/常規給予 10-20 mL/kg 生理食鹽水輸液。</p>
+                        <p><b>• Disability (失能)：</b>以 AVPU 評估意識，檢查瞳孔大小、對光反應及肌張力。意識不清者應檢測血糖，低血糖依醫囑補糖。</p>
+                        <p><b>• Exposure (身體暴露)：</b>量測體溫。中暑採物理散熱（禁止給退燒藥）；低體溫給予保暖。懷疑受虐外傷通報 113 保護專線。</p>
+                    </div>
+                `,
+                hint: "課本 P.296 重點摘要：初級評估為實體處置依循，請留意心率小於 60 下且灌流不足的 BVM 介入指引。"
+            }
+        };
+
+        function switchEval(id) {
+            document.querySelectorAll('.duty-card').forEach(btn => btn.classList.remove('active'));
+            const clickedBtn = document.getElementById('btn-eval-' + id);
+            if (clickedBtn) clickedBtn.classList.add('active');
+
+            const data = evalData[id];
+            document.getElementById('eval-title').innerHTML = data.title;
+            document.getElementById('eval-content').innerHTML = data.content;
+            document.getElementById('eval-num').innerText = data.num;
+            document.getElementById('eval-hint').innerText = data.hint;
+        }
+
+        // ======= 8大原則動態切換數據 =======
+        const principlesData = {
+            1: {
+                title: "1. 小兒評估三角 (PAT) 快速篩檢",
+                content: "在 30-60 秒內免接觸病童進行。透過初步肉眼觀察「外觀、呼吸作功、皮膚循環」黃金三要素，快速判定病童是否屬於呼吸窘迫、呼吸衰竭或休克，以此決定救護現場的急救優先層級。",
+                num: "EMS PRINCIPLE 01",
+                hint: "💡 臨床實務指引提示：不需接觸病童即可快速判斷。"
+            },
+            2: {
+                title: "2. 小兒氣道嗅吸擺位 (Sniffing Position)",
+                content: "小兒後枕部骨骼比例較大，平躺時極易造成呼吸道屈曲阻塞。急救處置時應於嬰兒肩胛骨下方墊合適毛巾，使其下顎微微上抬，維持臉部與呼吸道平行之「嗅吸姿勢」，以確保氣道維持最大通暢度。",
+                num: "EMS PRINCIPLE 02",
+                hint: "💡 臨床實務指引提示：後枕部較大，若平躺會造成呼吸道阻塞。"
+            },
+            3: {
+                title: "3. 孕婦側躺及左推子宮減壓",
+                content: "懷孕 20 週以上（臨床外觀子宮底高度位於或高於肚臍）的孕婦若展現休克徵候或灌流不足，送醫運送途中應採取左側躺姿勢；若病患不幸發生心搏停止需執行 CPR，施救者務必指派專人將子宮向左側推移，解除巨大子宮對下腔靜脈的壓迫。",
+                num: "EMS PRINCIPLE 03",
+                hint: "💡 臨床實務指引提示：推移子宮是為了解除子宮對下腔靜脈的壓迫。"
+            },
+            4: {
+                title: "4. 產婦病史「痛/道/歲/月/胎/次/病」口訣",
+                content: "救護現場迅速詢問口訣：陣痛間隔是否小於 5 分鐘（代表即將分娩）、陰道是否出血/破水/胎頭外露、產婦年齡、目前懷孕月/週數、是否為雙胞胎、過去生產次數（經產婦產程較快）及過去重大病史，作為現場接生或立即送醫之決定性判斷標準。",
+                num: "EMS PRINCIPLE 04",
+                hint: "💡 臨床實務指引提示：為方便記憶，現場詢問可運用此七字口訣。"
+            },
+            5: {
+                title: "5. 無菌接生與會陰保護技術",
+                content: "救護現場打開緊急生產包並穿戴無菌手套。將無菌治療巾墊於臀下。胎頭產出時，施救者必須以手掌適當施力保護產婦會陰避免產生嚴重撕裂傷；接續引導胎頭向下使上方肩膀露出，再向上拉出另一側肩膀，順勢娩出胎兒。",
+                num: "EMS PRINCIPLE 05",
+                hint: "💡 臨床實務指引提示：胎頭產出時注意保護會陰，但勿用力阻止其產出。"
+            },
+            6: {
+                title: "6. 臍帶處理與夾斷時機點",
+                content: "胎兒娩出後，若臨床狀態評估良好，應等產出 30 秒後再行夾閉臍帶。第一道臍帶夾應固定於距離嬰兒肚臍 5-10 公分處，第二道臍帶夾間隔 5-10 公分，最後於兩夾正中間使用無菌剪刀剪斷。若遭遇臍帶繞頸且無法解除，則立刻夾斷剪開。",
+                num: "EMS PRINCIPLE 06",
+                hint: "💡 臨床實務指引提示：若需復甦急救，目前尚無足夠證據建議結紮時機。"
+            },
+            7: {
+                title: "7. 新生兒正壓通氣 (PPV) 參數",
+                content: "若出生新生兒心率小於 100 次/分或呈現無呼吸、喘息狀態，需立即給予正壓通氣。通氣建議速率為每分鐘 40-60 下（約每秒一下，通氣 15 秒約 15 下）。針對35週（含）以上之新生兒，初期通氣建議直接使用 21% 室內空氣。",
+                num: "EMS PRINCIPLE 07",
+                hint: "💡 臨床實務指引提示：35週以下之早產兒建議使用 21%~30% 氧氣。"
+            },
+            8: {
+                title: "8. 新生兒胸部按壓 3:1 比例",
+                content: "若經建立有效正壓通氣 30 秒後，心率仍小於 60 次/分，應立即啟動胸部按壓。臨床操作首選雙手環抱大拇指按壓法，深度為胸廓前後徑的 1/3。其核心按壓與吹氣比嚴格限定為 3:1（每分鐘包含 90 次按壓 + 30 次吹氣，共 120 次複合動作）。",
+                num: "EMS PRINCIPLE 08",
+                hint: "💡 臨床實務指引提示：按壓時需將氧氣濃度調整至 100%。"
+            }
+        };
+
+        function switchPrinciple(id) {
+            document.querySelectorAll('.duty-card').forEach(btn => btn.classList.remove('active'));
+            const clickedBtn = document.getElementById('btn-principle-' + id);
+            if (clickedBtn) clickedBtn.classList.add('active');
+
+            const data = principlesData[id];
+            document.getElementById('principle-title').innerText = data.title;
+            document.getElementById('principle-content').innerText = data.content;
+            document.getElementById('principle-num').innerText = data.num;
+            document.querySelector('#view-principles .bg-slate-800').innerText = data.hint;
+        }
+
+        // ======= 檢查表勾選計算腳本 =======
+        function calculatePatScore() {
+            const checkedCount = document.querySelectorAll('.pat-cb:checked').length;
+            const resultDiv = document.getElementById('check-result');
+
+            if (checkedCount === 0) {
+                resultDiv.innerHTML = "🟢 尚未發現明顯異常指標。";
+                resultDiv.className = "text-xs font-bold text-green-400 text-center";
+            } else if (checkedCount <= 2) {
+                resultDiv.innerHTML = `🟡 發現 ${checkedCount} 項異常指標：病童可能處於初期呼吸窘迫或代償性休克階段，應嚴密監測並給予適當處置！`;
+                resultDiv.className = "text-xs font-bold text-amber-400 text-center";
+            } else if (checkedCount <= 4) {
+                resultDiv.innerHTML = `🟠 嚴重！發現 ${checkedCount} 項異常指標：病童可能已進展至呼吸衰竭或失代償性休克，必須立刻給予高濃度氧氣與正壓通氣！`;
+                resultDiv.className = "text-xs font-bold text-orange-400 text-center";
+            } else {
+                resultDiv.innerHTML = `🔴 致命危急！發現 ${checkedCount} 項異常指標：病童有危急或心肺衰竭風險，請立即進行高級生命守護，必要時準備 CPR！`;
+                resultDiv.className = "text-xs font-bold text-red-500 text-center";
+            }
+        }
+
+        function resetChecklist() {
+            document.querySelectorAll('.pat-cb').forEach(cb => cb.checked = false);
+            calculatePatScore();
+        }
+    </script>
+</body>
+</html>
