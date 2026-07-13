@@ -15,7 +15,7 @@ description: 製作 EMT 海栓讀書會新章節時使用。本 skill 把使用�
 
 1. **SPA 單檔架構**：每一章的所有 view 必須整合在單一 `chapN.html` 內，由 `switchView()` 切換。**不要再像 v1 一樣拆成多個 HTML 子頁**。
 2. **嚴格對照頁碼**：左側選單與每個 view 的 header 都必須精準標示「課本頁碼」（例如 `P.32 - P.35`），方便讀書會成員對照紙本書。每個小節按鈕的副標也要附頁次與一句提示。
-3. **無 SVG / 無 Mermaid / 圖表只用 Chart.js**：禁止使用外部 SVG 或 Mermaid.js。所有圖示一律 Unicode emoji（🚑🩺🧠🫁❤️📜🚨🎯⚠️ 等）或單純 HTML/CSS 形狀（圓點、邊框、漸層、純色塊）。要做資料視覺化只能用 Chart.js（chap1 訓練時數、chap3 傷亡統計都是這樣做的）。
+3. **圖示與圖表**：資料視覺化（統計、比較、時數）用 Chart.js（chap1 訓練時數、chap3 傷亡統計都是這樣做的）。圖示與插圖可彈性選用：Unicode emoji（🚑🩺🧠🫁❤️📜🚨🎯⚠️ 等）、HTML/CSS 形狀（圓點、邊框、漸層、純色塊）、**SVG**，或**直接嵌入課本擷取圖**（`<img src="./assets/img/檔名">`，圖檔放 `assets/img/`）。當課本本身有現成圖（如生命之鏈、流程圖、解剖圖）時，**優先嵌入原圖**以求與紙本精準對照，不必勉強重繪。Mermaid 仍建議避免（流程圖用 CSS 節點、SVG 或 Chart.js 即可）。
 4. **Tailwind 標準色彩**：所有顏色用 ems-* token（`bg-ems-blue` / `text-ems-orange` / `border-ems-navy`）或 Tailwind 內建的 slate-* 灰階。**禁止硬寫 hex 色**。token 定義在 `assets/js/tailwind-config.js`。
 5. **降低認知負荷**（最重要的一條）：**嚴禁直接把課本的大段文字原封貼上**。要依內容屬性，主動轉換成下列元件之一：
 
@@ -126,7 +126,7 @@ MPC/
 - **小節用 `<section class="view-section hidden">`**，第一個小節初始狀態加 `class="view-section fade-in block"`。
 - **不要硬寫 hex 色**：全部用 ems-* token 或 Tailwind slate-* 灰階。
 - **RWD 不用手動處理**：`chapter-nav.js` 會自動在 lg 以下注入漢堡選單與遮罩。但如果加新元件，記得把寬表格用 `overflow-x-auto` 包起來避免溢出。
-- **不要引入 SVG / Mermaid**。圖表只用 Chart.js。
+- **資料圖表用 Chart.js**；插圖可用 SVG 或直接嵌入課本擷取圖（圖檔放 `assets/img/`，課本現成圖優先嵌入）。僅 Mermaid 仍建議避免。
 
 ## 載入順序（CRITICAL）
 
