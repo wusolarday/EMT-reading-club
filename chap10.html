@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第十章 長者緊急醫療救護</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800 overflow-hidden">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第十章 長者緊急救護</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">Finn &amp; 51先 &amp; 米歇 &amp; 倚安 · 週二 21:00–22:00</p>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+            
+            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">00. 本章學習重點</span>
+                <span class="text-[11px] text-slate-400">P.305 | 官方核心考點</span>
+            </button>
+            
+            <button onclick="switchView('view-psychology', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01. 心理影響：憂鬱與自殺</span>
+                <span class="text-[11px] text-slate-400">P.306 - P.307 | 項目數完整版</span>
+            </button>
+            
+            <button onclick="switchView('view-anatomy', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02. 老化對人體帶來的影響</span>
+                <span class="text-[11px] text-slate-400">P.308 - P.310 | 十大系統純生理</span>
+            </button>
+            
+            <button onclick="switchView('view-communication', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03. 與老年病人溝通挑戰</span>
+                <span class="text-[11px] text-slate-400">P.311 - P.313 | 12項聽力與失語/失智</span>
+            </button>
+
+            <button onclick="switchView('view-assessment', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04. 老人評估與實務技巧</span>
+                <span class="text-[11px] text-slate-400">P.314 - P.316 | 氣道擺位與不典型傷病</span>
+            </button>
+            
+            <button onclick="switchView('view-trauma-abuse', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">05. 長者外傷與虐待辨識</span>
+                <span class="text-[11px] text-slate-400">P.317 - P.319 | 改良固定與家暴通報</span>
+            </button>
+
+            <button onclick="switchView('view-tubes', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">06. 常見留置管路處置</span>
+                <span class="text-[11px] text-slate-400">P.320 - P.323 | 5大管路緊急狀況</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ===================== VIEW 0: OBJECTIVES ===================== -->
+        <section id="view-objectives" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.304 - P.305</div>
+                <h2 class="text-3xl font-bold text-ems-navy">第十章：長者緊急醫療救護</h2>
+                <div class="mt-4 border-l-4 border-ems-orange bg-orange-50 p-4 rounded-r-xl shadow-sm">
+                    <p class="text-ems-orange font-bold text-lg italic">「能陪著長者安詳地走完人生最後一程，對救護技術員而言，是一種無比的福氣。」</p>
+                </div>
+            </header>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習重點
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-xl">✦</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">老化身心與解剖影響</h4>
+                            <p class="text-sm text-slate-600 mt-1">掌握長者神經、心血管、呼吸系統老化特徵，並辨識憂鬱及自殺高風險因子。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-xl">✦</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">現場溝通與特殊評估</h4>
+                            <p class="text-sm text-slate-600 mt-1">克服視力、聽力與失語/失智溝指障礙，並運用對稱法則精準評估長者不典型傷病。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-xl">✦</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">長者外傷與虐待防線</h4>
+                            <p class="text-sm text-slate-600 mt-1">熟練駝背或人工關節病患的改良固定技術，並落實法定五大類老人虐待形式辨識。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="text-ems-blue font-bold text-xl">✦</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">五大居家留置管路異常</h4>
+                            <p class="text-sm text-slate-600 mt-1">建立鼻胃管、尿管、氣切管、造口、洗腎廔管之居家照護與到院前緊急狀況應變。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 1: PSYCHOLOGY ===================== -->
+        <section id="view-psychology" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.306 - P.307</div>
+                <h2 class="text-3xl font-bold text-ems-navy">辨識老化對病人產生的心理影響</h2>
+                <p class="text-ems-gray mt-2 text-lg">長者常因慢性疾病或生活失落引發憂鬱與自殺高風險，救護員應主動敏銳辨識並依規範處置。</p>
+            </header>
+
+            <div class="space-y-6 mt-6">
+                <!-- 上方大區塊：臨床心理風險識別指標 (12欄) -->
+                <div class="w-full">
+                    <h3 class="font-bold text-lg text-ems-navy border-b pb-2 mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-xl">⚠️</span> 臨床心理風險識別指標
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- 左卡：憂鬱症 -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy text-base block mb-3 border-b border-slate-200 pb-1.5">（一）憂鬱症 (Depression) ── 6 大特徵</b>
+                            <ul class="space-y-2">
+                                <li><b>1. 頻繁的非緊急救護案件：</b>亦即「救護常客」，可能代表著報案者內心是需要幫助的，但卻沒有合適的管道求助，因此常不自覺地使用緊急救護系統，在這個過程中讓自己感覺被幫助。</li>
+                                <li><b>2. 頻繁至急診或診所就醫：</b>就算沒有頻繁使用緊急救護系統，憂鬱症的病人還是可能會主動就醫，因此若觀察到病人描述過很多就醫經驗，但卻沒有相對應的慢性病史或診斷，就該有所警覺。</li>
+                                <li><b>3. 主訴的嚴重程度與物理檢查不符：</b>雖然疼痛、不舒服是很主觀而且受到很多因素影響，但如果觀察到明顯不相符的狀況，有可能就是憂鬱症。</li>
+                                <li><b>4. 糟糕的環境衛生：</b>因為覺得「這些都不重要了」，所以有憂鬱症的族群對於維持環境整潔會失去興趣。</li>
+                                <li><b>5. 缺乏社交網絡：</b>救護技術員在和老年人交談中，如果發現病人缺乏家人、朋友、鄰居、社區等社交網絡支持系統時要提高警覺。因為缺乏社交網絡支持的老年人，有很高的機會是隱蔽的憂鬱症病人。</li>
+                                <li><b>6. 失樂症 (Anhedonia)：</b>失樂症是對什麼事情都不會感到有興趣或是開心，這是憂鬱症很重要的跡象。</li>
+                            </ul>
+                        </div>
+                        <!-- 右卡：自殺 -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy text-base block mb-3 border-b border-slate-200 pb-1.5">（二）自殺 (Suicide) ── 6 大因子</b>
+                            <ul class="space-y-2">
+                                <li><b>1. 失去重要親人：</b>隨著年紀增加，終究會面對到生活圈中配偶、家人或朋友的死亡，而活著的那方，會感覺到被拋棄、愧疚、害怕以及孤獨。</li>
+                                <li><b>2. 身體疾病：</b>當身體老化時，身體出現疾病是很常見的，不只是心情、身體、獨立性會受影響，甚至會感受到是否有受到妥善的對待。心理部分因為生活必須仰賴他人，經濟狀況無法被保障，導致自我認同價值低落。</li>
+                                <li><b>3. 憂鬱症以及絕望感：</b>憂鬱症、心理疾病或物質濫用都是自殺的高風險因子，90% 的自殺病人具有上述的危險因子，而如果老年族群有透露出絕望的訊息，代表很有可能有自殺的行為。</li>
+                                <li><b>4. 孤立：</b>許多老年族群因為身體疾病導致不方便移動，造成社交孤立；讓老年人感覺到自己沒有價值、被孤立，這些都會讓老年人有自殺的想法。</li>
+                                <li><b>5. 酒精濫用：</b>酒精濫用與自殺是有直接關聯性的，大約 40%-60% 的酗酒者有憂鬱的問題。</li>
+                                <li><b>6. 失去生命的意義：</b>人生的角色改變時，可能會覺得絕望以及自我價值低落，例如退休、沒有能力再工作，這些都會增加自殺的風險。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 下方大區塊：救護技術員前線處置 -->
+                <div class="w-full pt-4">
+                    <h3 class="font-bold text-lg text-ems-navy border-b pb-2 mb-4 flex items-center gap-2">
+                        <span class="text-ems-blue text-xl">📋</span> 自殺防制：救護技術員前線處置規範
+                    </h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm leading-relaxed">
+                        <!-- 左卡：應該做 -->
+                        <div class="p-6 bg-blue-50 border border-blue-200 rounded-xl text-slate-700 space-y-3">
+                            <b class="text-ems-blue block text-base border-b border-blue-200 pb-1.5">✓ 應該做的事情</b>
+                            <p><b>(1) 一律送醫：</b>將有自殺行為或風險的老年病人送醫，無論身體評估的結果如何，必要時轉介至心理衛生或社會安全網。</p>
+                            <p><b>(2) 告知與記錄：</b>將發現的顧慮告知一起出同的同伴，以及記錄在救護記錄表中。</p>
+                            <p><b>(3) 嚴肅看待聲明：</b>對於病人言語上有自殺關聯的聲明都應該嚴肅看待，這可能是病人唯一透露出的跡象，也是唯一能及時阻止病人的機會。</p>
+                            <p><b>(4) 阻止並隔離危險：</b>如果已經是採取自殺行為的個案，要阻止病人做出更進一步的嘗試，所以要將環境以及隨身的危險物品隔離。</p>
+                            <p><b>(5) 直接詢問不迴避：</b>直接詢問同病患有自殺意圖的病人相關問題，不需要迴避或是迂迴。直接談論自殺的問題並不會讓沒有自殺意圖的人產生自殺的想法，但是直接談論以及專業的回應可以傳遞信任和關心病人的感受。</p>
+                            <p><b>(6) 給予正面希望：</b>如果可以，儘量給予病人正面的想法以及希望。</p>
+                        </div>
+                        <!-- 右卡：不應該做 -->
+                        <div class="p-6 bg-red-50 border border-red-200 rounded-xl text-slate-700 space-y-4">
+                            <b class="text-ems-danger block text-base border-b border-red-200 pb-1.5">✗ 不應該做的事情</b>
+                            <p><b>(1) 絕對不要批判：</b>「不要批判」。絕對不要去評斷自殺行為的是非對錯。對於想自殺的人來說，闡述生命的價值一點意義都沒有。</p>
+                            <p><b>(2) 生理評估優先：</b>不要讓自殺案件的機構、情境影響救護技術員的判斷，身體問題永遠優先於心理問題，因此就算是自殺案件，還是必須依照專業素養來評估以及處置病人。</p>
+                            <p><b>(3) 嚴禁病人獨處：</b>不應該讓有自殺風險的病人獨處或是從救護技術員的視野中消失，就算是一下子也不可以（例如跳樓、開瓦斯自殺案件）。</p>
+                            <p><b>(4) 絕不承諾保密：</b>不應該承諾保守病人的秘密，並且應該要積極協助尋求醫療衛生單位的協助。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 2: ANATOMY ===================== -->
+        <section id="view-anatomy" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.308 - P.310</div>
+                <h2 class="text-3xl font-bold text-ems-navy">老化對人體帶來的影響</h2>
+                <p class="text-ems-gray mt-2 text-lg">嚴格依據課本原始順序，完整列舉十個生理系統的老化改變與到院前臨床核心影響。</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 1. 神經系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>（一）神經系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>大腦的重量在 80 歲時會減少 10-20%，感覺和運動神經的網絡會變慢以及反應變差。萎縮的大腦會導致顱內空間增加（圖 10-1），這讓腦內血管容易因外傷而撕裂，進而導致腦出血。</p>
+                        <p><b>• 臨床核心影響：</b>因腦內空間增加，長者在腦出血時<span class="text-ems-orange font-bold">顱內壓升高的微候會更遲後出現</span>。此外，對痛的感覺會退化，例如心絞痛在老年病人的不適感可能只出現在頸部或下巴，反而沒有典型的胸痛症狀。</p>
+                    </div>
+                </div>
+
+                <!-- 2. 感官功能 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>（二）感官功能
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>眼睛病變（如青光眼、白內障、視網膜剝離、黃斑部病變）都會導致視力受影響。聽力也會隨著年齡退化，特別是高頻率聲音。此外，糖尿病神經病變最常見。</p>
+                        <p><b>• 臨床核心影響：</b>瞳孔反應和眼睛視力會受限、變慢，且瞳孔普遍會變得較小。而糖尿病神經病變會讓下肢血液循環變差、受壓迫或出現腫脹時沒有疼痛的感覺。</p>
+                    </div>
+                </div>
+
+                <!-- 3. 呼吸系統 (P.308-309跨頁純描述) -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue md:col-span-2">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>（三）呼吸系統
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700 leading-relaxed">
+                        <div>
+                            <p><b>• 解剖生理改變：</b>上呼吸道的肌肉會因為老化而變得較無力，會讓口咽內的舌頭及組織在狀況不好時更容易阻塞呼吸道。此外，使用假牙的族群因為上顎被假牙覆蓋，吞嚥食物時的感知會喪失，可能使老年族群較容易吞下太大塊的食物而增加異物哽塞的風險。咳嗽以及嘔吐反射能力也會降低。下呼吸道的平滑肌也隨年齡增長而變得無力（圖 10-2）。呼吸道塌陷、肺泡形狀改變、胸廓變得僵硬。</p>
+                        </div>
+                        <div>
+                            <p><b>• 臨床核心影響：</b>自 65 歲起至 80 歲間，每年動脈氧分壓降低約 1mmHg，<span class="text-ems-blue font-bold">血氧濃度 93%-95% 在老年族群可能是很常見的現象</span>。因此吸氣期可能會在聽診時發現喘鳴嘯聲 (Wheezing)，同樣在吐氣時也會發現。因橫膈膜力量減弱、駝背等情形，使得出現呼吸窘迫時更難代償。另外有些疾病的狀態（如中風、嚴重的失智症）會導致老年人喪失呼吸道保護的能力，也比較容易發生吸入性肺炎。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 心血管系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-blue">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-blue"></span>（四）心血管系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>動脈硬化 (Atherosclerosis) 是因為膽固醇堆積和鈣化形成斑塊使血管壁變狹窄（如冠狀動脈阻塞）。心臟節律細胞以及傳導纖維老化，血管逐漸硬化使血壓必須提高來保持足夠灌流，心肌因而變厚出現結構性病變。</p>
+                        <p><b>• 臨床核心影響：</b>心律不整（如心房顫動）在老年族群更加普遍，會增加血栓形成機會並導致血管栓塞。心臟對於荷爾蒙反應變差，長者需要更長的時間來代償以及恢復（<span class="text-ems-orange font-bold">極易發生姿勢性低血壓</span>）；且當病人失血、脫水時，理論上心跳要加快來代償，但在血壓、心血管藥物影響下，<span class="font-bold text-ems-danger">心跳可能就不會加快</span>。</p>
+                    </div>
+                </div>
+
+                <!-- 5. 皮膚系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（五）皮膚系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>皮膚表面隨著老化而萎縮，導致皮膚產生皺紋、變薄、變乾、失去彈性且更脆弱（圖 10-3）。微血管退化且周邊循環變差，油脂分泌減少且汗腺活動下降。</p>
+                        <p><b>• 臨床核心影響：</b>當皮下受傷時，<span class="text-ems-orange font-bold">皮下不易止血，進而容易形成較大的血腫</span>。此外，長期受壓迫處容易形成壓瘡，且汗腺活動下降會讓老年族群降低對熱及溫度的調節能力，容易引發低體溫或中暑。</p>
+                    </div>
+                </div>
+
+                <!-- 6. 骨骼肌肉系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（六）骨骼肌肉系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>肌肉纖維變少、運動神經數量減少且強度減弱。肌腱、韌帶與關節處軟骨失去彈性，關節液減少導致關節炎. 因骨質疏鬆而變脆弱的脊椎骨會形成駝背。</p>
+                        <p><b>• 臨床核心影響：</b>駝背會導致<span class="text-ems-orange font-bold">脊椎活動受限制以及呼吸道擺位時變得很困難</span>。老年婦女在停經後出現骨質疏鬆（Postmenopausal）的情況很常見，因此出現脊椎壓迫性骨折、髖骨骨折、前臂骨折的機會都會提高。</p>
+                    </div>
+                </div>
+
+                <!-- 7. 內分泌系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（七）內分泌系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>內分泌腺體功能退化，相關荷爾蒙調節機制隨老化發生轉變。</p>
+                        <p><b>• 臨床核心影響：</b>老年族群最常見的內分泌系統疾病就是<b>非胰島素依賴型糖尿病（第二型糖尿病）</b>。糖尿病以及高血壓會讓老年人發生心肌梗塞、腦中風、腎衰竭的風險大大提高。</p>
+                    </div>
+                </div>
+
+                <!-- 8. 消化系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（八）消化系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>食道的括約肌老化，導致容易出現胃食道逆流並進而造成食道損傷；肛門括約肌老化則會導致大便失禁。胃部控制神經減少使蠕動降低、胃酸分泌減少。腸繫膜血液循環減少到 50%。肝臟血流與肝細胞酵素分泌減少。</p>
+                        <p><b>• 臨床核心影響：</b>腸胃蠕動減少會導致便秘，身體變得不易吸收營養。肝功能降低加上若有吸菸、喝酒習慣會變得更差，<span class="text-ems-orange font-bold">讓老年族群在使用藥物時，更容易發生中毒的狀況</span>。</p>
+                    </div>
+                </div>
+
+                <!-- 9. 免疫系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（九）免疫系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>免疫系統功能隨著年紀老化，造成身體對外來病原體防禦與監視能力下降。</p>
+                        <p><b>• 臨床核心影響：</b>更容易出現感染、惡性腫瘤以及自體免疫失調的情況。<span class="text-ems-danger font-bold">肺炎以及泌尿道感染在臥床的病人身上會很常顯現</span>。</p>
+                    </div>
+                </div>
+
+                <!-- 10. 泌尿生殖系統 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-t-4 border-ems-orange">
+                    <h4 class="font-bold text-ems-navy text-base mb-3 flex items-center gap-1.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-ems-orange"></span>（十）泌尿生殖系統
+                    </h4>
+                    <div class="space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p><b>• 解剖生理改變：</b>在 30 歲到 80 歲間，腎臟組織會減少 20%，而 20 歲到 90 歲間，腎臟的過濾功能也會減少 50%。</p>
+                        <p><b>• 臨床核心影響：</b>這些老化改變會讓腎臟在體液調控及藥物代謝時出現問題，特別是許多老年族群會同時服用多種不同慢性疾病藥物。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 3: COMMUNICATION ===================== -->
+        <section id="view-communication" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.311 - P.313</div>
+                <h2 class="text-3xl font-bold text-ems-navy">與老年病人溝通挑戰</h2>
+                <p class="text-ems-gray mt-2 text-lg">克服聽力、語言與失智障礙之溝通心法，建立前線救護的信任與專業溝通。</p>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 mt-6">
+                <!-- 左欄：聽力障礙溝通技巧 (12項完整) -->
+                <div class="xl:col-span-5 bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                    <h3 class="font-bold text-lg text-ems-navy border-b pb-2 flex items-center gap-2">
+                        <span>👂 聽力障礙之溝通技巧 (表 10-1)</span>
+                    </h3>
+                    <div class="text-sm text-slate-700 leading-relaxed space-y-2">
+                        <p><b>1.</b> 詢問是否有些助聽器，以及是否需要使用。</p>
+                        <p><b>2.</b> 溝通時面對病人，並保持適當距離。</p>
+                        <p><b>3.</b> 儘量減少背景的噪音，例如電視或收音機。</p>
+                        <p><b>4.</b> 儘量讓光線打在救護技術員臉上，而不是站在背光處。</p>
+                        <p><b>5.</b> 救護技術員要在病人可見的高度及位置對話。</p>
+                        <p><b>6.</b> 用正常的速度說話，除非觀察到病人有不理解的情況。</p>
+                        <p><b>7.</b> 說話可以比平常稍微大聲 (Slightly louder)，但不是用吼 (Shout) 的。</p>
+                        <p><b>8.</b> 面對聽力障礙者，溝通時要隨時看著病人，並且表達的內容要與臉部表情一致。</p>
+                        <p><b>9.</b> 絕對不要在不同空間或是看不到的地方與聽力障礙者溝通。</p>
+                        <p><b>10.</b> 用簡短的句子，避免使用太長的對話。</p>
+                        <p><b>11.</b> 對於被誤解的內容，可以重新換句話說。</p>
+                        <p><b>12.</b> 聽力障礙者在疲憊或生病的情況下，可能會無法聽清楚和理解溝通的內容。</p>
+                        
+                        <div class="text-ems-blue font-bold mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100 text-xs md:text-sm">
+                            💡 實務密技 (P.311)：若現場長者無助聽器且因耳聾無法溝通，可以嘗試逆向使用聽診器 (Reverse stethoscope) 來輔助溝通 ── 將聽診器耳塞戴在長者耳上，救護技術員對著聽診頭說話。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右欄：失語症與失智症應對技巧 -->
+                <div class="xl:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6">
+                    <!-- （一）失語症區塊 -->
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-lg text-ems-navy border-b pb-2">🗣️ （一）失語症 (Aphasia) 應對</h3>
+                        <div class="p-3.5 bg-slate-50 rounded-lg text-sm text-slate-600 leading-relaxed border-l-4 border-ems-navy">
+                            <b>課本簡介 (P.312)：</b>失語症是一種語言能力缺陷，這會導致病人無法說話或是無法理解說話的內容，甚至失去讀和寫的能力。失語症常見的原因是因中風導致的腦部損傷。
+                        </div>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-1.5 pl-1">
+                            <b class="text-ems-navy block mb-1">✦ 與失語症患者溝通的技巧 (表 10-2)</b>
+                            <p><b>1.</b> 詢問家人或照顧者，病人是說話困難還是聆聽困難；如果是聆聽困難，可以運用環境素材來引導，利用呈現給病人看和理解的方式，來告訴病人救護技術員希望病人做到甚麼。</p>
+                            <p><b>2.</b> 如果是說話困難，那麼可以用簡單的問題，例如用是非題的方式來輔助溝通。</p>
+                            <p><b>3.</b> 與失語症病人對話要如同與成人一樣，而不是像對小孩說話，避免顯露出高人一等的樣子。</p>
+                            <p><b>4.</b> 在溝通時，減少背景的噪音。</p>
+                            <p><b>5.</b> 確保在溝通前有取得病人的注意力。</p>
+                            <p><b>6.</b> 嘗試構築任何對話、鼓勵各種可能的溝通方式。</p>
+                            <p><b>7.</b> 給予病人時間去做，也允許合理的應答時間。如果病人花了太長的時間回答，可以請病人重複一下詢問的問題來看病人是否理解。並且嘗試幫病患填入關鍵字句，避免堅持病人要把每一個字句說好。</p>
+                            <p><b>8.</b> 採取簡單明瞭的方式溝通，簡單的句子、放慢語速、保持正常音量，並且在關鍵字句時加重語氣。</p>
+                            <p><b>9.</b> 儘量利用姿勢、手勢以及視覺輔助來促進溝通。</p>
+                            <p><b>10.</b> 當感覺到羞愧或是被催促時，失語症病人會減少溝通的嘗試。因此給予病人足夠的時間去建構想說的內容，且救護技術員在聆聽時不要有負面的態度（如不耐煩、糾正...等）。</p>
+                        </div>
+                    </div>
+
+                    <!-- （二）失智症區塊 -->
+                    <div class="space-y-3 pt-2">
+                        <h3 class="font-bold text-lg text-ems-navy border-b pb-2">🧠 （二）失智症 (Dementia) 應對</h3>
+                        <div class="p-3.5 bg-slate-50 rounded-lg text-sm text-slate-600 leading-relaxed border-l-4 border-ems-orange">
+                            <b>課本簡介 (P.312)：</b>語言障礙在失智症的病人身上是很常見的，像是無法說出人或是東西的名稱或是說不出自己想要說的。事實上在失智症早期的表現就是如此。而失智症最終可能會遺忘朋友或家人，因此可能也不知道救護技術員是什麼樣的存在。
+                        </div>
+                        <div class="text-sm text-slate-700 leading-relaxed space-y-1.5 pl-1">
+                            <b class="text-ems-orange block mb-1">✦ 與失智症病人溝通的技巧 (表 10-3)</b>
+                            <p><b>1.</b> 使用清楚、具體以及病人熟悉的語言。</p>
+                            <p><b>2.</b> 一次講一件事就好，用詞簡單而且不要太快。</p>
+                            <p><b>3.</b> 避免使用專業術語。</p>
+                            <p><b>4.</b> 使用簡短的句子，如果病人不理解，那是因為大腦需要時間理解，而如果更換語句說的方式，病人會需要費力去再次理解，因此將同樣的問題描述過後再重複一次。如果重複後病人還是不理解，才用換句話說或是替換字詞來提示。</p>
+                            <p><b>5.</b> 使用手勢、姿勢...等方式來搭配所說的內容。</p>
+                            <p><b>6.</b> 如果病人嘗試回答問題，但在回答中途出現中斷，可以重複他最後說的結尾作為提示。</p>
+                            <p><b>7.</b> 在解釋為什麼要這麼做的時候不要給予冗長的解釋，可能會導致病人無法理解。</p>
+                            <p><b>8.</b> 用「名詞」取代「代名詞」，因為病人可能會分心去思考代名詞是指誰。例如：不要說「你的丈夫在遠處，我可以問『他』一些關於你的問題嗎？」比較好的方式是「你的丈夫在遠處，我可以問問『你的丈夫』一些關於你的問題嗎？」</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 4: 老人評估 ===================== -->
+        <section id="view-assessment" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.314 - P.316</div>
+                <h2 class="text-3xl font-bold text-ems-navy">老人評估與實務技巧</h2>
+                <p class="text-ems-gray mt-2 text-lg">在到院前針對長者特殊解剖與不典型傷病，採取更審慎的思考模式與實務技巧。</p>
+            </header>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                <!-- 左側：5大評估項目切換鈕 -->
+                <div class="lg:col-span-4 grid grid-cols-1 gap-2 max-h-[460px] overflow-y-auto pr-1">
+                    <button id="btn-ger-1" onclick="switchGerEval(1)" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex flex-col gap-1">
+                        <span class="text-ems-navy font-bold">• 評估思維與環境、心智</span>
+                        <span class="text-xs text-slate-400 font-normal">評估差異 / 環境線索 / 定向力辨識</span>
+                    </button>
+                    <button id="btn-ger-2" onclick="switchGerEval(2)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex flex-col gap-1">
+                        <span class="text-ems-blue font-bold">• 評估呼吸道 (核心鐵則)</span>
+                        <span class="text-xs text-slate-400 font-normal">下顎推舉 / 呼吸道擺位 / 假牙處理規範</span>
+                    </button>
+                    <button id="btn-ger-3" onclick="switchGerEval(3)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex flex-col gap-1">
+                        <span class="text-ems-navy font-bold">• 評估呼吸與循環</span>
+                        <span class="text-xs text-slate-400 font-normal">胸廓聽診 / 雙側脈搏 / 藥物干擾代償</span>
+                    </button>
+                    <button id="btn-ger-4" onclick="switchGerEval(4)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex flex-col gap-1">
+                        <span class="text-ems-navy font-bold">• 評估用藥</span>
+                        <span class="text-xs text-slate-400 font-normal">非處方與中草藥 / 近期變更 / 中毒風險</span>
+                    </button>
+                    <button id="btn-ger-5" onclick="switchGerEval(5)" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-left text-sm font-bold text-slate-700 flex flex-col gap-1">
+                        <span class="text-ems-orange font-bold">• 外傷特殊評估原則</span>
+                        <span class="text-xs text-slate-400 font-normal">內科致命成因 / 腹部感知遮蔽 / 對稱法則</span>
+                    </button>
+                </div>
+
+                <!-- 右側：動態顯示內文區 -->
+                <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-6 md:p-8 shadow-md flex flex-col min-h-[420px]">
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-3 mb-4">
+                        <h3 id="ger-title" class="text-xl font-bold text-ems-blue">評估思維與環境、心智狀態</h3>
+                        <span class="text-xs font-mono text-slate-400 tracking-wider" id="ger-num">P.314 原文</span>
+                    </div>
+                    
+                    <!-- 主要內文區 -->
+                    <div id="ger-content" class="text-slate-300 space-y-4 leading-relaxed text-sm md:text-base flex-1">
+                        <p><b>1. 比較老年病人評估之不同：</b>評估長者與一般族群的思考模式不同，必須考量整體面向，更細心謹慎。例如42歲胸痛最可能是心臟問題；但82歲長者胸痛，因老化及症狀不典型，必須將心臟、血栓、主動脈剝離或呼吸問題同時納入考量。</p>
+                        <p><b>2. 現場環境評估：</b>現場環境可提供救護技術員額外的資訊，包含居住環境是否過冷過熱、基本生活需求是否被滿足、是否有受虐或照顧不當的跡象。煙灰缸暗示仍有抽菸習慣，未整理及未服用的藥物意味著慢性病未良好控制。</p>
+                        <p><b>3. 心智狀態評估：</b>年紀增加本身並不會導致心智狀態變差，切勿輕易假設意識改變或反應不佳是正常的。必須確實評估並取得長者平常的意識基準以辨別急性或慢性問題。可藉由人、事、地、時的定向力評估認知功能障礙（長期照護機構長者對星期概念較模糊，可用是否知道現在是早、中、下午或晚來評估）。</p>
+                    </div>
+
+                    <!-- 底部提示區 -->
+                    <div id="ger-hint" class="mt-4 p-3 bg-slate-800 rounded border border-slate-700 text-xs text-slate-300">
+                        課本 P.314：在評估、病史及環境資訊蒐集都必須更加細心。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 5: TRAUMA & ABUSE ===================== -->
+        <section id="view-trauma-abuse" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.317 - P.319</div>
+                <h2 class="text-3xl font-bold text-ems-navy">長者外傷處置與老人虐待辨識</h2>
+                <p class="text-ems-gray mt-2 text-lg">辨識長者常見的高致命外傷風險、精確執行改良式固定技術，並落實法定老人虐待指標之到院前識別。</p>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 mt-6">
+                <!-- 左側：長者特殊外傷與改良式固定 (獨立展開) -->
+                <div class="xl:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-6 text-sm text-slate-700 leading-relaxed">
+                    
+                    <!-- 部份 1：辨識長者常見的外傷風險 -->
+                    <div class="space-y-3">
+                        <h3 class="font-bold text-base text-ems-navy border-b pb-2 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-ems-blue"></span>（一）辨識長者常見的外傷風險 (P.317)
+                        </h3>
+                        <div class="space-y-2 pr-1">
+                            <p><b>1. 頸椎以及脊椎外傷：</b>因骨質疏鬆關係，長者脊椎脆弱易骨折，且容納脊髓空間變狹窄，更容易在受傷當下因壓迫導致脊髓損傷。臨床可能僅因單純摔倒就造成頸椎骨折，或出現神經學損傷症狀卻沒有外觀骨折形態。</p>
+                            <p><b>2. 軀幹外傷：</b>氣胸、血胸在年齡上無嚴重程度區分，但肋骨骨折與連枷胸在老年族群會更嚴重且致命，極易伴隨內部肺挫傷及出血。此外，主動脈常因老化脆弱易被撕裂，但其中有 50% 病人身體理學檢查正常，主訴通常不典型（如躺下時感覺背痛）。</p>
+                            <p><b>3. 髖關節骨折 (Hip fracture)：</b>包含股骨頭、股骨頸及近端股骨骨折。髖關節骨折很常發生在老年且合併有骨質疏鬆的女性病人，且多發生在從站姿跌倒的情境下。此外，老年族群發生骨盆外傷時，會有很高的骨盆出血可能性。</p>
+                            <p><b>4. 下肢外傷：</b>膝蓋會因關節炎而變得僵硬，更容易導致遠端大腿骨骨折，且只需要很小的外傷能量轉換（如單純踩空跌倒）就會造成。踝骨骨折常發生在直接衝擊、小腿中段以及側面撞擊（如車禍撞擊下肢），或是發生扭轉的力量傳遞到脛骨所致。</p>
+                            <p><b>5. 上肢外傷：</b>上肢外傷通常較少出現危及生命危險的可能，但手腕骨折、遠端前臂骨折很常見，主要在跌倒時用手去撐地的情況下發生，會嚴重影響病人生活的獨立性。</p>
+                            <p><b>6. 關於人工關節損傷：</b>人工關節在髖關節、膝蓋與肩膀很常見。人工關節仍需依靠剩下的骨骼維持穩定，當骨折發生在接近關節處時會使其失去穩定。常見成因為跌倒、交通意外、骨質疏鬆減少強度、吻合不良或感染導致廔管變鬆。人工關節脫臼在安裝後 6 週內最容易發生。</p>
+                        </div>
+                    </div>
+
+                    <!-- 部份 2：如何固定老年外傷病人 -->
+                    <div class="space-y-3 pt-2">
+                        <h3 class="font-bold text-base text-ems-navy border-b pb-2 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-ems-blue"></span>（二）如何固定老年外傷病人 (P.318)
+                        </h3>
+                        <div class="space-y-3">
+                            <p><b>1. 頸頭減移與固定挑戰：</b>長者可能無法使用標準頸圈限制活動，或無法順利牽引病人頭部到身體的自然中線，此時<span class="text-ems-danger font-bold">嚴禁強行牽引</span>。應改用<b>捲緊的毛毯包圍住病人的頭部兩側</b>以限制其移動，固定時在束帶接觸的地方墊一些紗布可避免皮膚損傷。</p>
+                            <p><b>2. 駝背病人固定挑戰：</b>遇嚴重駝背的病人，可以嘗試<b>以毛毯或枕頭來提供頭部與上背部的支撐</b>，不要嘗試或強迫駝背的病人躺平。另外為了避免壓瘡，在將病人移到長背板前，可以用軟墊來形成緩衝和減少骨頭凸出處的皮膚壓力。</p>
+                            <p><b>3. 髖關節骨折固定原則：</b>髖關節骨折<span class="text-ems-danger font-bold">不需要嘗試使用牽引類型的固定</span>。可以考慮使用毛毯、長夾板做固定。毛毯應該要<b>置於兩腿之間，並以原姿勢固定</b>。毛毯功能是讓病人維持穩定姿勢、避免移動導致二次受傷並減少疼痛。可以考慮使用長背板或鏟式擔架，運送過程中仍須持續評估末梢肢體的血液循環狀況。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：法定老人虐待形式與案例辨識 (滿欄展開) -->
+                <div class="xl:col-span-5 bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-base text-ems-navy border-b pb-2 mb-3 flex items-center gap-2">
+                            <span class="text-ems-blue text-xl">🛡️</span> 法定老人虐待形式與案例辨識 (表 10-4)
+                        </h3>
+                        <p class="text-xs text-slate-500 mb-3">依我國老人福利法第41條第1項規定，救護員若於前線環境發現長者有直系血親卑親屬或契約照顧者有以下情事，致生命身體危難者應依法通報：</p>
+                        <div class="space-y-2 text-sm text-slate-600 leading-relaxed pr-1">
+                            <p class="p-2 bg-red-50 rounded-lg border border-red-100">
+                                <b class="text-ems-danger block mb-0.5">1. 身體虐待：</b><br>
+                                • <i>辨識重點：</i>出現與病人主訴病史不相符的外傷、無法解釋的骨折或傷痕。<br>
+                                • <i>案例：</i>打耳光、踢、拉扯頭髮、刻意推倒老人家；菸頭刻意燙傷，或使用家中物品作為攻擊武器。
+                            </p>
+                            <p class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                                <b class="text-slate-800 block mb-0.5">2. 情感或心理虐待：</b><br>
+                                • <i>辨識重點：</i>病人情緒異常緊張、表現出莫名恐懼，或與主要照顧者互動時出現異常情緒反應。<br>
+                                • <i>案例：</i>不停責罵或是恐嚇、以懲罰當作威脅、聲稱只有這樣才能照顧老人。
+                            </p>
+                            <p class="p-2 bg-amber-50 rounded-lg border border-amber-100">
+                                <b class="text-ems-orange block mb-0.5">3. 疏忽照顧或遺棄：</b><br>
+                                • <i>辨識重點：</i>臨床有明顯嚴重的營養不良跡象、個人衛生極度不佳。<br>
+                                • <i>案例：</i>未準備食物、水、衣物或慢性病生活必需藥物；未注意老人個人衛生；或將老人留置在醫院、養老院等機構後不聞不問。
+                            </p>
+                            <p class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                                <b class="text-slate-800 block mb-0.5">4. 性虐待：</b><br>
+                                • <i>辨識重點：</i>生殖器或肛門等私密部位不明原因傷害、或現場有性傳染病的症狀出現。<br>
+                                • <i>案例：</i>刻意使老人裸露、強迫做強迫性行為、以語言性騷擾或刻意攻擊性器官。
+                            </p>
+                            <p class="p-2 bg-amber-50 rounded-lg border border-amber-100">
+                                <b class="text-ems-orange block mb-0.5">5. 財務剝削：</b><br>
+                                • <i>辨識重點：</i>長者生活品質與其經濟狀況明顯不符，或與主要照顧者落差很大；重要財物莫名消失。<br>
+                                • <i>案例：</i>偷竊金錢或財物、未經同意擅自將老人財產過戶或是兌現、強迫老人更改遺囑或簽署合約指定代理人。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 6: TUBES ===================== -->
+        <section id="view-tubes" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.320 - P.323</div>
+                <h2 class="text-3xl font-bold text-ems-navy">常見居家留置管路與到院前緊急狀況</h2>
+                <p class="text-ems-gray mt-2 text-lg">到院前應落實全身檢視，搬運時避免拉扯管路，並精確掌握 5 大管路危急處置。</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm leading-relaxed">
+                <!-- 1. 鼻胃管 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                    <b class="text-ems-navy text-base block border-b pb-1 mb-1">鼻胃管 (NG Tube)</b>
+                    <p class="text-xs text-slate-500">目的：協助無法經口進食者維持營養與水份。</p>
+                    <div class="space-y-2 text-slate-600">
+                        <p class="text-ems-blue font-bold text-xs">⚠️ 到院前緊急狀況與處置：</p>
+                        <p><b>• 滑脫或阻塞：</b>引發營養與電解質失衡，更可能引發嘔吐或吸入性肺炎。</p>
+                        <p><b>• 灌食中嗆咳：</b><span class="text-ems-danger font-bold">立即停止灌食</span>，迅速評估呼吸、給予氧氣，並將鼻胃管打開引流減壓。</p>
+                        <p><b>• 周圍紅腫：</b>可能為感染微兆，注意觀察記錄。</p>
+                    </div>
+                </div>
+
+                <!-- 2. 導尿管 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                    <b class="text-ems-navy text-base block border-b pb-1 mb-1">導尿管 (Urinary Catheter)</b>
+                    <p class="text-xs text-slate-500">目的：協助無法自行排尿的病人順利排出尿液。</p>
+                    <div class="space-y-2 text-slate-600">
+                        <p class="text-ems-blue font-bold text-xs">⚠️ 到院前緊急狀況與處置：</p>
+                        <p><b>• 尿管阻塞：</b>導致尿液滯留、膀胱漲痛、引發泌尿道感染。</p>
+                        <p><b>• 意外脫落：</b><span class="text-ems-danger font-bold">嚴禁現場逕行插回</span>，避免造成二次尿道撕裂傷害，應迅速送醫。</p>
+                        <p><b>• 混濁或血尿：</b>可能為感染或其他泌尿系統疾病微兆，詳細記錄。</p>
+                    </div>
+                </div>
+
+                <!-- 3. 氣切管 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                    <b class="text-ems-navy text-base block border-b pb-1 mb-1">氣切管 (Tracheostomy Tube)</b>
+                    <p class="text-xs text-slate-500">目的：協助呼吸道阻塞或呼吸衰竭病人維持通暢。</p>
+                    <div class="space-y-2 text-slate-600">
+                        <p class="text-ems-blue font-bold text-xs">⚠️ 到院前緊急狀況與處置：</p>
+                        <p><b>• 意外脫落：</b>極度緊急狀況！應立即嘗試建立通氣並速送醫。</p>
+                        <p><b>• 痰液完全阻塞且無法給氣：</b>可嘗試將氣囊的水或空氣抽出；有內管者，可請家屬<span class="text-ems-orange font-bold">先行單獨移除內管</span>（非整組氣切管）。</p>
+                        <p><b>• 造口出血：</b>使用乾淨敷料加壓止血，並儘速送醫。</p>
+                        <p class="text-ems-danger font-bold text-xs">※ 鐵則：切勿將任何一般面罩氧氣接頭嘗試強行置入或連接上氣切管！</p>
+                    </div>
+                </div>
+
+                <!-- 4. 造口 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                    <b class="text-ems-navy text-base block border-b pb-1 mb-1">造口 (Stoma)</b>
+                    <p class="text-xs text-slate-500">目的：提供排泄或維持營養途徑（如結腸/迴腸/胃造廔）。</p>
+                    <div class="space-y-2 text-slate-600">
+                        <p class="text-ems-blue font-bold text-xs">⚠️ 到院前緊急狀況與處置：</p>
+                        <p><b>• 造口脫垂：</b><span class="text-ems-danger font-bold">絕不可嘗試將脫垂的腸段推回體內</span>！應使用「濕潤的無菌紗布」覆蓋表面保護，並儘速送醫處置。</p>
+                        <p><b>• 造口阻塞/出血：</b>可能導致腹痛、嘔吐等腸阻塞症狀，使用乾淨敷料加壓止血並送醫。</p>
+                    </div>
+                </div>
+
+                <!-- 5. 洗腎廔管 -->
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-2">
+                    <b class="text-ems-navy text-base block border-b pb-1 mb-1">洗腎廔管 (AV Fistula)</b>
+                    <p class="text-xs text-slate-500">目的：提供血液透析所需的血流管路，適用腎衰竭者。</p>
+                    <div class="space-y-2 text-slate-600">
+                        <p class="text-ems-blue font-bold text-xs">⚠️ 到院前緊急狀況與處置：</p>
+                        <p><b>• 廔管出血：</b>高壓噴發極度致命！<span class="text-ems-danger font-bold">應立即實施精確的局部加壓止血</span>並迅速送醫。</p>
+                        <p><b>• 廔管阻塞：</b>每日需手摸震顫 (Thrill) 或聽診雜音 (Bruit)，若減弱或消失代表廔管已發生阻塞，會導致手部嚴重腫脹疼痛。</p>
+                        <p><b>• 廔管感染：</b>若出現紅、腫、熱、痛或膿液，需立即就醫。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== CORE JS & DATA SWITCH DRIVER ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        // ======= 老人評估分頁 (VIEW 4) 動態數據驅動字典 =======
+        const gerEvalData = {
+            1: {
+                title: "評估思維與環境、心智狀態",
+                num: "P.314 原文",
+                content: `
+                    <p><b>1. 比較老年病人評估之不同：</b>評估長者與一般族群的思考模式不同，必須考量整體面向，更細心謹慎。例如42歲胸痛最可能是心臟問題；但82歲長者胸痛，因老化及症狀不典型，必須將心臟、血栓、主動脈剝離或呼吸問題同時納入考量。</p>
+                    <p><b>2. 現場環境評估：</b>現場環境可提供救護技術員額外的資訊，包含居住環境是否過冷過熱、基本生活需求是否被滿足、是否有受虐或照顧不當的跡象。煙灰缸暗示仍有抽菸習慣，未整理及未服用的藥物意味著慢性病未良好控制。</p>
+                    <p><b>3. 心智狀態評估：</b>年紀增加本身並不會導致心智狀態變差，切勿輕易假設意識改變或反應不佳是正常的。必須確實評估並取得長者平常的意識基準以辨別急性或慢性問題。可藉由人、事、地、時的定向力評估認知功能障礙（長期照護機構長者對星期概念較模糊，可用是否知道現在是早、中、下午或晚來評估）。</p>
+                `,
+                hint: "課本 P.314：評估長者必須考量整體面向，環境與平常意識基準是非常重要的線索。"
+            },
+            2: {
+                title: "評估呼吸道 (核心技術鐵則)",
+                num: "P.314 原文",
+                content: `
+                    <p><b>1. 溫和徒手操作：</b>長者頸椎以及下巴骨骼因為老化變得脆弱，操作壓額抬下顎法或下顎推舉法時，應該要更溫和地去操作以避免造成不必要的傷害；因在頸椎受傷情形下移動幅度可能較大、易導致進一步脊髓損傷，<b>應優先採用下顎推舉法</b>來處置呼吸道。</p>
+                    <p><b>2. 假牙與面罩通氣原則：</b>使用面罩搭配甦醒球進行人工呼吸時，可以讓病人<b>維持佩戴假牙的狀態</b>來保持嘴部的形狀，避免扣 CE 手勢時因面部凹陷而漏氣。</p>
+                    <p><b>3. 假牙與進階氣道原則：</b>如果今天嘗試使用聲門上呼吸道、插管的處置時，就<b>應該移除假牙</b>，避免在處置時管路損壞或是由物件脫落，導致呼吸道阻塞。</p>
+                    <p><b>4. 疾病窒息風險：</b>中風、嚴重失智症會導致長者喪失嘔吐反射以及吞嚥能力，此類病患喪失呼吸道保護能力，較容易發生吸入性肺炎。</p>
+                `,
+                hint: "課本 P.314 核心：面罩通氣留假牙防漏氣，進階氣道拔假牙防阻塞。優先用下顎推舉。"
+            },
+            3: {
+                title: "評估呼吸與循環技術",
+                num: "P.315 原文",
+                content: `
+                    <p><b>1. 評估呼吸：</b>長者呼吸速度正常介於 10-20 次/分，但胸腔可能因老化變僵硬，不易觀察到起伏，應仔計觀察並善用聽診器評估異音與深淺。注意咳嗽型態、痰的顏色與傳染病「TOCC」評估。</p>
+                    <p><b>2. 評估循環與雙側脈搏：</b>心臟對神經調控變差，常趨向較慢心跳與較弱脈搏，評估時記得尋找兩側脈搏。心律不整（如心房顫動）在老年族群更加普遍。</p>
+                    <p><b>3. 藥物干擾心跳代償：</b>老年族群服用的一些血壓、心臟、心血管藥物會影響心跳速度。當病人失血、脫水時，理論上心跳要加快代償，但在<b>藥物影響下心跳可能就不會加快</b>，救護員切勿因此掉以輕心。</p>
+                    <p><b>4. 高血壓日常基準值：</b>低血壓（收縮壓&lt;90mmHg）意味組織缺乏灌流（如排查腸胃道出血）。需注意若長者日常血壓基準值偏高，則對成年人外觀正常的血壓，在長者身上可能就已經是休克了。</p>
+                `,
+                hint: "課本 P.315 警語：失血脫水時心跳可能因慢性病藥物干擾而無法加快代償，血壓應對比日常基準。"
+            },
+            4: {
+                title: "評估用藥注意事項",
+                num: "P.316 原文",
+                content: `
+                    <p><b>1. 非處方與中草藥：</b>除了有處方的藥物以外，也要高度注意老年族群是否服用非處方藥、中藥或草藥，特別是近期有新的處方、非處方用藥或是劑量調整。</p>
+                    <p><b>2. 藥物中毒高風險成因：</b>老化導致肝臟血流減少以及肝細胞酵素分泌減少，使肝臟功能降低。加上長者如果合有吸菸、喝酒的習慣，會讓肝臟功能變得更差，<b>讓老年族群在使用藥物時，更容易發生中毒的狀況</b>。</p>
+                `,
+                hint: "課本 P.316：肝臟血流與酵素減少，使長者在使用藥物時更容易發生中毒狀況。"
+            },
+            5: {
+                title: "外傷特殊評估原則",
+                num: "P.316 原文",
+                content: `
+                    <p><b>1. 釐清疾病與外傷共病：</b>在外傷救護中，要仔細釐清主要問題是受傷還是疾病。長者跌倒外傷或車禍，常是因為內科疾病（如血糖異常、虛弱、頭暈或心律不整）所造成，這些內科疾病往往比看到的外傷更為致命。</p>
+                    <p><b>2. 腹部感知遮蔽效應：</b>長者的腹腔因為感知退化以及肌肉組織減少，<b>即使發生嚴重的腹腔病變或出血，在理學檢查時可能也不會出現典型的腹膜炎症候</b>，極易掩蓋傷情。</p>
+                    <p><b>3. 活用肢體對稱法則 (Rule of symmetry)：</b>長者常有嚴重的關節炎情況，手指或肢體可能原本就有明顯變形，常讓現場辨別骨折或脫臼變得困難。此時去仔細比較兩側肢體，會更容易判斷是否為本次外傷所導致。</p>
+                `,
+                hint: "課本 P.316 鐵則：長者腹部感知退化，嚴重內出血或病變可能「完全不出現」腹膜炎症候！"
+            }
+        };
+
+        function switchGerEval(id) {
+            document.querySelectorAll('#view-assessment .duty-card').forEach(btn => btn.classList.remove('active'));
+            const clickedBtn = document.getElementById('btn-ger-' + id);
+            if (clickedBtn) clickedBtn.classList.add('active');
+
+            const data = gerEvalData[id];
+            document.getElementById('ger-title').innerHTML = data.title;
+            document.getElementById('ger-content').innerHTML = data.content;
+            document.getElementById('ger-num').innerText = data.num;
+            document.getElementById('ger-hint').innerText = data.hint;
+        }
+    </script>
+</body>
+</html>
