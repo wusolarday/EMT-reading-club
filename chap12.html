@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第十二章 病人轉送、轉診或轉院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800 overflow-hidden">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第十二章 病人轉送</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">轉診 · 轉院 · 交班 · 送醫流程</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+
+            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">00. 本章學習重點</span>
+                <span class="text-[11px] text-slate-400">P.340 - P.341 | 法規・三大目標</span>
+            </button>
+
+            <button onclick="switchView('view-terms', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01. 轉送常用名詞</span>
+                <span class="text-[11px] text-slate-400">P.342 - P.343 | 後送醫院・TTAS 五級</span>
+            </button>
+
+            <button onclick="switchView('view-methods', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02. 轉送方式</span>
+                <span class="text-[11px] text-slate-400">P.344 - P.345 | 陸空海・分流・繞道</span>
+            </button>
+
+            <button onclick="switchView('view-enroute', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03. 轉送途中注意事項</span>
+                <span class="text-[11px] text-slate-400">P.346 - P.349 | 司機守則・送醫流程</span>
+            </button>
+
+            <button onclick="switchView('view-handover', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04. 架構性交班模組</span>
+                <span class="text-[11px] text-slate-400">P.350 - P.351 | ISBAR・IMIST</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ===================== VIEW 0: 本章學習重點 ===================== -->
+        <section id="view-objectives" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.340 - P.341</div>
+                <h2 class="text-3xl font-bold text-ems-navy">第十二章：病人轉送、轉診或轉院</h2>
+                <p class="text-ems-gray mt-2 text-lg">轉送病人是救護技術員最重要的使命——安全、快速、有效的醫療交接，直接影響病人預後。</p>
+            </header>
+
+            <!-- 核心定義卡 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue mb-8">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">📜</span> 法規依據
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                        <div class="text-xs text-ems-blue font-bold uppercase tracking-wider mb-2">緊急醫療救護法 第 29 條</div>
+                        <p class="text-slate-300 text-sm leading-relaxed">救護人員應依救護指揮中心指示前往現場急救，並將緊急傷病患送往就近適當醫院。在急救至送達醫院前不得無故延誤，並應完整交接。</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                        <div class="text-xs text-ems-blue font-bold uppercase tracking-wider mb-2">緊急傷病患實施辦法 第 3 條</div>
+                        <p class="text-slate-300 text-sm leading-relaxed">無法法規定指定「無法提供適切治療」之情況，醫院得協助安排轉診；轉診義務明確規範何時可不受後送限制。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 學習目標 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習目標
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">理解轉送法規與條件</h4>
+                            <p class="text-sm text-slate-600 mt-1">掌握病人轉送、轉診及轉院的法規依據、常用名詞定義與通用適用條件。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">掌握不同運送方式</h4>
+                            <p class="text-sm text-slate-600 mt-1">了解陸上、空中、海上救護運送的工具選擇，以及分流與繞道的後送決策邏輯。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">提升安全交接能力</h4>
+                            <p class="text-sm text-slate-600 mt-1">熟悉送醫途中監測要點，並能運用 ISBAR 與 IMIST 架構性交班模組完整交接。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===================== VIEW 1: 轉送常用名詞 ===================== -->
+        <section id="view-terms" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.342 - P.343</div>
+                <h2 class="text-3xl font-bold text-ems-navy">01 轉送、轉診或轉院之常用名詞</h2>
+                <p class="text-ems-gray mt-2 text-lg">釐清「後送醫院」「急救責任醫院」「急診檢傷制度」三大概念，是正確後送決策的基礎。</p>
+            </header>
+
+            <!-- 三大名詞手風琴 -->
+            <div class="space-y-4 mb-8">
+
+                <!-- 後送醫院 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-blue" onclick="toggleLaw(1)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">🏥 後送醫院（指定後送醫院）</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-1">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="font-bold text-ems-navy mb-2">定義</p>
+                                <p>依緊急傷病患實施辦法第 2 條，「指定後送醫院」係指地方衛生主管機關依轄區內緊急醫療需要，劃分責任區並考量醫療機構緊急醫療處置能力、設備及專長，依序指定接受轉入特定緊急傷病患之醫院。</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-ems-navy mb-2">轉診義務</p>
+                                <ul class="list-disc pl-5 space-y-1 text-sm">
+                                    <li>後送醫院不得拒絕接受其轉診</li>
+                                    <li>病患或家屬要求非後送醫院時，醫院應告知其可能之風險</li>
+                                    <li>轉診後傷病事消失後，得轉回原診治醫院</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-blue-50 border border-blue-100 p-3 rounded-lg">
+                            <p class="text-sm text-blue-800"><strong>同法第 4 條</strong>：遇有跨縣市事項，由相關地方衛生主管機關協調辦理；必要時得請中央衛生主管機關協助指定。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 急救責任醫院 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-orange" onclick="toggleLaw(2)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">🚨 急救責任醫院</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-2">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="font-bold text-ems-navy mb-2">法源與指定</p>
+                                <p>依緊急醫療救護法第 37 條，直轄市、縣（市）衛生主管機關應依轄區內緊急醫療設施及專業，指定急救責任醫院；<strong>非急救責任醫院不得使用急救責任醫院名稱</strong>。</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-ems-navy mb-2">六大義務（同法第 39 條）</p>
+                                <ul class="list-disc pl-5 space-y-1 text-sm">
+                                    <li>全天候提供緊急傷病患醫療照護</li>
+                                    <li>接受醫療機構轉診之緊急傷病患</li>
+                                    <li>派遣醫師指導救護人員執行救護工作</li>
+                                    <li>提供緊急醫療救護訓練</li>
+                                    <li>依中央衛生主管機關規定提供緊急醫療救護資訊</li>
+                                    <li>其他衛生主管機關關關規定事項</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-orange-50 border border-orange-100 p-3 rounded-lg">
+                            <p class="text-sm text-orange-800"><strong>醫院能力分級</strong>（衛福部依緊救法第 38 條第 2 項）：重度級、中度級及一般級急救責任醫院；至民國 113 年 6 月計有重度級 52 家、中度級 74 家、一般級 79 家，完成全國 14 個醫網。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 急診檢傷制度 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-blue" onclick="toggleLaw(3)">
+                    <div class="p-5 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                        <h3 class="font-bold text-lg text-ems-navy">📊 急診檢傷制度（TTAS 五級）</h3>
+                        <span class="text-ems-blue font-bold text-xl" id="law-icon-3">+</span>
+                    </div>
+                    <div class="p-5 hidden text-slate-700 text-sm leading-relaxed" id="law-content-3">
+                        <p class="mb-4">自民國 99 年 1 月 1 日起實施<strong>急診五級檢傷分類基準（Taiwan Triage and Acuity Scale, TTAS）</strong>，歷經 104 年、107 年及 108 年三次修正，系用呼吸、生命徵象、意識、體溫、疼痛程度、高危性受傷機轉等 6 個調節變數，區分成人與兒童標準。</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr class="bg-ems-navy text-white">
+                                        <th class="px-3 py-2 text-left rounded-tl-lg">分類級數</th>
+                                        <th class="px-3 py-2 text-left">病情嚴重</th>
+                                        <th class="px-3 py-2 text-left">定義</th>
+                                        <th class="px-3 py-2 text-left rounded-tr-lg">可能等候時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-red-100 border-b border-red-200">
+                                        <td class="px-3 py-2 font-bold text-red-700">第一級</td>
+                                        <td class="px-3 py-2 font-bold text-red-700">復甦急救</td>
+                                        <td class="px-3 py-2 text-slate-700">病況危急，生命或肢體處於立即危險狀態</td>
+                                        <td class="px-3 py-2 font-bold text-red-700">立刻急救</td>
+                                    </tr>
+                                    <tr class="bg-orange-50 border-b border-orange-200">
+                                        <td class="px-3 py-2 font-bold text-orange-700">第二級</td>
+                                        <td class="px-3 py-2 font-bold text-orange-700">危急</td>
+                                        <td class="px-3 py-2 text-slate-700">潛在性及生命性、裝置及器具功能狀況失常，需快速控制病情者</td>
+                                        <td class="px-3 py-2 font-bold text-orange-700">10 分鐘</td>
+                                    </tr>
+                                    <tr class="bg-yellow-50 border-b border-yellow-200">
+                                        <td class="px-3 py-2 font-bold text-yellow-700">第三級</td>
+                                        <td class="px-3 py-2 font-bold text-yellow-700">緊急</td>
+                                        <td class="px-3 py-2 text-slate-700">病況可能惡化，需急症處置，病人可能伴隨明顯不適的狀況</td>
+                                        <td class="px-3 py-2 font-bold text-yellow-700">30 分鐘</td>
+                                    </tr>
+                                    <tr class="bg-green-50 border-b border-green-200">
+                                        <td class="px-3 py-2 font-bold text-green-700">第四級</td>
+                                        <td class="px-3 py-2 font-bold text-green-700">次緊急</td>
+                                        <td class="px-3 py-2 text-slate-700">病況為慢性疾病，或情況合乎相關，在 1-2 小時處置沒有惡化之虞</td>
+                                        <td class="px-3 py-2 font-bold text-green-700">60 分鐘</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="px-3 py-2 font-bold text-slate-600">第五級</td>
+                                        <td class="px-3 py-2 font-bold text-slate-600">非緊急</td>
+                                        <td class="px-3 py-2 text-slate-700">病況為非急症狀況，可能為慢性或輕微問題，不需立即處置</td>
+                                        <td class="px-3 py-2 font-bold text-slate-600">120 分鐘</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 bg-blue-50 border border-blue-100 p-3 rounded-lg">
+                            <p class="text-sm text-blue-800">緊急醫療救護項技術所稱之緊急傷病患多屬 TTAS 之第一級或第二級，促使救護技術員執行到院前急救有參考依據，送達後直接進入重症或危急區域接受護理人員檢傷。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 2: 轉送方式 ===================== -->
+        <section id="view-methods" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.344 - P.345</div>
+                <h2 class="text-3xl font-bold text-ems-navy">02 轉送、轉診或轉院之方式</h2>
+                <p class="text-ems-gray mt-2 text-lg">依病人位置、轉送距離、病況穩定度與所承受風險，選擇最適合的運送工具與後送策略。</p>
+            </header>
+
+            <!-- 初級 vs 次級運送 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-5 rounded-xl border border-blue-100 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 bg-ems-blue text-white px-3 py-1 rounded-bl-xl text-xs font-bold">初級運送</div>
+                    <h4 class="font-bold text-ems-navy text-lg mt-4">Primary Transport</h4>
+                    <p class="text-sm text-slate-700 mt-2">從救護現場直接送往醫院的運送，稱之為<strong>初級運送</strong>。在台灣地區絕大多數的初級運送是由消防單位執行，二級運送多由醫院或民間救護車機構行轉。</p>
+                </div>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 bg-slate-600 text-white px-3 py-1 rounded-bl-xl text-xs font-bold">次級運送</div>
+                    <h4 class="font-bold text-ems-navy text-lg mt-4">Secondary Transport</h4>
+                    <p class="text-sm text-slate-700 mt-2">病患在急救責任醫院接受初步急救與穩定後，需要轉到其他醫院的運送，稱之為<strong>次級運送（Secondary Transport）</strong>或轉院運送。</p>
+                </div>
+            </div>
+
+            <!-- 三種運送工具互動卡 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">🚑</span> 運送工具選擇
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 grid grid-cols-1 gap-3">
+                        <button onclick="showTransport(1)" id="btn-transport-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 text-slate-700 font-bold">
+                            <span class="text-3xl">🚑</span>
+                            <div class="text-left">
+                                <div class="font-bold text-ems-navy">陸上救護運送</div>
+                                <div class="text-xs text-slate-500 font-normal">最常見的初級運送</div>
+                            </div>
+                        </button>
+                        <button onclick="showTransport(2)" id="btn-transport-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 text-slate-700 font-bold">
+                            <span class="text-3xl">🚁</span>
+                            <div class="text-left">
+                                <div class="font-bold text-ems-navy">空中救護運送</div>
+                                <div class="text-xs text-slate-500 font-normal">離島・偏遠・特殊事故</div>
+                            </div>
+                        </button>
+                        <button onclick="showTransport(3)" id="btn-transport-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center gap-3 text-slate-700 font-bold">
+                            <span class="text-3xl">⛵</span>
+                            <div class="text-left">
+                                <div class="font-bold text-ems-navy">海上救護運送</div>
+                                <div class="text-xs text-slate-500 font-normal">海巡・漁船・海洋事故</div>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-6 shadow-md flex flex-col min-h-[220px]">
+                        <h3 id="transport-title" class="text-xl font-bold text-ems-blue mb-3 border-b border-slate-700 pb-3">🚑 陸上救護運送</h3>
+                        <div id="transport-content" class="text-slate-300 space-y-3 leading-relaxed flex-1">
+                            <p class="text-white font-bold">絕大部分病人的主要轉送工具，是到到院前救護的主要車輛。</p>
+                            <ul class="list-disc pl-5 space-y-1.5 text-sm">
+                                <li>可分陸上、空中及海上運送，取決於病人位置、轉送距離、病況穩定度及所承受之風險等因素</li>
+                                <li>加護型救護車及其他間救護輸工具僅為少數縣（市）依勤務需求而配置</li>
+                                <li>在運送過程中，救護人員的安全也是重要關鍵</li>
+                                <li>必先利其器——掌握救護車輛的保養、器材的維護及安全駕駛的原則</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 後送方式：分流 vs 繞道 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🔀</span> 後送方式：分流 vs 繞道
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 分流 -->
+                    <div class="bg-blue-50 p-5 rounded-xl border border-blue-100">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-ems-blue text-white px-2 py-0.5 rounded text-xs font-bold">分流 Diversion</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-3">如果 <strong>A 醫院</strong>已超乎負荷，沒有能力再接收病人，這時應將病人後送到 B 醫院，並應無法再繼續承接病人這樣的狀態稱為<strong>「分流」</strong>。</p>
+                        <div class="bg-white border border-blue-200 p-3 rounded-lg">
+                            <p class="text-xs text-blue-700 font-bold mb-1">⚠️ 注意事項</p>
+                            <p class="text-xs text-slate-600">為了緩和醫院滿床的壓力並少救護車在醫院門口排隊的窘境，臺北市於民國 97 年 6 月實施「到院前急診分流計畫」；遇有緊急危急病人時不予分流，應立即送往任有能力處置之適當醫院。</p>
+                        </div>
+                    </div>
+                    <!-- 繞道 -->
+                    <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="bg-slate-600 text-white px-2 py-0.5 rounded text-xs font-bold">繞道 Bypass</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-3">如果<strong>離救護現場最近的 A 醫院</strong>未具有處理重症或特殊傷病患能力，這時將病人直接送往具有處理能力的 B 醫院之狀況稱為<strong>「繞道」</strong>。</p>
+                        <div class="bg-white border border-slate-200 p-3 rounded-lg">
+                            <p class="text-xs text-slate-600 font-bold mb-1">🫀 需繞道的特殊病況</p>
+                            <ul class="text-xs text-slate-600 space-y-0.5 list-disc pl-4">
+                                <li>急性冠狀動脈症候群（院前 12 導程心電圖）</li>
+                                <li>腦血管疾病（stroke center）</li>
+                                <li>毒蛇咬傷（抗蛇毒血清）</li>
+                                <li>一氧化碳中毒（高壓氧）</li>
+                                <li>重大外傷（外科處置能力）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 3: 轉送途中注意事項 ===================== -->
+        <section id="view-enroute" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.346 - P.349</div>
+                <h2 class="text-3xl font-bold text-ems-navy">03 轉送途中注意事項</h2>
+                <p class="text-ems-gray mt-2 text-lg">安全送醫，需要司機的專業駕駛與車廂救護技術員的持續監測共同配合。</p>
+            </header>
+
+            <!-- 司機注意事項 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">🚗</span> 司機應注意事項
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 grid grid-cols-2 gap-2">
+                        <button onclick="showDriver(1)" id="btn-driver-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 text-sm font-bold text-center">
+                            <span class="text-2xl mb-1">💪</span>良好體能
+                        </button>
+                        <button onclick="showDriver(2)" id="btn-driver-2" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 text-sm font-bold text-center">
+                            <span class="text-2xl mb-1">🧠</span>正確判斷
+                        </button>
+                        <button onclick="showDriver(3)" id="btn-driver-3" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 text-sm font-bold text-center">
+                            <span class="text-2xl mb-1">📋</span>熟交通法規
+                        </button>
+                        <button onclick="showDriver(4)" id="btn-driver-4" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 text-sm font-bold text-center">
+                            <span class="text-2xl mb-1">🤝</span>良好駕駛態度
+                        </button>
+                    </div>
+                    <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-6 shadow-md flex flex-col min-h-[200px]">
+                        <h3 id="driver-title" class="text-xl font-bold text-ems-blue mb-3 border-b border-slate-700 pb-3">💪 保持良好體能狀況</h3>
+                        <div id="driver-content" class="text-slate-300 space-y-2 leading-relaxed flex-1 text-sm">
+                            <p class="text-white font-bold">駕駛車輛是一種消耗體能的活動，需要注意力集中。</p>
+                            <ul class="list-disc pl-5 space-y-1.5">
+                                <li>若在非正常的體能狀況下，很容易疲倦而影響安全</li>
+                                <li>救護技術員的輪班不同於其他行業，多半日夜輪替，上班期間常需調整體力</li>
+                                <li>切勿飲酒過度，以免體力不濟而影響駕駛安全</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8項安全規範 -->
+                <div class="mt-6 border-t border-slate-200 pt-6">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-blue">🛡️</span> 8 項安全駕駛規範</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+                            <p class="text-sm text-slate-700">救護車應保持全天候車燈開啟，以提醒用路人</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+                            <p class="text-sm text-slate-700">變換車道要逐步行進</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+                            <p class="text-sm text-slate-700">保持與前車安全距離，車速越高的路段，更應拉長車距</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">4</span>
+                            <p class="text-sm text-slate-700">目視方向，善用後照鏡；避免緊急加減及煞車</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">5</span>
+                            <p class="text-sm text-slate-700">轉彎時應提早打方向燈，以警示用路人</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">6</span>
+                            <p class="text-sm text-slate-700">過交叉路口，應減速慢行並觀視左、右、前、後方，確認所有車輛都停止後再行駛；遵警察指揮</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">7</span>
+                            <p class="text-sm text-slate-700">依規定開啟警鳴器及閃光燈，但仍無法警示所有用路人，故駕駛員仍須提高警覺</p>
+                        </div>
+                        <div class="flex items-start gap-2 p-2 bg-slate-50 rounded border border-slate-200">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">8</span>
+                            <p class="text-sm text-slate-700">任何路口、轉換車道時，事先預估可能的風險（防禦性駕駛）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 兩階段作為：離現場前 + 途中 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- 離現場前 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-xl">🏁</span> 救護車駛離救護現場前應有作為
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-ems-blue pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">通報醫院</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">應通報醫院：ALS 個案應將病人主要問題、異常生命徵象等先行預警醫院以利醫院先準事先做好準備；使回報資訊完整及送醫途中之救護工作。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">熟悉前往醫院路線</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">駕駛員應於開車前應熟悉醫療路線之救護工作，以確保救護安全；確認病人已準備好並同意被轉院。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">特殊規定</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">依用式救護車行車規則規定，載運人數上限為 5 人；若超過規定人數，應妥善向家屬解釋行車安全全規定；送醫過程中，家屬或同乘者無論坐於何處，均應繫上安全帶。</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 送醫途中 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-blue text-xl">🔄</span> 送醫途中應有作為
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-ems-orange pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">持續監測</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">應 1 名以上救護技術員進行生命徵象監測或次級評估；危急個案應持續進行後續評估，以及早發現病人趨微的狀況變化。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">評估再評估</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">若送醫過程需花一些時間，穩定個案每 15 分鐘重估一次生命徵象；若狀況不穩定（危急個案）則每 5 分鐘再評估一次。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-3">
+                            <h4 class="font-bold text-sm text-ems-navy">心理支持</h4>
+                            <p class="text-xs text-slate-600 mt-0.5">每位病人在送醫過程中，都會呈現緊張不安的狀態，適時的心理支持與保暖或維持體溫是專業的表現，勿過度專業的話術與口吻，讓病人產生心理上的壓力。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 送醫途中救護流程 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🔄</span> 送醫途中救護流程
+                </h3>
+                <!-- 流程圖（純 CSS） -->
+                <div class="overflow-x-auto">
+                    <div class="flex items-center gap-2 min-w-max py-4 px-2">
+                        <div class="bg-ems-navy text-white text-center px-4 py-3 rounded-lg text-sm font-bold min-w-[90px]">上救護車</div>
+                        <span class="text-ems-blue font-bold text-xl">→</span>
+                        <div class="bg-blue-50 border-2 border-ems-blue text-center px-4 py-3 rounded-lg text-sm font-bold min-w-[110px] text-ems-navy">上車時<br>是否有頸動脈搏？</div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="flex items-center gap-2">
+                                <span class="text-green-600 font-bold text-xs">有</span>
+                                <span class="text-ems-blue font-bold text-xl">→</span>
+                                <div class="bg-orange-50 border border-orange-200 text-center px-3 py-2 rounded-lg text-xs font-bold min-w-[110px] text-ems-navy">初級評估後依置<br>「表12-2、表12-3」<br>及次級評估</div>
+                            </div>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-red-600 font-bold text-xs">無</span>
+                                <span class="text-ems-blue font-bold text-xl">→</span>
+                                <div class="bg-red-50 border border-red-200 text-center px-3 py-2 rounded-lg text-xs font-bold min-w-[110px] text-red-700">持續心肺復甦術<br>並使用 AED</div>
+                            </div>
+                        </div>
+                        <span class="text-ems-blue font-bold text-xl">→</span>
+                        <div class="bg-slate-50 border border-slate-200 text-center px-4 py-3 rounded-lg text-sm font-bold min-w-[90px] text-ems-navy">院前<br>病情回報</div>
+                        <span class="text-ems-blue font-bold text-xl">→</span>
+                        <div class="bg-slate-50 border border-slate-200 text-center px-4 py-3 rounded-lg text-sm font-bold min-w-[110px] text-ems-navy">持續監測、<br>重新或重複評估</div>
+                        <span class="text-ems-blue font-bold text-xl">→</span>
+                        <div class="bg-ems-navy text-white text-center px-4 py-3 rounded-lg text-sm font-bold min-w-[90px]">到達醫院</div>
+                    </div>
+                </div>
+
+                <!-- 異外傷/外傷病人處置表對照 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                    <!-- 非外傷病人 -->
+                    <div>
+                        <div class="bg-ems-blue text-white text-center py-2 rounded-t-lg text-sm font-bold">表 12-2 非外傷病人處置表</div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">分類</th>
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">病人常見表現</th>
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">處置</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-red-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-red-700">X</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">大量出血</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">直接加壓或使用適當止血帶</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-red-600">A</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.意識不清<br>2.嗆音（口中有分泌物、電吐等）</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">對疼痛刺激無反應，應優先查吸吸同時查查細胞搏；若要讓病人塞入口咽呼</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-orange-600">B</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.呼吸速度改變<br>2.瀕死呼吸</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">立即給予氧氣或提升更高度氧療治療，必要時徵候維持；檢查脈搏，無脈搏時立刻 CPR</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-yellow-600">C</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.休克<br>2.頸動脈搏不到</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">靜脈注射或下肢抬高、保暖；立即 CPR</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-blue-600">D</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">AED 示示電擊</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">依各消防救護車內或車前 AED 程序操作</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-slate-600">其他</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.血糖 &lt;60<br>2.體溫異常<br>3.缺血性胸痛<br>4.急症腹中風<br>5.生產</td>
+                                        <td class="border border-slate-300 px-2 py-1.5 text-xs">送途中給予葡萄糖水或靜脈注射輸葡萄糖液；給予保暖；12 導程心電圖傳輸，心律監視；通氣，啟動急急救治療小組；保護產婦</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 外傷病人 -->
+                    <div>
+                        <div class="bg-ems-orange text-white text-center py-2 rounded-t-lg text-sm font-bold">表 12-3 外傷病人處置表</div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100">
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">分類</th>
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">病人常見表現</th>
+                                        <th class="border border-slate-300 px-2 py-1.5 text-left">處置</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-red-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-red-700">X</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">大量出血</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">直接加壓或使用適當止血帶</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-red-600">A</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.意識不清<br>2.嗆音（口中有分泌物、電吐等）</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">若要讓病人塞入口咽呼吸道，請不要讓病人意識到入口；病人倒側讓流出不讓不讓吸吸</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-orange-600">B</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.呼吸速度改變<br>2.瀕死呼吸</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">立即給予氧氣或提升更高濃度氧療治療，保暖血壓下降；檢查脈搏，無脈搏時立刻 CPR</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-yellow-600">C</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">1.休克<br>2.頸動脈搏不到</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">靜脈注射或下肢抬高、保暖；立即 CPR</td>
+                                    </tr>
+                                    <tr class="bg-slate-50">
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-blue-600">D</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">神經異常</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">頭、長背板保護</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-slate-300 px-2 py-1.5 font-bold text-slate-600">其他</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">骨折、特殊傷部位急危急部位</td>
+                                        <td class="border border-slate-300 px-2 py-1.5">清洗傷口、包紮止血、骨折固定；啟動重大外傷機制</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 4: 架構性交班模組 ===================== -->
+        <section id="view-handover" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.350 - P.351</div>
+                <h2 class="text-3xl font-bold text-ems-navy">04 架構性交班模組</h2>
+                <p class="text-ems-gray mt-2 text-lg">到達醫院後的交班品質，直接影響醫療團隊能否立即採取最適當的處置。</p>
+            </header>
+
+            <!-- 交班重要性 -->
+            <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-orange mb-8">
+                <p class="text-slate-300 leading-relaxed">救護技術員將病人送達醫院，與醫療團隊完整交班，需確保病人病情、已進行的處置措施以及生命徵象的完整交接。醫療品質推廣學會（JCI）為建立機構內團隊領導與溝通機制，落實醫療人員訊息有效溝通並促進團隊合作，使用「ISBAR」進行架構性交班；另「IMIST」對於外傷救護中能協助救護人員快速、有效傳遞病人的狀況及處置，確保接手醫療團隊可以立即採取最適當的行動，提升病人的生存機會和治療效果。</p>
+            </div>
+
+            <!-- ISBAR vs IMIST 互動對照 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+                <!-- ISBAR -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-blue text-white p-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold">ISBAR 交班步驟</h3>
+                            <p class="text-blue-200 text-xs mt-0.5">適用：一般急症交班</p>
+                        </div>
+                        <span class="text-5xl font-black text-blue-300/40">I</span>
+                    </div>
+                    <div class="divide-y divide-slate-100">
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-blue text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">I</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">Introduction（自我介紹）</div>
+                                    <p class="text-sm text-slate-600 mt-1">「護理師你好，我是 ○○ 分隊的 EMT。」</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-blue text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">S</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">Situation（情況）</div>
+                                    <p class="text-sm text-slate-600 mt-1">病人為 65 歲男性，主訴胸痛 30 分鐘前開始不退，疼痛從胸口到下巴、呼吸冒汗與呼吸困難。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-blue text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">B</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">Background（背景）</div>
+                                    <p class="text-sm text-slate-600 mt-1">過去有高血壓及心臟病病史。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-blue text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">A</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">Assessment（評估）</div>
+                                    <p class="text-sm text-slate-600 mt-1">心電圖示 ST 段上升，血壓為 150/90 mmHg，脈搏 110 次 / 分，SpO₂ 為 92%。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">R</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">Recommendation（建議）</div>
+                                    <p class="text-sm text-slate-600 mt-1">建議立即進行心電圖監控，並準備急救處置；可能需要進行急診心導管手術。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IMIST -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-orange text-white p-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold">IMIST 交班步驟</h3>
+                            <p class="text-orange-200 text-xs mt-0.5">適用：外傷救護交班</p>
+                        </div>
+                        <span class="text-5xl font-black text-orange-300/40">I</span>
+                    </div>
+                    <div class="divide-y divide-slate-100">
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">I</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">身份確認（Identification）</div>
+                                    <p class="text-sm text-slate-600 mt-1">「護理師你好，我是 ○○ 分隊的 EMT，車禍病人為 25 歲男性。」</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">M</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">傷害機轉（Mechanism of injury）</div>
+                                    <p class="text-sm text-slate-600 mt-1">病人為機車騎士，與小客車碰撞摔倒。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">I</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">受傷型態（Type of injury）</div>
+                                    <p class="text-sm text-slate-600 mt-1">初級評估估計右股骨骨折。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">S</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">生命徵象或關鍵症狀（Signs or Symptoms）</div>
+                                    <p class="text-sm text-slate-600 mt-1">GCS 3 分、呼吸喘、血壓 84/50 mmHg、SpO₂ 95%。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-slate-50 transition">
+                            <div class="flex items-start gap-3">
+                                <span class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-base shrink-0">T</span>
+                                <div>
+                                    <div class="font-bold text-ems-navy">進行的治療（Treatment Given）</div>
+                                    <p class="text-sm text-slate-600 mt-1">給予氧氣治療、靜脈輸液、骨折固定；目前血壓維持可容許性血壓。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 課堂補充：病人要史已前到 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <div class="flex items-center gap-2 mb-5">
+                    <h3 class="text-xl font-bold text-ems-navy">💡 課堂補充：交班口訣</h3>
+                    <span class="text-xs bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded font-bold">教官補充</span>
+                </div>
+                <div class="bg-ems-navy text-white p-5 rounded-xl mb-5 text-center">
+                    <p class="text-sm text-slate-400 mb-2">另一套常用口訣，適合快速記憶交班要素</p>
+                    <p class="text-4xl font-black tracking-widest text-ems-orange">病人要史已前到</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-blue">病人</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">病人資訊</div>
+                        <div class="text-xs text-slate-500 mt-1">姓名、年齡、性別</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-blue">要</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">主要原因</div>
+                        <div class="text-xs text-slate-500 mt-1">本次主訴或事故原因</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-blue">史</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">過去病史</div>
+                        <div class="text-xs text-slate-500 mt-1">慢性病、過敏、藥物</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-blue">已</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">已做處置</div>
+                        <div class="text-xs text-slate-500 mt-1">給氧、CPR、止血等</div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-blue">前</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">目前生命徵象</div>
+                        <div class="text-xs text-slate-500 mt-1">BP、HR、SpO₂、GCS</div>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-3 text-center">
+                        <div class="text-2xl font-black text-ems-orange">到</div>
+                        <div class="text-xs font-bold text-ems-navy mt-1">何時到</div>
+                        <div class="text-xs text-slate-500 mt-1">預計抵達時間</div>
+                    </div>
+                </div>
+                <div class="mt-4 bg-amber-50 border border-amber-200 p-3 rounded-lg">
+                    <p class="text-sm text-amber-800">⚡ <strong>與 ISBAR / IMIST 的差異</strong>：這套口訣結構更精簡，強調「已做處置」與「預計到達時間」，適合院前電話預報時快速傳達，不一定包含建議或傷害機轉的細節。</p>
+                </div>
+            </div>
+
+            <!-- 結論 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">🏁</span> 結論
+                </h3>
+                <div class="border-l-4 border-ems-orange bg-orange-50 p-5 rounded-r-xl">
+                    <p class="text-slate-700 leading-relaxed mb-3">轉送、轉診或轉院途中，救護技術員面臨的挑戰，無論是病人的狀況、到院前駕駛安全或到院後交接，<strong>全賴於平日的準備與訓練，安全且平穩地將病人送達醫院是救護技術員最重要的使命</strong>，唯有不斷的提升自我安全意識及救護能力，才能完成任務。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-3xl mb-2">🔄</div>
+                        <div class="font-bold text-ems-navy text-sm">平日準備與訓練</div>
+                        <p class="text-xs text-slate-500 mt-1">熟悉送醫路線、設備保養、交班流程</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-3xl mb-2">🛡️</div>
+                        <div class="font-bold text-ems-navy text-sm">安全意識</div>
+                        <p class="text-xs text-slate-500 mt-1">防禦性駕駛、自身安全與病人安全並重</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-center">
+                        <div class="text-3xl mb-2">🤝</div>
+                        <div class="font-bold text-ems-navy text-sm">完整醫療交接</div>
+                        <p class="text-xs text-slate-500 mt-1">ISBAR / IMIST 確保資訊無遺漏傳遞</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        // ── 手風琴 ──────────────────────────────────────
+        function toggleLaw(id) {
+            const content = document.getElementById('law-content-' + id);
+            const icon    = document.getElementById('law-icon-' + id);
+            if (!content || !icon) return;
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '−';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        // ── 運送工具互動卡 ──────────────────────────────
+        const transportData = {
+            1: {
+                t: '🚑 陸上救護運送',
+                c: `<p class="text-white font-bold">絕大部分病人的主要轉送工具，是到院前救護的主要車輛。</p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm">
+                        <li>可分陸上、空中及海上運送，取決於病人位置、轉送距離、病況穩定度及所承受之風險等因素</li>
+                        <li>加護型救護車及其他間救護輸工具僅為少數縣（市）依勤務需求而配置</li>
+                        <li>在運送過程中，救護人員的安全也是重要關鍵</li>
+                        <li>必先利其器——掌握救護車輛的保養、器材的維護及安全駕駛的原則</li>
+                    </ul>`
+            },
+            2: {
+                t: '🚁 空中救護運送',
+                c: `<p class="text-white font-bold">國內空中救護運送的資源，來自內政部空勤務、空軍及民間航空公司等單位，並由衛福部進行資源的整合。</p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm">
+                        <li>多半擔任離島和偏遠地區症傷病患的醫院間轉診，也區分為初級及二級運送</li>
+                        <li>多僅運行在特殊事故，如大量傷病患、特殊救護需求或是災難事件等</li>
+                        <li>離島：直升機成為主要工具，空降救援時對地面隊的配合有嚴格要求</li>
+                        <li>緊急醫療救護系統將此病人直接送往具有急性腦中風處理能力的醫院</li>
+                    </ul>`
+            },
+            3: {
+                t: '⛵ 海上救護運送',
+                c: `<p class="text-white font-bold">海上救護運送常仰賴仰印艦艇與直升機的海空配合作業，依據民國 108 年 6 月 21 日修正之「海岸巡防法」相關規範執行。</p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-sm">
+                        <li>第 3 條第 7 款：海巡機關執行「海岸巡防、海洋災害救護…」等事項</li>
+                        <li>海上救護不僅需要掌握的資訊條件，尋找救難目標，更須克服惡劣海況，以完成拯救或接駁</li>
+                        <li>海上救護運送的過程中，仍應完成對病人的評估及處置</li>
+                        <li>離島地區的救護轉送，通常需要跨單位協調（海巡、消防、醫療）</li>
+                    </ul>`
+            }
+        };
+
+        function showTransport(id) {
+            const data = transportData[id];
+            if (!data) return;
+            document.getElementById('transport-title').innerText = data.t;
+            document.getElementById('transport-content').innerHTML = data.c;
+            document.querySelectorAll('.duty-card').forEach(el => el.classList.remove('active'));
+            const btn = document.getElementById('btn-transport-' + id);
+            if (btn) btn.classList.add('active');
+        }
+
+        // ── 司機守則互動卡 ──────────────────────────────
+        const driverData = {
+            1: {
+                t: '💪 保持良好體能狀況',
+                c: `<p class="text-white font-bold">駕駛車輛是一種消耗體能的活動，需要注意力集中。</p>
+                    <ul class="list-disc pl-5 space-y-1.5">
+                        <li>若在非正常的體能狀況下，很容易疲倦而影響安全</li>
+                        <li>救護技術員的輪班不同於其他行業，多半日夜輪替，上班期間常需調整體力</li>
+                        <li>切勿飲酒過度，以免體力不濟而影響駕駛安全</li>
+                    </ul>`
+            },
+            2: {
+                t: '🧠 正確判斷力',
+                c: `<p class="text-white font-bold">車輛事故總是在短短幾秒內發生，因此駕駛救護車要有防禦性駕駛觀念。</p>
+                    <ul class="list-disc pl-5 space-y-1.5">
+                        <li>在危機發生前選擇解決方法；有經驗的駕駛員能預期什麼情況容易發生危險</li>
+                        <li>能及防应，避免交通事故發生，而這些經驗的累積可以從同事間的討論、留意相關媒體報導，或從消防署及各縣市製作的案例教育中習得</li>
+                        <li>平時養成良好的行車習慣，例如行經十字路口或常發生事故路段應減速慢行</li>
+                    </ul>`
+            },
+            3: {
+                t: '📋 熟悉交通法規',
+                c: `<p class="text-white font-bold">救護車在行駛上有交通優先權但沒有免責權，仍須注意車輛行駛應有的基本義務。</p>
+                    <ul class="list-disc pl-5 space-y-1.5">
+                        <li>跨越雙黃線超車、加速衝過紅燈等，都必須確保安全無虞才能執行</li>
+                        <li>救護車行駛上特有的違規行為，如占用反向車道超越前車或強行搶越</li>
+                        <li>闖紅燈等，容易使閃避不及的用路人發生車禍或糾紛</li>
+                        <li>善用優先燈號，避免緊急加減及煞車</li>
+                    </ul>`
+            },
+            4: {
+                t: '🤝 良好駕駛態度',
+                c: `<p class="text-white font-bold">駕駛態度是安全駕駛操作中重要的一環，救護技術員若不關心自身安全，或自以為是的駕駛態度，則很難養成謹慎規避的駕駛經驗。</p>
+                    <ul class="list-disc pl-5 space-y-1.5">
+                        <li>唯有正確的態度與遵守下列安全駕駛的守則，才能使自己與病人安全上獲得保障</li>
+                        <li>駕駛員必須在每次駕駛前，評估自己的心靈是否受家庭或工作壓力影響</li>
+                        <li>是否能勝任駕駛工作，並避免因情緒影響安全</li>
+                        <li>「訓練」才是改變不好駕駛態度、培養安全意識的最有效方式</li>
+                    </ul>`
+            }
+        };
+
+        function showDriver(id) {
+            const data = driverData[id];
+            if (!data) return;
+            document.getElementById('driver-title').innerText = data.t;
+            document.getElementById('driver-content').innerHTML = data.c;
+            // 只影響司機區塊內的 duty-card
+            document.querySelectorAll('[id^="btn-driver-"]').forEach(el => el.classList.remove('active'));
+            const btn = document.getElementById('btn-driver-' + id);
+            if (btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

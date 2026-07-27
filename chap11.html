@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第十一章 行為急症</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800 overflow-hidden">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第十一章 行為急症</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">精神危機 · 法規 · 評估 · 處置</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+
+            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">00. 本章學習重點</span>
+                <span class="text-[11px] text-slate-400">P.324 - P.325 | 五大學習目標</span>
+            </button>
+
+            <button onclick="switchView('view-recognition', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01. 認識行為急症及精神疾病</span>
+                <span class="text-[11px] text-slate-400">P.326 - P.327 | 四型態 · 五類疾病</span>
+            </button>
+
+            <button onclick="switchView('view-law', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02. 精神衛生法及相關法規</span>
+                <span class="text-[11px] text-slate-400">P.328 - P.329 | 就醫要件 · 法源</span>
+            </button>
+
+            <button onclick="switchView('view-assessment', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03. 行為急症之評估</span>
+                <span class="text-[11px] text-slate-400">P.330 - P.333 | CABD · DEFUSE · 暴力風險</span>
+            </button>
+
+            <button onclick="switchView('view-handling', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04. 危機處理小組分工協調</span>
+                <span class="text-[11px] text-slate-400">P.334 - P.337 | TRM · 領導溝通守望相助 · 站位 · 約束</span>
+            </button>
+
+            <button onclick="switchView('view-pitfalls', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">05. 常見陷阱與約束作業</span>
+                <span class="text-[11px] text-slate-400">P.338 - P.339 | 8步驟 · 非精神因素</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ===================== VIEW 0: OBJECTIVES ===================== -->
+        <section id="view-objectives" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.324 - P.325</div>
+                <h2 class="text-3xl font-bold text-ems-navy">第十一章：行為急症</h2>
+                <div class="mt-4 border-l-4 border-ems-orange bg-orange-50 p-4 rounded-r-xl shadow-sm">
+                    <p class="text-ems-orange font-bold text-lg">🧠 面對行為急症與精神危機時，救護技術員無需確診，只需判斷：<br>病人的行為是否對自己或他人造成危害風險？</p>
+                </div>
+            </header>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-6">
+                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
+                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習目標
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">認識行為急症及常見精神疾病</h4>
+                            <p class="text-sm text-slate-600 mt-1">掌握行為急症四種型態，辨識憂鬱、雙極性精神病、思覺失調等五類常見精神疾病。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">熟知精神衛生法及相關法律規範</h4>
+                            <p class="text-sm text-slate-600 mt-1">了解精神衛生法第32條與警察職權行使法第19條，確保護送與約束作業的法律依據。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">掌握評估行為急症之技巧</h4>
+                            <p class="text-sm text-slate-600 mt-1">運用叫叫CABD初級評估、DEFUSE言語技巧、「居安危枕戈旦」次級評估及暴力風險工具。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">4</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-navy">瞭解現場分工、資源轉介及身體約束</h4>
+                            <p class="text-sm text-slate-600 mt-1">熟悉警消衛生三方協作機制、L/V型站位、8步驟約束流程及社區資源轉介路徑。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-orange-50 rounded-lg border border-orange-200 md:col-span-2">
+                        <span class="bg-ems-orange text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">5</span>
+                        <div>
+                            <h4 class="font-bold text-base text-ems-orange">避開處理行為急症時常見的陷阱</h4>
+                            <p class="text-sm text-slate-600 mt-1">辨識非精神因素（低血糖、酒精、毒藥物、肝腦病變等）引發的類精神行為，避免誤判；正確執行約束作業並告知家屬。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===================== VIEW 1: RECOGNITION ===================== -->
+        <section id="view-recognition" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.326 - P.327</div>
+                <h2 class="text-3xl font-bold text-ems-navy">01 認識行為急症及精神疾病</h2>
+                <p class="text-ems-gray mt-2 text-lg">救護技術員無需確診精神疾病，重點在辨識病人是否處於危機狀態，並評估對自身或他人的風險。</p>
+            </header>
+
+            <!-- 四種行為急症型態 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">⚡</span> 行為急症四種型態
+                </h3>
+                <p class="text-sm text-slate-600 mb-5">行為急症（Behavioral Emergency）是指病人的行為、情緒或思考失控，需要緊急介入。病人可能出現以下四種型態，有時不只單一出現：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-blue-50 rounded-xl border border-blue-200 border-t-4 border-t-ems-blue">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-ems-blue font-black text-xl">①</span>
+                            <h4 class="font-bold text-ems-navy">失去現實感</h4>
+                        </div>
+                        <p class="text-sm text-slate-700">醫學上的「急性精神狀態」，可能出現幻覺和妄想。病人因失去現實感，無法理解真實情境，並非特定疾病，除精神疾病外，低血糖、頭部外傷或物質使用皆可引起。需特別注重生理狀態的評估。</p>
+                    </div>
+                    <div class="p-4 bg-orange-50 rounded-xl border border-orange-200 border-t-4 border-t-ems-orange">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-ems-orange font-black text-xl">②</span>
+                            <h4 class="font-bold text-ems-navy">失去希望</h4>
+                        </div>
+                        <p class="text-sm text-slate-700">例如覺得無助、低價值感；病人外表可能出現自傷、自殺的行為。自傷不是特定疾病，病人可能因精神疾病、過去的創傷經驗、缺乏社會人際資源，或適應壓力事件而引發。</p>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-200 border-t-4 border-t-red-400">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-red-500 font-black text-xl">③</span>
+                            <h4 class="font-bold text-ems-navy">失去控制</h4>
+                        </div>
+                        <p class="text-sm text-slate-700">不可控制的憤怒、衝動；特別是在物質使用的病人（如酒精和安非他命），會降低痛苦忍受度和對行為的控制力，對外在刺激容易過度反應，並且需要注意警報幻覺和妄想引發之攻擊行為。</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 border-t-4 border-t-slate-400">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-slate-500 font-black text-xl">④</span>
+                            <h4 class="font-bold text-ems-navy">失去穩定的想法</h4>
+                        </div>
+                        <p class="text-sm text-slate-700">表現為不成比例的焦慮、緊張、恐慌。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常見精神疾病 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">🏥</span> 常見精神疾病介紹
+                </h3>
+                <div class="space-y-3" id="accordion-mental">
+                    <!-- 憂鬱症 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('acc-depression')" class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition text-left">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-blue-100 text-ems-blue rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">一</span>
+                                <span class="font-bold text-ems-navy">憂鬱症（Depression）</span>
+                            </div>
+                            <span class="text-slate-400 text-lg accordion-icon">＋</span>
+                        </button>
+                        <div id="acc-depression" class="hidden p-4 bg-white text-sm text-slate-700 leading-relaxed border-t border-slate-100">
+                            <p>根據世界衛生組織調查平均每100人中有3-5人罹患。病人長期感到沮喪，對生活不感興趣而失去活力，常感受到罪惡與自卑感。其睡眠與食慾受到影響，阻礙其日常生活和社交行為，最嚴重時可導致自殺甚至至死亡。</p>
+                            <div class="mt-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                                <b class="text-ems-blue">綠旗期初期症狀：</b>焦慮、否認和憤怒等情緒。如果出現攻擊行為，需注意不尋常的攻擊行為，如：拍桌子、抓頭髮、嗆咬等，並且需提防情緒激動時的武器傷害。
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 雙極性情感性精神病 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('acc-bipolar')" class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition text-left">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-purple-100 text-purple-600 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">二</span>
+                                <span class="font-bold text-ems-navy">雙極性情感性精神病（舊名：躁鬱症）</span>
+                            </div>
+                            <span class="text-slate-400 text-lg accordion-icon">＋</span>
+                        </button>
+                        <div id="acc-bipolar" class="hidden p-4 bg-white text-sm text-slate-700 leading-relaxed border-t border-slate-100">
+                            <p>同一時期輪替出現狂躁和憂鬱兩種情緒狀態。</p>
+                            <div class="grid grid-cols-2 gap-3 mt-3">
+                                <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                    <b class="text-yellow-700 block mb-1">狂躁階段</b>
+                                    <p class="text-xs">人會變得極度亢奮且精力充沛；有時話多且思考無邏輯，造成無法有效溝通。</p>
+                                </div>
+                                <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                    <b class="text-blue-700 block mb-1">憂鬱階段</b>
+                                    <p class="text-xs">情緒低落而缺乏生活力，有時沉默、思考無邏輯，造成無法有效溝通。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 思覺失調症 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('acc-schizo')" class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition text-left">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-orange-100 text-ems-orange rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">三</span>
+                                <span class="font-bold text-ems-navy">思覺失調症（Schizophrenia）</span>
+                            </div>
+                            <span class="text-slate-400 text-lg accordion-icon">＋</span>
+                        </button>
+                        <div id="acc-schizo" class="hidden p-4 bg-white text-sm text-slate-700 leading-relaxed border-t border-slate-100">
+                            <p>即過去所說的精神分裂症，顧名思義是一種思考與知覺功能發生混亂的情形，其特點是思維的破碎，影響語言、感知和自我感覺。病人常有幻覺、幻視或妄想，造成長時間與現實社會脫節，而出現異常的社會行為且無法理解什麼是真實或現實。</p>
+                            <div class="mt-3 p-3 bg-orange-50 rounded-lg border border-orange-100">
+                                <b class="text-ems-orange">救護提醒：</b>在次級評估時可以查看病人手臂上是否有針孔疤痕，若現場發現可疑的空瓶、藥袋、藥盒或不明錠劑，一併帶往醫院，可協助醫師後續的判斷與治療。
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 酒精成癮與藥物濫用 -->
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('acc-substance')" class="w-full flex items-center justify-between p-4 bg-slate-50 hover:bg-slate-100 transition text-left">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-amber-100 text-amber-700 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">四</span>
+                                <span class="font-bold text-ems-navy">酒精成癮與藥物濫用</span>
+                            </div>
+                            <span class="text-slate-400 text-lg accordion-icon">＋</span>
+                        </button>
+                        <div id="acc-substance" class="hidden p-4 bg-white text-sm text-slate-700 leading-relaxed border-t border-slate-100">
+                            <p>酒精成癮的病人對酒精有生理或心理的依賴，除造成身體的慢性疾病外，也同時影響家庭、工作與人際關係，建議轉介至精神科尋求協助和治療。</p>
+                            <p class="mt-2">此類病人若突然不喝酒，可能發生焦慮和暫時性幻覺的戒斷症候群，嚴重時甚至可能出現癲癇發作及危及生命。而藥物濫用是指不正當醫療用途為目的，未經醫師開立或未遵循醫師指示，擅自過量或常使用特定藥物。救護技術員在現場依流程對病人進行緊急處置外，在次級評估時可以查看病人手臂上是否有針孔疤痕，若現場發現可疑的空瓶、藥袋、藥盒或不明錠劑，一併帶往醫院。</p>
+                        </div>
+                    </div>
+                    <!-- 自殺或自傷 -->
+                    <div class="border border-red-200 rounded-xl overflow-hidden">
+                        <button onclick="toggleAccordion('acc-suicide')" class="w-full flex items-center justify-between p-4 bg-red-50 hover:bg-red-100 transition text-left">
+                            <div class="flex items-center gap-3">
+                                <span class="bg-red-200 text-red-700 rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">五</span>
+                                <span class="font-bold text-ems-navy">自殺或自傷</span>
+                            </div>
+                            <span class="text-slate-400 text-lg accordion-icon">＋</span>
+                        </button>
+                        <div id="acc-suicide" class="hidden p-4 bg-white text-sm text-slate-700 leading-relaxed border-t border-red-100">
+                            <p>世界衛生組織定義自殺為「一個人有意識地蓄意傷害自己的身體，以達到結束自己的生命之行為」。自殺常見的危險因子為罹患精神疾病和喪失身體健康等。</p>
+                            <div class="mt-3 p-3 bg-red-50 rounded-lg border border-red-200">
+                                <b class="text-red-600">救護處置原則：</b>若救護疑似自殺案件時，現場處置以急救病人為優先，同時也注意盡量保留現場的完整狀態，以利後續調查。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 2: LAW ===================== -->
+        <section id="view-law" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.328 - P.329</div>
+                <h2 class="text-3xl font-bold text-ems-navy">02 精神衛生法及相關法規</h2>
+                <p class="text-ems-gray mt-2 text-lg">救護技術員依法執行護送就醫與身體約束，病人不需要現場確診，只需符合護送要件即可。</p>
+            </header>
+
+            <!-- 護送就醫要件 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">🚑</span> 護送就醫的要件
+                </h3>
+                <p class="text-sm text-slate-600 mb-5">許多人擔心護送病人就醫可能侵犯自由而面臨法律問題。依精神衛生法，警察或消防機關發現疑似精神疾病者有傷害自己或他人之虞時，應通知衛生局查明並協助護送至當地醫療機構。</p>
+
+                <div class="p-4 bg-ems-navy/5 border border-ems-navy/20 rounded-xl mb-4">
+                    <p class="text-sm text-slate-700 leading-relaxed">病人<b>不需要</b>在現場第一時間有明確的精神科診斷，只要言行舉止表現明顯有異於正常人，且為他人帶來困擾，多半就符合精神衛生法第3條所述的條件。</p>
+                </div>
+
+                <!-- 流程圖文字版 -->
+                <div class="flex flex-col md:flex-row items-stretch gap-2 mt-4">
+                    <div class="flex-1 bg-slate-100 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-1">👤</div>
+                        <div class="font-bold text-ems-navy text-sm">疑似精神疾病者</div>
+                        <div class="text-xs text-slate-500 mt-1">思考、行為異常<br>危害自身或他人</div>
+                    </div>
+                    <div class="flex items-center justify-center text-ems-orange font-bold text-2xl px-2">→</div>
+                    <div class="flex-1 bg-blue-50 rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-1">📞</div>
+                        <div class="font-bold text-ems-blue text-sm">通知主管機關</div>
+                        <div class="text-xs text-slate-500 mt-1">1. 通知主管機關（縣市衛生局）<br>2. 可通知警察機關</div>
+                    </div>
+                    <div class="flex items-center justify-center text-ems-orange font-bold text-2xl px-2">→</div>
+                    <div class="flex-1 bg-ems-navy rounded-xl p-4 text-center">
+                        <div class="text-2xl mb-1">🏥</div>
+                        <div class="font-bold text-white text-sm">護送往就近適當醫院</div>
+                        <div class="text-xs text-slate-300 mt-1">依法護送<br>確保安全</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法條 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- 精神衛生法第32條 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-ems-navy text-white p-4">
+                        <div class="text-xs text-ems-blue font-bold mb-1">（一）精神衛生法第 32 條</div>
+                        <h4 class="font-bold text-lg">護送就醫與身體約束</h4>
+                        <div class="text-xs text-slate-300 mt-1">民國 111 年 12 月 14 日</div>
+                    </div>
+                    <div class="p-4 space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <div class="flex gap-3">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+                            <p>醫療機構因病人醫療需要或為防範緊急傷力、自殺或自傷之事件，於告知病人後，得於特定之保護設施內，拘束其身體或限制其行動自由，並應立即評估，不得逾必要之時間。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+                            <p>前項醫療機構以外之精神照護機構及<b>緊急醫療救護人員</b>，為防範緊急傷力、自殺或自傷之事件，於告知病人後，得拘束其身體，並立即護送就醫。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+                            <p>前二項拘束身體或限制行動自由，<b>不得以繩具或其他不正當方式</b>之；其具體程序、約束設備之種類、約束的時間及應遵行事項之辦法由主管機關定之。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-ems-blue text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">4</span>
+                            <p>第一項及第二項所為告知病人，於緊急或特殊情形無為之者，應於事後告知。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 警察職權行使法第19條 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-700 text-white p-4">
+                        <div class="text-xs text-slate-300 font-bold mb-1">（二）警察職權行使法第 19 條</div>
+                        <h4 class="font-bold text-lg">警察管束條件</h4>
+                        <div class="text-xs text-slate-300 mt-1">警察得管束之四種情形</div>
+                    </div>
+                    <div class="p-4 space-y-3 text-sm text-slate-700 leading-relaxed">
+                        <p class="text-xs text-slate-500 mb-2">警察對於下列情形之一者，得管束：</p>
+                        <div class="flex gap-3">
+                            <span class="bg-slate-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+                            <p>瘋狂或酒醉，非管束不能救護其生命、身體之危險，或防他人生命、身體之危險。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-slate-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+                            <p>意圖自殺，非管束不能救護其生命者。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-slate-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+                            <p>暴行或鬥毆，非管束不能預防其傷害。</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="bg-slate-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">4</span>
+                            <p>他認為必須救護或危害公安之虞，非管束不能救護或不能預防危害者。</p>
+                        </div>
+                        <div class="mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
+                            <b>時限規定：</b>警察管束時間最長不得超過 24 小時；應即時通知或交由家屬或其他關係機關人員保護。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-5 text-sm text-slate-700 leading-relaxed">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⚖️</span>
+                    <div>
+                        <b class="text-amber-700 block mb-1">傷害風險評估要點</b>
+                        <p>傷害他人或自己的風險評估，最直觀的就是意念和言語；除此之外，也要考慮：病人是否有妄想妄念，或是否因處境混亂而行為無法預測。如果病人有衝撞或破壞行為，也需列入危險考量。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 3: ASSESSMENT ===================== -->
+        <section id="view-assessment" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.330 - P.333</div>
+                <h2 class="text-3xl font-bold text-ems-navy">03 行為急症之評估</h2>
+                <p class="text-ems-gray mt-2 text-lg">初級評估（叫叫CABD）→ DEFUSE言語技巧 → 次級評估（居安危枕戈旦）→ 環境/氛圍/武器評估 → 情緒曲線與暴力風險</p>
+            </header>
+
+            <!-- 一 初級評估 叫叫CABD -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-1 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">①</span> 初級評估：叫叫 CABD
+                    <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">表 11-1</span>
+                </h3>
+                <p class="text-sm text-slate-500 mb-4">到達現場先行前評估，運用口訣快速決定接觸病人的策略。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-ems-navy text-white">
+                                <th class="px-4 py-3 text-left font-bold w-24">口訣</th>
+                                <th class="px-4 py-3 text-left font-bold">評估重點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-100">
+                                <td class="px-4 py-3 font-bold text-ems-blue bg-blue-50">叫（召集）</td>
+                                <td class="px-4 py-3 text-slate-700">聯繫警察與衛生單位，確保現場支援到位</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 bg-slate-50/50">
+                                <td class="px-4 py-3 font-bold text-ems-blue bg-blue-50">叫（觀察）</td>
+                                <td class="px-4 py-3 text-slate-700">確認排除危險空間，管理環境、確認保護狀態</td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="px-4 py-3 font-bold text-ems-orange bg-orange-50"><b>C</b> 認知<br><span class="text-xs font-normal text-slate-500">Cognition</span></td>
+                                <td class="px-4 py-3 text-slate-700">確認病人是否思維正常、是否脫離現實</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 bg-slate-50/50">
+                                <td class="px-4 py-3 font-bold text-ems-orange bg-orange-50"><b>A</b> 情緒<br><span class="text-xs font-normal text-slate-500">Affection</span></td>
+                                <td class="px-4 py-3 text-slate-700">評估病人情緒：高漲、憤怒、恐懼等</td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="px-4 py-3 font-bold text-ems-orange bg-orange-50"><b>B</b> 行為<br><span class="text-xs font-normal text-slate-500">Behavior</span></td>
+                                <td class="px-4 py-3 text-slate-700">評估是否有異常舉動或立即的危險行為（如語無倫次、注意力渙散、突然停止動作）</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-bold text-red-600 bg-red-50"><b>D</b> 決定與控制<br><span class="text-xs font-normal text-slate-500">Decide & DEFUSE</span></td>
+                                <td class="px-4 py-3 text-slate-700">進行言語障礙，或必要時執行保護性約束</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- DEFUSE 技巧 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-1 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">💬</span> DEFUSE 言語障礙技巧
+                    <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">表 11-2</span>
+                </h3>
+                <p class="text-sm text-slate-500 mb-4">使用適當言語技巧以有效穩定病人情緒，減少暴力衝突，確保所有人安全。<br>口訣：<b class="text-ems-orange">「選擇安全關係，需要界限評估。」</b></p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-blue mb-2">D</div>
+                        <div class="font-bold mb-1">選擇路徑<br><span class="text-xs text-slate-300 font-normal">Decide</span></div>
+                        <p class="text-xs text-slate-300">選擇適合情緒障礙情境的處置策略</p>
+                    </div>
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-blue mb-2">E</div>
+                        <div class="font-bold mb-1">確保安全<br><span class="text-xs text-slate-300 font-normal">Ensure Safety</span></div>
+                        <p class="text-xs text-slate-300">確保現場所有人員的人身安全</p>
+                    </div>
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-blue mb-2">F</div>
+                        <div class="font-bold mb-1">建立關係<br><span class="text-xs text-slate-300 font-normal">Form Relationship</span></div>
+                        <p class="text-xs text-slate-300">建立病人對救護員的信任感</p>
+                    </div>
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-blue mb-2">U</div>
+                        <div class="font-bold mb-1">善用需要<br><span class="text-xs text-slate-300 font-normal">Utilize Interests</span></div>
+                        <p class="text-xs text-slate-300">瞭解並善用病人的需求與興趣</p>
+                    </div>
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-blue mb-2">S</div>
+                        <div class="font-bold mb-1">設下界限<br><span class="text-xs text-slate-300 font-normal">Set Limits</span></div>
+                        <p class="text-xs text-slate-300">設下合理的行為界限，減少衝突空間</p>
+                    </div>
+                    <div class="p-4 bg-ems-navy text-white rounded-xl text-sm">
+                        <div class="text-3xl font-black text-ems-orange mb-2">E</div>
+                        <div class="font-bold mb-1">重新評估<br><span class="text-xs text-slate-300 font-normal">Enforce / Evaluate</span></div>
+                        <p class="text-xs text-slate-300">隨時重新評估現場情況，適時調整策略</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 次級評估 居安危枕戈旦 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-1 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">②</span> 次級評估：居安危、枕戈旦
+                    <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">表 11-3</span>
+                </h3>
+                <p class="text-sm text-slate-500 mb-4">若初評發現沒有立即危險，可進行次級評估。8個項目無固定順序，用完整資訊判斷是否需要護送就醫。</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="px-4 py-2 text-center font-bold text-ems-navy w-16">口訣</th>
+                                <th class="px-4 py-2 text-left font-bold text-ems-navy">評估內容</th>
+                                <th class="px-4 py-2 text-center font-bold text-ems-navy w-16">口訣</th>
+                                <th class="px-4 py-2 text-left font-bold text-ems-navy">評估內容</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-100">
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-blue bg-blue-50">居</td>
+                                <td class="px-4 py-3 text-slate-700">居住環境是否有安全空間可以介入與開通</td>
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-orange bg-orange-50">枕</td>
+                                <td class="px-4 py-3 text-slate-700">病人是否無法去精神科診斷治療（未服藥、長期未就醫）</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 bg-slate-50/50">
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-blue bg-blue-50">安</td>
+                                <td class="px-4 py-3 text-slate-700">確認周遭環境與隨身是否有危險藥物或武器</td>
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-orange bg-orange-50">戈</td>
+                                <td class="px-4 py-3 text-slate-700">病人如何對待重要關係人（家屬、友人）</td>
+                            </tr>
+                            <tr class="border-b border-slate-100">
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-blue bg-blue-50">危</td>
+                                <td class="px-4 py-3 text-slate-700">評估病人思維是否怪異以及行為是否難以預測</td>
+                                <td class="px-4 py-3 text-center font-black text-2xl text-ems-orange bg-orange-50">旦</td>
+                                <td class="px-4 py-3 text-slate-700">一旦現場情勢升溫，應有緊急備援安全計畫</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 三、四、五 環境評估 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-xl">🚪</span> 三 空間環境的考量</h4>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li><b class="text-ems-blue">門：</b>進門前表明身份，站在門緣側方，不正對門口，防止門後遭攻擊。</li>
+                        <li><b class="text-ems-blue">窗：</b>2樓以上注意病人情緒激動可能跳窗，引導遠離窗戶。</li>
+                        <li><b class="text-ems-blue">走廊與樓梯：</b>確保緊急時有足夠撤離通道，避免被物體阻礙。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-xl">👃</span> 四 氛圍的判斷</h4>
+                    <p class="text-xs text-slate-500 mb-3">進入環境後提高感官敏銳度，隨時保持警覺：</p>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li><b class="text-ems-blue">味道：</b>酒味、毒品氣味或瓦斯味</li>
+                        <li><b class="text-ems-blue">聲音：</b>爭吵聲、哭叫、哭泣等負面情緒聲音</li>
+                        <li><b class="text-ems-blue">光線：</b>光源不足時放慢行動，尋找燈源或使用手電筒</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-xl">⚔️</span> 五 現場人物與武器評估</h4>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li>先迅速判斷現場重點，合理疏散無關人員。</li>
+                        <li>注意病人是否持有或藏有危險物品（鈍器、刃器或其他攻擊物品）。</li>
+                        <li>可請家屬協助收起危險物品以避免意外。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 六七 動態情勢與團隊合作 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-ems-blue text-xl">🔄</span> 六 動態情勢與備援計畫
+                    </h4>
+                    <p class="text-sm text-slate-700 leading-relaxed">情況可能隨時變化，需有備援計畫並與其他警察、衛生機構協調。例如當病人突然攻擊時由警察協助控制，救護技術員再進行約束和核驗傷處置。保持警覺並隨時調整應對策略，確保現場處置安全有效。</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200">
+                    <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-ems-blue text-xl">🤝</span> 七 團隊合作（警消衛分工）
+                    </h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="p-2 bg-blue-50 rounded border-l-4 border-ems-blue">
+                            <b class="text-ems-blue">警察單位：</b>協助查明精神病人狀況，監管管束有傷害之虞者，協送醫療。
+                        </div>
+                        <div class="p-2 bg-orange-50 rounded border-l-4 border-ems-orange">
+                            <b class="text-ems-orange">消防單位：</b>處理急救救護、搬送及簡易身體評估，全程護送至適當醫療機構。
+                        </div>
+                        <div class="p-2 bg-green-50 rounded border-l-4 border-green-500">
+                            <b class="text-green-700">衛生單位：</b>評估病人目前精神狀態，判斷是否為新確診或流浪精神病人，並提供後續資源。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 八 情緒曲線及暴力風險評估 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">📊</span> 八 情緒曲線及暴力風險評估
+                    <span class="text-xs bg-orange-100 text-ems-orange px-2 py-0.5 rounded font-medium">表 11-4</span>
+                </h3>
+                <p class="text-sm text-slate-600 mb-4">美國研究顯示，接獲的任務中有14%比例與暴力行為有關，整個救護運送過程中有高達5%會發生暴力行為。<b>大部分暴力行為並非病人最初的行為，而是處置過程中因緊張或焦慮加劇所致。</b></p>
+                <!-- 情緒曲線 五階段 -->
+                <div class="mb-6">
+                    <div class="text-xs font-bold text-slate-500 mb-3 text-center">圖 11-2 潛在暴力行為的情緒曲線（五階段）</div>
+                    <div class="flex flex-col sm:flex-row items-stretch gap-1 text-xs text-center">
+                        <div class="flex-1 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <div class="text-blue-600 font-bold text-sm mb-1">①</div>
+                            <div class="font-bold text-ems-navy">誘發階段</div>
+                            <div class="text-slate-500 mt-1">環境刺激或內在症狀引發暴力情緒</div>
+                            <div class="w-full h-1 bg-gradient-to-r from-blue-200 to-blue-400 rounded mt-2"></div>
+                        </div>
+                        <div class="flex items-center justify-center text-slate-300 font-bold text-xl">→</div>
+                        <div class="flex-1 bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                            <div class="text-yellow-600 font-bold text-sm mb-1">②</div>
+                            <div class="font-bold text-ems-navy">升高階段</div>
+                            <div class="text-slate-500 mt-1">持續刺激未有效介入，情緒持續升高</div>
+                            <div class="w-full h-1 bg-gradient-to-r from-yellow-300 to-yellow-500 rounded mt-2"></div>
+                        </div>
+                        <div class="flex items-center justify-center text-slate-300 font-bold text-xl">→</div>
+                        <div class="flex-1 bg-red-50 border border-red-300 rounded-lg p-3">
+                            <div class="text-red-600 font-bold text-sm mb-1">③</div>
+                            <div class="font-bold text-red-700">危機階段</div>
+                            <div class="text-slate-500 mt-1">出現暴力攻擊行為，需立即介入</div>
+                            <div class="w-full h-1 bg-red-500 rounded mt-2"></div>
+                        </div>
+                        <div class="flex items-center justify-center text-slate-300 font-bold text-xl">→</div>
+                        <div class="flex-1 bg-orange-50 border border-orange-200 rounded-lg p-3">
+                            <div class="text-orange-600 font-bold text-sm mb-1">④</div>
+                            <div class="font-bold text-ems-navy">高原平復階段</div>
+                            <div class="text-slate-500 mt-1">暴力後情緒在高原期逐漸平復</div>
+                            <div class="w-full h-1 bg-gradient-to-r from-orange-400 to-orange-200 rounded mt-2"></div>
+                        </div>
+                        <div class="flex items-center justify-center text-slate-300 font-bold text-xl">→</div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3">
+                            <div class="text-slate-500 font-bold text-sm mb-1">⑤</div>
+                            <div class="font-bold text-ems-navy">事後低落</div>
+                            <div class="text-slate-500 mt-1">出現自責、憂鬱、焦慮，甚至自傷</div>
+                            <div class="w-full h-1 bg-gradient-to-r from-slate-300 to-slate-100 rounded mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 表11-4 暴力風險評估工具 -->
+                <h4 class="font-bold text-ems-navy mb-3 flex items-center gap-2">
+                    <span class="text-ems-blue">🔍</span> 表 11-4 暴力風險評估工具（眼耳鼻舌身意）
+                </h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-ems-navy text-white">
+                                <th class="px-4 py-3 text-center font-bold w-16">口訣</th>
+                                <th class="px-4 py-3 text-left font-bold">觀察重點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-slate-100"><td class="px-4 py-3 text-center font-bold text-ems-blue bg-blue-50 text-lg">眼</td><td class="px-4 py-3 text-slate-700">眼神凶惡、瞪視、憤怒、不看人（目光迴避也需注意）</td></tr>
+                            <tr class="border-b border-slate-100 bg-slate-50/50"><td class="px-4 py-3 text-center font-bold text-ems-blue bg-blue-50 text-lg">耳</td><td class="px-4 py-3 text-slate-700">幻聽症狀，因為症狀持續使病人無法正常接收外界聲音</td></tr>
+                            <tr class="border-b border-slate-100"><td class="px-4 py-3 text-center font-bold text-ems-blue bg-blue-50 text-lg">鼻</td><td class="px-4 py-3 text-slate-700">呼吸急促、急速、無法理解指令</td></tr>
+                            <tr class="border-b border-slate-100 bg-slate-50/50"><td class="px-4 py-3 text-center font-bold text-ems-blue bg-blue-50 text-lg">舌</td><td class="px-4 py-3 text-slate-700">語言凌亂、音量大聲、語速快、使用懷敵意的用語、威脅等</td></tr>
+                            <tr class="border-b border-slate-100"><td class="px-4 py-3 text-center font-bold text-ems-blue bg-blue-50 text-lg">身</td><td class="px-4 py-3 text-slate-700">攻擊的動作、突然回頭、無法靜止、身體突然改變姿勢、舉臂、用拳打東西</td></tr>
+                            <tr><td class="px-4 py-3 text-center font-bold text-ems-orange bg-orange-50 text-lg">意</td><td class="px-4 py-3 text-slate-700">先前已有暴力意圖或衝動行為紀錄</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 4: HANDLING ===================== -->
+        <section id="view-handling" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.334 - P.337</div>
+                <h2 class="text-3xl font-bold text-ems-navy">04 危機處理小組分工、協調、聯繫及作業方式</h2>
+                <p class="text-ems-gray mt-2 text-lg">TRM 四面向（領導・溝通・守望・互助）× CIT 跨職類合作，再到站位安全、資源轉介、約束流程。</p>
+            </header>
+
+            <!-- 一 團隊合作及團隊資源管理 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-3 flex items-center gap-2">
+                    <span class="bg-ems-navy text-white rounded-lg px-2.5 py-0.5 text-sm font-black">一</span> 團隊合作及團隊資源管理
+                </h3>
+                <p class="text-sm text-slate-700 leading-relaxed mb-4">由於病人和周遭的人都可能有安全威脅，單一專業不足以保障病人和一線人員的安全，需要啟動警察、消防、衛生等跨單位合作，各司其職，才能將風險降到最低。救護技術員可以將執行 OHCA 案件所運用的<b>團隊資源管理（Team Resource Management, TRM）</b>概念融入，透過以下 4 個面向介紹<b>精神危機處理團隊（Crisis Intervention Team, CIT）</b>在現場與警察和衛生單位合作的原則。</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-sm">
+                    <div class="bg-ems-navy text-white rounded-xl p-4">
+                        <div class="text-2xl mb-2">👑</div>
+                        <div class="font-bold text-ems-blue">領導</div>
+                        <div class="text-xs text-slate-300 mt-1">明確指揮，凝定計畫</div>
+                    </div>
+                    <div class="bg-ems-navy text-white rounded-xl p-4">
+                        <div class="text-2xl mb-2">📣</div>
+                        <div class="font-bold text-ems-blue">溝通</div>
+                        <div class="text-xs text-slate-300 mt-1">清晰傳遞，確認回報</div>
+                    </div>
+                    <div class="bg-ems-navy text-white rounded-xl p-4">
+                        <div class="text-2xl mb-2">👁️</div>
+                        <div class="font-bold text-ems-blue">守望</div>
+                        <div class="text-xs text-slate-300 mt-1">相互照應，及早示警</div>
+                    </div>
+                    <div class="bg-ems-navy text-white rounded-xl p-4">
+                        <div class="text-2xl mb-2">🤲</div>
+                        <div class="font-bold text-ems-blue">互助</div>
+                        <div class="text-xs text-slate-300 mt-1">跨職類協作，共同解決</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 二 領導 / 三 溝通 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="bg-ems-navy text-white rounded-lg px-2.5 py-0.5 text-sm font-black">二</span> 領導
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">CIT 團隊最重要的任務目標就是「<b>安全</b>」，要達到安全就需要各職類做好分工，並有明確的領導者跟各職類溝通。領導者可以是帶隊或資深同仁，此人必須要有承擔責任及指揮分工的能力。</p>
+                    <div class="mt-3 p-3 bg-ems-blue/10 rounded-lg border border-ems-blue/20 text-sm">
+                        <b class="text-ems-blue">建議做法：</b>來自警察、救護、衛生單位的領導者需一同凝定處置計畫及溝通協調，並建議由 <b>1 位救護同仁</b>發號施令。
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="bg-ems-navy text-white rounded-lg px-2.5 py-0.5 text-sm font-black">三</span> 溝通
+                        <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">表 11-5</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-3">溝通是團隊合作非常重要的因素，確保彼此有效傳達資訊與資源。四種溝通技巧：</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="p-2 bg-blue-50 rounded border-l-3 border-ems-blue">
+                            <b class="text-ems-blue">尊重邏輯、接連訴求：</b>
+                            <span class="text-slate-600">「你好，我們是OO分隊，接下來跟病人接觸時，可否請你們協助安全護送？」</span>
+                        </div>
+                        <div class="p-2 bg-blue-50 rounded border-l-3 border-ems-blue">
+                            <b class="text-ems-blue">建立信任、主動求援：</b>
+                            <span class="text-slate-600">「病人現在情緒很激動，如果等會有突然攻擊，要拜託你們幫忙。」</span>
+                        </div>
+                        <div class="p-2 bg-blue-50 rounded border-l-3 border-ems-blue">
+                            <b class="text-ems-blue">積極態度、明確指令：</b>
+                            <span class="text-slate-600">「請你們協助幫忙按壓！謝謝！」語氣和善，不奢命令口吻。</span>
+                        </div>
+                        <div class="p-2 bg-blue-50 rounded border-l-3 border-ems-blue">
+                            <b class="text-ems-blue">大聲過報、同步確認：</b>
+                            <span class="text-slate-600">救護員：「有刀！」警察：「我看到了，你們先退後。」</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 四 守望 / 五 相助 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="bg-ems-navy text-white rounded-lg px-2.5 py-0.5 text-sm font-black">四</span> 守望
+                        <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">表 11-6</span>
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-3">守望的意思是相互照應幫忙，守望需包含「<b>病人、組員、環境、進度</b>」等 4 個面向。好的守望能及早辨識危機，及早反應，幫助夥伴安全完成任務。</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100">
+                                    <th class="px-3 py-2 text-left font-bold text-ems-navy">守望項目</th>
+                                    <th class="px-3 py-2 text-left font-bold text-ems-navy">守望細項</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-3 py-2 font-bold text-ems-blue">病人</td>
+                                    <td class="px-3 py-2 text-slate-700">病人狀態、危險物品</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 bg-slate-50/50">
+                                    <td class="px-3 py-2 font-bold text-ems-blue">組員</td>
+                                    <td class="px-3 py-2 text-slate-700">情緒、接觸與掩護、站位、距離、空間、武力</td>
+                                </tr>
+                                <tr class="border-b border-slate-100">
+                                    <td class="px-3 py-2 font-bold text-ems-blue">環境</td>
+                                    <td class="px-3 py-2 text-slate-700">氛圍、人、硬體設施</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2 font-bold text-ems-blue">進度</td>
+                                    <td class="px-3 py-2 text-slate-700">時間進程</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-600">
+                        <b>接觸與掩護原則：</b>一人擔任接觸者（與病人交涉評估），另一人擔任掩護者（蒐集資訊並確保撤離路線），兩者隨時互相掌握狀況。
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-lg text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="bg-ems-navy text-white rounded-lg px-2.5 py-0.5 text-sm font-black">五</span> 相助
+                    </h3>
+                    <p class="text-sm text-slate-700 leading-relaxed mb-3">相助的意思是以團隊合作共同解決問題。夥伴間應互相幫忙、對事不對人、和緩溝通，並主動發揮自身專業或請求支援。互相提援與鼓勵同樣重要，隨時提醒可能的風險或不當行為。</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <span class="text-ems-blue shrink-0">👮</span>
+                            <p class="text-slate-700"><b>警察：</b>在病人出現攻擊行為時，保護救護技術員安全；使用武力時注意體位性窒息等危險。</p>
+                        </div>
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <span class="text-ems-orange shrink-0">🚒</span>
+                            <p class="text-slate-700"><b>消防救護：</b>不確定病人是否符合護送就醫條件時，請衛生單位協助判斷。</p>
+                        </div>
+                        <div class="flex gap-3 p-3 bg-slate-50 rounded-lg border border-slate-200">
+                            <span class="text-green-600 shrink-0">🏥</span>
+                            <p class="text-slate-700"><b>衛生單位：</b>協助判斷並考量警察及救護技術員的現場評估，確保 CIT 團隊所有成員安全。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 六 站位及安全考量 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">📐</span> 六 站位及安全考量
+                </h3>
+                <p class="text-sm text-slate-600 mb-5">站位分為兩種：面對病人的站位與圍繞成員的站位。面對病人時，應側身站立，重心置於雙腳中間，以降低被攻擊的風險。安全距離是能反應危險的距離，以兩臂展為概念，目的是增加反應時間。對情緒激動但未持武器者，應保持能閃避攻擊的距離；若對方已持武器，應盡量遠距甚至撤離現場，由警察處置。</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="bg-ems-navy/5 border border-ems-navy/20 rounded-xl p-5">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-ems-navy text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-lg">L</div>
+                            <div>
+                                <div class="font-bold text-ems-navy">L 型站位</div>
+                                <div class="text-xs text-slate-500">圖 11-3-1</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-700">隊員站位呈L形，一人正面接觸病人，另一人在側翼監控，避免同時暴露於攻擊路徑，確保側翼人員可即時協助。</p>
+                        <div class="mt-3 flex gap-2 items-center justify-center text-xs">
+                            <div class="bg-ems-navy text-white px-3 py-2 rounded text-center w-16">病人<br>🧍</div>
+                            <div class="text-slate-400">↑↗</div>
+                            <div class="flex flex-col gap-1">
+                                <div class="bg-ems-blue text-white px-2 py-1 rounded text-center">救護員A →</div>
+                                <div class="bg-slate-400 text-white px-2 py-1 rounded text-center">  救護員B</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-ems-orange/5 border border-ems-orange/20 rounded-xl p-5">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="bg-ems-orange text-white rounded-lg w-10 h-10 flex items-center justify-center font-black text-lg">V</div>
+                            <div>
+                                <div class="font-bold text-ems-navy">V 型站位（開放空間）</div>
+                                <div class="text-xs text-slate-500">圖 11-3-2</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-700">適用於開放空間。兩人分站兩側呈V形，避免火線交叉，若病人使用槍器或刃器突然攻擊，可分散攻擊並對病人形成控制。桌椅等空間中的物體創造安全距離。</p>
+                        <div class="mt-3 flex gap-4 items-center justify-center text-xs">
+                            <div class="bg-slate-500 text-white px-2 py-1 rounded text-center">救護員A<br>↗</div>
+                            <div class="bg-ems-navy text-white px-3 py-2 rounded text-center w-16">病人<br>🧍</div>
+                            <div class="bg-slate-500 text-white px-2 py-1 rounded text-center">救護員B<br>↖</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-slate-700">
+                    <b class="text-amber-700">⚠️ 重要原則：</b>若病人突然攻擊，物體能夠制其行動，為自己爭取更多反應時間，確保安全。與病人對話時，若病人未經邀請縮短距離或嘗試試肢體接觸，為危險訊號，不要再靠近。
+                </div>
+            </div>
+
+            <!-- 七 資源轉介 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">🔗</span> 七 資源轉介
+                </h3>
+                <p class="text-sm text-slate-600 mb-4">實務中多數情況是病人不願就醫，而家屬、鄰里或關係人希望送醫。當一線人員對是否合適就醫標準意見不一時，應通知轄區衛生局查明是否有送醫必要，並協助至適當醫療機構。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm">
+                        <b class="text-ems-blue block mb-2">護後病人返回社區路徑</b>
+                        <p class="text-slate-700">護後病人可能無法回返就醫決定。透過護送資源轉介讓病人進入社會安全網，能為病人及家屬帶來長遠福社。</p>
+                    </div>
+                    <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-sm">
+                        <b class="text-green-700 block mb-2">轉介窗口</b>
+                        <ul class="space-y-1 text-slate-700">
+                            <li>• 各縣市衛生局的「心理衛生中心」</li>
+                            <li>• 「疑似或社區精神病人照護優先計畫」</li>
+                            <li>• 讓病家可以尋求醫療資源</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-600">
+                    <b>法規要件：</b>護後若現場不符合護送就醫的醫療要求，亦可將個案轉介至各縣市衛生局的「心理衛生中心」。如果法規要求必要依法護送，如果現場不符合護送就醫的醫療要求，亦可將個案轉介至各縣市衛生局的「心理衛生中心」。
+                </div>
+            </div>
+
+            <!-- 八 執行勤務與約束流程 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">📋</span> 八 執行勤務與約束流程
+                    <span class="text-xs bg-orange-100 text-ems-orange px-2 py-0.5 rounded font-medium">圖 11-4</span>
+                </h3>
+                <p class="text-sm text-slate-600 mb-5">以下為行為急症救護案件之參考流程，應依照各縣市規範調整。</p>
+
+                <!-- 流程圖 -->
+                <div class="flex flex-col items-center gap-1 max-w-md mx-auto">
+                    <div class="w-full bg-ems-navy text-white text-center py-3 px-4 rounded-xl text-sm font-bold">
+                        📞 通報衛生與警察機關
+                    </div>
+                    <div class="text-ems-blue font-bold text-xl">↓</div>
+                    <div class="w-full bg-slate-100 text-center py-3 px-4 rounded-xl text-sm font-bold text-slate-700">
+                        🚑 到達現場
+                    </div>
+                    <div class="text-ems-blue font-bold text-xl">↓</div>
+                    <div class="w-full bg-amber-50 border-2 border-amber-300 text-center py-3 px-4 rounded-xl text-sm font-bold text-amber-700">
+                        ⚠️ 現場是否安全？
+                    </div>
+                    <div class="flex w-full gap-4">
+                        <div class="flex-1 flex flex-col items-center gap-1">
+                            <div class="text-slate-500 text-xs font-bold">否 ↓</div>
+                            <div class="w-full bg-red-100 border border-red-200 text-center py-2 px-3 rounded-lg text-xs font-bold text-red-700">排除危險因子</div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center gap-1">
+                            <div class="text-slate-500 text-xs font-bold">是 ↓</div>
+                            <div class="w-full bg-blue-50 border border-blue-200 text-center py-2 px-3 rounded-lg text-xs font-bold text-ems-blue">是否危急個案？</div>
+                        </div>
+                    </div>
+                    <div class="text-ems-blue font-bold text-xl">↓ 初評精神狀況</div>
+                    <div class="w-full bg-amber-50 border-2 border-amber-300 text-center py-3 px-4 rounded-xl text-sm font-bold text-amber-700">
+                        是否符合精神衛生法第3條病患？
+                    </div>
+                    <div class="w-full bg-slate-100 text-center py-3 px-4 rounded-xl text-sm font-bold text-slate-700">
+                        由主管機關認定有無自傷與傷人之病況
+                    </div>
+                    <div class="text-ems-blue font-bold text-xl">↓</div>
+                    <div class="w-full bg-ems-navy text-white text-center py-3 px-4 rounded-xl text-sm font-bold">
+                        🏥 救護車內數處流程（8步驟約束）
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== VIEW 5: PITFALLS ===================== -->
+        <section id="view-pitfalls" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.338 - P.339</div>
+                <h2 class="text-3xl font-bold text-ems-navy">05 常見陷阱與約束作業程序</h2>
+                <p class="text-ems-gray mt-2 text-lg">避免誤判非精神因素、依法執行8步驟約束流程、維護病人尊嚴。</p>
+            </header>
+
+            <!-- 常見陷阱 -->
+            <div class="bg-ems-navy text-white p-6 rounded-xl shadow-sm mb-6">
+                <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+                    <span class="text-ems-orange text-xl">⚠️</span> 常見陷阱：非精神因素引發的類精神行為
+                </h3>
+                <p class="text-sm text-slate-300 mb-4">許多緊急傷病員會造成意識障礙、認知障礙或行為異常，使病人表現精神或行為急症。<b class="text-white">救護技術員務必謹慎評估，排除下列生理性原因：</b></p>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">💊</div>
+                        <div class="font-bold text-ems-blue">毒藥物</div>
+                        <div class="text-xs text-slate-300 mt-1">藥物中毒、物質濫用</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">🩺</div>
+                        <div class="font-bold text-ems-blue">尿毒症</div>
+                        <div class="text-xs text-slate-300 mt-1">腎功能衰竭引發意識改變</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">🍬</div>
+                        <div class="font-bold text-ems-blue">低血糖</div>
+                        <div class="text-xs text-slate-300 mt-1">血糖過低造成行為異常</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">🍺</div>
+                        <div class="font-bold text-ems-blue">酒精</div>
+                        <div class="text-xs text-slate-300 mt-1">急性酒精中毒或戒斷</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">🫁</div>
+                        <div class="font-bold text-ems-blue">肝腦病變</div>
+                        <div class="text-xs text-slate-300 mt-1">肝功能異常引起腦部病變</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3 text-center">
+                        <div class="text-2xl mb-1">🧓</div>
+                        <div class="font-bold text-ems-blue">失智症</div>
+                        <div class="text-xs text-slate-300 mt-1">急性期行為混亂、激動</div>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-ems-orange/20 border border-ems-orange/30 rounded-lg text-sm">
+                    <b class="text-ems-orange">另外注意：</b>在使用約束帶時，應充分告知其關係人或家屬，並說明此處置之必要性。
+                </div>
+            </div>
+
+            <!-- 8步驟約束作業 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="font-bold text-lg text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-blue text-xl">🔒</span> 約束流程作業程序（8步驟）
+                    <span class="text-xs bg-ems-blue/10 text-ems-blue px-2 py-0.5 rounded font-medium">圖 11-5</span>
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">放置擔架：</b>將擔架放置地面，若狀況許可，設法讓病人先坐在擔架上。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">約定口令：</b>小組成員約定口令，同時控制病人手腳活動，以控制大關節為原則。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">束縛手腳：</b>以約束帶束縛手腕與腳踝，約束過程中注意勿難以控制而接觸病人的口部太近。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-amber-50 rounded-xl border border-amber-200">
+                        <div class="bg-ems-orange text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">4</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">固定於擔架（重要）：</b>將病人固定於擔架床上，面朝上。一手綁高於頭部的擔架床、另一手綁低於腰際的擔架床上，雙腳各自綁於擔架床上。另一端需固定於床架，<b class="text-red-600">不可固定在床欄</b>。（參考圖 11-5）
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">5</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">安全帶扣緊：</b>擔架安全帶扣上拉緊，但<b class="text-red-600">不可妨礙病人呼吸</b>。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">6</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">口罩防護（必要時）：</b>如病人會吐口水或攻擊，須先控制頭部，再小心協助病人戴上口罩。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="bg-ems-blue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">7</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">檢查隨身物品：</b>依法得檢查被護送人之身體及所攜帶之物，注意其身上是否有利器或其他危險物品，將其移除並交給家屬或遺留相關人員保管。
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                        <div class="bg-ems-navy text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shrink-0">8</div>
+                        <div class="text-sm text-slate-700 leading-relaxed">
+                            <b class="text-ems-navy">維護尊嚴：</b>給予被蓋或衣物適當遮蓋以維護病人尊嚴，但胸腹交界以上部位應保持容易觀察，以利監測生命徵象。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 約束注意事項 -->
+                <div class="mt-5 p-4 bg-ems-navy/5 border border-ems-navy/20 rounded-xl">
+                    <h4 class="font-bold text-ems-navy mb-2 flex items-center gap-1.5">📌 約束核心原則</h4>
+                    <ul class="space-y-1.5 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><span class="text-ems-blue shrink-0">▪</span>約束的目的是為了<b>保護病人及他人安全</b>，而不是為了懲罰病人。</li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue shrink-0">▪</span>若評估無法讓病人情緒平靜下來，才考慮使用約束，先嘗試言語溝通（DEFUSE）。</li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue shrink-0">▪</span>使用約束前應充分<b>告知家屬或關係人</b>，並說明此處置之必要性。</li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue shrink-0">▪</span>約束後於事後詳細記錄於救護紀錄表。</li>
+                    </ul>
+                </div>
+
+                <!-- 參考資料 -->
+                <div class="mt-5 p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500">
+                    <b class="text-slate-600 block mb-2">參考資料（P.339）</b>
+                    <ol class="space-y-1 list-decimal list-inside">
+                        <li>Mosby's Crash Course 精神醫學 Darran Bloye / Simon Davies 孔某翻譯</li>
+                        <li>中級救護員教科書，內政部消防署，2021。</li>
+                        <li>精神病人護送警告引手冊，衛生福利部、民國 111 年 6 月。</li>
+                        <li>臺北市政府緊急救護技術員到院前急救護作業程序手冊 - S9 精神異常／行為急症患者救護（評見附錄）。</li>
+                        <li>Alice Dalton, Richard Allen Walker: Mosby's paramedic refresher and review: A case studies approach, 2nd ed. 2007</li>
+                        <li>Bruun, A. & Denham, G. (2013). Managing Aggression & Potentially Violent Situations. In A. Bruun & P. Mitchell (Eds.) YouthAOD Toolbox. Melbourne: YSAS.</li>
+                        <li>CIT 訓練教材，台灣緊急救護醫師指導學會，2023。</li>
+                        <li>COBURN, Victoria A.; MYCYK, Mark B. Physical and chemical restraints. Emergency Medicine Clinics, 27.4: 655-667, 2009.</li>
+                        <li>Mick J. Sanders, MSA, EMT-P. Mosby's Paramedic Textbook, Revised 4rd Edition. Mosby Jems, Elsevier. 2012.</li>
+                        <li>Rosen P, Barkin R: Emergency medicines: concepts and clinical practice, 4th ed.,1998</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        // 手風琴開合
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            const btn = el.previousElementSibling;
+            const icon = btn.querySelector('.accordion-icon');
+            const isHidden = el.classList.contains('hidden');
+            el.classList.toggle('hidden', !isHidden);
+            if (icon) icon.textContent = isHidden ? '－' : '＋';
+        }
+
+        window.onViewSwitch = function(viewId) {
+            // 章節切換後重置手風琴
+        };
+    </script>
+</body>
+</html>
