@@ -21,12 +21,7 @@
         <div class="flex-1 overflow-y-auto py-2">
             <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
 
-            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-                <span class="font-bold text-sm">00. 本章學習重點</span>
-                <span class="text-[11px] text-slate-400">P.324 - P.325 | 五大學習目標</span>
-            </button>
-
-            <button onclick="switchView('view-recognition', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <button onclick="switchView('view-recognition', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
                 <span class="font-bold text-sm">01. 認識行為急症及精神疾病</span>
                 <span class="text-[11px] text-slate-400">P.326 - P.327 | 四型態 · 五類疾病</span>
             </button>
@@ -60,63 +55,8 @@
     <!-- ===================== MAIN CONTENT ===================== -->
     <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
 
-        <!-- ===================== VIEW 0: OBJECTIVES ===================== -->
-        <section id="view-objectives" class="view-section fade-in block">
-            <header class="mb-8">
-                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.324 - P.325</div>
-                <h2 class="text-3xl font-bold text-ems-navy">第十一章：行為急症</h2>
-                <div class="mt-4 border-l-4 border-ems-orange bg-orange-50 p-4 rounded-r-xl shadow-sm">
-                    <p class="text-ems-orange font-bold text-lg">🧠 面對行為急症與精神危機時，救護技術員無需確診，只需判斷：<br>病人的行為是否對自己或他人造成危害風險？</p>
-                </div>
-            </header>
-
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mt-6">
-                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
-                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習目標
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">1</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">認識行為急症及常見精神疾病</h4>
-                            <p class="text-sm text-slate-600 mt-1">掌握行為急症四種型態，辨識憂鬱、雙極性精神病、思覺失調等五類常見精神疾病。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">2</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">熟知精神衛生法及相關法律規範</h4>
-                            <p class="text-sm text-slate-600 mt-1">了解精神衛生法第32條與警察職權行使法第19條，確保護送與約束作業的法律依據。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">3</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">掌握評估行為急症之技巧</h4>
-                            <p class="text-sm text-slate-600 mt-1">運用叫叫CABD初級評估、DEFUSE言語技巧、「居安危枕戈旦」次級評估及暴力風險工具。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">4</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">瞭解現場分工、資源轉介及身體約束</h4>
-                            <p class="text-sm text-slate-600 mt-1">熟悉警消衛生三方協作機制、L/V型站位、8步驟約束流程及社區資源轉介路徑。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-orange-50 rounded-lg border border-orange-200 md:col-span-2">
-                        <span class="bg-ems-orange text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">5</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-orange">避開處理行為急症時常見的陷阱</h4>
-                            <p class="text-sm text-slate-600 mt-1">辨識非精神因素（低血糖、酒精、毒藥物、肝腦病變等）引發的類精神行為，避免誤判；正確執行約束作業並告知家屬。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
         <!-- ===================== VIEW 1: RECOGNITION ===================== -->
-        <section id="view-recognition" class="view-section hidden">
+        <section id="view-recognition" class="view-section fade-in block">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.326 - P.327</div>
                 <h2 class="text-3xl font-bold text-ems-navy">01 認識行為急症及精神疾病</h2>

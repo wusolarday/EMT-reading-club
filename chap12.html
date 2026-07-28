@@ -21,12 +21,7 @@
         <div class="flex-1 overflow-y-auto py-2">
             <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
 
-            <button onclick="switchView('view-objectives', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-                <span class="font-bold text-sm">00. 本章學習重點</span>
-                <span class="text-[11px] text-slate-400">P.340 - P.341 | 法規・三大目標</span>
-            </button>
-
-            <button onclick="switchView('view-terms', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+            <button onclick="switchView('view-terms', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
                 <span class="font-bold text-sm">01. 轉送常用名詞</span>
                 <span class="text-[11px] text-slate-400">P.342 - P.343 | 後送醫院・TTAS 五級</span>
             </button>
@@ -55,65 +50,9 @@
     <!-- ===================== MAIN CONTENT ===================== -->
     <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
 
-        <!-- ===================== VIEW 0: 本章學習重點 ===================== -->
-        <section id="view-objectives" class="view-section fade-in block">
-            <header class="mb-8">
-                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.340 - P.341</div>
-                <h2 class="text-3xl font-bold text-ems-navy">第十二章：病人轉送、轉診或轉院</h2>
-                <p class="text-ems-gray mt-2 text-lg">轉送病人是救護技術員最重要的使命——安全、快速、有效的醫療交接，直接影響病人預後。</p>
-            </header>
-
-            <!-- 核心定義卡 -->
-            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue mb-8">
-                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                    <span class="text-ems-blue text-2xl">📜</span> 法規依據
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-xs text-ems-blue font-bold uppercase tracking-wider mb-2">緊急醫療救護法 第 29 條</div>
-                        <p class="text-slate-300 text-sm leading-relaxed">救護人員應依救護指揮中心指示前往現場急救，並將緊急傷病患送往就近適當醫院。在急救至送達醫院前不得無故延誤，並應完整交接。</p>
-                    </div>
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-xs text-ems-blue font-bold uppercase tracking-wider mb-2">緊急傷病患實施辦法 第 3 條</div>
-                        <p class="text-slate-300 text-sm leading-relaxed">無法法規定指定「無法提供適切治療」之情況，醫院得協助安排轉診；轉診義務明確規範何時可不受後送限制。</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 學習目標 -->
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
-                <h3 class="text-xl font-bold text-ems-navy mb-6 flex items-center gap-2">
-                    <span class="text-ems-blue text-2xl">🎯</span> 本章學習目標
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">1</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">理解轉送法規與條件</h4>
-                            <p class="text-sm text-slate-600 mt-1">掌握病人轉送、轉診及轉院的法規依據、常用名詞定義與通用適用條件。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">2</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">掌握不同運送方式</h4>
-                            <p class="text-sm text-slate-600 mt-1">了解陸上、空中、海上救護運送的工具選擇，以及分流與繞道的後送決策邏輯。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <span class="bg-ems-blue text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shrink-0">3</span>
-                        <div>
-                            <h4 class="font-bold text-base text-ems-navy">提升安全交接能力</h4>
-                            <p class="text-sm text-slate-600 mt-1">熟悉送醫途中監測要點，並能運用 ISBAR 與 IMIST 架構性交班模組完整交接。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
 
         <!-- ===================== VIEW 1: 轉送常用名詞 ===================== -->
-        <section id="view-terms" class="view-section hidden">
+        <section id="view-terms" class="view-section fade-in block">
             <header class="mb-8">
                 <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.342 - P.343</div>
                 <h2 class="text-3xl font-bold text-ems-navy">01 轉送、轉診或轉院之常用名詞</h2>
