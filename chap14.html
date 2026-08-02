@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT 海栓讀書會 - 第十四章 空中救護概論、現況與相關法規</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/tailwind-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; padding:1.25rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .section-label { display:inline-flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:800; color:#1e293b; margin-bottom:.9rem; }
+    .section-label::before { content:''; width:.7rem; height:1.5rem; background:#0284c7; border-radius:.125rem; display:inline-block; }
+    .note-list li { margin-bottom:.45rem; }
+    .pill { display:inline-flex; align-items:center; background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; border-radius:999px; padding:.3rem .65rem; font-size:.82rem; font-weight:700; }
+    .flow-node { background:#fff; border:1px solid #e2e8f0; border-radius:.6rem; padding:.7rem 1rem; text-align:center; font-weight:800; color:#1e293b; }
+    .flow-node.head { background:#1e293b; color:#fff; border-color:#1e293b; }
+    .flow-node.act { background:#e0f2fe; border-color:#0284c7; color:#075985; }
+    .flow-node.warn { background:#fef2f2; border-color:#dc2626; color:#991b1b; }
+    .flow-arrow::after { content:'↓'; display:block; text-align:center; color:#0284c7; font-size:1rem; margin:.2rem 0; }
+    .acc-content { display:none; }
+    .acc-content.open { display:block; }
+    .grid-btn { cursor:pointer; transition:transform .15s, box-shadow .15s, background-color .15s; }
+    .grid-btn:hover { transform:translateY(-2px); }
+    .grid-btn.active { background:#0284c7; color:#fff; border-color:#0284c7; box-shadow:0 8px 20px -8px rgba(2,132,199,.45); }
+    .chart-container { position:relative; width:100%; min-height:300px; height:38vh; max-height:380px; }
+
+    /* ---- 課本圖片插槽 ---- */
+    .figure-img { width:100%; max-height:30rem; object-fit:contain; background:#fff; border:1px solid #e2e8f0; border-radius:.5rem; padding:.6rem; display:block; }
+    .img-placeholder { display:none; flex-direction:column; align-items:center; justify-content:center; gap:.35rem;
+      min-height:11rem; border:2px dashed #94a3b8; border-radius:.5rem; background:repeating-linear-gradient(45deg,#f8fafc,#f8fafc 12px,#f1f5f9 12px,#f1f5f9 24px); padding:1.25rem; text-align:center; }
+    .img-placeholder .ph-icon { font-size:1.75rem; opacity:.5; }
+    .img-placeholder .ph-name { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.78rem; font-weight:700; color:#0284c7; background:#e0f2fe; border:1px solid #bae6fd; border-radius:.35rem; padding:.15rem .5rem; word-break:break-all; }
+    .img-placeholder .ph-desc { font-size:.78rem; color:#64748b; line-height:1.5; }
+    figcaption { font-size:.78rem; color:#64748b; text-align:center; margin-top:.5rem; line-height:1.5; }
+    @media (max-width:1023px){ main { padding:1.25rem !important; } .chart-container { height:320px; } }
+  </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+      <h1 class="text-xl font-bold text-white tracking-wide">第十四章 空中救護</h1>
+      <p class="text-xs text-ems-blue font-medium mt-1">概論 · 現況 · 法規 · 航空生理 · 風險管理</p>
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-2">
+      <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+
+      <button onclick="switchView('view-intro', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">前言　本章總覽</span>
+        <span class="text-[11px] text-slate-400">P.376 - P.377 | 學習目標・五節地圖</span>
+      </button>
+
+      <button onclick="switchView('view-01', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">01. 概論及任務類型</span>
+        <span class="text-[11px] text-slate-400">P.378 - P.379 | 飛安優先・MEDEVAC vs AE</span>
+      </button>
+
+      <button onclick="switchView('view-02', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">02. 臺灣現況及相關法規</span>
+        <span class="text-[11px] text-slate-400">P.380 - P.385 | 七大單位・空審中心・14 項適應症</span>
+      </button>
+
+      <button onclick="switchView('view-03', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">03. 航空生理對人體的影響</span>
+        <span class="text-[11px] text-slate-400">P.386 - P.388 | 低壓・低氧・低溫・低濕</span>
+      </button>
+
+      <button onclick="switchView('view-04', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">04. 航程中常見照護</span>
+        <span class="text-[11px] text-slate-400">P.389 - P.391 | 八類病況・7P・HOB 30°</span>
+      </button>
+
+      <button onclick="switchView('view-05', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">05. 作業之風險管理</span>
+        <span class="text-[11px] text-slate-400">P.392 - P.395 | 三九點鐘・裝卸載 SOP・離島後送</span>
+      </button>
+
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">附錄</div>
+
+      <button onclick="switchView('view-figs', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">圖片清單與參考資料</span>
+        <span class="text-[11px] text-slate-400">P.376 - P.395 | 待補圖檔一覽・7 篇文獻</span>
+      </button>
+    </div>
+
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+      ← 回章節目錄
+    </a>
+  </nav>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+    <!-- ============================================================ -->
+    <!-- VIEW: 前言                                                    -->
+    <!-- ============================================================ -->
+    <section id="view-intro" class="view-section fade-in block">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.376 - P.377</div>
+        <h2 class="text-3xl font-bold text-ems-navy">前言　空中救護概論、現況與相關法規</h2>
+        <p class="text-ems-gray mt-2 text-lg">空中救護＝<strong>緊急醫療</strong>×<strong>非定期飛行</strong>。整章只有一句話最重要：<strong>飛行安全永遠優先於一切</strong>，即使任務本身的目的是拯救垂危的性命。</p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+          <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+            <span class="text-ems-orange text-2xl">🎯</span> 學習目標
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>認識<strong>空中救護及任務類型</strong></span></li>
+            <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解<strong>臺灣空中救護現況及相關法規</strong></span></li>
+            <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>理解<strong>航空生理對人體的影響</strong></span></li>
+            <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>瞭解常見<strong>空中轉送航程中照護</strong></span></li>
+            <li class="flex items-start gap-3 text-slate-700"><span class="text-ems-blue mt-0.5">☑</span><span>總結<strong>空中救護作業之風險管理</strong></span></li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-5 leading-relaxed">編撰委員：徐克強 醫師（三軍總醫院）、陳哲輝 教官（國家搜救指揮中心空中轉診審核中心）、李佳翰 教官（空軍救護隊）、黃至正 教官（安捷航空）</p>
+        </div>
+
+        <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+          <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">🚁</span> 三個貫穿全章的原則</h3>
+          <p class="text-slate-400 text-sm mb-5">五個小節看似分散，其實都在回答同一個問題：「這趟飛行值不值得、安不安全、能不能救到人。」</p>
+          <div class="space-y-3">
+            <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+              <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+              <div class="text-sm"><span class="font-bold text-white">飛行安全優先於一切。</span><span class="text-slate-300"> 飛行器是救援的運載工具，任何風險都可能對全體組員的生命安全構成威脅。機長是最高指揮官，負最終決策責任。</span></div>
+            </div>
+            <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+              <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+              <div class="text-sm"><span class="font-bold text-white">兩個專業的組員資源管理 (CRM)。</span><span class="text-slate-300"> 醫護與飛行組員必須在極端條件下彼此合作、共同克服險阻，成功救活任何一條生命都是平時組員管理訓練成果的最高讚賞。</span></div>
+            </div>
+            <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+              <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+              <div class="text-sm"><span class="font-bold text-white">空中不是地面的延長線。</span><span class="text-slate-300"> 高空低壓、低氧、低溫、低濕會改寫地面上熟悉的每一項處置：輸液速率、氣囊壓力、體溫、脫水。</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-8">
+        <div class="section-label">本章地圖：五個小節怎麼串起來</div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-stretch">
+          <button onclick="switchView('view-01', document.querySelectorAll('.nav-item')[1])" class="grid-btn text-left bg-white border border-slate-300 rounded-lg p-4">
+            <div class="text-2xl font-black text-ems-blue">01</div>
+            <div class="font-bold text-sm text-ems-navy mt-1">概論與任務類型</div>
+            <div class="text-xs text-slate-500 mt-1">什麼是空中救護？MEDEVAC 與 AE 差在哪？</div>
+          </button>
+          <button onclick="switchView('view-02', document.querySelectorAll('.nav-item')[2])" class="grid-btn text-left bg-white border border-slate-300 rounded-lg p-4">
+            <div class="text-2xl font-black text-ems-blue">02</div>
+            <div class="font-bold text-sm text-ems-navy mt-1">臺灣現況與法規</div>
+            <div class="text-xs text-slate-500 mt-1">誰在飛？誰審核？依哪一部辦法？</div>
+          </button>
+          <button onclick="switchView('view-03', document.querySelectorAll('.nav-item')[3])" class="grid-btn text-left bg-white border border-slate-300 rounded-lg p-4">
+            <div class="text-2xl font-black text-ems-blue">03</div>
+            <div class="font-bold text-sm text-ems-navy mt-1">航空生理</div>
+            <div class="text-xs text-slate-500 mt-1">高度如何改變病人的身體與你的處置？</div>
+          </button>
+          <button onclick="switchView('view-04', document.querySelectorAll('.nav-item')[4])" class="grid-btn text-left bg-white border border-slate-300 rounded-lg p-4">
+            <div class="text-2xl font-black text-ems-blue">04</div>
+            <div class="font-bold text-sm text-ems-navy mt-1">航程中照護</div>
+            <div class="text-xs text-slate-500 mt-1">八類常見病況在機上怎麼顧？</div>
+          </button>
+          <button onclick="switchView('view-05', document.querySelectorAll('.nav-item')[5])" class="grid-btn text-left bg-white border border-slate-300 rounded-lg p-4">
+            <div class="text-2xl font-black text-ems-blue">05</div>
+            <div class="font-bold text-sm text-ems-navy mt-1">風險管理</div>
+            <div class="text-xs text-slate-500 mt-1">起降、接近、裝卸載、離島後送的實務。</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="card border-l-4 border-l-ems-orange">
+          <div class="section-label">一句話記住 MEDEVAC</div>
+          <p class="text-sm leading-relaxed text-slate-700"><strong>把人從危險裡拉出來。</strong>從危急或不穩定的環境，運送到具備初步醫療資源的地點，是<strong>院前救護的延伸</strong>。民間形式即 HEMS（直昇機緊急醫療服務）。</p>
+        </div>
+        <div class="card border-l-4 border-l-ems-blue">
+          <div class="section-label">一句話記住 AE</div>
+          <p class="text-sm leading-relaxed text-slate-700"><strong>把人從醫院送到另一家醫院。</strong>兩個醫療設施之間的長程轉送，通常超過 <strong>300 浬（約 556 公里）</strong>，多用定翼機，兩端要有機場與地面救護車接駁。</p>
+        </div>
+        <div class="card border-l-4 border-l-ems-danger">
+          <div class="section-label">一句話記住風險</div>
+          <p class="text-sm leading-relaxed text-slate-700">空中救護「常伴隨時間緊迫與環境惡劣」，在<strong>不可預知的風險</strong>下進行，且無法透過其他運輸工具完成。<strong>安全與準則</strong>是這個救護方式最重要的課題。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 01                                                       -->
+    <!-- ============================================================ -->
+    <section id="view-01" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.378 - P.379</div>
+        <h2 class="text-3xl font-bold text-ems-navy">01　空中救護概論及任務類型</h2>
+        <p class="text-ems-gray mt-2 text-lg">先建立價值觀（飛安優先、CRM），再分清兩大任務類型（MEDEVAC / AE），最後用表 14-1 決定「這個病人該用什麼運具」。</p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">一、核心價值與精神</div>
+          <ul class="note-list text-sm leading-relaxed text-slate-700">
+            <li>空中救護結合<strong>緊急醫療</strong>與<strong>非定期飛行</strong>兩個高度專業領域，核心價值在於「執行救命同時保持飛行安全」。</li>
+            <li>救護模式通常在<strong>不可預知的風險</strong>下進行，且無法透過其他運輸工具完成，因此<strong>安全與準則</strong>是最重要的課題。</li>
+            <li>飛行器上的最高指揮官是<strong>機長</strong>，負最終決策責任；緊急狀況下即便病人非常危急，機長仍必須確保飛行的穩定與安全。</li>
+            <li><strong>保障所有機組員平安到達指定地點降落，為最優先考量。</strong></li>
+            <li>醫療技術之外，前提是完善的<strong>訓練</strong>與周密的<strong>航程規畫</strong>：氣象條件預判、飛行路徑選擇、緊急情況備用方案，缺一不可。</li>
+            <li>醫護人員必須接受<strong>專業航空醫學訓練</strong>，瞭解飛行環境對病人生理狀況的影響，並在有限空間與時間內提供即時救護與適當選擇。</li>
+          </ul>
+        </div>
+
+        <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+          <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2"><span class="text-2xl">🕊</span> 「聞聲救苦」的兩層考驗</h3>
+          <p class="text-slate-300 text-sm leading-relaxed mb-4">要使「聞聲救苦」的精神得以彰顯，面對的不僅是技術與體力的考驗，更是對<strong class="text-white">生命價值的回應</strong>。醫護人員與飛行組員在面臨極端條件下，彼此合作共同克服險阻，成功拯救的任何一條生命，都是對平時組員管理訓練成果的最高讚賞。</p>
+          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4">
+            <div class="text-xs font-bold text-ems-blue tracking-widest mb-2">CORE / 總結</div>
+            <p class="text-sm text-slate-200 leading-relaxed">空中救護的核心關鍵，在於<strong class="text-white">兩個專業領域的組員資源管理</strong>，達成安全挽救危急病人的最終目標。而這一切的實現，必須<strong class="text-white">以飛行安全為基礎</strong>，確保機組人員與病人的平安，方能進一步將緊急救護的專業發揮到極致。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-6">
+        <div class="section-label">二、空中救護任務的分類</div>
+        <p class="text-sm text-slate-600 mb-5">兩類任務<strong>皆依賴航空器的快速反應與機動性</strong>，提供病人從危險區域或醫療資源不足地區移至進階醫療單位的轉送服務；但在<strong>執行範圍、工具與操作方式</strong>上存在顯著差異。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="bg-orange-50 p-5 rounded-lg border border-orange-100 relative overflow-hidden">
+            <div class="absolute right-0 top-0 bg-ems-orange text-white px-2 py-1 rounded-bl-lg text-xs font-bold">短程・院前延伸</div>
+            <h4 class="font-bold text-ems-navy text-lg">（一）醫療後送 MEDEVAC</h4>
+            <p class="text-xs text-slate-500 mb-3">Medical Evacuation</p>
+            <ul class="note-list text-sm text-slate-700 leading-relaxed">
+              <li>將傷患從<strong>危急或不穩定的環境</strong>，透過空中運送至具備初步醫療資源的地點進行緊急搶救。</li>
+              <li>經常與<strong>戰地救援</strong>相關：戰區內將受傷的軍人或平民從交戰區送至安全區域的初步醫療站。</li>
+              <li>因此 MEDEVAC 通常是<strong>院前救護的延伸</strong>，目標是盡快將病人從生命危險中脫離。</li>
+              <li>民間多以<strong>直昇機緊急醫療服務（HEMS）</strong>形式呈現，使用直昇機進行短程運輸，尤其在地面交通無法迅速到達的地區，如偏遠地區或災難現場。</li>
+              <li>臺灣代表：<strong>空軍救護隊、空中勤務總隊、衛福部離島航空器駐地備勤及運送服務計畫</strong>，旨在迅速反應並將緊急傷病患轉移至就近的高階醫療機構，實施搶救或手術介入治療。</li>
+            </ul>
+          </div>
+          <div class="bg-blue-50 p-5 rounded-lg border border-blue-100 relative overflow-hidden">
+            <div class="absolute right-0 top-0 bg-ems-blue text-white px-2 py-1 rounded-bl-lg text-xs font-bold">長程・院際轉送</div>
+            <h4 class="font-bold text-ems-navy text-lg">（二）空中醫療轉送 AE</h4>
+            <p class="text-xs text-slate-500 mb-3">Aeromedical Evacuation</p>
+            <ul class="note-list text-sm text-slate-700 leading-relaxed">
+              <li>針對<strong>長程</strong>的醫療運送，通常涉及<strong>兩個醫療設施之間</strong>的轉送。</li>
+              <li>距離通常超過 <strong>300 浬（約 556 公里）</strong>（表 14-1）。</li>
+              <li>多半利用<strong>定翼機</strong>：飛行距離較長、機艙環境較穩妥，但需要具備跑道的機場起飛及落地。</li>
+              <li>操作模式為兩端醫療機構或醫療站之間的病人轉運，並需在<strong>兩端機場安排地面救護車接駁</strong>。</li>
+              <li>多用於<strong>跨國或跨區域</strong>的空中救護，尤其涉及專門醫療資源或<strong>回國返鄉 (Repatriation)</strong> 需求時。以臺灣為例，現今國際救援公司提供跨國空中醫療轉送服務。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-5 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
+          <strong>兩類任務的共同要求：</strong>需將<strong>緊急轉送醫學</strong>與<strong>航空專業</strong>緊密合作，並依據具體的病人需求及任務環境，制定<strong>詳細的救護計畫</strong>，以確保病人在最短的時間內獲得適當的醫療照護。
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">表 14-1 醫療運輸模式比較</div>
+          <div class="overflow-x-auto">
+            <table class="data-table text-sm">
+              <thead>
+                <tr><th>比較項目</th><th>地面運輸</th><th>直昇機</th><th>定翼機</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="font-bold">最佳範圍<br><span class="text-xs font-normal text-slate-500">（通常情況）</span></td><td>0–50 浬</td><td>50–150 浬</td><td>渦輪螺旋槳：&gt;150 浬<br>噴射機：&gt;300 浬</td></tr>
+                <tr><td class="font-bold">成本</td><td>低</td><td>高</td><td>高</td></tr>
+                <tr><td class="font-bold">複雜性</td><td>低</td><td>高</td><td>高</td></tr>
+                <tr><td class="font-bold">航空醫療人員</td><td>高多變性</td><td>專業運輸人員</td><td>專業運輸人員</td></tr>
+                <tr><td class="font-bold">天氣</td><td>受天氣影響最小</td><td>最受天氣影響</td><td>受天氣影響比直昇機少</td></tr>
+                <tr><td class="font-bold">運輸安全性</td><td>重大安全問題</td><td>重大安全問題</td><td>安全性最高</td></tr>
+                <tr><td class="font-bold">主要優勢</td><td>可用性最高；<br>最低的成本</td><td>靈活性高，可在現場和醫院降落；運輸速度快</td><td>高速長距離運輸</td></tr>
+                <tr><td class="font-bold">主要限制</td><td>路況、交通</td><td>易受天氣影響</td><td>需要機場</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed">出處譯自：Hurd WW, Beninati W, editors. Aeromedical Evacuation: Management of Acute and Stabilized Patient. P.43, Chap 4. Civilian Air Medical Transport. New York: Springer-Verlag; 2019. ISBN 978-3-030-15903-0.</p>
+        </div>
+
+        <div class="card flex flex-col">
+          <div class="section-label">三種運具的最佳距離帶</div>
+          <p class="text-sm text-slate-500 mb-3">把表 14-1 的第一列畫成距離帶，決策時一眼看出「這段距離該找誰」。</p>
+          <div class="chart-container flex-1"><canvas id="rangeChart"></canvas></div>
+          <p class="text-xs text-slate-500 mt-3">＊定翼機以渦輪螺旋槳 &gt;150 浬起算，噴射機 &gt;300 浬；圖中以 300 浬為顯示上限。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 02                                                       -->
+    <!-- ============================================================ -->
+    <section id="view-02" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.380 - P.385</div>
+        <h2 class="text-3xl font-bold text-ems-navy">02　臺灣空中救護現況及相關法規</h2>
+        <p class="text-ems-gray mt-2 text-lg">臺灣的空中救護分成兩條路：<strong>到院前的緊急運送</strong>與<strong>院際間的緊急轉送</strong>。兩條路的申請窗口、執行單位都不一樣，先分清楚，再認識七個單位。</p>
+      </header>
+
+      <!-- 兩大範疇對照 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card border-t-4 border-t-ems-orange">
+          <div class="section-label">範疇一：到院前的緊急運送</div>
+          <div class="space-y-1">
+            <div class="flow-node head">各緊急應變單位<br><span class="text-xs font-normal text-slate-300">海巡署、各縣市消防局等</span></div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node act">向<strong>國家搜救指揮中心</strong>申請</div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node">由<strong>內政部空中勤務總隊</strong>或<strong>空軍司令部</strong>所屬航空器執行</div>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mt-4">大多為<strong>山域事故、海上救難</strong>，及因<strong>天災造成孤島效應</strong>之地區的緊急傷病患與人道救助。</p>
+        </div>
+        <div class="card border-t-4 border-t-ems-blue">
+          <div class="section-label">範疇二：院際間的緊急轉診</div>
+          <div class="space-y-1">
+            <div class="flow-node head">原就診之醫療院所醫師</div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node act">向<strong>空中轉診審核中心</strong>提出申請</div>
+            <div class="flow-arrow"></div>
+            <div class="flow-node">金門、連江、澎湖：委外承包<strong>民用航空器</strong><br class="hidden md:block"><span class="text-xs font-normal text-slate-500">臺東縣蘭嶼鄉、綠島鄉：內政部空中勤務總隊航空器協助為主</span></div>
+          </div>
+          <p class="text-sm text-slate-700 leading-relaxed mt-4">對象主要為<strong>離、外島地區急、重、難症</strong>，或當地醫療機構無法處置之傷病患，將其安全且快速地送往本島醫學中心或指定責任醫院接受緊急醫療處置。</p>
+        </div>
+      </div>
+
+      <!-- 七大單位 sub-nav -->
+      <div class="card mb-6">
+        <div class="section-label">七個必須認得的單位／制度</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-2">
+          <button onclick="showUnit(1,this)" class="unit-btn grid-btn active bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">一<br>空軍救護隊</button>
+          <button onclick="showUnit(2,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">二<br>空中傷患後送小組</button>
+          <button onclick="showUnit(3,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">三<br>空中勤務總隊</button>
+          <button onclick="showUnit(4,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">四<br>離島駐地備勤</button>
+          <button onclick="showUnit(5,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">五<br>空審中心 NAAC</button>
+          <button onclick="showUnit(6,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">六<br>國搜中心 NRCC</button>
+          <button onclick="showUnit(7,this)" class="unit-btn grid-btn bg-white border border-slate-300 rounded-lg px-3 py-3 text-xs font-bold text-slate-700">七<br>相關法規</button>
+        </div>
+      </div>
+
+      <!-- 一、空軍救護隊 -->
+      <div id="unit-1" class="unit-block">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+          <div class="card xl:col-span-2">
+            <div class="section-label">一、空軍救護隊的緣起與任務</div>
+            <div class="ml-2">
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 39 年（1950）</span>
+                <h4 class="font-bold text-lg text-slate-800">於嘉義成立直昇機部隊</h4>
+                <p class="text-slate-600 text-sm mt-1">中華民國空軍的救護部隊，通稱<strong>海鷗部隊</strong>，開始肇建。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 41 年 → 72 年</span>
+                <h4 class="font-bold text-lg text-slate-800">改編為空軍救護隊、更改部隊番號</h4>
+                <p class="text-slate-600 text-sm mt-1">民國 41 年改編為空軍救護隊，民國 72 年更改部隊番號為空軍救護隊（圖 14-1）。早期機種——定翼機：C-47、PBY、HU-16 水陸兩用機；直昇機：H-5、H-13、H-19、HH-1H。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 75 / 86 / 87 年</span>
+                <h4 class="font-bold text-lg text-slate-800">S-70C 系列進場，開始夜間搜救</h4>
+                <p class="text-slate-600 text-sm mt-1">民國 75 年購入 <strong>S-70C-1</strong> 型機 14 架；86 年購入 <strong>S-70C-6</strong> 全天候搜救機 4 架（圖 14-2）；<strong>87 年開始執行夜間搜救任務</strong>。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 100 年</span>
+                <h4 class="font-bold text-lg text-slate-800">EC-225 型機 3 架，加裝 AAT 醫療模組</h4>
+                <p class="text-slate-600 text-sm mt-1">加裝空中緊急醫療救護模組（<strong>Air Ambulance Technology, AAT</strong>，圖 14-3）。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-orange">民國 101 年（核心）</span>
+                <h4 class="font-bold text-lg text-slate-800">任務型態轉折：民間搜救移交</h4>
+                <p class="text-slate-600 text-sm mt-1">空中勤務總隊接收國防部 UH-60M 黑鷹直昇機後，由<strong>國家搜救指揮中心依權責劃分統一調派</strong>；至此空軍救護隊轉為<strong>專職軍事任務為主、民間搜救為輔</strong>。</p>
+              </div>
+              <div class="timeline-item border-l-transparent">
+                <span class="text-sm font-bold text-ems-blue">民國 107 年至今</span>
+                <h4 class="font-bold text-lg text-slate-800">UH-60M 成為主力機種</h4>
+                <p class="text-slate-600 text-sm mt-1">接收陸軍移撥 <strong>UH-60M 型黑鷹直昇機 15 架</strong>（圖 14-4），取代 S-70C-1；S-70C-1 已全面退役。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="card">
+              <div class="section-label">現役機隊盤點</div>
+              <div class="overflow-x-auto">
+                <table class="data-table text-sm">
+                  <thead><tr><th>機種</th><th>現況</th></tr></thead>
+                  <tbody>
+                    <tr><td class="font-bold">S-70C-1</td><td>已<strong>全面退役</strong></td></tr>
+                    <tr><td class="font-bold">S-70C-6</td><td>民國 101 年蘭嶼外海執行搜救時墜毀 1 架，現存 <strong>3 架</strong>持續服役</td></tr>
+                    <tr><td class="font-bold">EC-225</td><td>現存 <strong>3 架</strong>持續服役</td></tr>
+                    <tr><td class="font-bold">UH-60M</td><td>民國 109 年專機任務墜毀 1 架於新北市烏來山區，剩餘 <strong>14 架</strong>服役；<strong>目前主力機種</strong></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="section-label">任務定位</div>
+              <ul class="note-list text-sm leading-relaxed text-slate-700">
+                <li><strong>主要任務：</strong>軍事搜救、沿海巡邏、偵照、運補、元首及政府軍政首長視導專機、新武器研發支援。</li>
+                <li><strong>兼負民間救護：</strong>山、海難、空難、緊急傷病患後送及重大災害搶救。</li>
+                <li><strong>核心任務：</strong>以<strong>飛行員落海搜救</strong>為主要核心。</li>
+                <li>早期民間搜救由<strong>內政部警政署空中警察隊</strong>負責，因飛機性能限制，<strong>海拔 2,500 公尺以上由空軍救護隊執行</strong>。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div class="card">
+            <div class="section-label">圖 14-1</div>
+            <figure>
+              <img class="figure-img" src="./assets/img/chap14-fig14-1-afrs-emblem.jpg" alt="圖 14-1 空軍救護隊隊徽" onerror="figFallback(this)">
+              <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-1-afrs-emblem.jpg</div><div class="ph-desc">圖 14-1 空軍救護隊隊徽<br>（課本 P.380 左欄）</div></div>
+              <figcaption>圖 14-1 空軍救護隊隊徽</figcaption>
+            </figure>
+          </div>
+          <div class="card">
+            <div class="section-label">圖 14-2</div>
+            <figure>
+              <img class="figure-img" src="./assets/img/chap14-fig14-2-s70c.jpg" alt="圖 14-2 S-70C-1（左）vs. S-70C-6（右）" onerror="figFallback(this)">
+              <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-2-s70c.jpg</div><div class="ph-desc">圖 14-2 S-70C-1（左）vs. S-70C-6（右）<br>（課本 P.380 左欄，兩張並排）</div></div>
+              <figcaption>圖 14-2 S-70C-1（左）vs. S-70C-6（右）</figcaption>
+            </figure>
+          </div>
+          <div class="card">
+            <div class="section-label">圖 14-3</div>
+            <figure>
+              <img class="figure-img" src="./assets/img/chap14-fig14-3-ec225-aat.jpg" alt="圖 14-3 EC-225（左）vs. AAT（右）" onerror="figFallback(this)">
+              <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-3-ec225-aat.jpg</div><div class="ph-desc">圖 14-3 EC-225（左）vs. AAT 醫療模組（右）<br>（課本 P.380 左欄下方）</div></div>
+              <figcaption>圖 14-3 EC-225（左）vs. AAT（右）</figcaption>
+            </figure>
+          </div>
+          <div class="card">
+            <div class="section-label">圖 14-4</div>
+            <figure>
+              <img class="figure-img" src="./assets/img/chap14-fig14-4-uh60m.jpg" alt="圖 14-4 UH-60M 型黑鷹直昇機 陸軍（左）vs. 空軍救護隊（中）vs. 空中勤務總隊（右）" onerror="figFallback(this)">
+              <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-4-uh60m.jpg</div><div class="ph-desc">圖 14-4 UH-60M 黑鷹直昇機<br>陸軍（左）／空軍救護隊（中）／空中勤務總隊（右）<br>（課本 P.381 上方三張並排）</div></div>
+              <figcaption>圖 14-4 UH-60M 型黑鷹直昇機　陸軍（左）vs. 空軍救護隊（中）vs. 空中勤務總隊（右）</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- 二、空中傷患後送小組 -->
+      <div id="unit-2" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          <div class="card xl:col-span-2">
+            <div class="section-label">二、空中傷患後送小組的緣起與任務</div>
+            <div class="ml-2">
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-orange">民國 47 年 8 月 23 日（起點）</span>
+                <h4 class="font-bold text-lg text-slate-800">823 砲戰</h4>
+                <p class="text-slate-600 text-sm mt-1">前線產生大量傷患，急需後送返臺治療。國軍立即建立緊急空中傷患後送之醫療量能，以<strong>減低官兵於戰場折損率</strong>為考量，規劃相關救傷機制因應戰場需要。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 48 年 9 月 1 日</span>
+                <h4 class="font-bold text-lg text-slate-800">成立「空中傷患後送分隊」</h4>
+                <p class="text-slate-600 text-sm mt-1">於空軍第 439 聯隊成立，隸屬空軍六聯隊第六醫務中心，調派 <strong>C-46 型運輸機</strong>專職東沙、金門外島傷患後送，成為國內當時<strong>唯一的空運傷患單位</strong>。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 58 年 → 65 年</span>
+                <h4 class="font-bold text-lg text-slate-800">C-119 換裝與「3169」醫療專機</h4>
+                <p class="text-slate-600 text-sm mt-1">空運部隊全面換裝 <strong>C-119 型運輸機</strong>（圖 14-5）。民國 65 年將「<strong>3169</strong>」號 C-119 改裝為專供軍醫使用之傷患後送醫療專機，主機艙區隔為<strong>手術室及擔架病房</strong>（圖 14-5），可供醫護人員於飛行期間實施手術以爭取時效。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">後續</span>
+                <h4 class="font-bold text-lg text-slate-800">醫療專機止於地面演練</h4>
+                <p class="text-slate-600 text-sm mt-1">因本、外島後送任務<strong>起降航程短</strong>等諸多因素考量，醫療專機僅用於地面演練及示範，<strong>未能實際執行空中任務</strong>，成為軍陣醫學研發的實驗計畫。後續購置 <strong>C-130H 型運輸機</strong>，服役至今。</p>
+              </div>
+              <div class="timeline-item border-l-transparent">
+                <span class="text-sm font-bold text-ems-blue">民國 103 年 11 月</span>
+                <h4 class="font-bold text-lg text-slate-800">編組為「空中傷患後送小組」</h4>
+                <p class="text-slate-600 text-sm mt-1">因應國軍組織調整而改編。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="card">
+              <div class="section-label">圖 14-5</div>
+              <figure>
+                <img class="figure-img" src="./assets/img/chap14-fig14-5-c119.jpg" alt="圖 14-5 C-119 型運輸機（上）空中手術室及擔架病房（下）" onerror="figFallback(this)">
+                <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-5-c119.jpg</div><div class="ph-desc">圖 14-5 C-119 型運輸機（上）／空中手術室及擔架病房（下）<br>（課本 P.381 右欄，上下共 3 張，可合成一張）</div></div>
+                <figcaption>圖 14-5 C-119 型運輸機（上）　空中手術室及擔架病房（下）</figcaption>
+              </figure>
+            </div>
+            <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
+              <h3 class="text-lg font-bold text-white mb-3">現況：空軍第六聯隊空中傷患後送小組</h3>
+              <ul class="note-list text-sm leading-relaxed text-slate-300">
+                <li>主要執行<strong class="text-white">外島傷患後送本島</strong>任務；平時執行傷患轉送任務為<strong class="text-white">交通班機兼施</strong>。</li>
+                <li>現可編成 <strong class="text-white">5 組</strong>傷患後送組。</li>
+                <li>每架次任務人力編制為 <strong class="text-white">2 員空勤醫療組員</strong>：<strong class="text-white">航空護理官</strong>及<strong class="text-white">航空救護士</strong>各 1 員。</li>
+                <li>飛行過程中需時刻注意患者<strong class="text-white">病情變化及家屬身心狀態</strong>，給予立即應對護理處置及照護。</li>
+              </ul>
+            </div>
+            <div class="card border-l-4 border-l-ems-danger">
+              <div class="section-label">關鍵決策點：機場評估</div>
+              <p class="text-sm leading-relaxed text-slate-700">後送專機抵達目的地機場時，<strong>航空護理官立即前往病人救護車上</strong>針對患者進行快速、確實的全面性評估，看病人當下狀況是否適合使用空中後送。<strong class="text-ems-danger">若當下判斷患者情況不適合上機，則現場宣布任務取消</strong>，將病人送回當地醫療機構在地醫療，以確保病人的航程後送安全。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 三、空中勤務總隊 -->
+      <div id="unit-3" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          <div class="card xl:col-span-2">
+            <div class="section-label">三、空中勤務總隊的緣起與任務</div>
+            <p class="text-sm leading-relaxed text-slate-700 mb-4"><strong>八掌溪事件</strong>後，為解決缺乏協調、整合之困境，因應<strong>公有航空器分屬不同機關造成調度困難</strong>，將四個單位之航空器統一統籌指揮，於<strong>民國 94 年 11 月成立內政部空中勤務總隊</strong>。</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center text-xs font-bold text-slate-700">內政部警政署<br>空中警察隊</div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center text-xs font-bold text-slate-700">內政部消防署<br>空中消防隊籌備處</div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center text-xs font-bold text-slate-700">交通部民用航空局<br>航空隊</div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center text-xs font-bold text-slate-700">行政院海岸巡防署<br>空中偵巡隊</div>
+            </div>
+            <div class="text-center text-ems-blue font-bold mb-3">↓　航空器統一統籌指揮</div>
+            <div class="flow-node head mb-6">內政部空中勤務總隊（民國 94 年 11 月）</div>
+
+            <div class="section-label">現用 3 種機型</div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-blue-50 border border-blue-100 rounded-lg p-4"><div class="font-bold text-ems-navy">黑鷹直昇機</div><div class="text-xs text-slate-600 mt-1">UH-60M</div></div>
+              <div class="bg-blue-50 border border-blue-100 rounded-lg p-4"><div class="font-bold text-ems-navy">海豚直昇機</div><div class="text-xs text-slate-600 mt-1">AS-365</div></div>
+              <div class="bg-blue-50 border border-blue-100 rounded-lg p-4"><div class="font-bold text-ems-navy">定翼機</div><div class="text-xs text-slate-600 mt-1">Beech-200</div></div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="card">
+              <div class="section-label">圖 14-6 空中勤務總隊五大任務</div>
+              <div class="space-y-2">
+                <div class="flow-node act text-sm">航空器、船舶遇難事故<br>緊急搜救之支援調度</div>
+                <div class="flow-node act text-sm">海、空難事故聯繫、協調國外搜救單位或其他重大災害事故緊急救援之支援調度</div>
+                <div class="flow-node act text-sm">山區、高樓等重大災難事故<br>緊急救援之支援調度</div>
+                <div class="flow-node act text-sm">移植器官空中運送之支援調度</div>
+                <div class="flow-node act text-sm">緊急傷（病）患空中<br>緊急救護之支援調度</div>
+              </div>
+              <p class="text-xs text-slate-500 mt-3 leading-relaxed">註：其中緊急傷病患之空中緊急救護及移植器官空中運送，係指「救護直昇機管理辦法」第二條之空中緊急救護及移植器官之空中運送。</p>
+            </div>
+            <div class="card">
+              <div class="section-label">國搜中心徽章（P.382）</div>
+              <figure>
+                <img class="figure-img" src="./assets/img/chap14-nrcc-emblem.jpg" alt="國家搜救指揮中心徽章 Taipei Rescue Coordination Center" onerror="figFallback(this)">
+                <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-nrcc-emblem.jpg</div><div class="ph-desc">國家搜救指揮中心徽章<br>TAIPEI RESCUE COORDINATION CENTER<br>（課本 P.382 左欄中央，無圖號）</div></div>
+                <figcaption>國家搜救指揮中心徽章（Taipei Rescue Coordination Center）</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 四、離島駐地備勤 -->
+      <div id="unit-4" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+          <div class="card xl:col-span-2">
+            <div class="section-label">四、離島航空器駐地備勤及運送服務計畫</div>
+            <div class="ml-2">
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 78 年</span>
+                <h4 class="font-bold text-lg text-slate-800">民間參與的起點</h4>
+                <p class="text-slate-600 text-sm mt-1">亞太航空引進美國 <strong>BELL-412 型直昇機</strong>，已完成加裝救護構型，邀請國外航空醫師及高級救護技術員各一名於松山機場專業演示，當時規劃為<strong>自費包機模式</strong>。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 89 年</span>
+                <h4 class="font-bold text-lg text-slate-800">健全緊急醫療救護體系五年計畫</h4>
+                <p class="text-slate-600 text-sm mt-1">行政院衛生署於 1 月 1 日訂定，並鑒於部分<strong>山地離島、外島</strong>等醫療資源不足區域需要空中救護；同年 9 月 25 日訂定「<strong>山地離島地區嚴重或緊急傷病患就醫交通費補助試辦要點</strong>」，規範補助區域、方式與緊急傷病患要件。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 91 年</span>
+                <h4 class="font-bold text-lg text-slate-800">澎湖縣後送計畫（未續辦）</h4>
+                <p class="text-slate-600 text-sm mt-1">澎湖縣政府訂定「澎湖縣九十一年度急診重症緊急救護直昇機後送計畫」並與德安航空簽約；但因<strong>七美延誤就醫案件經監察院糾正</strong>後，無意願續辦。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-orange">民國 92 年（核心）</span>
+                <h4 class="font-bold text-lg text-slate-800">航空器駐地化的第一步</h4>
+                <p class="text-slate-600 text-sm mt-1">金門縣委託德安航空試辦「<strong>離島航空器駐地備勤及運送服務計畫</strong>」，正式將空中救護的航空器駐地化，但因遇 <strong>SARS</strong> 及「<strong>救護直昇機管理辦法</strong>」公布實施而結束試辦。同年 10 月金門縣府與中興航空簽訂常態性駐地契約，成為國內<strong>第一架民用救護專用直昇機常態性進駐離島</strong>。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 98 年 7 月 → 100 年</span>
+                <h4 class="font-bold text-lg text-slate-800">改用定翼機、擴大補助</h4>
+                <p class="text-slate-600 text-sm mt-1">中興航空服務期間經歷 <strong>2 次重大飛安事故</strong>，基於飛航安全考量改用<strong>定翼機</strong>進駐離島。民國 98 至 100 年衛福部先後補助臺東縣蘭嶼鄉、綠島鄉、連江縣、澎湖縣望安鄉緊急醫療空中後送之隨機人員費用與救護器材。</p>
+              </div>
+              <div class="timeline-item border-l-transparent">
+                <span class="text-sm font-bold text-ems-orange">民國 107 → 108 年 7 月 1 日</span>
+                <h4 class="font-bold text-lg text-slate-800">三離島委託駐地 ＋ 空轉後送遠距會診平臺</h4>
+                <p class="text-slate-600 text-sm mt-1">107 年由衛福部補助，金門、連江、澎湖三離島縣衛生局委託民間航空器駐地備勤；108 年 7 月 1 日起逐步啟用「<strong>空轉後送遠距會診平臺</strong>」，將空中轉診申請<strong>全面電子化</strong>，導入多方資訊共同決策，<strong>降低夜航架次及不必要的後送</strong>，改善醫病關係、提升緊急醫療品質。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="card border-t-4 border-t-ems-blue">
+              <div class="section-label">目前駐地機型</div>
+              <div class="overflow-x-auto">
+                <table class="data-table text-sm">
+                  <thead><tr><th>地區</th><th>機型／執行方式</th></tr></thead>
+                  <tbody>
+                    <tr><td class="font-bold">金門縣</td><td>定翼機（駐地備勤）</td></tr>
+                    <tr><td class="font-bold">澎湖縣</td><td>直昇機（駐地備勤）</td></tr>
+                    <tr><td class="font-bold">連江縣</td><td>直昇機（駐地備勤）</td></tr>
+                    <tr><td class="font-bold">臺東縣<br>綠島鄉・蘭嶼鄉</td><td>由<strong>內政部空中勤務總隊</strong>協助緊急醫療轉送；中央補助臺東縣府委託廠商辦理隨行上機救護人員及醫療器材</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+              <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">🎓</span> 隨機人員資格（考點）</h3>
+              <p class="text-sm text-slate-300 leading-relaxed">採購計畫規範連江縣、金門縣及澎湖縣航空器駐地備勤之廠商，需派任 1 名以上具<strong class="text-white">中級救護技術員（含）以上資格</strong>，且<strong class="text-white">受過空中救護相關教育訓練</strong>之專業人員，執行空中緊急醫療轉診任務。</p>
+              <p class="text-sm text-slate-300 leading-relaxed mt-3">臺東縣綠島鄉、蘭嶼鄉隨行上機救護人員亦需為<strong class="text-white">中級救護技術員（含）以上</strong>資格，並受過空中救護相關訓練。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 五、空審中心 -->
+      <div id="unit-5" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div class="card">
+            <div class="section-label">五、空中轉診審核中心之緣起與任務</div>
+            <div class="ml-2">
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 91 年</span>
+                <h4 class="font-bold text-lg text-slate-800">NACC 全國空中緊急醫療救護諮詢中心</h4>
+                <p class="text-slate-600 text-sm mt-1">行政院衛生署邀請專家學者共同討論及制定「<strong>救護直昇機管理辦法</strong>」，建立空中救護審核機制，委託專業團體派遣醫療團隊進駐消防署救災救護指揮中心，成立 <strong>National Aeromedical Consultation Center (NACC)</strong>，並制定「衛生署空中轉診審核中心離島地區緊急空中後送案件標準作業流程」，提供<strong>全天候 24 小時</strong>空中轉診專業審核。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-orange">民國 95 年 1 月 1 日</span>
+                <h4 class="font-bold text-lg text-slate-800">正名「空中轉診審核中心」NAAC</h4>
+                <p class="text-slate-600 text-sm mt-1">正名為「行政院衛生署空中轉診審核中心」，簡稱<strong>空審中心（National Aeromedical Approval Center, NAAC）</strong>。</p>
+              </div>
+              <div class="timeline-item border-l-transparent">
+                <span class="text-sm font-bold text-ems-blue">民國 102 年</span>
+                <h4 class="font-bold text-lg text-slate-800">改組升格為衛生福利部空中轉診審核中心</h4>
+                <p class="text-slate-600 text-sm mt-1">負責促進空中救護品質，並建立審核機制。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-blue">
+              <h3 class="text-lg font-bold text-white mb-2">空審中心（NAAC）的組成</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">由執行長與<strong class="text-white">急診醫學、重症醫學、航空醫學及災難醫學</strong>四大專科共 <strong class="text-white">32 名醫師</strong>進駐消防署救災救護指揮中心<strong class="text-white">輪值審核</strong>。</p>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-slate-800 border border-slate-700 rounded p-3 text-sm font-bold">急診醫學專科</div>
+                <div class="bg-slate-800 border border-slate-700 rounded p-3 text-sm font-bold">重症醫學專科</div>
+                <div class="bg-slate-800 border border-slate-700 rounded p-3 text-sm font-bold">航空醫學專科</div>
+                <div class="bg-slate-800 border border-slate-700 rounded p-3 text-sm font-bold">災難醫學專科</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="section-label">主要任務項目（24 小時受理離島偏遠地區）</div>
+              <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+                <li>到院後送所需之<strong>空中醫療轉送必要性評估</strong>。</li>
+                <li><strong>核定</strong>空中醫療轉送及器官運送申請之相關事項。</li>
+                <li><strong>聯繫</strong>申請空中後送醫院及接受醫院。</li>
+                <li><strong>協調</strong>隨行醫護人員之派遣及醫療設備。</li>
+                <li>提供國搜中心救護技術員空中緊急救護案件必要之<strong>醫療諮詢</strong>。</li>
+                <li>建置<strong>空審中心資料庫</strong>。</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 六、國搜中心 -->
+      <div id="unit-6" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div class="card">
+            <div class="section-label">六、國家搜救指揮中心之緣起與任務</div>
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-5">
+              <div class="font-bold text-ems-danger mb-1">民國 89 年 7 月 22 日　八掌溪事件</div>
+              <p class="text-sm text-slate-700 leading-relaxed">發生於臺灣嘉義縣，造成 <strong>4 名受困河床民眾</strong>不幸被洪水沖走死亡。事件檢討主要原因是救災「<strong>制度不夠健全、程序不夠明確、人員不夠積極</strong>」。</p>
+            </div>
+            <div class="ml-2">
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 89 年 7 月 24 日</span>
+                <h4 class="font-bold text-lg text-slate-800">成立行政院國家搜救指揮中心（NRCC）</h4>
+                <p class="text-slate-600 text-sm mt-1">為整合及強化國內救災資源，奉行政院指示，先以當時國防部國軍搜救協調中心作為作業幕僚，並以<strong>任務編組</strong>方式成立<strong>National Rescue Command Center (NRCC)</strong>，簡稱國搜中心。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="text-sm font-bold text-ems-blue">民國 98 年 8 月</span>
+                <h4 class="font-bold text-lg text-slate-800">莫拉克颱風「八八風災」</h4>
+                <p class="text-slate-600 text-sm mt-1">政府重新檢討災害防救體系及相關法規。</p>
+              </div>
+              <div class="timeline-item border-l-transparent">
+                <span class="text-sm font-bold text-ems-orange">民國 99 年 8 月 4 日（法制化）</span>
+                <h4 class="font-bold text-lg text-slate-800">納入「災害防救法」</h4>
+                <p class="text-slate-600 text-sm mt-1">由<strong>中央災害防救委員會</strong>設立國搜中心，負責統籌、調度國內各搜救單位資源，執行災害事故之<strong>人員搜救及緊急救護之運送任務</strong>，確立法制地位及法源依據，完成國搜中心法制化。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-label">表 14-2 國家搜救指揮中心之任務項目</div>
+            <div class="overflow-x-auto">
+              <table class="data-table text-sm">
+                <thead><tr><th>國家搜救指揮中心之任務項目</th></tr></thead>
+                <tbody>
+                  <tr><td>1. 航空器、船舶遇難事故之緊急搜救支援調度。</td></tr>
+                  <tr><td>2. 緊急傷（病）患之空中緊急救護支援調度。</td></tr>
+                  <tr><td>3. 移植器官之空中運送支援調度。</td></tr>
+                  <tr><td>4. 山區、高樓等重大災難事故之緊急救援支援調度。</td></tr>
+                  <tr><td>5. 海、空難事故聯繫、協調國外搜救單位或其他重大災害事故之緊急救援支援調度。</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">其中緊急傷病患之空中緊急救護及移植器官空中運送，係指「救護直昇機管理辦法」第二條之空中緊急救護及移植器官之空中運送。</p>
+            <div class="mt-4 bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
+              <strong>對照記憶：</strong>表 14-2（國搜中心任務）與圖 14-6（空勤總隊五大任務）內容<strong>幾乎相同</strong>——差別在於<strong>國搜中心負責「調度指揮」</strong>，<strong>空勤總隊負責「執行」</strong>。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 七、相關法規 -->
+      <div id="unit-7" class="unit-block hidden">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+          <div class="card">
+            <div class="section-label">七、臺灣空中救護相關法規</div>
+            <div class="space-y-4">
+              <div class="border-l-4 border-ems-blue pl-4">
+                <h4 class="font-bold text-ems-navy">母法：緊急醫療救護法 第 22 條</h4>
+                <p class="text-sm text-slate-600 mt-1">民國 84 年制定公布，第 22 條為授權依據。民國 102 年修正為：「救護直昇機、救護飛機、救護船（艦）及其他救護車以外之救護運輸工具，其救護之範圍、應配置之配備、查核、申請與派遣之程序、停降地點與接駁方式、救護人員之資格與訓練、勤務人數、勤務紀錄之製作與保存、檢查及其他應遵行事項之辦法，<strong>由中央衛生主管機關會同有關機關定之</strong>。」</p>
+              </div>
+              <div class="border-l-4 border-ems-orange pl-4">
+                <h4 class="font-bold text-ems-navy">現行主要法規：救護直昇機管理辦法</h4>
+                <p class="text-sm text-slate-600 mt-1">現行臺灣空中救護所適用之法規<strong>主要為此辦法</strong>，係依上開授權訂定。</p>
+              </div>
+              <div class="border-l-4 border-slate-300 pl-4">
+                <h4 class="font-bold text-ems-navy">修正中：空中救護運輸工具管理辦法（草案）</h4>
+                <p class="text-sm text-slate-600 mt-1">基於綠島、蘭嶼、澎湖、金門、連江等離島及偏遠地區，受限交通不便與醫療資源缺乏，空中救護需求較高，有<strong>增列救護飛機及其他空中救護運輸工具</strong>之需要，衛生福利部於<strong>民國 111 年公告修正草案</strong>。</p>
+              </div>
+            </div>
+
+            <div class="section-label mt-6">申請管道（依救護直昇機管理辦法）</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                <div class="font-bold text-ems-navy mb-2">空中緊急救護</div>
+                <p class="text-sm text-slate-700 leading-relaxed">須由<strong>當地消防局</strong>提交申請案至<strong>內政部消防署救災救護指揮中心</strong>。</p>
+              </div>
+              <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                <div class="font-bold text-ems-navy mb-2">空中轉診</div>
+                <p class="text-sm text-slate-700 leading-relaxed">由<strong>傷病患就診之醫院填寫申請表</strong>，向內政部消防署救災救護指揮中心敘明轉診安排之情形，並<strong>副知當地衛生局</strong>。</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-700 leading-relaxed mt-4">後由<strong>中央衛生主管機關委託專業團體或空中轉診審核中心</strong>派遣執行任務。前述空中緊急救護或空中轉診，地方政府或相關機構與<strong>民間救護直昇機訂有合約者</strong>，逕向當地衛生局或相關機構申請派遣該合約民航業者為之。</p>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+              <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2"><span class="text-xl">⚖️</span> 執行空中救護的三大原則</h3>
+              <div class="space-y-3">
+                <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                  <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">一</div>
+                  <div class="text-sm text-slate-300"><strong class="text-white">當地醫療資源</strong>依其設備及專長<strong class="text-white">無法提供治療</strong>，且具病情之<strong class="text-white">迫切性</strong>，非經空中救護將立即影響傷病患生命安全。</div>
+                </div>
+                <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                  <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">二</div>
+                  <div class="text-sm text-slate-300"><strong class="text-white">接受轉診或診治醫院</strong>能及時提供傷病患確切的醫療。</div>
+                </div>
+                <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                  <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">三</div>
+                  <div class="text-sm text-slate-300">空中救護<strong class="text-white">運送途中有足夠之設備及專業救護人員</strong>救治。</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="section-label">合約民航業者應依循之民航通告</div>
+              <ul class="note-list text-sm leading-relaxed text-slate-700">
+                <li><span class="pill mr-2">AC 120-033D</span>緊急醫療服務飛機之飛航作業，105.03.15</li>
+                <li><span class="pill mr-2">AC 120-045</span>救護直昇機之飛航作業，99.02.25</li>
+              </ul>
+              <p class="text-xs text-slate-500 mt-3">合約之民航業者，須依循民航通告提供空中救護及緊急醫療服務航空器之使用人，編訂作業程序及準則。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-label">表 14-3 空中救護適應症（14 項，緊急傷病患須符合）</div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-2">
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</span><span class="text-sm text-slate-700">外傷指數小於 12，或年齡小於 5 歲、外傷指數小於 9。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</span><span class="text-sm text-slate-700">昏迷指數小於 9，或昏迷指數變化降低超過 2 分。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</span><span class="text-sm text-slate-700">頭、頸、軀幹的穿刺或壓碎傷，導致生命象徵不穩定。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</span><span class="text-sm text-slate-700">脊椎、脊髓嚴重或已導致肢體癱瘓的外傷。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">5</span><span class="text-sm text-slate-700">完全性或未完全性的截肢傷（不含手指、腳趾截肢傷）。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">6</span><span class="text-sm text-slate-700">二處以上（含二處）之長骨骨折或嚴重骨盆骨折。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">7</span><span class="text-sm text-slate-700">二度、三度燒傷面積達 10%，或顏面、會陰等部位燒傷。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">8</span><span class="text-sm text-slate-700">溺水，並發嚴重呼吸系統病症。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">9</span><span class="text-sm text-slate-700">器官衰竭需積極性加護治療。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">10</span><span class="text-sm text-slate-700">需立即積極治療（含侵入性治療）之低體溫症。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-orange-50 border border-orange-100 rounded-lg"><span class="bg-ems-orange text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">11</span><span class="text-sm text-slate-700">成人患者呼吸速率每分鐘<strong>大於 30 或小於 10</strong> 次、心跳速率每分鐘<strong>大於 150 或小於 50</strong> 次。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">12</span><span class="text-sm text-slate-700">心因性胸痛、主動脈剝離、動脈瘤滲漏、急性中風、抽搐不止。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">13</span><span class="text-sm text-slate-700">高危險性產婦或新生兒。</span></div>
+            <div class="flex items-start gap-3 p-3 bg-slate-50 border border-slate-200 rounded-lg"><span class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">14</span><span class="text-sm text-slate-700">其他非經空中救護，將影響緊急醫療救護時效。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 03                                                       -->
+    <!-- ============================================================ -->
+    <section id="view-03" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.386 - P.388</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03　航空生理對人體的影響</h2>
+        <p class="text-ems-gray mt-2 text-lg">高空的四個物理事實——<strong>低壓、低氧、低溫、低濕</strong>——會改寫你在地面熟悉的每一項處置。理解這些變化並在<strong>適當時機</strong>調整，是空中救護成功的關鍵。</p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+        <div class="bg-white border-2 border-ems-blue rounded-xl p-4 text-center">
+          <div class="text-3xl mb-1">📉</div><div class="font-bold text-ems-navy">低壓</div><div class="text-xs text-slate-500 mt-1">波以耳定律<br>氣體膨脹</div>
+        </div>
+        <div class="bg-white border-2 border-ems-orange rounded-xl p-4 text-center">
+          <div class="text-3xl mb-1">🫁</div><div class="font-bold text-ems-navy">低氧</div><div class="text-xs text-slate-500 mt-1">道爾頓分壓定律<br>P 氧氣下降</div>
+        </div>
+        <div class="bg-white border-2 border-slate-400 rounded-xl p-4 text-center">
+          <div class="text-3xl mb-1">🥶</div><div class="font-bold text-ems-navy">低溫</div><div class="text-xs text-slate-500 mt-1">每上升 1,000 呎<br>約降 2°C</div>
+        </div>
+        <div class="bg-white border-2 border-slate-400 rounded-xl p-4 text-center">
+          <div class="text-3xl mb-1">💧</div><div class="font-bold text-ems-navy">低濕</div><div class="text-xs text-slate-500 mt-1">機艙相對濕度<br>約 20%</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">一、高空低壓的影響</div>
+          <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
+            <div class="font-bold text-ems-navy text-sm mb-1">波以耳定律 (Boyle's Law)</div>
+            <p class="text-sm text-slate-700">氣體體積與壓力<strong>成反比</strong> → <strong>壓力減少時，氣體體積增加。</strong></p>
+          </div>
+          <div class="space-y-4">
+            <div class="border-l-4 border-ems-orange pl-4">
+              <h4 class="font-bold text-ems-navy">靜脈輸液流速</h4>
+              <p class="text-sm text-slate-600 mt-1">氣壓下降 → <strong>輸液軟袋內氣體膨脹</strong>（圖 14-7）→ 相對增加向下液體的流速 → 導致輸液速率變化。</p>
+              <p class="text-sm text-slate-700 mt-2"><strong>處置：</strong>考量調整輸液速率閥門，或使用<strong>塑膠硬盒輸液罐</strong>，並用 <strong>19 號空針頭針刺減壓</strong>（圖 14-7），避免壓力及氣體膨脹效應，維持靜脈輸液壓力，保障所需的輸液速率。</p>
+            </div>
+            <div class="border-l-4 border-ems-danger pl-4">
+              <h4 class="font-bold text-ems-navy">氣管內管的氣囊</h4>
+              <p class="text-sm text-slate-600 mt-1">氣體膨脹效應在不同飛行高度，可能使氣囊<strong>過度充氣或洩氣</strong>，導致周圍組織壓迫或密合不良，造成氣管損傷或氣體洩漏。</p>
+              <p class="text-sm text-slate-700 mt-2"><strong>處置：</strong>適當調整氣囊壓力，維持在 <strong class="text-ems-danger">20–30 cmH₂O</strong>。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-label">圖 14-7　輸液減壓對策</div>
+          <figure>
+            <img class="figure-img" src="./assets/img/chap14-fig14-7-iv-bag.jpg" alt="圖 14-7 輸液軟袋內氣體膨脹（左）塑膠硬盒輸液罐並用 19 號空針頭針刺減壓（右）" onerror="figFallback(this)">
+            <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-7-iv-bag.jpg</div><div class="ph-desc">圖 14-7 輸液軟袋內氣體膨脹（左）／塑膠硬盒輸液罐，並用 19 號空針頭針刺減壓（右）<br>（課本 P.386 左欄下方，兩張並排）</div></div>
+            <figcaption>圖 14-7　輸液軟袋內氣體膨脹（左）　塑膠硬盒輸液罐，並用 19 號空針頭針刺減壓（右）<br><span class="text-[11px] text-slate-400">＊課本圖說誤植為「圖 16-7」，依章次應為圖 14-7</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">二、高空低氧的影響</div>
+          <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 mb-4">
+            <div class="font-bold text-ems-navy text-sm mb-1">道爾頓分壓定律 (Dalton's Law of Partial Pressures)</div>
+            <p class="text-sm text-slate-700">混合氣體中，各組成氣體的分壓與其摩爾分率成正比，總壓力是各分壓之總和：</p>
+            <div class="mt-2 text-center font-bold text-ems-navy bg-white border border-orange-100 rounded py-2">P 總和 ＝ P 氧氣 ＋ P 其他氣體</div>
+          </div>
+          <ul class="note-list text-sm leading-relaxed text-slate-700">
+            <li>飛行高度增加 → 外界大氣壓力（P 總和）降低 → <strong>P 氧氣也隨之下降</strong>（因氧氣摩爾分率約 <strong>21%</strong> 保持相對穩定）。</li>
+            <li>肺泡中的氧濃度（氧氣在肺泡內的分壓）相應減少 → 影響<strong>血氧飽和度</strong>和整體氧合狀態。</li>
+            <li>對已有<strong>呼吸功能不全或氧合障礙</strong>的病人，低氧環境可能導致血氧飽和度進一步下降。醫療人員應<strong>提前考慮使用氧氣供應設備</strong>，確保提供足夠氧氣濃度以維持病患血氧飽和度。</li>
+            <li>一般情況下，飛行高度達 <strong>8,000 至 10,000 呎</strong>時，非病態人群的血氧飽和度可能下降至 <strong>94% 左右而無任何危害</strong>。</li>
+            <li class="text-ems-danger"><strong>高風險族群：</strong>肺部慢性纖維化、慢性阻塞性肺疾病（COPD）等<strong>肺泡交換氧氣功能受阻</strong>的患者，這種低氧環境可能引發<strong>危險的低氧血症</strong>，必須依病人具體狀況調整氧氣治療需求。</li>
+          </ul>
+        </div>
+
+        <div class="card flex flex-col">
+          <div class="section-label">高度 × 氣溫 × 血氧（示意）</div>
+          <p class="text-sm text-slate-500 mb-3">依課本數據建構的趨勢示意：氣溫每上升 1,000 呎約降 2°C；非病態人群於 8,000–10,000 呎 SpO₂ 約降至 94%。</p>
+          <div class="chart-container flex-1"><canvas id="altitudeChart"></canvas></div>
+          <p class="text-xs text-slate-500 mt-3">＊示意曲線，非實測值；氣溫以地面 25°C 起算。</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">三、高空低溫的影響</div>
+          <div class="bg-slate-100 border border-slate-200 rounded-lg p-4 mb-4 text-center">
+            <span class="font-bold text-ems-navy">每上升 1,000 呎 → 氣溫約下降 2°C</span>
+          </div>
+          <ul class="note-list text-sm leading-relaxed text-slate-700">
+            <li>對<strong>急重症患者</strong>生理影響尤為顯著，尤其重大外傷且處於<strong>休克狀態</strong>的病人：低溫導致失溫 → 進一步加劇<strong>循環不良、酸血症併惡化凝血功能</strong>。</li>
+            <li><strong>強調保暖措施：</strong>保溫毯、<strong>低體溫防護處置包（Hypothermic Prevention &amp; Management Kit, HPMK）</strong>、加熱的輸液裝置、暖風設備，用來維持病人的核心體溫。</li>
+            <li><strong>無法自主調節體溫的重傷者</strong>風險最高：高海拔失溫患者、落水飛行員、嚴重外傷低容休克、重度昏迷或麻醉狀態下的病人；低溫可能增加併發症風險，進而影響預後。</li>
+            <li><strong>持續監測體溫，適時進行主動增溫措施</strong>，是空中轉送中不可或缺的一部分。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="section-label">四、高空低濕的影響</div>
+          <div class="bg-slate-100 border border-slate-200 rounded-lg p-4 mb-4 text-center">
+            <span class="font-bold text-ems-navy">機艙內相對濕度約 20%（遠低於地面環境）</span>
+          </div>
+          <ul class="note-list text-sm leading-relaxed text-slate-700">
+            <li>引發<strong>無感知的脫水</strong> → 血液濃度增加 → 可能增加<strong>血栓形成</strong>的風險。短航程風險較低，但<strong>長程飛行</strong>中脫水狀況的評估及適當補液絕不得忽視。</li>
+            <li><strong>眼部與黏膜：</strong>對昏迷或無法自主閉眼的患者，應使用<strong>眼藥膏</strong>並以<strong>紗布覆蓋眼睛</strong>，防止角膜乾燥與受損。</li>
+            <li><strong>氧氣治療的陷阱：</strong>供氧會進一步加劇黏膜脫水乾裂 → 建議在氧氣治療時<strong>加裝潮濕瓶</strong>增加吸入氣體的濕度。</li>
+            <li>依病人實際情況<strong>適當增加液體輸注量</strong>，以抵抗潛在的低濕度蒸散脫水效應。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">🧭</span> 五、綜合應對策略：Pre-fly the patient</h3>
+        <p class="text-slate-400 text-sm mb-5">飛行醫療任務前，<strong class="text-slate-200">先模擬整個航程</strong>是相當重要的步驟：提前進行完整的病人生理評估、瞭解病人的需求，<strong class="text-slate-200">而不是大全套什麼都帶</strong>（航空器必須考量載重平衡）。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300">確定病人<strong class="text-white">氧氣</strong>及各項設備的<strong class="text-white">電力需求</strong></div></div>
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300">隨時<strong class="text-white">調整氣囊壓力</strong></div></div>
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300">確保氧氣、各類別<strong class="text-white">醫療電子監控設備</strong>及<strong class="text-white">呼吸機功能正常</strong></div></div>
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300">加強病人的<strong class="text-white">保暖措施</strong></div></div>
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300">各類型<strong class="text-white">藥物的劑量計算</strong></div></div>
+          <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3"><span class="text-ems-blue mt-0.5">☑</span><div class="text-sm text-slate-300"><strong class="text-white">增加液體注備容量</strong>，預防低濕環境帶來的脫水</div></div>
+        </div>
+        <div class="mt-5 bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-sm text-slate-300 leading-relaxed">
+          除本節簡述的航空生理外，還有常見的<strong class="text-white">震動與噪音、加減速效應、飛行安全、人員安全與時差</strong>等生理問題，詳細內容請參考航空醫學教課書。空中轉送醫療人員應在飛行前做好充分準備，依據病人的個別情況，制定<strong class="text-white">個人化的飛行醫療計畫</strong>——這是空中轉送醫療人員的基本職責，對於病人的預後有至關重要的影響。
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 04                                                       -->
+    <!-- ============================================================ -->
+    <section id="view-04" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.389 - P.391</div>
+        <h2 class="text-3xl font-bold text-ems-navy">04　常見空中救護航程中照護</h2>
+        <p class="text-ems-gray mt-2 text-lg">病情掌握與護理需求都會受飛行環境影響。<strong>瞭解各種常見疾病狀況下的最佳照護措施，並針對空中環境的特殊挑戰進行適應</strong>，是確保安全和有效救護的不二法門。點選下方任一病況查看重點。</p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3 self-start">
+          <button onclick="showCare(1,this)" class="care-btn grid-btn active bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">❤️</div><div class="font-bold text-sm mt-1">一、心臟血管急症</div></button>
+          <button onclick="showCare(2,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🫁</div><div class="font-bold text-sm mt-1">二、胸腔相關急症</div></button>
+          <button onclick="showCare(3,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🩸</div><div class="font-bold text-sm mt-1">三、腹腔疾病</div></button>
+          <button onclick="showCare(4,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🧠</div><div class="font-bold text-sm mt-1">四、頭部外傷</div></button>
+          <button onclick="showCare(5,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🦴</div><div class="font-bold text-sm mt-1">五、肢體石膏固定</div></button>
+          <button onclick="showCare(6,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🔥</div><div class="font-bold text-sm mt-1">六、嚴重燒灼（燙）傷</div></button>
+          <button onclick="showCare(7,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">👁</div><div class="font-bold text-sm mt-1">七、眼部穿刺傷</div></button>
+          <button onclick="showCare(8,this)" class="care-btn grid-btn bg-white border border-slate-300 rounded-lg p-4 text-left"><div class="text-xl">🧑‍⚕️</div><div class="font-bold text-sm mt-1">八、精神科疾病</div></button>
+        </div>
+
+        <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[420px]">
+          <h3 id="care-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">一、心臟血管相關急症</h3>
+          <div id="care-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-white p-8 rounded-2xl shadow-lg border-t-8 border-ems-orange relative text-center">
+        <div class="text-6xl text-slate-100 absolute top-4 left-6 leading-none">&ldquo;</div>
+        <div class="relative z-10 px-8">
+          <div class="text-xs font-bold tracking-widest text-ems-orange mb-3">九、結語</div>
+          <p class="text-lg md:text-xl font-bold text-slate-800 leading-relaxed">在空中轉送途中，由於<strong class="text-ems-navy">高空環境的特殊性</strong>與<strong class="text-ems-navy">資源稀缺性</strong>，醫療人員需依據不同病人的病情，靈活運用照護策略。針對飛行過程中的特殊挑戰，<strong class="text-ems-navy">精確評估病情變化並實施適當的醫療處置</strong>，能顯著提高病人的安全性和生存機會。</p>
+        </div>
+        <div class="text-6xl text-slate-100 absolute bottom-4 right-6 rotate-180 leading-none">&ldquo;</div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 05                                                       -->
+    <!-- ============================================================ -->
+    <section id="view-05" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.392 - P.395</div>
+        <h2 class="text-3xl font-bold text-ems-navy">05　空中救護作業之風險管理</h2>
+        <p class="text-ems-gray mt-2 text-lg">從天氣、落地點、接近方向到裝卸載流程——這一節全部是「不做會出事」的實務規範。EMT 最常直接遇到的，是<strong>機坪交接與三、九點鐘接近原則</strong>。</p>
+      </header>
+
+      <!-- 一、起降注意事項 -->
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">一、直昇機起、降注意事項</div>
+          <div class="space-y-4">
+            <div class="border-l-4 border-ems-blue pl-4">
+              <h4 class="font-bold text-ems-navy">① 天氣是決定起飛標準的第一因素</h4>
+              <p class="text-sm text-slate-600 mt-1">包含<strong>風向、風速、能見度、雷雨</strong>。起飛前需確認<strong>駐地、目標區域及沿途天氣</strong>是否符合標準，甚至<strong>附近備降場之天氣限度</strong>，等種種因素關乎直昇機是否可受令執飛。</p>
+            </div>
+            <div class="border-l-4 border-ems-blue pl-4">
+              <h4 class="font-bold text-ems-navy">② 機務狀態確認</h4>
+              <p class="text-sm text-slate-600 mt-1">天氣因素排除後，<strong>飛行前檢查、開車檢查</strong>，確認飛機機務狀態無虞，才能確保執行任務之飛航安全。</p>
+            </div>
+            <div class="border-l-4 border-ems-orange pl-4">
+              <h4 class="font-bold text-ems-navy">③ 目標區屬未知區域，潛在危安因素多</h4>
+              <p class="text-sm text-slate-600 mt-1">若任務屬<strong>傷患空中轉送</strong>，通常選擇<strong>有塔臺及相關人員引導的標準機場</strong>以減少安全風險，但仍需組員確認場外環境是否安全。</p>
+            </div>
+            <div class="border-l-4 border-ems-danger pl-4">
+              <h4 class="font-bold text-ems-navy">④ 院前山區救援：落地考量更複雜</h4>
+              <ul class="note-list text-sm text-slate-600 mt-2">
+                <li>優先考量該任務區<strong>無線電能持續構聯</strong>，以利管制單位確認狀況。</li>
+                <li>考量<strong>山區天氣狀況、雲層變化</strong>，並持續觀察該落地點後續天氣是否如前。</li>
+                <li>確認落地點<strong>空間大小是否足夠</strong>：直昇機落地點（Heli-Pad）基本需要 <strong class="text-ems-danger">30m × 30m 空曠區域</strong>。</li>
+                <li>周遭是否有<strong>突出的障礙物</strong>會影響脫離方向及機身結構。</li>
+                <li>下方<strong>地質是否足以支撐直昇機重量</strong>。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="card">
+            <div class="section-label">圖 14-8　救護車停放位置</div>
+            <figure>
+              <img class="figure-img" src="./assets/img/chap14-fig14-8-helipad-ambulance.jpg" alt="圖 14-8 直昇機停機坪之救護車停放位置" onerror="figFallback(this)">
+              <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-8-helipad-ambulance.jpg</div><div class="ph-desc">圖 14-8 直昇機停機坪之救護車停放位置<br>（課本 P.392 右欄，含跑道與 3 點鐘方向救護車示意）</div></div>
+              <figcaption>圖 14-8　直昇機停機坪之救護車停放位置</figcaption>
+            </figure>
+          </div>
+          <div class="card border-t-4 border-t-ems-orange">
+            <div class="section-label">機坪交接（Tarmac hand-over）</div>
+            <div class="space-y-1">
+              <div class="flow-node head text-sm">任務機落地</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node text-sm">地面人員與救護車保持在<strong>飛機滑行路線外</strong></div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node act text-sm">確認飛機停妥後，<strong>後艙組員下機引導</strong>救護車至指定位置</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node act text-sm">首選位置：<strong>平行於飛機 3 點鐘旋翼區外</strong>（圖 14-8）</div>
+              <div class="flow-arrow"></div>
+              <div class="flow-node text-sm">救護車停妥後，後艙組員引導傷病患至救護車旁<br><strong>實施機坪交接作業</strong></div>
+            </div>
+            <p class="text-sm text-slate-700 leading-relaxed mt-4"><strong>為什麼是 3 點鐘、平行停放？</strong>因臺灣救護車均為<strong>後車廂上掀門式</strong>，此位置及方向較不易因旋翼產生之氣流，導致救護車上物品飛濺噴出。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 進出動線 -->
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <div class="section-label">圖 14-9　直昇機進出動線</div>
+          <figure>
+            <img class="figure-img" src="./assets/img/chap14-fig14-9-approach-path.jpg" alt="圖 14-9 直昇機進出動線" onerror="figFallback(this)">
+            <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-9-approach-path.jpg</div><div class="ph-desc">圖 14-9 直昇機進出動線<br>（課本 P.393 右上，紅色 ✗ 危險區／綠色 ➜ 安全進出方向）</div></div>
+            <figcaption>圖 14-9　直昇機進出動線</figcaption>
+          </figure>
+        </div>
+        <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-danger">
+          <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="text-2xl">⚠️</span> 三、九點鐘方向：唯一的安全進出方向</h3>
+          <div class="grid grid-cols-3 gap-3 mb-5 text-center">
+            <div class="bg-red-900/40 border border-red-700 rounded-lg p-4"><div class="text-2xl mb-1">✗</div><div class="text-xs font-bold text-red-200">12 點鐘（機首）<br>危險區域</div></div>
+            <div class="bg-emerald-900/30 border border-emerald-600 rounded-lg p-4"><div class="text-2xl mb-1">➜</div><div class="text-xs font-bold text-emerald-200">3・9 點鐘<br>（機身左右兩側）<br>安全進出</div></div>
+            <div class="bg-red-900/40 border border-red-700 rounded-lg p-4"><div class="text-2xl mb-1">✗</div><div class="text-xs font-bold text-red-200">6 點鐘（機尾）<br>最危險</div></div>
+          </div>
+          <ul class="note-list text-sm leading-relaxed text-slate-300">
+            <li><strong class="text-white">機尾為危險地帶</strong>，安全進出方向為機身左右兩側，一般通稱<strong class="text-white">三、九點鐘方向</strong>（圖 14-9）；此扇形區域<strong class="text-white">前、後均為危險區域</strong>。</li>
+            <li><strong class="text-white">為什麼前方危險：</strong>直昇機在傷病患裝卸載時，會將發動機收至<strong class="text-white">慢車狀態</strong>，旋翼轉速下降，造成前方旋翼失去離心力而下沉，故<strong class="text-white">前方旋翼會降低翼尖面高度</strong>。</li>
+            <li><strong class="text-white">為什麼後方更危險：</strong>後方有<strong class="text-white">尾旋翼</strong>設計，相較之下比前方更加危險。</li>
+            <li>因此將安全進出方向劃定為<strong class="text-white">三、九點位置</strong>。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 二、裝卸載 SOP -->
+      <div class="card mb-6">
+        <div class="section-label">二、直昇機裝卸載傷病患標準作業流程（空軍救護隊）</div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+            <div class="text-xs font-bold tracking-widest text-ems-blue mb-3">STEP 1　派遣與登機</div>
+            <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+              <li>派遣單位通知<strong>任務屬性、目標區位置、傷病患人數、情況</strong>。</li>
+              <li>到達目標區，<strong>確認目標位置</strong>。</li>
+              <li>依現場狀況執行登機作業，區分為<strong>落地接駁</strong>與<strong>吊掛進艙</strong>兩大類。</li>
+              <li>重點均是<strong>確認傷病患人數</strong>：登機人數需與<strong>受令人數一致</strong>。</li>
+              <li>如傷病患要求其他人員登機，<strong>均須回報機長</strong>；機長與管制單位確認是否更改命令。<strong>如無法構聯，保持原任務命令</strong>執行登機人數之管制。</li>
+              <li>登機後將傷病患<strong>實施固定</strong>（圖 14-10），且確保<strong>後艙人員及裝備都固定妥善</strong>，方可告知機長執行起飛程序。</li>
+            </ol>
+          </div>
+          <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
+            <div class="text-xs font-bold tracking-widest text-ems-blue mb-3">STEP 2　起飛後至航程中</div>
+            <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+              <li>起飛穩定後進行<strong>人、裝隔離</strong>，機組人員確認是否有<strong>危險物品及危安因子</strong>。</li>
+              <li>確認無虞後執行<strong>初級評估</strong>並記錄傷病患資料，將初評之<strong>生命徵象及基本資訊回報機長</strong>，以利機長回報管制單位。</li>
+              <li>執行<strong>次級評估</strong>，確認主要傷情及相關醫療行為。</li>
+              <li>如有<strong>高度或速度之要求</strong>，或傷病情疑慮需<strong>更改後送醫院</strong>，以機內通話告知機長，由機長與管制單位構聯協調是否更改飛行計畫。</li>
+            </ol>
+          </div>
+          <div class="bg-orange-50 border border-orange-100 rounded-lg p-5">
+            <div class="text-xs font-bold tracking-widest text-ems-orange mb-3">STEP 3　電擊與落地交接</div>
+            <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+              <li>如需<strong>電擊（去顫、整流或起搏）</strong>：後艙需先完成<strong>絕緣措施程序</strong>。</li>
+              <li>再由機長回報欲執行電擊作業，<strong>請前艙加強監控儀表資訊</strong>，避免飛機進入危險狀態。</li>
+              <li>後續航程持續<strong>監控傷情並治療</strong>。</li>
+              <li>確認落地機場<strong>並獲得許可落地</strong>後，確認救護車位置。</li>
+              <li><strong>救護士離艙與救護車 EMT 人員完成傷病患交接。</strong></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="mt-5 bg-ems-navy text-white rounded-lg p-5 border-l-4 border-ems-danger">
+          <div class="font-bold mb-2 flex items-center gap-2"><span>⚠️</span> 例外情境：大量傷患搜救／人員撤離</div>
+          <p class="text-sm text-slate-300 leading-relaxed">上述任務為<strong class="text-white">有規範登機人員</strong>之任務。如遇<strong class="text-white">大量傷患搜救任務或人員撤離</strong>相關任務，<strong class="text-white">沒有明訂上機人數限制</strong>，其規範更改為<strong class="text-white">直昇機起飛總重限制</strong>。此類任務待救者均盡快解除受災區域，而忽略直昇機載重之危安因素，故仍需<strong class="text-white">依直昇機載重平衡限制</strong>下進行撤離；後續登機後醫療處置行為及相關作業與前述略同。</p>
+        </div>
+      </div>
+
+      <!-- 三、離島後送 -->
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+        <div class="card">
+          <div class="section-label">圖 14-10　機上傷患及裝備固定</div>
+          <figure>
+            <img class="figure-img" src="./assets/img/chap14-fig14-10-patient-secure.jpg" alt="圖 14-10 機上傷患及裝備固定" onerror="figFallback(this)">
+            <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-10-patient-secure.jpg</div><div class="ph-desc">圖 14-10 機上傷患及裝備固定<br>（課本 P.394 左上，擔架綁帶固定實照）</div></div>
+            <figcaption>圖 14-10　機上傷患及裝備固定</figcaption>
+          </figure>
+        </div>
+
+        <div class="card xl:col-span-2">
+          <div class="section-label">三、離島地區緊急空中後送</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <ul class="note-list text-sm leading-relaxed text-slate-700">
+                <li>接獲離島醫療轉送任務，後艙醫療組員<strong>先與管制單位確認傷病患病情</strong>，以利整備隨機醫療裝備，為後續機上醫療處置備便。</li>
+                <li>需隨時保持<strong>氧氣、電力設施、輸液與急救藥品備援</strong>，支持突發狀況應變。</li>
+                <li>如接獲病人為<strong>飛沫傳染或空氣傳染性疾病</strong>（如 COVID-19 或 SARS 等），且<strong>未有呼吸道隔離</strong>（如氣管內插管併使用標準過濾裝置的機械性呼吸器）相關措施，<strong class="text-ems-danger">起飛前此架次任務組員需穿著防護個裝（PPE，圖 14-11）</strong>，待確認防護無虞後始可執行任務。</li>
+                <li>新冠疫情期間，臺灣空中醫療轉送配置有<strong>充氣式負壓隔離艙</strong>，將傷患先行防護至艙體內，再裝載登機返臺隔離治療。</li>
+              </ul>
+            </div>
+            <div>
+              <figure>
+                <img class="figure-img" src="./assets/img/chap14-fig14-11-ppe.jpg" alt="圖 14-11 空氣傳播傷患隔離衣穿戴" onerror="figFallback(this)">
+                <div class="img-placeholder"><div class="ph-icon">🖼</div><div class="ph-name">chap14-fig14-11-ppe.jpg</div><div class="ph-desc">圖 14-11 空氣傳播傷患隔離衣穿戴<br>（課本 P.394 右下，黑鷹前組員著白色 PPE 實照）</div></div>
+                <figcaption>圖 14-11　空氣傳播傷患隔離衣穿戴</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- VIEW 附錄：圖片清單與參考資料                                   -->
+    <!-- ============================================================ -->
+    <section id="view-figs" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.376 - P.395</div>
+        <h2 class="text-3xl font-bold text-ems-navy">附錄　圖片清單與參考資料</h2>
+        <p class="text-ems-gray mt-2 text-lg">本章共預留 <strong>11 個課本圖片插槽</strong>。把截好的圖依下表檔名放進 <code class="bg-slate-200 px-1.5 py-0.5 rounded text-sm">assets/img/</code>，頁面會自動顯示；尚未放入時會顯示帶檔名的虛線預留框。</p>
+      </header>
+
+      <div class="card mb-6">
+        <div class="section-label">待補圖檔一覽</div>
+        <div class="overflow-x-auto">
+          <table class="data-table text-sm">
+            <thead><tr><th>課本頁</th><th>圖號</th><th>圖說（課本小字）</th><th>檔名</th><th>出現位置</th></tr></thead>
+            <tbody>
+              <tr><td>P.380</td><td class="font-bold">圖 14-1</td><td>空軍救護隊隊徽</td><td><code>chap14-fig14-1-afrs-emblem.jpg</code></td><td>02 ▸ 一、空軍救護隊</td></tr>
+              <tr><td>P.380</td><td class="font-bold">圖 14-2</td><td>S-70C-1（左）vs. S-70C-6（右）</td><td><code>chap14-fig14-2-s70c.jpg</code></td><td>02 ▸ 一、空軍救護隊</td></tr>
+              <tr><td>P.380</td><td class="font-bold">圖 14-3</td><td>EC-225（左）vs. AAT（右）</td><td><code>chap14-fig14-3-ec225-aat.jpg</code></td><td>02 ▸ 一、空軍救護隊</td></tr>
+              <tr><td>P.381</td><td class="font-bold">圖 14-4</td><td>UH-60M 型黑鷹直昇機　陸軍（左）vs. 空軍救護隊（中）vs. 空中勤務總隊（右）</td><td><code>chap14-fig14-4-uh60m.jpg</code></td><td>02 ▸ 一、空軍救護隊</td></tr>
+              <tr><td>P.381</td><td class="font-bold">圖 14-5</td><td>C-119 型運輸機（上）　空中手術室及擔架病房（下）</td><td><code>chap14-fig14-5-c119.jpg</code></td><td>02 ▸ 二、空中傷患後送小組</td></tr>
+              <tr><td>P.382</td><td class="font-bold">（無圖號）</td><td>國家搜救指揮中心徽章　Taipei Rescue Coordination Center</td><td><code>chap14-nrcc-emblem.jpg</code></td><td>02 ▸ 三、空中勤務總隊</td></tr>
+              <tr><td>P.386</td><td class="font-bold">圖 14-7</td><td>輸液軟袋內氣體膨脹（左）　塑膠硬盒輸液罐，並用 19 號空針頭針刺減壓（右）<br><span class="text-xs text-slate-500">＊課本誤植為「圖 16-7」</span></td><td><code>chap14-fig14-7-iv-bag.jpg</code></td><td>03 ▸ 一、高空低壓</td></tr>
+              <tr><td>P.392</td><td class="font-bold">圖 14-8</td><td>直昇機停機坪之救護車停放位置</td><td><code>chap14-fig14-8-helipad-ambulance.jpg</code></td><td>05 ▸ 一、起降注意事項</td></tr>
+              <tr><td>P.393</td><td class="font-bold">圖 14-9</td><td>直昇機進出動線</td><td><code>chap14-fig14-9-approach-path.jpg</code></td><td>05 ▸ 三九點鐘方向</td></tr>
+              <tr><td>P.394</td><td class="font-bold">圖 14-10</td><td>機上傷患及裝備固定</td><td><code>chap14-fig14-10-patient-secure.jpg</code></td><td>05 ▸ 三、離島後送</td></tr>
+              <tr><td>P.394</td><td class="font-bold">圖 14-11</td><td>空氣傳播傷患隔離衣穿戴</td><td><code>chap14-fig14-11-ppe.jpg</code></td><td>05 ▸ 三、離島後送</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-5 bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
+          <strong>已改用 HTML／表格重建、不需圖檔者：</strong>圖 14-6（空中勤務總隊五大任務）、表 14-1（醫療運輸模式比較）、表 14-2（國搜中心任務項目）、表 14-3（空中救護適應症 14 項）。
+        </div>
+        <p class="text-xs text-slate-500 mt-3">檔名副檔名可換成 <code>.png</code>／<code>.JPG</code>，但需同步修改 HTML 內的 <code>src</code>。圖檔建議寬度 1200px 以上、去除書頁背景。</p>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="section-label">參考資料（課本 P.395）</div>
+          <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+            <li>全國法規資料庫。救護直昇機管理辦法 [Internet]。全國法規資料庫。2003。Available from: https://law.moj.gov.tw/LawClass/LawHistory.aspx?pcode=L0020074</li>
+            <li>Tsai S-H, Kraus J, Wu H-R, Chen W-L, Chiang M-F, Lu L-H, et al. The effectiveness of video-telemedicine for screening of patients requesting emergency air medical transport (EAMT). Journal of Trauma - Injury, Infection and Critical Care. 2007 Jul;62(2):504–511.</li>
+            <li>Britton T, Blakeman TC, Eggert J, Rodriquez D, Ortiz H, Branson RD. Managing endotracheal tube cuff pressure at altitude: a comparison of four methods. Journal of Trauma and Acute Care Surgery. 2014 Sep;77(3):240–244.</li>
+            <li>Bennett BL, Giesbrect G, Zafren K, Christensen R, Littlejohn LF, Drew B, et al. Management of Hypothermia in Tactical Combat Casualty Care: TCCC Guideline Proposed Change 20-01 (June 2020). Journal of Special Operations Medicine. 2020 Sep;20(3):21–35.</li>
+            <li>Hurd WW, Jernigan JG, Carlton PKJr. Aeromedical Evacuation: Management of Acute and Stabilized Patients (3rd ed.). 2003rd ed. Springer; 2002.</li>
+            <li>徐克強。臺東離島低血容性休克個案報告－空中醫療標準作業程序。軍醫雙月刊。2021 年 6 月；(55)：29–30。</li>
+            <li>Chen T-A, Lai C-Y, Hsu K-C. Emergency Air Medical Transport of Patients with Coronavirus Disease 2019: Experience with an Inflatable Negative Pressure Isolation Chamber on the UH-60M Helicopter. Journal of Medical Sciences. 2024 Jan;44(1):50–52.</li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <div class="section-label">讀書會速記：本章 10 個必記數字</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="font-black text-ems-blue text-lg">300 浬</div><div class="text-xs text-slate-600">AE 長程轉送的距離門檻（約 556 公里）</div></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="font-black text-ems-blue text-lg">50–150 浬</div><div class="text-xs text-slate-600">直昇機最佳運送範圍</div></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="font-black text-ems-blue text-lg">2,500 公尺</div><div class="text-xs text-slate-600">早期海拔以上民間搜救由空軍救護隊執行</div></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="font-black text-ems-blue text-lg">32 名醫師</div><div class="text-xs text-slate-600">空審中心（NAAC）輪值審核人力</div></div>
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="font-black text-ems-blue text-lg">14 項</div><div class="text-xs text-slate-600">空中救護適應症（表 14-3）</div></div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><div class="font-black text-ems-orange text-lg">20–30 cmH₂O</div><div class="text-xs text-slate-600">高空中氣管內管氣囊壓力</div></div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><div class="font-black text-ems-orange text-lg">2°C / 1,000 呎</div><div class="text-xs text-slate-600">高度上升的氣溫遞減率</div></div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><div class="font-black text-ems-orange text-lg">20%</div><div class="text-xs text-slate-600">機艙內相對濕度</div></div>
+            <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><div class="font-black text-ems-orange text-lg">HOB 30°</div><div class="text-xs text-slate-600">頭部外傷病人頭高姿勢；SBP 維持 100–110 mmHg</div></div>
+            <div class="bg-red-50 border border-red-200 rounded-lg p-3"><div class="font-black text-ems-danger text-lg">30m × 30m</div><div class="text-xs text-slate-600">Heli-Pad 基本空曠區域需求</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="./assets/js/chapter-nav.js"></script>
+  <script>
+    /* 課本圖片插槽：圖檔尚未放入 assets/img/ 時，顯示帶檔名的預留框 */
+    function figFallback(img) {
+      img.style.display = 'none';
+      var ph = img.parentElement.querySelector('.img-placeholder');
+      if (ph) ph.style.display = 'flex';
+    }
+
+    /* 手風琴 */
+    function toggleAcc(id) {
+      var c = document.getElementById('acc-' + id);
+      var i = document.getElementById('acc-icon-' + id);
+      if (!c) return;
+      c.classList.toggle('open');
+      if (i) i.textContent = c.classList.contains('open') ? '−' : '+';
+    }
+
+    /* 02 七大單位切換 */
+    function showUnit(n, btn) {
+      document.querySelectorAll('.unit-block').forEach(function (el) { el.classList.add('hidden'); });
+      var t = document.getElementById('unit-' + n);
+      if (t) t.classList.remove('hidden');
+      document.querySelectorAll('.unit-btn').forEach(function (el) { el.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+    }
+
+    /* 04 航程中照護 八類病況 */
+    var careData = {
+      1: {
+        title: '一、心臟血管相關急症',
+        html: '<p class="font-bold text-white">依病情提供適當濃度氧氣，全航程維持 SpO₂ 90% 以上。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li>若病人在飛行過程中出現<strong class="text-white">突發性缺血性胸部不適或胸悶、胸痛</strong>，應立即再次進行 <strong class="text-white">12 導程心電圖（ECG）</strong>檢查，評估是否存在急性或進展性心肌梗塞或其他心臟異常。</li>'
+            + '<li>必要時透過通訊手段——<strong class="text-white">隨機醫師機內通話、遠端專科醫師衛星構聯</strong>——尋求醫療指導醫師協助。</li>'
+            + '<li>迅速與飛行團隊一起協調，給予病人最佳的介入治療決策。</li>'
+            + '</ul>'
+      },
+      2: {
+        title: '二、胸腔相關急症',
+        html: '<p class="font-bold text-white">氣胸在飛行時可能惡化——起飛前就要處理，不要等到空中。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li><strong class="text-white">氣胸：</strong>建議起飛前先行<strong class="text-white">插入胸管</strong>，或以<strong class="text-white">豬尾巴引流管（Pigtail）</strong>進行引流，並確保引流系統（如哈姆立克閥或水下引流）能正常運作，避免氣體積聚。</li>'
+            + '<li>持續觀察病人是否出現<strong class="text-white">氣促、胸痛、皮下氣腫</strong>等臨床惡化徵象，可能提示有空氣滲漏。</li>'
+            + '<li><strong class="text-white">氣喘：</strong>保持呼吸道通暢並提供高濃度氧氣。飛行前視情況先行給予<strong class="text-white">異丙托溴銨（Ipratropium）</strong>抗膽鹼類藥物、<strong class="text-white">特布他林（Terbutaline）β2 受體刺激劑</strong>吸入，合併給予<strong class="text-white">類固醇與硫酸鎂注射劑</strong>。</li>'
+            + '<li><strong class="text-white">適當的呼吸道處置，在高空低氧環境下是維持呼吸功能的關鍵。</strong>應備妥藥物輔助氣管插管（DAI）、聲門上呼吸道（SGA）及外科呼吸道（Surgical Airway）等工具及相應麻醉鎮靜藥物，併使用袋瓣罩甦醒球，或最好能備妥<strong class="text-white">航空用呼吸機</strong>。</li>'
+            + '</ul>'
+      },
+      3: {
+        title: '三、腹腔疾病',
+        html: '<p class="font-bold text-white">高空低壓可能加重腹腔疾病：腸胃穿孔使腹腔內壓驟然上升，造成下腔靜脈回心血流量不足而產生休克症狀。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li>外傷性腹腔出血無論<strong class="text-white">實質器官破裂</strong>或<strong class="text-white">腸系膜血管損傷</strong>產生低血容性休克，均有相對的死亡風險。</li>'
+            + '<li><strong class="text-white">密切監控生命徵象：</strong>血壓、心跳速率、尿輸出量及<strong class="text-white">腹圍變化</strong>；若病人清醒，可觀察是否有腹部脹痛或其他消化系統異狀。</li>'
+            + '<li>轉送飛行前，若有必要可先行放置<strong class="text-white">鼻胃管或肛管</strong>，並予以<strong class="text-white">開放式引流</strong>。</li>'
+            + '<li>根據病人病況給予適當輸血，維持血紅素及血氧飽和度；必要時給予止血針劑（如 <strong class="text-white">Tranexamic acid, TXA 傳明酸</strong>）治療。</li>'
+            + '</ul>'
+      },
+      4: {
+        title: '四、頭部外傷',
+        html: '<p class="font-bold text-white">外傷性腦損傷（TBI）病人：穩定腦壓的作為與監控是全程重點。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li><strong class="text-white">頭高（Head of Bed, HOB）30°</strong> 是一個相當標準、又順手就可完成的最佳姿態。</li>'
+            + '<li>持續監測<strong class="text-white">意識水準（GCS）、瞳孔大小與反應、生命徵象</strong>。</li>'
+            + '<li>尤其<strong class="text-white">收縮壓建議維持在 100–110 mmHg</strong>，以維持足夠的<strong class="text-white">腦部灌流壓力（Cerebral Perfusion Pressure）</strong>。</li>'
+            + '<li><strong class="text-white">高空低氧環境可能對腦部損傷進一步加重</strong>，因此需特別警惕可能出現的<strong class="text-white">腦壓升高</strong>和<strong class="text-white">呼吸功能不全</strong>現象。</li>'
+            + '</ul>'
+      },
+      5: {
+        title: '五、肢體石膏固定',
+        html: '<p class="font-bold text-white">飛行中的低壓環境，可加劇長骨骨折病人腔室症候群的風險——尤其是長時間固定在石膏中的肢體。</p>'
+            + '<div class="bg-slate-800 border border-slate-700 rounded-lg p-4 my-3">'
+            + '<div class="text-xs font-bold text-ems-blue tracking-widest mb-2">腔室症候群 7P 徵象</div>'
+            + '<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-sm">'
+            + '<div>① 壓脹感 <span class="text-slate-400">Pressure</span></div>'
+            + '<div>② 皮膚冷感 <span class="text-slate-400">Poikilothermia</span></div>'
+            + '<div>③ 感覺異常 <span class="text-slate-400">Paresthesia</span></div>'
+            + '<div>④ 疼痛 <span class="text-slate-400">Pain</span></div>'
+            + '<div>⑤ 蒼白 <span class="text-slate-400">Pallor</span></div>'
+            + '<div>⑥ 無脈 <span class="text-slate-400">Pulselessness</span></div>'
+            + '<div>⑦ 運動功能喪失 <span class="text-slate-400">Paralysis</span></div>'
+            + '</div></div>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li><strong class="text-white">以疼痛作為切點：</strong>病人的疼痛已超過一般臨床的判斷，應立即給予相應的外科處置。</li>'
+            + '<li>若等到後面<strong class="text-white">蒼白、無脈搏或運動功能喪失</strong>，通常為時已晚。</li>'
+            + '</ul>'
+      },
+      6: {
+        title: '六、嚴重燒灼（燙）傷',
+        html: '<p class="font-bold text-white">首先應先檢查是否有吸入性嗆傷的可能。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li><strong class="text-white">顏面燒傷警訊：</strong>含面部頭髮、眉毛、眼瞼燒傷，嘴唇及呼吸道黏膜紅腫、出血、起水泡，眼睛紅腫、疼痛且不斷流淚等，均需特別留意。</li>'
+            + '<li>此類患者需<strong class="text-white">先進行呼吸道確保</strong>，必要時<strong class="text-white">預防性插管</strong>保護呼吸道。</li>'
+            + '<li>同時使用 <strong class="text-white">100% 氧氣</strong>，洗出可能的<strong class="text-white">一氧化碳</strong>或其他吸入性氣體中毒。</li>'
+            + '<li><strong class="text-white">航程中應加強保暖</strong>：大面積皮膚損傷可加重病人的體溫流失，進而影響生存預後。</li>'
+            + '<li>同時補充足夠體液，<strong class="text-white">持續監測尿液輸出量</strong>——這是評估傷者循環狀態和腎功能的基本指標。</li>'
+            + '</ul>'
+      },
+      7: {
+        title: '七、眼部穿刺傷',
+        html: '<p class="font-bold text-white">眼球貫穿性穿刺傷：立即使用硬式眼罩覆蓋，勿在眼球球體上加壓。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li>應立即使用<strong class="text-white">硬式眼罩</strong>進行覆蓋，<strong class="text-white">勿在眼球球體上加壓</strong>，以防止進一步的球體損傷。</li>'
+            + '<li>同時應提供<strong class="text-white">適當的氧氣治療</strong>，因為高氧環境有助於減少眼部的壓力變化，避免進一步的視力損害。</li>'
+            + '</ul>'
+      },
+      8: {
+        title: '八、精神科疾病',
+        html: '<p class="font-bold text-white">不穩定的精神疾病患者較不適合登機，尤其是可能對飛行安全構成威脅的病人。</p>'
+            + '<ul class="list-disc pl-5 space-y-2 text-base">'
+            + '<li>如果任務有必須執行的需求，應採取適當的<strong class="text-white">保護性約束</strong>，包括使用<strong class="text-white">物理性的約束帶或約束衣</strong>。</li>'
+            + '<li>在某些情況下，可以先行使用<strong class="text-white">化學性約束</strong>（如抗焦慮劑或鎮靜劑等），以減少病人的突發性激躁行為。</li>'
+            + '<li>必要時<strong class="text-white">保防人員隨行</strong>，協處實施物理保護約束，確保病人不會干擾機組人員或接近飛行逃生設備。</li>'
+            + '<li>這些措施旨在保護機上所有組員的<strong class="text-white">飛行安全</strong>，確保任務順利完成。</li>'
+            + '</ul>'
+      }
+    };
+
+    function showCare(n, btn) {
+      var d = careData[n];
+      if (!d) return;
+      document.getElementById('care-title').textContent = d.title;
+      document.getElementById('care-content').innerHTML = d.html;
+      document.querySelectorAll('.care-btn').forEach(function (el) { el.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+    }
+
+    /* 圖表 */
+    var charts = {};
+    function initRangeChart() {
+      var el = document.getElementById('rangeChart');
+      if (!el || charts.range) return;
+      charts.range = new Chart(el, {
+        type: 'bar',
+        data: {
+          labels: ['地面運輸', '直昇機', '定翼機'],
+          datasets: [{
+            label: '最佳運送範圍（浬）',
+            data: [[0, 50], [50, 150], [150, 300]],
+            backgroundColor: ['#94a3b8', '#0284c7', '#1e293b'],
+            borderRadius: 6,
+            barPercentage: 0.55
+          }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: function (c) { return c.raw[0] + ' – ' + c.raw[1] + ' 浬'; } } }
+          },
+          scales: {
+            x: { min: 0, max: 300, title: { display: true, text: '距離（浬）' }, grid: { color: '#e2e8f0' } },
+            y: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    function initAltitudeChart() {
+      var el = document.getElementById('altitudeChart');
+      if (!el || charts.alt) return;
+      charts.alt = new Chart(el, {
+        type: 'line',
+        data: {
+          labels: ['0', '2,000', '4,000', '6,000', '8,000', '10,000'],
+          datasets: [
+            {
+              label: '機艙外氣溫（°C，以地面 25°C 起算）',
+              data: [25, 21, 17, 13, 9, 5],
+              borderColor: '#0284c7', backgroundColor: 'rgba(2,132,199,.12)',
+              tension: .3, fill: true, yAxisID: 'y'
+            },
+            {
+              label: '非病態人群血氧飽和度（%）',
+              data: [98, 97, 96.5, 95.5, 94.5, 94],
+              borderColor: '#ea580c', backgroundColor: 'rgba(234,88,12,.10)',
+              tension: .3, fill: false, yAxisID: 'y1', borderDash: [6, 4]
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } },
+          scales: {
+            x: { title: { display: true, text: '飛行高度（呎）' }, grid: { color: '#e2e8f0' } },
+            y: { position: 'left', title: { display: true, text: '氣溫 °C' }, grid: { color: '#e2e8f0' } },
+            y1: { position: 'right', min: 88, max: 100, title: { display: true, text: 'SpO₂ %' }, grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    window.onViewSwitch = function (viewId) {
+      if (viewId === 'view-01') initRangeChart();
+      if (viewId === 'view-03') initAltitudeChart();
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initRangeChart();
+      showCare(1, document.querySelector('.care-btn'));
+    });
+  </script>
+</body>
+</html>
