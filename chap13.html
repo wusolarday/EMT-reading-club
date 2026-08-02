@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMT 海栓讀書會 - 第十三章 環境急症與野外地區緊急救護</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./assets/js/tailwind-config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800 overflow-hidden">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+        <div class="p-6 border-b border-slate-700 bg-slate-900">
+            <h1 class="text-xl font-bold text-white tracking-wide">第十三章 環境急症</h1>
+            <p class="text-xs text-ems-blue font-medium mt-1">溺水 · 冷熱 · 高海拔 · 咬螫 · 電擊 · 中毒</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-2">
+            <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">章節導覽</div>
+
+            <button onclick="switchView('view-intro', this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">前言　環境醫學總覽</span>
+                <span class="text-[11px] text-slate-400">P.352 - P.354 | 學習目標・通用五級檢傷</span>
+            </button>
+
+            <button onclick="switchView('view-drown', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">01. 溺水與潛水急症</span>
+                <span class="text-[11px] text-slate-400">P.354 - P.357 | 窒息・減壓病・6.1°C 準則</span>
+            </button>
+
+            <button onclick="switchView('view-thermal', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">02. 冷熱急症</span>
+                <span class="text-[11px] text-slate-400">P.357 - P.360 | 中暑・低體溫四分級・凍瘡</span>
+            </button>
+
+            <button onclick="switchView('view-altitude', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">03. 高海拔急症</span>
+                <span class="text-[11px] text-slate-400">P.360 - P.364 | AMS/HACE/HAPE・LLAMSS</span>
+            </button>
+
+            <button onclick="switchView('view-bite', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">04. 動物咬螫傷</span>
+                <span class="text-[11px] text-slate-400">P.364 - P.368 | 六大毒蛇・蜂螫・抗蛇毒血清</span>
+            </button>
+
+            <button onclick="switchView('view-marine', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">05. 有毒海洋生物咬螫傷</span>
+                <span class="text-[11px] text-slate-400">P.367 - P.369 | 刺絲胞・棘皮・魟魚・溫水浸泡</span>
+            </button>
+
+            <button onclick="switchView('view-electric', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">06. 電傷害</span>
+                <span class="text-[11px] text-slate-400">P.369 - P.372 | 雷擊六型・觸電三型・逆向檢傷</span>
+            </button>
+
+            <button onclick="switchView('view-gas', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">07. 有毒氣體中毒</span>
+                <span class="text-[11px] text-slate-400">P.372 - P.374 | 四大類毒氣・發紺陷阱</span>
+            </button>
+
+            <button onclick="switchView('view-poison', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+                <span class="font-bold text-sm">08. 其他野外中毒</span>
+                <span class="text-[11px] text-slate-400">P.373 - P.375 | 四大途徑・瞳孔判讀・毒物中心</span>
+            </button>
+        </div>
+
+        <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
+            ← 回章節目錄
+        </a>
+    </nav>
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+        <!-- ============================================================ -->
+        <!-- VIEW 0: 前言 環境醫學總覽                                     -->
+        <!-- ============================================================ -->
+        <section id="view-intro" class="view-section fade-in block">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.352 - P.354</div>
+                <h2 class="text-3xl font-bold text-ems-navy">前言　環境急症與野外地區緊急救護</h2>
+                <p class="text-ems-gray mt-2 text-lg">環境醫學談的是「環境反過來傷害人」：物理、化學、生物三類因素造成的急症與傷害。本章 8 個小節，全部都從「現場安全」開始。</p>
+            </header>
+
+            <!-- 學習目標 + 本章定位 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🎯</span> 學習目標
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>認識各種<strong>環境急症</strong>及<strong>野外急症</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3 text-slate-700">
+                            <span class="text-ems-blue mt-0.5">☑</span>
+                            <span>熟練各種環境急症及野外急症之<strong>病人評估與處置</strong></span>
+                        </li>
+                    </ul>
+                    <div class="mt-5 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-600 leading-relaxed">
+                        環境醫學主要在討論環境中的<strong>物理、化學和生物</strong>等因素所造成的環境急症或環境傷害：氣候因素引起的冷熱急症與雷擊傷害、高度或深度因素導致的高山疾病與潛水急症、動物螫咬傷、海洋生物咬螫傷及有毒植物等。
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3">編撰委員：鄭宏熙醫師（臺東馬偕）、廖昱翔／簡明克／黃文賢 教官（臺東縣消防局）</p>
+                </div>
+
+                <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+                    <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="text-2xl">🚨</span> 貫穿全章的三個共同原則
+                    </h3>
+                    <p class="text-slate-400 text-sm mb-5">八個小節內容不同，但骨架相同。抓住這三點，其餘只是細節差異。</p>
+                    <div class="space-y-3">
+                        <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                            <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+                            <div class="text-sm"><span class="font-bold text-white">現場安全永遠第一。</span><span class="text-slate-300"> 電線、毒氣、蜂群、毒蛇、雷雨、高山——救護技術員自己先安全，才有人能救病人。</span></div>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                            <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+                            <div class="text-sm"><span class="font-bold text-white">先脫離環境，再談處置。</span><span class="text-slate-300"> 帶離暴露源／脫離高低溫環境／降低高度／切斷電源，是所有環境急症的第一線治療。</span></div>
+                        </div>
+                        <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-start gap-3">
+                            <div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+                            <div class="text-sm"><span class="font-bold text-white">環境急症常是大量傷病患。</span><span class="text-slate-300"> 毒氣、蜂群、雷擊、集體中毒都可能多人受害，第一位到達最資深者擔任現場指揮官，先檢傷分類。</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 表 13-1 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-2 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">📋</span> 表 13-1　環境醫學通用五級檢傷
+                </h3>
+                <p class="text-sm text-slate-500 mb-4">這張表適用於本章所有環境急症；各小節另有專屬檢傷表（表 13-2 溺水、13-3 冷熱／凍傷、13-6 咬螫傷、13-7 電擊）。</p>
+                <div class="overflow-x-auto">
+                    <table class="data-table w-full">
+                        <thead>
+                            <tr><th class="w-2/3">判定依據</th><th class="text-center">到院前級數</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>重度呼吸窘迫（SpO₂ &lt; 90%）</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                            <tr><td>休克</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                            <tr><td>無意識（GCS 3-8）</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                            <tr><td>中度呼吸窘迫（SpO₂ &lt; 92%）</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td></tr>
+                            <tr><td>血行動力循環不足</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td></tr>
+                            <tr><td>意識程度改變（GCS 9-13）</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td></tr>
+                            <tr><td>輕度呼吸窘迫（SpO₂ 92-94%）</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td></tr>
+                            <tr><td>血壓或心跳有異於病人之平常數值，但血行動力穩定</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 本章地圖 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-2 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">🗺️</span> 本章地圖（點卡片直接跳到該節）
+                </h3>
+                <p class="text-sm text-slate-500 mb-5">八個小節依「水 → 溫度 → 高度 → 生物 → 電 → 化學」的環境因子順序排列。</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button onclick="jumpTo('view-drown')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">🌊</span><span class="text-xs text-ems-blue">01</span><span class="text-sm">溺水與潛水</span><span class="text-[10px] text-slate-400 font-normal">P.354-357</span>
+                    </button>
+                    <button onclick="jumpTo('view-thermal')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">🌡️</span><span class="text-xs text-ems-blue">02</span><span class="text-sm">冷熱急症</span><span class="text-[10px] text-slate-400 font-normal">P.357-360</span>
+                    </button>
+                    <button onclick="jumpTo('view-altitude')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">⛰️</span><span class="text-xs text-ems-blue">03</span><span class="text-sm">高海拔急症</span><span class="text-[10px] text-slate-400 font-normal">P.360-364</span>
+                    </button>
+                    <button onclick="jumpTo('view-bite')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">🐍</span><span class="text-xs text-ems-blue">04</span><span class="text-sm">動物咬螫傷</span><span class="text-[10px] text-slate-400 font-normal">P.364-368</span>
+                    </button>
+                    <button onclick="jumpTo('view-marine')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">🪼</span><span class="text-xs text-ems-blue">05</span><span class="text-sm">海洋生物</span><span class="text-[10px] text-slate-400 font-normal">P.367-369</span>
+                    </button>
+                    <button onclick="jumpTo('view-electric')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">⚡</span><span class="text-xs text-ems-blue">06</span><span class="text-sm">電傷害</span><span class="text-[10px] text-slate-400 font-normal">P.369-372</span>
+                    </button>
+                    <button onclick="jumpTo('view-gas')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">☠️</span><span class="text-xs text-ems-blue">07</span><span class="text-sm">有毒氣體</span><span class="text-[10px] text-slate-400 font-normal">P.372-374</span>
+                    </button>
+                    <button onclick="jumpTo('view-poison')" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1">
+                        <span class="text-3xl">🍄</span><span class="text-xs text-ems-blue">08</span><span class="text-sm">其他野外中毒</span><span class="text-[10px] text-slate-400 font-normal">P.373-375</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 1: 溺水與潛水急症                                        -->
+        <!-- ============================================================ -->
+        <section id="view-drown" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.354 - P.357</div>
+                <h2 class="text-3xl font-bold text-ems-navy">01　溺水與潛水急症</h2>
+                <p class="text-ems-gray mt-2 text-lg">「溺水是缺氧問題，潛水急症是氣泡問題。」一個往下沉，一個往上浮，兩種完全不同的病生理。</p>
+            </header>
+
+            <!-- 雙色對照：溺水 vs 減壓病 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 bg-ems-blue text-white px-3 py-1 rounded-bl-lg text-xs font-bold">缺氧</div>
+                    <h4 class="font-bold text-ems-navy text-lg flex items-center gap-2">🌊 溺水（Drowning）</h4>
+                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">病人在水中，因<strong>吸入水分或喉頭痙攣</strong>使呼吸道阻塞所產生的一種<strong>窒息現象</strong>。</p>
+                    <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1.5">
+                        <li>人類大腦是高度分化組織，對氧氣與血流供應格外敏感</li>
+                        <li>缺氧稍長，即使很快獲救、全身循環已恢復，<strong>腦部血液循環仍可能不理想</strong>，造成持續性傷害</li>
+                        <li>腦溫每降低 <strong>10°C</strong>，ATP 消耗量減少 <strong>50%</strong>，讓腦部不受損的時間<strong>加倍</strong></li>
+                        <li>溺水持續時間越長 → 死亡或出院後嚴重神經後遺症的風險越大</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 bg-ems-navy text-white px-3 py-1 rounded-bl-lg text-xs font-bold">氣泡</div>
+                    <h4 class="font-bold text-ems-navy text-lg flex items-center gap-2">🤿 減壓病 DCS（潛水夫病）</h4>
+                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">水中每下潛 <strong>10 公尺</strong>即增加一個大氣壓力。長時間或經常暴露於高壓環境、或呼吸高壓混合氣體時，<strong>氮氣溶解於血液或組織中</strong>。</p>
+                    <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1.5">
+                        <li>回復正常大氣壓的過程中，溶解之氣體逐漸自血液或組織釋出，經靜脈流至肺部藉呼吸排出</li>
+                        <li>若<strong>未按減壓程序或上升過快</strong>，溶解於組織內的氣泡便會快速釋出 → 形成<strong>氣泡栓塞</strong></li>
+                        <li>影響血液循環，形成缺氧與缺血 → 此臨床症狀即為 <strong>Decompression Sickness, DCS</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 明顯死亡判定 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-danger mb-8">
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span class="text-2xl">⚠️</span> 關鍵數字：6.1°C — 溺水病人「明顯死亡」的判定
+                </h3>
+                <p class="text-slate-400 text-sm mb-5">溺水病人是救護技術員到達現場幾乎可以確認求救原因的病人。<strong class="text-white">除非已明顯死亡，否則所有溺水病人均應積極的給予救護。</strong>除了緊急醫療救護委員會第七次會議紀錄所定義的現場死亡外，還包含：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-1">溫水（水溫 &gt; 6.1°C）</div>
+                        <p class="text-slate-300 text-sm">救起的病人<strong class="text-white">沒有生命徵象</strong>，或持續 <strong class="text-white">30 分鐘</strong>的復甦仍失敗。</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-1">冷水（水溫 &lt; 6.1°C）</div>
+                        <p class="text-slate-300 text-sm">已知<strong class="text-white">沉入水中超過 60 分鐘</strong>。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 頸椎 + 流程圖 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-orange">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2">
+                        <span class="text-ems-orange text-2xl">🦴</span> 是否有明確的外傷機轉？
+                    </h3>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 mb-4">
+                        <div class="text-3xl font-black text-ems-orange">0.009<span class="text-xl">%</span></div>
+                        <p class="text-sm text-slate-700 mt-1">溺水病人<strong>頸椎受傷</strong>的比例。<br>因此<strong>不需要例行性給予頸椎減脊移</strong>。</p>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-2">絕大部份有與溺水環境相關之外傷，例如在<strong>淺水區跳水、滑水道溺水或衝落大排水溝</strong>等。下列情形才需固定頸椎：</p>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><span class="text-ems-orange mt-0.5">▪</span><span>明顯頭部或脊椎外傷</span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-orange mt-0.5">▪</span><span>主訴頸部、背部、下背痛</span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-orange mt-0.5">▪</span><span>四肢麻或無力</span></li>
+                    </ul>
+                </div>
+
+                <!-- 圖 13-1 流程（純 CSS） -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1">圖 13-1　溺水與潛水急症緊急救護流程</h3>
+                    <p class="text-xs text-slate-500 mb-4">無反應 vs 有反應的兩條分支</p>
+                    <div class="flex flex-col items-center text-center text-sm">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">溺水／潛水病人</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded">是否有明確的外傷機轉？</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">非外傷／外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="grid grid-cols-2 gap-3 w-full">
+                            <div class="bg-slate-700 text-white font-bold py-2 rounded text-xs">無反應</div>
+                            <div class="bg-slate-700 text-white font-bold py-2 rounded text-xs">有反應</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 w-full text-slate-400 py-1"><div>↓</div><div>↓</div></div>
+                        <div class="grid grid-cols-2 gap-3 w-full">
+                            <div class="bg-slate-50 border border-slate-200 p-2 rounded text-[11px] text-slate-700 leading-snug">打開呼吸道、檢查呼吸<br>如有呼吸 → 聽診肺音<br>如無呼吸 → 給 2 次人工呼吸<br>並檢查頸動脈搏</div>
+                            <div class="bg-slate-50 border border-slate-200 p-2 rounded text-[11px] text-slate-700 leading-snug flex items-center justify-center">聽診肺音<br>（正常／異常）<br>全肺濕囉音 or 部分濕囉音</div>
+                        </div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded">必要處置</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 現場救護 8 點 互動網格 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">🚑</span> 非外傷／外傷現場救護流程：8 個特有注意事項
+                </h3>
+                <p class="text-sm text-slate-500 mb-5">點選左側編號查看細節。這 8 點是溺水／潛水病人「與其他病人不同」之處。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 grid grid-cols-4 lg:grid-cols-2 gap-3">
+                        <button onclick="showDrown(1)" id="btn-drown-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">1</span>無反應</button>
+                        <button onclick="showDrown(2)" id="btn-drown-2" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">2</span>肺音</button>
+                        <button onclick="showDrown(3)" id="btn-drown-3" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">3</span>保暖</button>
+                        <button onclick="showDrown(4)" id="btn-drown-4" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">4</span>給氧</button>
+                        <button onclick="showDrown(5)" id="btn-drown-5" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">5</span>輸液</button>
+                        <button onclick="showDrown(6)" id="btn-drown-6" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">6</span>血糖</button>
+                        <button onclick="showDrown(7)" id="btn-drown-7" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">7</span>高壓氧</button>
+                        <button onclick="showDrown(8)" id="btn-drown-8" class="duty-card bg-white border border-slate-300 rounded-lg p-3 flex flex-col items-center justify-center text-slate-700 font-bold text-xs"><span class="text-xl text-ems-blue">8</span>拒絕就醫</button>
+                    </div>
+                    <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[320px]">
+                        <h3 id="drown-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3">1. 對沒有反應的病人</h3>
+                        <div id="drown-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 表 13-2 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2">
+                    <span class="text-ems-orange text-2xl">📋</span> 表 13-2　溺水五級檢傷
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="data-table w-full">
+                        <thead><tr><th class="w-2/3">判定依據</th><th class="text-center">到院前級數</th></tr></thead>
+                        <tbody>
+                            <tr><td>心跳／呼吸停止</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                            <tr><td>中樞體溫 &lt; 32°C</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                            <tr><td>中樞體溫 32-35°C</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-slate-500 mt-3">※ 另可併用表 13-1 環境醫學通用五級檢傷。</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 2: 冷熱急症                                              -->
+        <!-- ============================================================ -->
+        <section id="view-thermal" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.357 - P.360</div>
+                <h2 class="text-3xl font-bold text-ems-navy">02　冷熱急症</h2>
+                <p class="text-ems-gray mt-2 text-lg">冷熱急症的本質是一道天平：<strong>熱量產生</strong> vs <strong>熱量散失</strong>。天平一失衡，體溫調節機轉就開始失能。</p>
+            </header>
+
+            <!-- 體溫調節與散熱四途徑 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🧠</span> 體溫調節</h3>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>正常體溫由<strong>大腦內的下視丘</strong>調節</span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>周邊體溫感受器位於<strong>皮膚及部分黏膜</strong>上</span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>傾向維持核心體溫於 <strong class="text-ems-orange">36~38°C</strong> 之間</span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>核心體溫過低或過高時，調節機轉開始失能</span></li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">♨️</span> 散熱四途徑</h3>
+                    <p class="text-sm text-slate-500 mb-4">環境不同，主要散熱途徑就不同——這決定了現場該怎麼處置。</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                            <div class="text-2xl mb-1">📡</div><div class="font-bold text-ems-navy text-sm">輻射</div>
+                            <p class="text-[11px] text-slate-600 mt-1">低於體溫的環境中，主要散熱方式之一</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-100 rounded-lg p-3 text-center">
+                            <div class="text-2xl mb-1">💨</div><div class="font-bold text-ems-navy text-sm">對流</div>
+                            <p class="text-[11px] text-slate-600 mt-1">低於體溫的環境中，與輻射並列主要途徑</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center">
+                            <div class="text-2xl mb-1">🤝</div><div class="font-bold text-ems-navy text-sm">傳導</div>
+                            <p class="text-[11px] text-slate-600 mt-1">接觸較冷物體時為主。<strong>水中熱傳導比空氣快 25 倍</strong></p>
+                        </div>
+                        <div class="bg-orange-50 border border-orange-100 rounded-lg p-3 text-center">
+                            <div class="text-2xl mb-1">💧</div><div class="font-bold text-ems-navy text-sm">蒸發</div>
+                            <p class="text-[11px] text-slate-600 mt-1">高於體溫的環境中，<strong>唯一有效</strong>的散熱方式（汗水蒸發）</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-slate-800 text-slate-300 rounded-lg p-4 text-sm">
+                        💡 <strong class="text-white">臨床連結：</strong>溺水時人體迅速失去熱量，就是因為水中熱傳導速度比空氣快 25 倍；反過來說，環境溫度高於體溫時只剩「蒸發」有效，所以中暑降溫要靠<strong class="text-white">濕潤全身 + 搧風</strong>。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 熱急症三級 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🔥</span> 一、熱急症：依嚴重度分三級</h3>
+                <p class="text-sm text-slate-500 mb-5">熱痙攣 → 熱衰竭 → 中暑。三者的分界點在「<strong>意識</strong>」與「<strong>核心體溫</strong>」。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-5 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-amber-400 text-slate-900 px-3 py-1 rounded-bl-lg text-xs font-bold">輕</div>
+                        <h4 class="font-bold text-ems-navy text-lg">（一）熱痙攣</h4>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">為<strong>疼痛性的隨意肌痙攣</strong>，在熱天劇烈運動數小時後，或活動中突然發生的抽筋。</p>
+                        <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1">
+                            <li>最常發生於<strong>小腿腹、上臂、腹、背部</strong>的肌肉</li>
+                            <li>通常是因為大量流汗導致體內水分與電解質（<strong>鈉、鉀或鎂</strong>）的流失</li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-5 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-ems-orange text-white px-3 py-1 rounded-bl-lg text-xs font-bold">中</div>
+                        <h4 class="font-bold text-ems-navy text-lg">（二）熱衰竭</h4>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">高溫環境中工作或運動，人體為了散熱而大量排汗，此時水分補充不足將造成脫水現象。</p>
+                        <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1">
+                            <li>若身體脫水大於<strong>體重的 2% 以上</strong>時，將可能產生熱衰竭現象</li>
+                            <li class="font-bold text-ems-orange">與中暑的分界：病人有<strong>正常的意識</strong>、<strong>出汗</strong>與核心體溫介於<strong>正常至 40°C 間</strong></li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-ems-danger text-white px-3 py-1 rounded-bl-lg text-xs font-bold">重</div>
+                        <h4 class="font-bold text-ems-navy text-lg">（三）中暑</h4>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">死亡率約為 <strong class="text-ems-danger">30~80%</strong>。</p>
+                        <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1">
+                            <li>臨床上中樞體溫超過 <strong>40°C</strong> 及中樞神經異常（<strong>躁動、嗜睡、抽搐、昏迷</strong>）時，即應高度懷疑中暑</li>
+                            <li class="text-ems-danger font-bold">陷阱：無汗症不一定會表現出來——約有一半的運動型中暑仍會繼續出汗</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 中暑兩型 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                    <div class="border border-ems-blue rounded-lg p-4 bg-blue-50 relative">
+                        <div class="absolute -left-[1px] top-4 w-1 h-8 bg-ems-blue"></div>
+                        <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                            <span>運動型中暑</span><span class="text-xs bg-blue-200 px-2 py-1 rounded text-blue-800">年輕人</span>
+                        </div>
+                        <p class="text-sm text-slate-700">先前<strong>健康的人或年輕人</strong>，在溼熱的環境下從事<strong>重度勞動性工作、劇烈運動</strong>，會產生大量熱，身體來不及排除而造成。</p>
+                    </div>
+                    <div class="border border-slate-300 rounded-lg p-4 bg-slate-50 relative">
+                        <div class="absolute -left-[1px] top-4 w-1 h-8 bg-slate-400"></div>
+                        <div class="font-bold text-ems-navy flex justify-between items-center mb-2">
+                            <span>傳統型中暑</span><span class="text-xs bg-slate-200 px-2 py-1 rounded text-slate-700">高風險族群</span>
+                        </div>
+                        <p class="text-sm text-slate-700"><strong>老年人、有慢性病、藥癮、酒癮、服用藥物</strong>的病人，或在<strong>通風不良的密閉空間</strong>裡，因體溫調節中樞失調，而散熱不良造成。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 冷急症 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">📊</span> 低體溫四分級（體溫區間）</h3>
+                    <p class="text-sm text-slate-500 mb-4">任何因素讓人減少產熱、增加散熱或兩者都有時，冷急症就會產生。</p>
+                    <div class="chart-container flex-1"><canvas id="hypothermiaChart"></canvas></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🥶</span> 各級低體溫的身體反應</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-sky-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">輕度低體溫 32~35°C</h4>
+                            <p class="text-sm text-slate-600">身體會<strong>發抖</strong>以增加熱能製造。體溫降到 <strong>35°C</strong> 時，人體以顫抖來達到<strong>最大的產熱效果</strong>。</p>
+                        </div>
+                        <div class="border-l-4 border-sky-500 pl-4">
+                            <h4 class="font-bold text-ems-navy">中度低體溫 28~32°C</h4>
+                            <p class="text-sm text-slate-600">意識會開始改變且<strong>發抖減少</strong>。體溫降到 <strong>32°C</strong> 可能開始出現<strong>心房纖維顫動或心搏過緩</strong>；中樞體溫 <strong>30°C</strong> 時心輸出量將降至平常的一半，血流灌注低的器官將失去功能。</p>
+                        </div>
+                        <div class="border-l-4 border-blue-700 pl-4">
+                            <h4 class="font-bold text-ems-navy">重度低體溫 24~28°C</h4>
+                            <p class="text-sm text-slate-600">意識<strong>昏迷</strong>且<strong>不再發抖</strong>。體溫降到 <strong>26.7~27.8°C</strong> 時，任何對心臟的物理刺激都會造成<strong class="text-ems-danger">心室纖維顫動</strong>（所以搬運必須極度輕柔）。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-navy pl-4">
+                            <h4 class="font-bold text-ems-navy">深度低體溫 &lt; 24°C</h4>
+                            <p class="text-sm text-slate-600">降至 <strong>24°C</strong> 時心臟便不收縮。成人最低存活紀錄是 <strong class="text-ems-orange">13.7°C</strong>。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 冰凍性傷害 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">❄️</span> 冰凍性傷害：凍傷 vs 凍瘡</h3>
+                <p class="text-sm text-slate-500 mb-5">被冰凍的組織在解凍前不容易判斷傷害的嚴重程度，因此分類通常是使用<strong>肢體回溫後</strong>，患部所影響的深度狀況來區分。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-ems-blue text-white px-3 py-1 rounded-bl-lg text-xs font-bold">可逆</div>
+                        <h4 class="font-bold text-ems-navy text-lg">凍傷 Frostnip</h4>
+                        <p class="text-sm text-slate-700 mt-2">因為<strong>皮膚表面形成冰晶</strong>，破壞皮下的細胞，<strong class="text-ems-blue">傷害尚可逆轉</strong>。</p>
+                    </div>
+                    <div class="bg-red-50 p-5 rounded-lg border border-red-200 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 bg-ems-danger text-white px-3 py-1 rounded-bl-lg text-xs font-bold">壞死</div>
+                        <h4 class="font-bold text-ems-navy text-lg">凍瘡 Frostbite</h4>
+                        <p class="text-sm text-slate-700 mt-2">因低溫造成<strong>局部組織細胞損傷</strong>，會造成<strong class="text-ems-danger">細胞壞死</strong>。</p>
+                        <p class="text-sm text-slate-700 mt-2"><strong>四肢</strong>的凍瘡佔 <strong>60%</strong>，其餘的凍瘡大多發生在<strong>臉部</strong>，尤其是<strong>耳朵和鼻子</strong>。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 流程 + 現場 6 點 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-2　冷、熱急症緊急救護流程</h3>
+                    <p class="text-xs text-slate-500 mb-4">分岔點在「是否有明確的外傷機轉」</p>
+                    <div class="flex flex-col items-center text-center text-sm">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">觀察環境</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded text-xs">是否有明確的外傷機轉？</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="grid grid-cols-2 gap-2 w-full">
+                            <div class="bg-ems-orange text-white font-bold py-2 rounded text-xs">非外傷現場<br>救護流程</div>
+                            <div class="bg-ems-orange text-white font-bold py-2 rounded text-xs">外傷現場<br>救護流程</div>
+                        </div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded text-xs">其他（回溫／降溫）必要處置</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 bg-slate-50 border border-slate-200 rounded-lg p-4 text-xs text-slate-600 leading-relaxed">
+                        <strong class="text-ems-navy">評估與判定：</strong>救護技術員必須保持高度警覺性，觀察環境並判斷出可能的傷害原因，因為嚴重的環境冷或熱急症病人，常出現<strong>意識混亂或喪失</strong>的狀況。如果環境仍持續處於高／低溫環境，應在確保救護技術員安全的前提下，<strong>儘速將病人脫離危險環境後，再進行評估處置</strong>。
+                        <br><br><strong class="text-ems-navy">外傷機轉：</strong>常見的冷或熱急症病人，常在意識喪失的同時發生<strong>摔倒、跌倒或是墜落</strong>等後續衍生傷害，因此若有明顯的外傷機轉存在，應考慮到可能存在的<strong>頸椎及其他外傷危害</strong>，並依外傷流程進行處置。
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🚑</span> 現場救護流程：6 項特有注意事項</h3>
+                    <p class="text-sm text-slate-500 mb-5">冷熱急症病人與其他病人不同之處。點標題展開。</p>
+                    <div class="space-y-3">
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-blue" onclick="toggleLaw(21)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">1. 沒有反應的病人 — 評估呼吸脈搏至少 30-45 秒</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-21">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-21">
+                                對沒有反應的病人，主手應立即目視有無適當呼吸，同時檢查頸動脈搏。尤其在<strong>重度低體溫</strong>時，常出現<strong>呼吸及心搏過緩</strong>的現象，因此評估低體溫病人呼吸和脈搏時，<strong class="text-ems-orange">至少評估 30-45 秒</strong>。
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-orange" onclick="toggleLaw(22)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">2. 「回溫前不宣告死亡」原則</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-22">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-22">
+                                除非病人已明顯死亡（<strong>無首或屍僵</strong>），否則救護技術員不應該在一開始就斷定病人死亡，必須努力給予<strong>回溫及處置</strong>，除非病人<strong class="text-ems-orange">已回溫且仍無反應</strong>。
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(23)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">3. 脈搏有疑慮就開始按壓、不要怕建立呼吸道</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-23">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-23">
+                                若對檢查脈搏結果有疑慮，<strong>立即開始按壓</strong>，不要延遲基本救命術介入直到病人回溫。無意識的低體溫病人呼吸道需要被保護，<strong class="text-ems-orange">不要擔心發生心室纖維顫動而延誤建立進階或輔助呼吸道</strong>。
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-danger" onclick="toggleLaw(24)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">4. 低體溫的電擊策略（考點）</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-24">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-24">
+                                在確認心律及要以 AED 電擊病人前，先對病人進行 <strong>2 分鐘的 CPR</strong>，若為可電擊心律，<strong>給予電擊一次</strong>，然後繼續操作 CPR 2 分鐘。若低體溫病人在電擊後仍偵測不到脈搏，<strong class="text-ems-danger">先暫緩除顫</strong>，在下次除顫前先進行有效 CPR 並著重將中樞體溫提升到 <strong>30°C 以上</strong>，直到核心體溫高於 30°C 才可繼續除顫。
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(25)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">5. 血氧濃度分析儀的誤差</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-25">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-25">
+                                血氧濃度分析儀量測時，也可能因為<strong>冰冷的皮膚與周邊血循不良</strong>，而產生較大的誤差。
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer" onclick="toggleLaw(26)">
+                            <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                <h4 class="font-bold text-ems-navy text-sm">6. 中暑病人離開熱源後</h4>
+                                <span class="text-ems-blue font-bold text-xl" id="law-icon-26">+</span>
+                            </div>
+                            <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-26">
+                                中暑病人在離開熱源後，應<strong>維持呼吸道暢通</strong>並給予<strong>高流量氧氣</strong>。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 回溫／降溫必要處置 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🌡️</span> （四）其他（回溫／降溫）必要處置</h3>
+                <p class="text-sm text-slate-500 mb-5">應適時除去病人的濕衣物、擦乾病人的身體及測量中樞體溫，並依現場狀況矯正體溫。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3">
+                        <button onclick="showThermo(1)" id="btn-thermo-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">🥶</span> 低體溫：主動／被動回溫</button>
+                        <button onclick="showThermo(2)" id="btn-thermo-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">❄️</span> 凍瘡：回溫的禁忌</button>
+                        <button onclick="showThermo(3)" id="btn-thermo-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">💧</span> 低體溫：脫水與低血糖</button>
+                        <button onclick="showThermo(4)" id="btn-thermo-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">🔥</span> 熱急症：先降溫再送醫</button>
+                        <button onclick="showThermo(5)" id="btn-thermo-5" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">🚐</span> 熱急症：運送與監測</button>
+                        <button onclick="showThermo(6)" id="btn-thermo-6" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex items-center justify-center gap-2 text-slate-700 font-bold text-sm"><span class="text-xl">💉</span> 熱急症：輸液與血糖</button>
+                    </div>
+                    <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[300px]">
+                        <h3 id="thermo-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3"></h3>
+                        <div id="thermo-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 表 13-3 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">📋</span> 表 13-3　高、低體溫及凍傷五級檢傷</h3>
+                <div class="overflow-x-auto">
+                    <table class="data-table w-full">
+                        <thead><tr><th class="w-2/3">判定依據</th><th class="text-center">到院前級數</th><th class="text-center">次要調節變數</th></tr></thead>
+                        <tbody>
+                            <tr><td>中樞體溫 &lt; 32°C、&gt; 41°C</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>中樞體溫 32-35°C</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>肢體冰冷無脈搏</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td></td></tr>
+                            <tr><td>蒼白的皮膚（含耳朵）</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td></td></tr>
+                            <tr><td>肢體冰冷有脈搏</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td></td></tr>
+                            <tr><td>急性周邊重度疼痛（8-10）</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>急性周邊中度疼痛（4-7）</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td></td></tr>
+                            <tr><td>輕微凍傷，皮膚沒有變色（含耳朵）</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td></td></tr>
+                            <tr><td>無凍傷徵象，生命徵象正常，無發燒，無疼痛不適</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>急性周邊輕度疼痛（&lt;4）</td><td class="text-center"><span class="inline-block bg-sky-400 text-white font-bold px-3 py-1 rounded">5</span></td><td></td></tr>
+                            <tr><td>凍傷，生命徵象正常，無發燒，無疼痛不適</td><td class="text-center"><span class="inline-block bg-sky-400 text-white font-bold px-3 py-1 rounded">5</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 3: 高海拔急症                                            -->
+        <!-- ============================================================ -->
+        <section id="view-altitude" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.360 - P.364</div>
+                <h2 class="text-3xl font-bold text-ems-navy">03　高海拔急症</h2>
+                <p class="text-ems-gray mt-2 text-lg">氧氣濃度在任何高度都是 21%，變的是<strong>大氣壓力</strong>。所以高海拔的問題不是「沒氧氣」，而是「氧分壓不夠」。</p>
+            </header>
+
+            <!-- 基本生理 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🏔️</span> 高海拔環境的三個特性</h3>
+                    <div class="flex gap-3 mb-4">
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-center"><div class="text-2xl">📉</div><div class="text-sm font-bold text-ems-navy mt-1">低氣壓</div></div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-center"><div class="text-2xl">🫁</div><div class="text-sm font-bold text-ems-navy mt-1">缺氧</div></div>
+                        <div class="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 text-center"><div class="text-2xl">🥶</div><div class="text-sm font-bold text-ems-navy mt-1">低溫</div></div>
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-700">
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>大氣中氧氣濃度在任何高度均為 <strong>21%</strong>，但隨高度增加，大氣壓力從海平面逐漸降低，<strong>氧氣分壓也隨著降低</strong></span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>白天的大氣壓力比夜高，所以<strong class="text-ems-orange">到了夜晚，高海拔疾病的症狀會變得更嚴重</strong></span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>攀升速度超過身體適應能力時就會發生高海拔疾病；<strong>攀升愈快、高度愈高，愈快發生且愈嚴重</strong></span></li>
+                        <li class="flex items-start gap-2"><span class="text-ems-blue mt-0.5">▪</span><span>通常在<strong>給予氧氣或降低高度</strong>後獲得改善</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🔄</span> 人體適應高山環境的生理變化</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="text-2xl">💨</span><span class="text-sm text-slate-700"><strong>呼吸變快</strong></span></div>
+                        <div class="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="text-2xl">🫀</span><span class="text-sm text-slate-700"><strong>肺動脈壓升高</strong>，使血液流向在低處時用不著的部分肺葉</span></div>
+                        <div class="flex items-center gap-3 bg-blue-50 border border-blue-100 rounded-lg p-3"><span class="text-2xl">🩸</span><span class="text-sm text-slate-700">製造更多<strong>紅血球</strong>，並使<strong>血紅素更易釋出氧氣</strong></span></div>
+                    </div>
+                    <div class="mt-4 bg-slate-800 text-slate-300 rounded-lg p-4 text-sm">
+                        高海拔疾病發生機率和嚴重程度，與<strong class="text-white">高度、攀升速度、停留時間與個人體質</strong>等有密切關係。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 高度分級 chart -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">📊</span> 一、高度對人體生理的影響</h3>
+                    <p class="text-sm text-slate-500 mb-4">三個高度級距（公尺）</p>
+                    <div class="chart-container flex-1"><canvas id="altitudeChart"></canvas></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4">三級高度的臨床意義</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-sky-400 pl-4">
+                            <h4 class="font-bold text-ems-navy">（一）高海拔 1500~3500 公尺</h4>
+                            <p class="text-sm text-slate-600">人體會降低活動行為、增加肺泡通氣而不會影響動脈血氧的運送。但<strong class="text-ems-orange">正常的人在 2100~2400 公尺高度時可能開始發生高海拔疾病</strong>。動脈血氧飽和度會降低，在活動與睡覺時可能會發生顯著的低血氧，<strong>大多數的高海拔疾病都在此高度發生</strong>。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-4">
+                            <h4 class="font-bold text-ems-navy">（二）超高海拔 3500~5500 公尺</h4>
+                            <p class="text-sm text-slate-600"><strong class="text-ems-orange">快速的攀升可能會致命</strong>，因此需要足夠的時間來適應此種高度。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-danger pl-4">
+                            <h4 class="font-bold text-ems-navy">（三）極高海拔 5500 公尺以上</h4>
+                            <p class="text-sm text-slate-600"><strong class="text-ems-danger">無論花多少時間亦無法適應</strong>，停留愈久身體只會愈來愈差。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 三種高海拔疾病 表13-4 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩺</span> 二、高海拔疾病三種型態（表 13-4 症候）</h3>
+                <p class="text-sm text-slate-500 mb-5">AMS 是門檻，HACE 是腦、HAPE 是肺——後兩者都要<strong>立即下山</strong>。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-5">
+                        <div class="text-xs font-bold text-amber-700 uppercase tracking-wider">AMS</div>
+                        <h4 class="font-bold text-ems-navy text-lg mb-2">急性高山症</h4>
+                        <p class="text-xs text-slate-500 mb-2">Acute Mountain Sickness</p>
+                        <p class="text-sm text-slate-700 font-bold">進入高海拔地區後，出現<span class="text-ems-orange">頭痛</span>以及至少一項以下症狀：</p>
+                        <ol class="list-decimal pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>食慾變差</li><li>疲勞或虛弱無力</li><li>暈眩或頭暈</li><li>夜間難以入睡</li>
+                        </ol>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-5">
+                        <div class="text-xs font-bold text-orange-700 uppercase tracking-wider">HACE</div>
+                        <h4 class="font-bold text-ems-navy text-lg mb-2">高海拔腦水腫</h4>
+                        <p class="text-xs text-slate-500 mb-2">High-Altitude Cerebral Edema</p>
+                        <p class="text-sm text-slate-700 font-bold">進入高海拔地區以後，產生以下兩種狀況的其中一種：</p>
+                        <ol class="list-decimal pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>在患有急性高山症的病人身上出現<strong>意識改變</strong>或<strong>步態不穩</strong>的症狀</li>
+                            <li>病人沒有急性高山症的表徵，但是出現意識改變及步態不穩的症狀</li>
+                        </ol>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <div class="text-xs font-bold text-red-700 uppercase tracking-wider">HAPE</div>
+                        <h4 class="font-bold text-ems-navy text-lg mb-2">高海拔肺水腫</h4>
+                        <p class="text-xs text-slate-500 mb-2">High-Altitude Pulmonary Edema</p>
+                        <p class="text-sm text-slate-700 font-bold">至少出現以下兩種<span class="text-ems-danger">症狀</span>：</p>
+                        <ol class="list-decimal pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>休息時呼吸困難</li><li>咳嗽</li><li>虛弱乏力或運動表現能力變差</li><li>胸悶或胸部充血感</li>
+                        </ol>
+                        <p class="text-sm text-slate-700 font-bold mt-3">身體檢查至少出現以下兩種<span class="text-ems-danger">徵候</span>：</p>
+                        <ol class="list-decimal pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>在至少一側的肺音出現濕囉音或哮鳴</li><li>中心型的發紺</li><li>呼吸急促</li><li>心跳加快</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 流程與評估 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-3　高海拔疾病緊急救護流程</h3>
+                    <div class="flex flex-col items-center text-center text-sm mt-4">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">觀察環境</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded text-xs">非外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded text-xs">給予降低高度必要處置</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 bg-orange-50 border border-orange-100 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
+                        <strong class="text-ems-navy">⚠️ 最容易誤判的一點：</strong>在高山如有咳嗽、頭痛、頭暈、噁心、虛弱等症狀，<strong>可能會被誤認為感冒</strong>。如表現出<strong class="text-ems-orange">步態不穩、咳嗽、多痰</strong>或類似感冒症狀，應懷疑為高海拔疾病。
+                        <br><br>此時<strong class="text-ems-danger">躺著休息或睡覺為最不智的處置</strong>，應在空氣流通的地方走動或坐著休息，不能改善時應<strong>立即下山</strong>。
+                        <br><br><strong class="text-ems-navy">執行山域搜救勤務須注意本身之安全。</strong>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🧠</span> （二）非外傷現場救護流程</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-ems-blue pl-4">
+                                <h4 class="font-bold text-ems-navy">1. 評估意識：多一招「100 減 7」</h4>
+                                <p class="text-sm text-slate-600">評估意識除了用「<strong>清聲痛否</strong>」的方式外，對於意識清醒病人可以用 <strong class="text-ems-orange">100 減 7</strong> 的方法來判斷病人的反應。</p>
+                            </div>
+                            <div class="border-l-4 border-ems-orange pl-4">
+                                <h4 class="font-bold text-ems-navy">2. 詢問病史：兩類慢性疾病可能在 1500 公尺就發生 HAPE</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                                    <div class="bg-slate-50 border border-slate-200 rounded p-3">
+                                        <div class="font-bold text-sm text-ems-navy mb-1">(1) 心肺先天性異常</div>
+                                        <ul class="list-disc pl-4 text-xs text-slate-600 space-y-1">
+                                            <li>任何原因引起的肺動脈高壓</li>
+                                            <li>先天性單側肺動脈缺失</li>
+                                            <li>先天性心臟缺陷（房間隔缺損、心室中膈缺損）</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-slate-50 border border-slate-200 rounded p-3">
+                                        <div class="font-bold text-sm text-ems-navy mb-1">(2) 頸動脈手術</div>
+                                        <ul class="list-disc pl-4 text-xs text-slate-600 space-y-1">
+                                            <li>頸動脈體輻射治療</li><li>頸動脈體切除</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-l-4 border-slate-300 pl-4">
+                                <h4 class="font-bold text-ems-navy">3. 輔助檢查</h4>
+                                <p class="text-sm text-slate-600">可用<strong>露易絲湖急性高山症指數（Lake Louise Acute Mountain Sickness Score, LLAMSS）</strong>進行輔助檢查（見下方互動計分表）。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+                        <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">⬇️</span> （三）給予降低高度必要處置</h3>
+                        <p class="text-slate-400 text-sm mb-5">高海拔疾病可能在症狀出現後不久即快速加重，因此若發現可能為高海拔疾病時，應立即處置：<strong class="text-white">降低高度是治療高海拔疾病最重要且最有效的方式。</strong></p>
+                        <div class="space-y-3">
+                            <div class="bg-slate-800 p-4 rounded border border-slate-700 border-l-4 border-l-amber-400">
+                                <div class="font-bold text-sm text-amber-300 mb-1">輕度急性高山症</div>
+                                <p class="text-sm text-slate-300">在症狀改善前，應嘗試減少體力活動並避免進一步上升高度，於同一高度<strong class="text-white">逗留 1~2 天</strong>的適應而有所改善。</p>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded border border-slate-700 border-l-4 border-l-ems-orange">
+                                <div class="font-bold text-sm text-ems-orange mb-1">中度急性高山症</div>
+                                <p class="text-sm text-slate-300">如經由適應或治療 <strong class="text-white">24 小時</strong>後仍無法改善時，即應<strong class="text-white">立即下山</strong>。</p>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded border border-slate-700 border-l-4 border-l-ems-danger">
+                                <div class="font-bold text-sm text-red-400 mb-1">嚴重急性高山症（HAPE / HACE）</div>
+                                <p class="text-sm text-slate-300">則應<strong class="text-white">立即下山至少 500~1000 公尺</strong>才能有某種程度的改善。</p>
+                            </div>
+                            <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                                <div class="font-bold text-sm text-ems-blue mb-2">如無法即刻下山時：維持 SpO₂ &gt; 90%</div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-sm">
+                                    <div class="bg-slate-900 rounded p-3"><div class="font-bold text-white">AMS / HACE</div><div class="text-slate-400">鼻管 <strong class="text-ems-orange">2-4 L/min</strong></div></div>
+                                    <div class="bg-slate-900 rounded p-3"><div class="font-bold text-white">HAPE</div><div class="text-slate-400">鼻管 <strong class="text-ems-orange">4-6 L/min</strong></div></div>
+                                    <div class="bg-slate-900 rounded p-3"><div class="font-bold text-white">PAC 加壓袋</div><div class="text-slate-400">等同<strong class="text-ems-orange">降低 1500 公尺</strong>之效果（圖 13-4）</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 bg-slate-900 rounded-lg p-4 border-l-4 border-ems-blue">
+                            <div class="font-bold text-sm text-ems-blue mb-1">（四）救護車內救護流程</div>
+                            <p class="text-sm text-slate-300">高度平均每上升 <strong class="text-white">100 公尺</strong>，溫度約下降 <strong class="text-white">0.6°C</strong>。因此在後送途中，有高海拔疾病者應在評估時，<strong class="text-white">確認病人是否合併有失溫症狀</strong>，並依失溫處理原則處置。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LLAMSS 互動計分 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🧮</span> 表 13-5　露易絲湖急性高山症指數（LLAMSS）互動計分</h3>
+                <p class="text-sm text-slate-500 mb-4">使用前提：<strong>新的高度上升，抵達地點高於海拔 2,500 公尺；出現頭痛，且下列三個症狀至少出現一個以上（腸胃道症狀、疲憊虛弱、頭暈／頭重腳輕）。</strong></p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-8 space-y-4">
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <h4 class="font-bold text-ems-navy mb-2">頭痛症狀</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-ll-group="0">
+                                <button onclick="setLL(0,0,this)" class="ll-btn duty-card active bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">無 <span class="text-xs text-slate-400">0</span></button>
+                                <button onclick="setLL(0,1,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">輕微頭痛 <span class="text-xs text-slate-400">1</span></button>
+                                <button onclick="setLL(0,2,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">中度頭痛 <span class="text-xs text-slate-400">2</span></button>
+                                <button onclick="setLL(0,3,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">嚴重頭痛無法緩解 <span class="text-xs text-slate-400">3</span></button>
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <h4 class="font-bold text-ems-navy mb-2">腸胃道症狀</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-ll-group="1">
+                                <button onclick="setLL(1,0,this)" class="ll-btn duty-card active bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">食慾良好 <span class="text-xs text-slate-400">0</span></button>
+                                <button onclick="setLL(1,1,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">食慾不振或噁心 <span class="text-xs text-slate-400">1</span></button>
+                                <button onclick="setLL(1,2,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">中度噁心或嘔吐 <span class="text-xs text-slate-400">2</span></button>
+                                <button onclick="setLL(1,3,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">嚴重噁心或嘔吐無法緩解 <span class="text-xs text-slate-400">3</span></button>
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <h4 class="font-bold text-ems-navy mb-2">疲憊虛弱</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-ll-group="2">
+                                <button onclick="setLL(2,0,this)" class="ll-btn duty-card active bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">無 <span class="text-xs text-slate-400">0</span></button>
+                                <button onclick="setLL(2,1,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">輕微 <span class="text-xs text-slate-400">1</span></button>
+                                <button onclick="setLL(2,2,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">中度疲憊 <span class="text-xs text-slate-400">2</span></button>
+                                <button onclick="setLL(2,3,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">嚴重疲憊虛弱無法緩解 <span class="text-xs text-slate-400">3</span></button>
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg p-4">
+                            <h4 class="font-bold text-ems-navy mb-2">頭昏／頭重腳輕</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2" data-ll-group="3">
+                                <button onclick="setLL(3,0,this)" class="ll-btn duty-card active bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">無 <span class="text-xs text-slate-400">0</span></button>
+                                <button onclick="setLL(3,1,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">輕微頭昏／頭重腳輕 <span class="text-xs text-slate-400">1</span></button>
+                                <button onclick="setLL(3,2,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">中度頭昏／頭重腳輕 <span class="text-xs text-slate-400">2</span></button>
+                                <button onclick="setLL(3,3,this)" class="ll-btn duty-card bg-white border border-slate-300 rounded-lg py-2 text-sm font-bold text-slate-700">嚴重無法緩解 <span class="text-xs text-slate-400">3</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-4 bg-ems-navy text-white rounded-xl p-6 shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="text-sm text-slate-400 font-bold tracking-wider uppercase">加總分數</div>
+                        <div id="ll-score" class="text-7xl font-black text-ems-blue my-2">0</div>
+                        <div id="ll-level" class="text-xl font-bold text-white mb-4">未達判定標準</div>
+                        <div class="w-full space-y-2 text-left text-xs">
+                            <div class="bg-slate-800 rounded px-3 py-2 flex justify-between"><span>輕度急性高山症</span><span class="font-bold text-amber-300">3-5 分</span></div>
+                            <div class="bg-slate-800 rounded px-3 py-2 flex justify-between"><span>中度急性高山症</span><span class="font-bold text-ems-orange">6-9 分</span></div>
+                            <div class="bg-slate-800 rounded px-3 py-2 flex justify-between"><span>嚴重急性高山症</span><span class="font-bold text-red-400">10-12 分</span></div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-4">※ 本計分僅為輔助檢查，仍須綜合病史與臨床表現判斷。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 4: 動物咬螫傷                                            -->
+        <!-- ============================================================ -->
+        <section id="view-bite" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.364 - P.368</div>
+                <h2 class="text-3xl font-bold text-ems-navy">04　動物咬螫傷</h2>
+                <p class="text-ems-gray mt-2 text-lg">臺灣兩大主角：<strong>六大毒蛇</strong>（依蛇毒特性決定血清）與<strong>蜂螫傷</strong>（致死主因是過敏性休克，不是毒性）。</p>
+            </header>
+
+            <!-- 六大毒蛇互動 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🐍</span> 一、毒蛇咬傷：臺灣六大毒蛇與蛇毒特性</h3>
+                <p class="text-sm text-slate-500 mb-5">臺灣毒蛇臨床上咬傷比較常見且較嚴重的有 6 種。蛇毒特性分為<strong>出血性、神經性及混合性</strong>——這決定了要送哪種血清。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+                        <button onclick="showSnake(1)" id="btn-snake-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">百步蛇</span><span class="text-[10px] text-slate-400 font-normal">圖 13-5</span></button>
+                        <button onclick="showSnake(2)" id="btn-snake-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">龜殼花</span><span class="text-[10px] text-slate-400 font-normal">圖 13-6</span></button>
+                        <button onclick="showSnake(3)" id="btn-snake-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">赤尾鮐蛇</span><span class="text-[10px] text-slate-400 font-normal">赤尾青竹絲・圖 13-7</span></button>
+                        <button onclick="showSnake(4)" id="btn-snake-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">雨傘節</span><span class="text-[10px] text-slate-400 font-normal">圖 13-8</span></button>
+                        <button onclick="showSnake(5)" id="btn-snake-5" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">飯匙倩</span><span class="text-[10px] text-slate-400 font-normal">眼鏡蛇・圖 13-9</span></button>
+                        <button onclick="showSnake(6)" id="btn-snake-6" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🐍</span><span class="text-sm">鎖鏈蛇</span><span class="text-[10px] text-slate-400 font-normal">圖 13-10</span></button>
+                    </div>
+                    <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[280px]">
+                        <h3 id="snake-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3"></h3>
+                        <div id="snake-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                    </div>
+                </div>
+
+                <!-- 蛇毒三分類 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h4 class="font-bold text-ems-navy">出血性蛇毒</h4>
+                        <p class="text-sm text-slate-700 mt-1">百步蛇、龜殼花、赤尾青竹絲</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                        <h4 class="font-bold text-ems-navy">神經性蛇毒</h4>
+                        <p class="text-sm text-slate-700 mt-1">雨傘節、眼鏡蛇（飯匙倩）</p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                        <h4 class="font-bold text-ems-navy">混合毒性</h4>
+                        <p class="text-sm text-slate-700 mt-1">鎖鏈蛇（以出血性為主，亦有神經性徵狀）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 蜂螫傷 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🐝</span> 二、蜂螫傷：三大類症狀</h3>
+                <p class="text-sm text-slate-500 mb-5">在臺灣最頻繁的昆蟲螫咬傷為蜂螫傷。大多數只產生局部反應，<strong class="text-ems-danger">絕大多數蜂螫致死者都是因發生嚴重過敏性休克而致命</strong>。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-5">
+                        <h4 class="font-bold text-ems-navy text-lg">1. 局部症狀</h4>
+                        <p class="text-sm text-slate-700 mt-2">局部<strong>紅、腫、熱、痛</strong>或有輕度搔癢。</p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-5">
+                        <h4 class="font-bold text-ems-navy text-lg">2. 毒性症狀</h4>
+                        <p class="text-sm text-slate-700 mt-2">一般要有<strong>多個蜂螫</strong>才比較會產生。</p>
+                        <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>腸胃道：噁心、嘔吐、腹瀉</li>
+                            <li>神經：吞嚥困難、抽搐、神智不清</li>
+                            <li>全身：發燒、全身水腫、血壓下降、休克</li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <h4 class="font-bold text-ems-navy text-lg">3. 過敏症狀</h4>
+                        <p class="text-sm text-slate-700 mt-2"><strong class="text-ems-danger">只要有一隻叮咬，不管蜂隻大小，都可能發生嚴重過敏性休克。</strong></p>
+                        <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>乾咳、喉嚨或胸部有緊縮的感覺</li>
+                            <li>眼皮浮腫、發癢、全身蕁麻疹</li>
+                            <li>呼吸困難、冒冷汗、血壓下降、昏迷</li>
+                        </ul>
+                        <p class="text-sm text-ems-danger font-bold mt-2">過敏症狀通常會一次比一次還嚴重，且致死多半於螫傷後的<strong>前 15 分鐘</strong>之內發生。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 緊急救護流程 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-11　動物咬螫傷緊急救護流程</h3>
+                    <div class="flex flex-col items-center text-center text-sm mt-4">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">觀察環境</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded text-xs">外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded text-xs">給予動物咬螫傷處置</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 space-y-3 text-sm">
+                        <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-slate-700 leading-relaxed">
+                            <strong class="text-ems-navy">1. 蜂螫案件：</strong>首先要確定現場環境安全，是否仍有殘餘蜂群會攻擊，儘可能在穩定病人同時<strong>快速上車關閉門窗</strong>；如現場觀察仍有蜂隻環繞，則<strong>立即請求支援協助</strong>，以穿著全副防護裝備協助將病人快速帶離現場。
+                        </div>
+                        <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-slate-700 leading-relaxed">
+                            <strong class="text-ems-navy">2. 蛇咬傷案件：</strong>若蛇還留在現場，儘可能<strong>判斷並記錄</strong>是何種蛇類咬傷，但<strong class="text-ems-danger">千萬不要嘗試捕捉</strong>；若蛇已離開，則詢問病人蛇的種類或特徵，以利到院後續治療時血清的選用。在無法或尚未確認是否為毒蛇咬傷的情況下，<strong class="text-ems-orange">應視為毒蛇咬傷來處置</strong>。
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-slate-700 leading-relaxed">
+                            <strong class="text-ems-navy">大量病人：</strong>動物咬螫傷也有大量病人之可能。到達現場之救護技術員應建立<strong>現場指揮協調系統</strong>，第一位到現場最資深且救護層級最高者為<strong>現場指揮官</strong>，並在支援未到前先實施適合現場狀況之檢傷分類。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩺</span> （二）外傷現場救護流程</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="border-l-4 border-ems-blue pl-4">
+                                <h4 class="font-bold text-ems-navy">1. 評估呼吸道及呼吸</h4>
+                                <p class="text-sm text-slate-600"><strong>神經性毒蛇咬傷</strong>可能會抑制呼吸；遭<strong>蜂螫傷</strong>的病人也有可能出現<strong>喉頭水腫</strong>而導致呼吸困難，因此應注意呼吸道的維持及給予氧氣。</p>
+                            </div>
+                            <div class="border-l-4 border-ems-orange pl-4">
+                                <h4 class="font-bold text-ems-navy">2. 評估循環</h4>
+                                <p class="text-sm text-slate-600">以穩定生命徵象為主。毒蛇咬傷可能有<strong>低血壓</strong>，蜂螫傷可能會<strong>過敏性休克</strong>，皆應建立靜脈路徑給予生理食鹽水。除非病人出現低血壓、休克情形，否則<strong>保持能讓靜脈打開的流量即可</strong>。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩹</span> （三）給予動物咬螫傷處置</h3>
+                        <p class="text-sm text-slate-500 mb-4">點標題展開細節。</p>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-danger" onclick="toggleLaw(41)">
+                                <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                    <h4 class="font-bold text-ems-navy text-sm">1. 毒蛇咬傷後的現場處置（含彈性繃帶技巧）</h4>
+                                    <span class="text-ems-blue font-bold text-xl" id="law-icon-41">+</span>
+                                </div>
+                                <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-41">
+                                    <ul class="list-disc pl-5 space-y-2">
+                                        <li>應讓病人<strong>保持冷靜、減少活動</strong>，切勿給予會加速血液循環的<strong class="text-ems-danger">酒或藥物</strong>，以免加速毒性作用</li>
+                                        <li>儘早卸除肢體上的<strong>戒指、手錶或手環</strong>等束縛物，以避免肢體腫脹後不易移除而影響到肢體循環</li>
+                                        <li>腫脹部位前緣應<strong class="text-ems-orange">每 15 分鐘用黑筆標記</strong>，以確定腫脹嚴重程度和進展速度</li>
+                                        <li>患肢保持與<strong>心臟同高位置</strong>（不過高或垂墜），肘關節或其他主要關節保持相當程度伸展（<strong>小於 45 度屈曲</strong>）</li>
+                                        <li>可考慮運用<strong>彈性繃帶</strong>：由遠心端往近心端，應覆蓋傷口的遠端與近端任一側至少 <strong class="text-ems-orange">10 至 15 公分</strong>的範圍</li>
+                                        <li>注意檢查末端肢體是否有足夠的血液循環（<strong>正常脈搏、感覺、膚色</strong>），輔以夾板或軟式護木固定患肢使其不亂動</li>
+                                        <li><strong class="text-ems-navy">包紮的目的是為了避免毒液進入大循環</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-orange" onclick="toggleLaw(42)">
+                                <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                    <h4 class="font-bold text-ems-navy text-sm">2. 蜂螫傷：45~60 秒的黃金刮除時間</h4>
+                                    <span class="text-ems-blue font-bold text-xl" id="law-icon-42">+</span>
+                                </div>
+                                <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-42">
+                                    如果有<strong>蜂刺及毒囊</strong>留置於皮膚時，來自毒刺及毒囊的毒液將持續進入皮膚 <strong class="text-ems-orange">45 至 60 秒</strong>。儘快用<strong>指甲、刀片或信用卡片輕輕將其刮除</strong>，並以<strong>肥皂水或消毒水</strong>清洗傷口，可予以<strong>冷敷</strong>來減輕蜂螫處之熱腫不適感。
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden cursor-pointer border-l-4 border-l-ems-blue" onclick="toggleLaw(43)">
+                                <div class="p-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center hover:bg-slate-100 transition">
+                                    <h4 class="font-bold text-ems-navy text-sm">3. 過敏性休克：腎上腺素筆的施打權限</h4>
+                                    <span class="text-ems-blue font-bold text-xl" id="law-icon-43">+</span>
+                                </div>
+                                <div class="p-4 hidden text-slate-700 text-sm leading-relaxed" id="law-content-43">
+                                    若病人有過敏性休克症狀，且備有<strong>醫師開立處方箋之腎上腺素筆</strong>，<strong class="text-ems-orange">中級救護技術員得協助病人施打</strong>；或可依當地預立醫囑，請求<strong>高級救護技術員</strong>支援協助處置。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 抗蛇毒血清 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-blue mb-8">
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">💉</span> （四）救護車內救護流程：國內四種抗蛇毒血清</h3>
+                <p class="text-slate-400 text-sm mb-5">遭毒蛇咬傷的病人應<strong class="text-white">儘速將病人後送至有抗蛇毒血清之醫院</strong>。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">1</div><div class="text-sm font-bold">抗龜殼花及赤尾鮐蛇毒血清</div></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">2</div><div class="text-sm font-bold">抗雨傘節及飯匙倩蛇毒血清</div></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">3</div><div class="text-sm font-bold">抗百步蛇毒血清</div></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700 flex items-center gap-3"><div class="bg-ems-blue text-white w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0">4</div><div class="text-sm font-bold">抗鎖鏈蛇毒血清</div></div>
+                </div>
+                <div class="mt-5 bg-slate-900 rounded-lg p-4 border-l-4 border-ems-orange text-sm text-slate-300">
+                    🔎 可至「<strong class="text-white">衛生福利部疾病管制署 - 智慧防疫物資管理系統 - 物資查詢 - 抗蛇毒血清儲備點查詢</strong>」確認轄內急救責任醫院是否備有血清。
+                </div>
+            </div>
+
+            <!-- 表 13-6 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">📋</span> 表 13-6　昆蟲、蛇、動物及海洋生物螫咬傷五級檢傷</h3>
+                <div class="overflow-x-auto">
+                    <table class="data-table w-full">
+                        <thead><tr><th class="w-2/3">判定依據</th><th class="text-center">到院前級數</th><th class="text-center">次要調節變數</th></tr></thead>
+                        <tbody>
+                            <tr><td>過去曾出現嚴重過敏反應</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>臉部、嘴唇與舌頭腫脹</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>凝血異常 - 危及生命或肢體的出血</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>無法控制的出血</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>疑似毒蛇咬傷（出血性／神經毒性）</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>急性周邊重度疼痛（8-10）</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td></td></tr>
+                            <tr><td>廣泛性紅疹／水泡</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>凝血異常 - 中度或輕度的出血</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>加壓後已止血</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>急性周邊中度疼痛（4-7）</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td></td></tr>
+                            <tr><td>局部性紅疹／水泡（過敏反應）</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>表淺撕裂／出血已停止</td><td class="text-center"><span class="inline-block bg-emerald-500 text-white font-bold px-3 py-1 rounded">4</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                            <tr><td>急性周邊輕度疼痛（&lt;4）</td><td class="text-center"><span class="inline-block bg-sky-400 text-white font-bold px-3 py-1 rounded">5</span></td><td></td></tr>
+                            <tr><td>輕微螫、咬傷；生命徵象正常；無發燒；無疼痛不適</td><td class="text-center"><span class="inline-block bg-sky-400 text-white font-bold px-3 py-1 rounded">5</span></td><td class="text-center text-ems-orange font-bold">＊</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 5: 有毒海洋生物咬螫傷                                     -->
+        <!-- ============================================================ -->
+        <section id="view-marine" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.367 - P.369</div>
+                <h2 class="text-3xl font-bold text-ems-navy">05　有毒海洋生物咬螫傷</h2>
+                <p class="text-ems-gray mt-2 text-lg">病人常說不清楚被什麼咬到。此時看<strong>傷口特徵</strong>：穿刺傷口 vs 過敏徵象，就能推測生物種類與處置方向。</p>
+            </header>
+
+            <!-- 三種受傷機轉 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🌊</span> （一）病人受傷機轉：三種常見中毒途徑</h3>
+                <p class="text-sm text-slate-500 mb-5">海洋生物咬螫傷的毒性種類眾多。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <div class="text-3xl mb-2">🐡</div>
+                        <h4 class="font-bold text-ems-navy text-lg">1. 具有毒刺或毒牙生物之螫咬傷</h4>
+                        <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>魚鰭具有棘刺的魚類：<strong>石頭魚、獅子魚、魟魚、鰻、鯰</strong>等</li>
+                            <li>吻部中具有含毒腺齒舌的<strong>芋螺</strong></li>
+                            <li>從唾液腺釋放出毒液的<strong>藍環章魚</strong></li>
+                            <li>藉由毒牙將毒素注入獵物的<strong>海蛇</strong></li>
+                        </ul>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-5">
+                        <div class="text-3xl mb-2">🪼</div>
+                        <h4 class="font-bold text-ems-navy text-lg">2. 刺絲胞生物螫傷</h4>
+                        <p class="text-sm text-slate-700 mt-2">包括<strong>水母、海葵、水螅及珊瑚</strong>等生物，其體表或觸手具有<strong>刺細胞</strong>，受刺激時釋放出毒素。</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
+                        <div class="text-3xl mb-2">🦔</div>
+                        <h4 class="font-bold text-ems-navy text-lg">3. 接觸性毒傷害</h4>
+                        <p class="text-sm text-slate-700 mt-2">主要發生於觸摸<strong>海參、海星、海膽</strong>等棘皮動物時，被其外殼及剛毛刺傷；或如觸摸<strong>海兔</strong>分泌的有毒黏液而受傷。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                        <h4 class="font-bold text-ems-navy text-sm mb-1">棘刺魚類的毒性</h4>
+                        <p class="text-sm text-slate-700">毒性物質為<strong>大的蛋白質</strong>，會產生<strong>劇痛、紅腫、血壓下降、嘔吐、肌肉麻痺、休克死亡</strong>等症狀。</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h4 class="font-bold text-ems-navy text-sm mb-1">海蛇的毒性</h4>
+                        <p class="text-sm text-slate-700">為<strong>神經性毒素</strong>。各種症狀開始時都很輕微，但會<strong class="text-ems-danger">逐漸惡化</strong>，逐漸導致吞咽困難、全身癱瘓等症狀，嚴重時可能在<strong class="text-ems-danger">數十分鐘內死亡</strong>。</p>
+                    </div>
+                </div>
+
+                <div class="mt-5 bg-ems-navy text-white rounded-lg p-5 border-l-4 border-ems-orange">
+                    <div class="font-bold text-ems-blue text-sm mb-2">🔍 病人說不出被什麼咬到時，看傷口特徵</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-slate-800 rounded p-3"><span class="font-bold text-white">穿刺傷口</span><span class="text-slate-300"> → 具毒刺／毒牙生物、棘皮動物</span></div>
+                        <div class="bg-slate-800 rounded p-3"><span class="font-bold text-white">過敏徵象</span><span class="text-slate-300"> → 紅疹、水泡、蕁麻疹、觸鬚痕（刺絲胞生物）</span></div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-3">依此推測為何種生物所傷，並給予其適當的救護處置。</p>
+                </div>
+            </div>
+
+            <!-- 流程 + 處置 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-12　有毒海洋生物咬螫傷緊急救護流程</h3>
+                    <div class="flex flex-col items-center text-center text-sm mt-4">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">病人受傷機轉</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded text-xs">外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-slate-100 border border-slate-300 text-slate-700 font-bold py-2 rounded text-xs">給予海洋生物咬螫傷處置</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
+                        <strong class="text-ems-navy">（二）外傷現場救護流程：</strong>在海洋生物咬螫傷的流程中，<strong>首重穩定病人的生命徵象</strong>，再依初級評估、病史詢問、生命徵象及次級評估之結果給予<strong>症狀治療</strong>，依不同海洋生物咬螫傷給予不同的特殊處置。
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩹</span> （三）給予海洋生物咬螫傷處置</h3>
+                    <p class="text-sm text-slate-500 mb-5">不同海洋生物咬螫傷的處置略有不同。點左側切換。</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                        <div class="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-3">
+                            <button onclick="showMarine(1)" id="btn-marine-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold text-sm gap-1"><span class="text-2xl">🪼</span>刺細胞生物</button>
+                            <button onclick="showMarine(2)" id="btn-marine-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold text-sm gap-1"><span class="text-2xl">🦔</span>棘皮動物</button>
+                            <button onclick="showMarine(3)" id="btn-marine-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold text-sm gap-1"><span class="text-2xl">🐟</span>魟魚</button>
+                        </div>
+                        <div class="lg:col-span-8 bg-ems-navy text-white rounded-xl p-6 shadow-md flex flex-col min-h-[240px]">
+                            <h3 id="marine-title" class="text-xl font-bold text-ems-blue mb-3 border-b border-slate-700 pb-3"></h3>
+                            <div id="marine-content" class="text-slate-300 space-y-3 leading-relaxed flex-1 text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 溫水浸泡 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-orange">
+                <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🛁</span> 共通處置：溫水浸泡（40~45°C，至少 20 分鐘）</h3>
+                <p class="text-sm text-slate-700 mb-4 leading-relaxed">大部分的海洋毒素在<strong>溫度以及濕度改變後就會失去毒性</strong>。對於穩定的病人，在運送病人之前及運送的過程中，建議的處置是將患部浸泡在<strong>溫暖的水</strong>中。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-black text-ems-orange">≥ 20<span class="text-lg"> 分鐘</span></div>
+                        <p class="text-sm text-slate-700 mt-1">浸泡至少 20 分鐘，或直至<strong>疼痛緩解</strong></p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-black text-ems-orange">40~45<span class="text-lg">°C</span></div>
+                        <p class="text-sm text-slate-700 mt-1">以病人能忍受且不至於燙傷為主（<strong>不超過 45°C 但也不應小於 40°C</strong>）</p>
+                    </div>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                        <div class="text-3xl mb-1">🚫</div>
+                        <p class="text-sm text-slate-700"><strong class="text-ems-danger">兩側足部或手部不要同時浸泡熱水</strong>——病人的患部常因麻木或嚴重疼痛而使燒燙傷不自覺地發生</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 6: 電傷害                                                -->
+        <!-- ============================================================ -->
+        <section id="view-electric" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.369 - P.372</div>
+                <h2 class="text-3xl font-bold text-ems-navy">06　電傷害</h2>
+                <p class="text-ems-gray mt-2 text-lg">電流通過身體組織造成的傷害稱為<strong>電傷害</strong>；通過皮膚所產生的皮膚損傷或壞死稱為<strong>電燒傷</strong>。這一節有本章唯一的「<strong>逆向檢傷</strong>」原則。</p>
+            </header>
+
+            <!-- 電阻與電壓 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🧬</span> 人體各器官的電阻</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-24 text-sm font-bold text-ems-navy shrink-0">最低電阻</div>
+                            <div class="flex-1 bg-red-100 border border-red-200 rounded px-3 py-2 text-sm text-slate-700"><strong>血管及神經</strong> → 較容易有電傷害</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-24 text-sm font-bold text-ems-navy shrink-0">高電阻</div>
+                            <div class="flex-1 bg-amber-50 border border-amber-200 rounded px-3 py-2 text-sm text-slate-700"><strong>皮膚</strong> → 但可因<strong>潮濕或流汗</strong>使電阻減低</div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-24 text-sm font-bold text-ems-navy shrink-0">最高電阻</div>
+                            <div class="flex-1 bg-blue-50 border border-blue-100 rounded px-3 py-2 text-sm text-slate-700"><strong>骨骼</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">⚡</span> 關鍵電壓數字</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-black text-ems-orange">&gt; 600V</div>
+                            <p class="text-xs text-slate-700 mt-1">造成嚴重受傷之機率<strong>即明顯增加</strong></p>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+                            <div class="text-2xl font-black text-ems-danger">&gt; 1000V</div>
+                            <p class="text-xs text-slate-700 mt-1">即稱為<strong>高壓電</strong></p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-ems-navy text-white rounded-lg p-4">
+                        <div class="text-sm font-bold text-ems-blue mb-1">⚡ 閃電</div>
+                        <p class="text-sm text-slate-300">屬於<strong class="text-white">極高壓直流電</strong>，可散發瞬間但強烈之熱輻射而使周圍空氣膨脹並產生熱，其瞬間溫度可達 <strong class="text-ems-orange">8,871~33,315°C</strong>。</p>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-3">電流依其方向可分為交流電（Alternating Current, AC）及直流電（Direct Current, DC）。</p>
+                </div>
+            </div>
+
+            <!-- 雷擊六型 + 觸電三型 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🌩️</span> 1. 雷擊：六種被閃電擊中的方式</h3>
+                    <p class="text-sm text-slate-500 mb-4">在野外容易遭受雷擊傷害的情況：<strong>冒雨行走、在車旁或獨立突出物旁</strong>（如空曠地形之大樹附近）等，<strong class="text-ems-orange">特別是衣服潮濕時</strong>。</p>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <button onclick="showBolt(1)" id="btn-bolt-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(1) 直接雷擊</button>
+                        <button onclick="showBolt(2)" id="btn-bolt-2" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(2) 側面雷擊</button>
+                        <button onclick="showBolt(3)" id="btn-bolt-3" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(3) 接觸性雷擊</button>
+                        <button onclick="showBolt(4)" id="btn-bolt-4" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(4) 地面雷擊</button>
+                        <button onclick="showBolt(5)" id="btn-bolt-5" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(5) 反向電流</button>
+                        <button onclick="showBolt(6)" id="btn-bolt-6" class="duty-card bg-white border border-slate-300 rounded-lg p-3 text-sm font-bold text-slate-700">(6) 爆炸傷或鈍傷</button>
+                    </div>
+                    <div class="bg-ems-navy text-white rounded-xl p-5 min-h-[110px]">
+                        <h4 id="bolt-title" class="text-lg font-bold text-ems-blue mb-2"></h4>
+                        <div id="bolt-content" class="text-slate-300 text-sm leading-relaxed"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🔌</span> 2. 觸電：三種人體接觸電源方式</h3>
+                    <p class="text-sm text-slate-500 mb-4">觸電可能會造成<strong>肌肉收縮或僵直性痙攣（Tetany）</strong>。高壓的交流電和直流電較傾向於產生<strong>單一骨骼肌的強烈收縮</strong>；家用低壓電則可能造成<strong>肌肉反覆的收縮</strong>直至電源被中斷。</p>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-ems-blue pl-4">
+                            <h4 class="font-bold text-ems-navy">(1) 一相觸電（圖 13-14）</h4>
+                            <p class="text-sm text-slate-600">電流由觸電處通過人體與地面相通的部位。<strong class="text-ems-orange">日常生活中的觸電大多屬此類。</strong></p>
+                        </div>
+                        <div class="border-l-4 border-ems-orange pl-4">
+                            <h4 class="font-bold text-ems-navy">(2) 二相觸電（圖 13-15）</h4>
+                            <p class="text-sm text-slate-600">人體<strong>兩處碰到電源</strong>，電流由高電位流向低電位處時通過所構成之電流迴路使人觸電。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-danger pl-4">
+                            <h4 class="font-bold text-ems-navy">(3) 跨步電壓觸電（圖 13-16）</h4>
+                            <p class="text-sm text-slate-600">電源對周遭導電時，可構成不同電壓之<strong>同心圓</strong>。當人體接近電源而<strong>雙腳邁開</strong>時，就會出現<strong>電位差</strong>而觸電。</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-orange-50 border border-orange-100 rounded-lg p-4 text-sm text-slate-700">
+                        <strong class="text-ems-navy">3. 別忘了外傷：</strong>不管是遭受雷擊或是觸電的病人，皆須考慮有無因電擊而<strong>從高處摔落</strong>之可能。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 逆向檢傷 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-danger mb-8">
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">🔄</span> 4. 全章最反直覺的一條：閃電傷害要「逆向檢傷」</h3>
+                <p class="text-slate-400 text-sm mb-5">閃電像一個瞬間巨大的<strong class="text-white">直流電擊</strong>，可能造成<strong class="text-white">心室停止</strong>；<strong class="text-white">交流電</strong>常導致<strong class="text-white">心室纖維顫動</strong>，而交流電及雷擊二者均可能引起<strong class="text-white">呼吸停止</strong>。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700 border-l-4 border-l-ems-danger">
+                        <div class="text-red-400 font-bold text-sm mb-2">大量病人時：逆向檢傷</div>
+                        <p class="text-slate-300 text-sm">當一群人同時受到閃電傷害時，大量病人檢傷原則應該<strong class="text-white">逆向檢傷</strong>——<strong class="text-ems-orange">先救看起來是死亡的病人</strong>（呼吸停止的病人，不論是否有心跳停止）。</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700 border-l-4 border-l-ems-blue">
+                        <div class="text-ems-blue font-bold text-sm mb-2">誤觸交流電而呼吸停止</div>
+                        <p class="text-slate-300 text-sm">除了需做<strong class="text-white">心肺復甦術</strong>外，還要<strong class="text-white">儘早進行心臟去顫</strong>。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 移除電源 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-danger mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🚧</span> （二）移除電傷害的來源</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <div class="text-4xl font-black text-ems-danger mb-1">10 <span class="text-lg">公尺</span></div>
+                        <h4 class="font-bold text-ems-navy">高壓電線</h4>
+                        <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>需移開<strong>至少 10 公尺</strong>方能接近病人</li>
+                            <li>必要時求助於<strong>專業人員</strong>將電源切斷</li>
+                            <li>在未斷絕電源前，救護技術員<strong class="text-ems-danger">絕不要進入</strong>遭電傷害病人的區域</li>
+                            <li><strong class="text-ems-danger">不要嘗試用任何東西</strong>去移除電線或移動病人——所有物品接觸高壓電時均可能會導電</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                        <h4 class="font-bold text-ems-navy">非高壓電時</h4>
+                        <ul class="list-disc pl-5 mt-2 text-sm text-slate-700 space-y-1">
+                            <li>儘可能用最迅速安全的方法將病人與電源隔開</li>
+                            <li>如無法切開電源，可站在<strong>木箱、塑膠管、橡皮墊或報紙</strong>等乾燥絕緣體上</li>
+                            <li>用<strong>乾的掃把、竹竿或木椅</strong>將病人的肢體拖離電源</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 外傷現場救護 + 輸液計算 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-7 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩺</span> （三）外傷現場救護流程</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-ems-danger pl-4">
+                            <h4 class="font-bold text-ems-navy">1. 特別注意是否合併骨折</h4>
+                            <p class="text-sm text-slate-600">遭受電傷害的病人應特別注意是否合併骨折，<strong class="text-ems-orange">尤其是頸部</strong>。</p>
+                        </div>
+                        <div class="border-l-4 border-ems-blue pl-4">
+                            <h4 class="font-bold text-ems-navy">2. 評估意識：需反覆評估</h4>
+                            <p class="text-sm text-slate-600">遭受雷擊之病人，意識表現可從輕度的<strong>意識清楚但時常發生慌亂和健忘</strong>，至嚴重的<strong>躁動、昏迷或立即的腦損傷</strong>，因此需<strong class="text-ems-orange">反覆評估病人意識狀態有無改變</strong>。</p>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">3. 評估病人身體</h4>
+                            <ul class="list-disc pl-5 mt-1 text-sm text-slate-600 space-y-1.5">
+                                <li><strong>(1) 誤觸交流電：</strong>電流直接穿透有阻力的身體組織時會產生熱能。瞬間<strong>高壓電</strong>會造成嚴重的電燒傷；<strong>家用低壓電（110V）</strong>則須數秒鐘方能產生電燒傷，且通常屬於<strong>輕微燒傷</strong>。</li>
+                                <li><strong>(2) 遭受雷擊：</strong>會有身體燒傷、抽筋，皮膚外觀可能呈現<strong class="text-ems-orange">雷擊紋</strong>。</li>
+                                <li><strong>(3) 電燒傷的兩個傷口：</strong>一般於「<strong>入口</strong>」及「<strong>出口</strong>」處之燒傷最為嚴重，而<strong class="text-ems-orange">入口處又比出口處嚴重</strong>。</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-slate-300 pl-4">
+                            <h4 class="font-bold text-ems-navy">4. 耳膜震裂</h4>
+                            <p class="text-sm text-slate-600">評估、處置及病史詢問時，病人可能有<strong>耳朵疼痛、聽力減退</strong>等耳膜震裂之臨床表現。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-ems-navy text-white rounded-xl p-6 shadow-md border-t-4 border-ems-orange">
+                    <h3 class="text-xl font-bold text-white mb-1 flex items-center gap-2"><span class="text-2xl">💧</span> 觸電病人輸液量試算</h3>
+                    <p class="text-slate-400 text-sm mb-4">由於有大量組織被破壞及燒傷，<strong class="text-white">輸液量應比實際燒傷體表面積所計算的量要大</strong>。公式：24 小時靜脈輸液量 = 4ml × 體重(Kg) × 燒燙傷面積(%)</p>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <label class="block">
+                            <span class="text-xs text-slate-400 font-bold">病人體重 (Kg)</span>
+                            <input id="burn-weight" type="number" value="70" min="1" oninput="calcBurn()" class="w-full mt-1 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white font-bold">
+                        </label>
+                        <label class="block">
+                            <span class="text-xs text-slate-400 font-bold">燒燙傷面積 (%)</span>
+                            <input id="burn-tbsa" type="number" value="20" min="1" max="100" oninput="calcBurn()" class="w-full mt-1 bg-slate-800 border border-slate-600 rounded px-3 py-2 text-white font-bold">
+                        </label>
+                    </div>
+                    <div class="bg-slate-800 rounded-lg p-4 space-y-2">
+                        <div class="flex justify-between items-center border-b border-slate-700 pb-2"><span class="text-sm text-slate-400">24 小時總量</span><span id="burn-total" class="text-2xl font-black text-ems-blue">5600</span></div>
+                        <div class="flex justify-between items-center"><span class="text-sm text-slate-400">前 8 小時（一半量）</span><span id="burn-first" class="text-lg font-bold text-ems-orange">2800 ml</span></div>
+                        <div class="flex justify-between items-center"><span class="text-sm text-slate-400">後 16 小時（另一半）</span><span id="burn-second" class="text-lg font-bold text-white">2800 ml</span></div>
+                    </div>
+                    <div class="mt-4 bg-slate-900 rounded p-4 text-sm text-slate-300 border-l-4 border-ems-danger">
+                        ⚠️ <strong class="text-white">閃電擊中時例外：</strong>在心跳和血壓恢復穩定後，要<strong class="text-white">節制水份的給予</strong>，以免造成進一步的<strong class="text-ems-orange">腦水腫</strong>。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 救護車內 + 表13-7 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🚑</span> （四）救護車內救護流程</h3>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-5">
+                        <p class="text-sm text-slate-700 leading-relaxed">對已恢復心跳的病人，<strong class="text-ems-danger">千萬要小心搬運時再次發生心室纖維顫動而致心跳停止</strong>，並<strong>持續監測心電圖</strong>以避免繼發性心跳停止。</p>
+                    </div>
+                    <div class="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-600">
+                        <strong class="text-ems-navy">另補充：</strong>圖 13-13 電傷害病人緊急救護處置流程為「觀察環境 → 移除電傷害的來源 → 外傷現場救護流程 → 救護車內救護流程」。
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">📋</span> 表 13-7　電擊傷害五級檢傷</h3>
+                    <div class="overflow-x-auto">
+                        <table class="data-table w-full">
+                            <thead><tr><th>判定依據</th><th class="text-center">到院前級數</th></tr></thead>
+                            <tbody>
+                                <tr><td>心跳／呼吸停止</td><td class="text-center"><span class="inline-block bg-ems-danger text-white font-bold px-3 py-1 rounded">1</span></td></tr>
+                                <tr><td>明顯皮膚組織傷害</td><td class="text-center"><span class="inline-block bg-ems-orange text-white font-bold px-3 py-1 rounded">2</span></td></tr>
+                                <tr><td>急性周邊重度疼痛（8-10）</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td></tr>
+                                <tr><td>無明顯皮膚組織傷害</td><td class="text-center"><span class="inline-block bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded">3</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 7: 有毒氣體中毒                                          -->
+        <!-- ============================================================ -->
+        <section id="view-gas" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.372 - P.374</div>
+                <h2 class="text-3xl font-bold text-ems-navy">07　有毒氣體中毒</h2>
+                <p class="text-ems-gray mt-2 text-lg">四大類毒氣，各有各的傷人方式。最危險的是<strong>化學窒息性氣體</strong>——病人明顯缺氧，血氧數值卻可能正常。</p>
+            </header>
+
+            <!-- 四大類毒氣互動 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">☠️</span> 一般有毒氣體可分為四大類</h3>
+                <p class="text-sm text-slate-500 mb-5">點選卡片查看機轉與代表氣體。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+                        <button onclick="showGas(1)" id="btn-gas-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">💨</span><span class="text-sm">1. 單純窒息性</span></button>
+                        <button onclick="showGas(2)" id="btn-gas-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🧪</span><span class="text-sm">2. 化學窒息性</span></button>
+                        <button onclick="showGas(3)" id="btn-gas-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🌫️</span><span class="text-sm">3. 刺激性毒氣</span></button>
+                        <button onclick="showGas(4)" id="btn-gas-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">⚠️</span><span class="text-sm">4. 刺激合併窒息</span></button>
+                    </div>
+                    <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[240px]">
+                        <h3 id="gas-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3"></h3>
+                        <div id="gas-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 流程 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-17　有毒氣體中毒緊急救護流程</h3>
+                    <div class="flex flex-col items-center text-center text-sm mt-4">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">觀察環境</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded text-xs">非外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 bg-slate-800 text-slate-300 rounded-lg p-4 text-sm leading-relaxed border-l-4 border-ems-blue">
+                        <strong class="text-white">（三）救護車內救護流程：</strong>於送醫途中，除了持續監測病人的生命徵象外，應<strong class="text-ems-orange">打開救護車窗戶以利車內通風</strong>。
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-danger">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🦺</span> （一）評估與判定：現場安全與除汙</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-ems-danger pl-4">
+                                <h4 class="font-bold text-ems-navy">1. 蒐集現場資料、著防護裝備</h4>
+                                <p class="text-sm text-slate-600">到達現場應評估現場安全，儘可能地蒐集現場資料，可搭配「<strong>現場標示版、緊急應變指南及物質安全資料表</strong>」獲取處理資訊。確定現場已安全採取適當防護措施接近病人，必要時應著<strong class="text-ems-orange">空氣呼吸器</strong>或其他必要防護裝備（參考第 15 章 - 現場化學防護），隨後將病人帶離暴露源。</p>
+                            </div>
+                            <div class="border-l-4 border-ems-orange pl-4">
+                                <h4 class="font-bold text-ems-navy">2. 大量病人的通報時機</h4>
+                                <p class="text-sm text-slate-600">若為大量病人事件，或<strong class="text-ems-orange">不能行動的病人超過 2 人</strong>而現場救護技術員不足以應付時，應通報<strong>救災救護指揮中心</strong>請求支援。</p>
+                            </div>
+                            <div class="border-l-4 border-ems-blue pl-4">
+                                <h4 class="font-bold text-ems-navy">3. 除汙</h4>
+                                <p class="text-sm text-slate-600">有毒氣體除造成呼吸道的傷害之外，亦有可能<strong>吸附或附著於病人衣物或皮膚上</strong>。因此將病人由暴露源帶開後，須記得對病人外表進行<strong class="text-ems-orange">除汙</strong>（參考第 15 章 - 毒化物質病人緊急處置原則 - 除汙）。如有必要得對病人<strong>眼睛進行沖洗</strong>。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🩺</span> （二）非外傷現場救護流程</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                                <h4 class="font-bold text-ems-navy text-sm">1. 病史 + 呼吸為重點</h4>
+                                <p class="text-sm text-slate-600 mt-1">病史詢問可追問其<strong>職業和環境</strong>，以得知現場為何種特殊有毒氣體。評估呼吸道及評估呼吸為重點，並儘快給予有<strong>100% 氧氣貯留袋之不重複吸氣面罩</strong>之氧氣治療（如非再吸入型面罩）。</p>
+                            </div>
+                            <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                                <h4 class="font-bold text-ems-navy text-sm">2. 評估循環：發紺與否是線索</h4>
+                                <p class="text-sm text-slate-600 mt-1"><strong>單純窒息性氣體</strong>會因為低血氧而<strong>發紺</strong>；<strong>化學窒息性氣體</strong>則會出現有明顯缺氧現象<strong class="text-ems-orange">但無發紺</strong>。</p>
+                            </div>
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <h4 class="font-bold text-ems-navy text-sm">3. 重點式身體檢查（含最大陷阱）</h4>
+                                <p class="text-sm text-slate-600 mt-1">聽診兩側肺音是否有囉音或喘鳴音——吸入<strong>刺激性毒氣會造成肺水腫</strong>。視狀況量測血壓、血氧等輔助檢查。<strong class="text-ems-danger">需特別注意：化學窒息性氣體中毒的病人，其血氧飽和濃度數值可能是正常的。</strong></p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                                <h4 class="font-bold text-ems-navy text-sm">4. 眼睛／皮膚接觸刺激性毒氣</h4>
+                                <p class="text-sm text-slate-600 mt-1">應用<strong>清水沖洗 20~30 分鐘</strong>。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- VIEW 8: 其他野外中毒                                          -->
+        <!-- ============================================================ -->
+        <section id="view-poison" class="view-section hidden">
+            <header class="mb-8">
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.373 - P.375</div>
+                <h2 class="text-3xl font-bold text-ems-navy">08　其他野外中毒</h2>
+                <p class="text-ems-gray mt-2 text-lg">四大中毒途徑<strong>並不互相排斥</strong>——同一種毒物可能同時經呼吸道吸入和皮膚吸收造成中毒。</p>
+            </header>
+
+            <!-- 四大中毒途徑 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">🍄</span> 一、常見中毒途徑</h3>
+                <p class="text-sm text-slate-500 mb-5">點選途徑查看常見中毒因子。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+                        <button onclick="showRoute(1)" id="btn-route-1" class="duty-card active bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">👃</span><span class="text-sm">（一）吸入</span><span class="text-[10px] text-slate-400 font-normal">→ 呼吸系統</span></button>
+                        <button onclick="showRoute(2)" id="btn-route-2" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">🖐️</span><span class="text-sm">（二）吸收</span><span class="text-[10px] text-slate-400 font-normal">→ 皮膚和黏膜</span></button>
+                        <button onclick="showRoute(3)" id="btn-route-3" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">👄</span><span class="text-sm">（三）食入</span><span class="text-[10px] text-slate-400 font-normal">→ 消化系統</span></button>
+                        <button onclick="showRoute(4)" id="btn-route-4" class="duty-card bg-white border border-slate-300 rounded-lg p-4 flex flex-col items-center justify-center text-slate-700 font-bold gap-1"><span class="text-2xl">💉</span><span class="text-sm">（四）注入</span><span class="text-[10px] text-slate-400 font-normal">→ 組織或血管</span></button>
+                    </div>
+                    <div class="lg:col-span-7 bg-ems-navy text-white rounded-xl p-8 shadow-md flex flex-col min-h-[240px]">
+                        <h3 id="route-title" class="text-2xl font-bold text-ems-blue mb-4 border-b border-slate-700 pb-3"></h3>
+                        <div id="route-content" class="text-slate-300 space-y-3 leading-relaxed flex-1"></div>
+                    </div>
+                </div>
+                <div class="mt-5 bg-orange-50 border border-orange-100 rounded-lg p-4 text-sm text-slate-700">
+                    💡 <strong class="text-ems-navy">暴露途徑並不互相排斥</strong>，例如有毒物質可以同時經由呼吸道吸入和皮膚吸收造成中毒。
+                </div>
+            </div>
+
+            <!-- 中毒病人處置 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-blue">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🧼</span> 二、中毒病人處置（一）一般治療</h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">中毒治療之原則，應以<strong class="text-ems-orange">阻止或減慢毒素的吸收為首要目的</strong>，並立即設法除去毒素。</p>
+                    <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1.5">
+                        <li>可將病人<strong>移離污染源</strong>，並至<strong>通風處</strong></li>
+                        <li><strong>移除污染衣物</strong></li>
+                        <li>用<strong>大量清水沖洗皮膚或眼睛</strong></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-ems-orange">
+                    <h3 class="text-xl font-bold text-ems-navy mb-3 flex items-center gap-2"><span class="text-ems-orange text-2xl">🚑</span> （二）症狀治療</h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">接觸、誤食有毒物質時，人體內各器官的功能往往發生嚴重的障礙，<strong>必須儘速處理才有復原的機會</strong>。</p>
+                    <ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-1.5">
+                        <li>產生<strong>抑制呼吸</strong>者：確認病人的呼吸道暢通後，則給予<strong>人工呼吸</strong></li>
+                        <li>若病人<strong>意識不清、口腔內有分泌物或嘔吐物</strong>：則給予<strong>抽吸</strong></li>
+                        <li>若<strong>無呼吸心跳</strong>：則進行<strong>心肺復甦術（CPR）</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 流程 + 評估 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                <div class="lg:col-span-4 bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-ems-navy mb-1">圖 13-18　其他中毒緊急救護流程</h3>
+                    <div class="flex flex-col items-center text-center text-sm mt-4">
+                        <div class="w-full bg-ems-navy text-white font-bold py-2 rounded">觀察環境</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded text-xs">非外傷現場救護流程</div>
+                        <div class="text-slate-400 py-1">↓</div>
+                        <div class="w-full bg-ems-orange text-white font-bold py-2 rounded">救護車內救護流程</div>
+                    </div>
+                    <div class="mt-5 space-y-3 text-sm">
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-slate-700 leading-relaxed">
+                            <strong class="text-ems-navy">（一）評估與判定 1.</strong> 到達現場應評估現場安全。常見野外中毒途徑<strong>除了食用外</strong>，也有可能經由<strong>吸入、吸收或注入</strong>之途徑造成中毒，確定已安全才接近病人並採取適當防護措施。
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-slate-700 leading-relaxed">
+                            <strong class="text-ems-navy">2. 大量病人：</strong>中毒事件也有大量病人之可能。到達現場之救護技術員應建立<strong>現場指揮協調系統</strong>，第一位到現場最資深且救護層級最高者為<strong>現場指揮官</strong>，並在支援未到前先實施適合現場狀況之檢傷分類。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🗣️</span> （二）非外傷現場救護流程：病史詢問的兩個關鍵問句</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                                <div class="font-bold text-ems-navy text-sm mb-1">「何時食用或接觸有毒物質？」</div>
+                                <p class="text-sm text-slate-600">用以推斷病人對毒性反應的情形。</p>
+                            </div>
+                            <div class="bg-orange-50 border border-orange-100 rounded-lg p-4">
+                                <div class="font-bold text-ems-navy text-sm mb-1">「病人有無其他不適？」</div>
+                                <p class="text-sm text-slate-600">因病人常含有<strong>兩種以上之毒性症狀</strong>（如誤食有毒物質可能兼具腹瀉與皮膚潰爛症狀），所以<strong class="text-ems-orange">處置的原則應以病人的症候給予症狀治療</strong>。</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-slate-50 border border-slate-200 rounded-lg p-4 text-sm text-slate-600">
+                            <strong class="text-ems-navy">1.</strong> 沒有反應或對呼喚沒有反應者，<strong>也要對家屬或陪伴者詢問病史</strong>。
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold text-ems-navy mb-1 flex items-center gap-2"><span class="text-ems-orange text-2xl">👁️</span> 3. 重點式身體檢查：瞳孔判讀對照
+                        </h3>
+                        <p class="text-sm text-slate-500 mb-4">(1) 主訴意識不清時：檢查眼睛瞳孔大小及是否對光有反應。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="bg-orange-50 border border-orange-200 rounded-lg p-5 text-center">
+                                <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto mb-3 flex items-center justify-center">
+                                    <div class="w-10 h-10 rounded-full bg-slate-900 border-2 border-slate-600"></div>
+                                </div>
+                                <div class="font-bold text-ems-navy">瞳孔擴大 &gt; 4mm</div>
+                                <p class="text-sm text-slate-700 mt-2">考慮可能<strong>食入含抗乙醯膽鹼作用之植物</strong>（如大花曼陀羅、馬纓丹等），或為<strong>安非他命中毒、甲醇中毒</strong>。</p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-5 text-center">
+                                <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto mb-3 flex items-center justify-center">
+                                    <div class="w-3 h-3 rounded-full bg-slate-900 border-2 border-slate-600"></div>
+                                </div>
+                                <div class="font-bold text-ems-navy">瞳孔成針狀眼 &lt; 2mm</div>
+                                <p class="text-sm text-slate-700 mt-2">可能為<strong>有機磷中毒、鴉片類中毒</strong>。</p>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="border-l-4 border-ems-orange pl-4">
+                                <h4 class="font-bold text-ems-navy text-sm">(2) 主訴肢體疼痛時</h4>
+                                <p class="text-sm text-slate-600">檢查全身皮膚是否有異常。肢體出現<strong>紅疹、疼痛、腫脹及潰瘍</strong>等，考慮可能接觸造成<strong>皮膚炎之植物或化學物質</strong>。</p>
+                            </div>
+                            <div class="border-l-4 border-slate-300 pl-4">
+                                <h4 class="font-bold text-ems-navy text-sm">(3) 發現肢體有紅疹、疼痛、腫脹甚至潰瘍時</h4>
+                                <p class="text-sm text-slate-600">應<strong>移除患處的衣物</strong>；若非乾淨的傷口，應以<strong>生理食鹽水沖洗傷口</strong>。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 輔助檢查與毒物中心 -->
+            <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange mb-8">
+                <h3 class="text-xl font-bold text-white mb-2 flex items-center gap-2"><span class="text-2xl">🧪</span> 4. 輔助檢查與帶回檢體
+                </h3>
+                <p class="text-slate-400 text-sm mb-5">處置著重在<strong class="text-white">症狀治療</strong>。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                        <div class="text-ems-blue font-bold text-sm mb-2">生命維持</div>
+                        <ul class="list-disc pl-5 text-sm text-slate-300 space-y-1.5">
+                            <li>倘若出現<strong class="text-white">低血壓</strong>，應立即建立<strong class="text-white">靜脈輸液路徑</strong>維持組織灌流</li>
+                            <li>血液氧氣濃度應維持在 <strong class="text-white">90% 以上</strong>，視情況給予適當之氧氣</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-2">帶回可疑毒物</div>
+                        <p class="text-sm text-slate-300">在確保病人安全的情況下，收集附近可能食用的<strong class="text-white">殘渣或接觸過的可疑毒物、農藥容器或包裝</strong>，使用<strong class="text-white">密封袋</strong>將其一併帶往醫院，協助醫療人員快速判斷毒物種類，並進行針對性的治療。</p>
+                    </div>
+                </div>
+                <div class="mt-4 bg-slate-900 rounded-lg p-5 border-l-4 border-ems-danger flex flex-col md:flex-row md:items-center gap-4">
+                    <div>
+                        <div class="text-xs text-slate-400 font-bold tracking-wider uppercase">毒物諮詢中心</div>
+                        <div class="text-3xl font-black text-ems-orange">02-2871-7121</div>
+                    </div>
+                    <p class="text-sm text-slate-300 flex-1">必要時可聯繫毒物諮詢中心尋求協助，<strong class="text-white">但切勿為了辨識毒物而延誤治療。</strong></p>
+                </div>
+            </div>
+
+            <!-- 救護車內 -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🚐</span> （三）救護車內救護流程：兩種姿位</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-5">
+                        <div class="text-3xl mb-2">🪟</div>
+                        <h4 class="font-bold text-ems-navy">1. 通風</h4>
+                        <p class="text-sm text-slate-700 mt-2">於送醫途中，除了持續監測病人的生命徵象外，應<strong>打開救護車窗戶</strong>以利車內通風。</p>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-lg p-5">
+                        <div class="text-3xl mb-2">↖️</div>
+                        <h4 class="font-bold text-ems-navy">2-1. 食入中毒 → 左側躺</h4>
+                        <p class="text-sm text-slate-700 mt-2">可使病人採<strong class="text-ems-blue">左側躺</strong>，減緩藥物經腸胃道吸收降低傷害，也可避免嘔吐及分泌物造成<strong>吸入性肺炎</strong>。</p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-5">
+                        <div class="text-3xl mb-2">🪑</div>
+                        <h4 class="font-bold text-ems-navy">2-2. 呼吸窘迫／衰竭 → 半坐臥</h4>
+                        <p class="text-sm text-slate-700 mt-2">中毒造成呼吸窘迫或衰竭時，視情況使病人<strong class="text-ems-orange">半坐臥</strong>，以維持呼吸道暢通。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="./assets/js/chapter-nav.js"></script>
+    <script>
+        // 從本章地圖卡片跳到指定 view，並同步側欄 active 狀態
+        function jumpTo(viewId) {
+            const btn = document.querySelector('.nav-item[onclick*="' + viewId + '"]');
+            switchView(viewId, btn);
+        }
+
+        // ── 共用：手風琴 ────────────────────────────────
+        function toggleLaw(id) {
+            const content = document.getElementById('law-content-' + id);
+            const icon    = document.getElementById('law-icon-' + id);
+            if (!content || !icon) return;
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.innerText = '−';
+            } else {
+                content.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        // ── 共用：互動網格產生器 ────────────────────────
+        function makeGrid(prefix, data) {
+            return function (id) {
+                const d = data[id];
+                if (!d) return;
+                document.getElementById(prefix + '-title').innerHTML = d.t;
+                document.getElementById(prefix + '-content').innerHTML = d.c;
+                document.querySelectorAll('[id^="btn-' + prefix + '-"]').forEach(el => el.classList.remove('active'));
+                const btn = document.getElementById('btn-' + prefix + '-' + id);
+                if (btn) btn.classList.add('active');
+            };
+        }
+
+        // ══════════════ 01 溺水與潛水急症 ══════════════
+        const drownData = {
+            1: { t: '1. 對沒有反應的病人', c: `
+                <p class="font-bold text-white">打開呼吸道，檢查呼吸。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>如有呼吸則<strong class="text-white">聽診肺音</strong>；如無呼吸先給予 <strong class="text-white">2 次人工呼吸</strong>並檢查頸動脈搏</li>
+                    <li>頸動脈搏<strong class="text-white">摸不到</strong>的病人：進行 30 次胸外按壓後 2 次人工呼吸</li>
+                    <li>應注意是否有<strong class="text-white">分泌物逆流</strong>——這是人工呼吸與 CPR 期間最常見的併發症</li>
+                    <li>頸動脈搏<strong class="text-white">摸得到</strong>的病人：給予人工呼吸，待恢復自主性呼吸後持續給予高流量氧氣治療</li>
+                </ul>` },
+            2: { t: '2. 有反應的病人 — 聽診肺音', c: `
+                <p class="font-bold text-white">聽診肺音四個位置，依濕囉音範圍決定氧氣濃度。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700"><div class="text-ems-orange font-bold text-sm mb-1">四個位置皆出現濕囉音</div><div class="text-sm">應給予<strong class="text-white">高濃度氧氣</strong>治療</div></div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700"><div class="text-ems-blue font-bold text-sm mb-1">部分出現濕囉音</div><div class="text-sm">給予<strong class="text-white">低流量氧氣</strong>治療</div></div>
+                </div>` },
+            3: { t: '3. 保暖與搬運', c: `
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>應適時除去病人的<strong class="text-white">濕衣物</strong>、擦乾病人的身體，用毛毯、乾衣物等包覆病人以保暖</li>
+                    <li>並<strong class="text-white">測量核心體溫</strong>，如有低體溫時，應依低體溫流程處置</li>
+                    <li>搬動時應使身體<strong class="text-white">保持水平</strong>，以免減少腦部和心臟的血流</li>
+                </ul>` },
+            4: { t: '4. 給氧與呼吸道', c: `
+                <p class="font-bold text-white">懷疑溺水的病人都要給予 100% 氧氣，以避免延遲性肺部症狀。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>呼吸急促的病人，必要時可建立<strong class="text-white">輔助呼吸道及抽吸</strong></li>
+                    <li><strong class="text-white">非再吸入型面罩</strong>可用於清醒的病人</li>
+                    <li>對於<strong class="text-white">無反應</strong>的溺水病人，必須考慮腦部缺氧，同時用 100% 氧氣給人工呼吸，並監測血氧濃度</li>
+                </ul>` },
+            5: { t: '5. 靜脈輸液', c: `
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>可用<strong class="text-white">生理食鹽水</strong>或<strong class="text-white">乳酸林格氏液</strong></li>
+                    <li>除非病人出現低血壓，否則輸液速率只須<strong class="text-white">維持靜脈通暢</strong>即可</li>
+                    <li>因為過度給予水份可能導致<strong class="text-white">肺水腫或腦水腫</strong></li>
+                </ul>` },
+            6: { t: '6. 測量血糖', c: `<p class="text-base">應測量病人血糖，<strong class="text-white">低血壓（低血糖）也可能是造成溺水的原因</strong>——不要只把溺水當成單純意外，要回頭找內科病因。</p>` },
+            7: { t: '7. 潛水急症 → 高壓氧設備醫院', c: `
+                <p class="font-bold text-white">有潛水急症的病人都應儘可能送往設有高壓氧設備的醫院治療。送醫過程中注意：</p>
+                <div class="space-y-3 mt-3">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-1">(1) 保持在一個大氣壓力下送醫</div>
+                        <p class="text-sm">切忌以飛機高空運送，以免因氣壓變化過劇造成病情惡化。以直升機或定翼機運送時，飛行高度<strong class="text-white">小於 1000 呎（300 公尺）</strong>是相對安全的；當飛行高度大於 1000 呎，則須有<strong class="text-white">加壓艙設備</strong>。暴露在較低大氣壓下（如乘坐高空的大部份商用航空器），可能會加重減壓病。</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-1">(2) 再加壓 Recompression</div>
+                        <p class="text-sm">是治療減壓病或氣體栓塞的主要方式，所有懷疑減壓病的病人要儘快送達<strong class="text-white">最近有高壓氧設備</strong>的醫院。</p>
+                    </div>
+                </div>` },
+            8: { t: '8. 拒絕就醫的溺水病人', c: `
+                <p class="font-bold text-white">許多溺水病人沒有症狀，有些人可能會拒絕就醫——但延遲性肺部傷害可能在數小時後才發生。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>將<strong class="text-white">所有溺水病人</strong>運送至急診進行評估</li>
+                    <li>如遇到拒絕情形，請花時間提供良好的病人衛教，告知<strong class="text-white">延遲性肺水腫</strong>等肺部傷害可能在溺水後數小時發生</li>
+                    <li>這需要堅定且持續的說服，才能讓病人同意就醫後續的評估和觀察</li>
+                    <li>如果病人仍然堅持拒絕就醫，必須告知潛在後果，並且必須於救護紀錄表<strong class="text-white">「拒絕送醫簽名」</strong>欄位處簽名確認</li>
+                </ul>` }
+        };
+        const showDrown = makeGrid('drown', drownData);
+        showDrown(1);
+
+        // ══════════════ 02 冷熱急症 ══════════════
+        const thermoData = {
+            1: { t: '🥶 低體溫：主動回溫 vs 被動回溫', c: `
+                <p class="font-bold text-white">主要在於使中樞體溫快速恢復至 30°C 以上。</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-ems-blue font-bold text-sm mb-1">被動回溫</div>
+                        <p class="text-sm">即是<strong class="text-white">保暖</strong>，避免熱量繼續散失。</p>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded border border-slate-700">
+                        <div class="text-ems-orange font-bold text-sm mb-1">主動回溫</div>
+                        <ul class="list-disc pl-5 text-sm space-y-1">
+                            <li>暖敷、電毯、烤燈</li>
+                            <li>溫暖的靜脈輸液 <strong class="text-white">40~42°C</strong></li>
+                            <li>吸入溫暖潮濕的氧氣 <strong class="text-white">約 42~46°C</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-3 text-base">💡 <strong class="text-white">移動前</strong>給予溫暖的氧氣，可避免運送過程中<strong class="text-white">心室纖維顫動</strong>。</p>` },
+            2: { t: '❄️ 凍瘡：回溫的做法與禁忌', c: `
+                <p class="font-bold text-white">凍瘡的治療就是回溫，但<span class="text-ems-orange">不可用火烤或電暖爐等乾熱方式</span>進行回溫。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>短暫的回溫後會再凍傷，而<strong class="text-white">再結凍會比被動解凍造成更大的傷害</strong></li>
+                    <li>將肢體浸泡於 <strong class="text-white">37 到 39°C</strong> 水中為最適宜</li>
+                    <li>凍傷的肢體應除去濕衣物用<strong class="text-white">乾毛毯包覆</strong></li>
+                    <li><strong class="text-ems-orange">不要摩擦</strong>凍傷的部位，並<strong class="text-ems-orange">保留水泡</strong></li>
+                </ul>` },
+            3: { t: '💧 低體溫：潛在的脫水與低血糖', c: `<p class="text-base">低體溫病人可能有潛在的<strong class="text-white">脫水及低血糖風險</strong>，應考慮給予<strong class="text-white">快速輸液及血糖監測</strong>。</p>` },
+            4: { t: '🔥 熱急症：「先降溫再送醫院」', c: `
+                <p class="font-bold text-white">「先降溫再送醫院」很重要，以免耽誤降低中樞體溫的時機。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li><strong class="text-white">最快</strong>的降溫方式：冰塊和冷水浸泡，但易受限於到院前環境</li>
+                    <li><strong class="text-white">第二有效</strong>的降溫方式：將病人<strong class="text-white">全身濕潤並搧風</strong></li>
+                    <li class="text-ems-orange">單用冰袋置放於腋窩、頸動脈、股動脈處<strong>不足以</strong>快速降低中樞體溫，應同時使用其他降溫方法以加強散熱</li>
+                    <li>儘速將中樞體溫降至 <strong class="text-white">40°C 以下</strong>並維持生命徵象</li>
+                </ul>` },
+            5: { t: '🚐 熱急症：運送與體溫監測', c: `
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>運送過程中，病人應被安置於<strong class="text-white">已準備好空調</strong>的救護車內</li>
+                    <li>即使病人體溫已明顯下降，依然應<strong class="text-white">立即送往醫院</strong></li>
+                    <li>在運送過程中每 <strong class="text-white">5 到 10 分鐘</strong>測量一次中樞體溫，確保有效地降溫</li>
+                </ul>` },
+            6: { t: '💉 熱急症：輸液與血糖', c: `
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>熱急症病人輸液治療時，應注意<strong class="text-ems-orange">避免過度灌注</strong>——因當體溫下降時，可能因體液的重新分配而造成<strong class="text-white">肺水腫</strong></li>
+                    <li>熱中暑病人常伴有<strong class="text-white">低血糖</strong>情形，應測量血糖並給予矯正</li>
+                </ul>` }
+        };
+        const showThermo = makeGrid('thermo', thermoData);
+        showThermo(1);
+
+        // ══════════════ Chart.js 延遲初始化 ══════════════
+        const chartInited = {};
+        window.onViewSwitch = function (viewId) {
+            if (chartInited[viewId]) return;
+            if (viewId === 'view-thermal') { initHypothermiaChart(); chartInited[viewId] = true; }
+            if (viewId === 'view-altitude') { initAltitudeChart();    chartInited[viewId] = true; }
+        };
+
+        function initHypothermiaChart() {
+            const el = document.getElementById('hypothermiaChart');
+            if (!el || typeof Chart === 'undefined') return;
+            new Chart(el.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['輕度低體溫', '中度低體溫', '重度低體溫', '深度低體溫'],
+                    datasets: [{
+                        label: '中樞體溫區間 (°C)',
+                        data: [[32, 35], [28, 32], [24, 28], [13.7, 24]],
+                        backgroundColor: ['#7dd3fc', '#38bdf8', '#0284c7', '#1e293b'],
+                        borderRadius: 4,
+                        barPercentage: 0.65
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { min: 12, max: 38, title: { display: true, text: '中樞體溫 (°C)' }, grid: { color: '#e2e8f0' } },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: c => c.raw[0] + '°C ~ ' + c.raw[1] + '°C' } }
+                    }
+                }
+            });
+        }
+
+        // ══════════════ 03 高海拔急症 ══════════════
+        function initAltitudeChart() {
+            const el = document.getElementById('altitudeChart');
+            if (!el || typeof Chart === 'undefined') return;
+            new Chart(el.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['高海拔', '超高海拔', '極高海拔'],
+                    datasets: [{
+                        label: '高度區間 (公尺)',
+                        data: [[1500, 3500], [3500, 5500], [5500, 8848]],
+                        backgroundColor: ['#38bdf8', '#ea580c', '#1e293b'],
+                        borderRadius: 4,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { min: 0, max: 9000, title: { display: true, text: '海拔高度（公尺）' }, grid: { color: '#e2e8f0' } },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: c => c.raw[0] + ' ~ ' + c.raw[1] + ' 公尺' } }
+                    }
+                }
+            });
+        }
+
+        // LLAMSS 互動計分
+        const llScores = [0, 0, 0, 0];
+        function setLL(group, value, btn) {
+            llScores[group] = value;
+            const wrap = document.querySelector('[data-ll-group="' + group + '"]');
+            if (wrap) wrap.querySelectorAll('.ll-btn').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            const total = llScores.reduce((a, b) => a + b, 0);
+            document.getElementById('ll-score').innerText = total;
+            const lv = document.getElementById('ll-level');
+            if (total >= 10)      { lv.innerText = '嚴重急性高山症';  lv.className = 'text-xl font-bold text-red-400 mb-4'; }
+            else if (total >= 6)  { lv.innerText = '中度急性高山症';  lv.className = 'text-xl font-bold text-ems-orange mb-4'; }
+            else if (total >= 3)  { lv.innerText = '輕度急性高山症';  lv.className = 'text-xl font-bold text-amber-300 mb-4'; }
+            else                  { lv.innerText = '未達判定標準';    lv.className = 'text-xl font-bold text-white mb-4'; }
+        }
+
+        // ══════════════ 04 動物咬螫傷 ══════════════
+        const snakeData = {
+            1: { t: '百步蛇（圖 13-5）', c: `
+                <div class="inline-block bg-ems-danger text-white px-3 py-1 rounded text-sm font-bold mb-3">出血性蛇毒</div>
+                <p class="text-base">臺灣臨床上咬傷比較常見<strong class="text-white">且較嚴重</strong>的六種毒蛇之一。</p>
+                <p class="text-base">蛇毒屬<strong class="text-white">出血性</strong>，破壞血液與組織，造成局部劇烈腫脹、壞死與凝血異常。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗百步蛇毒血清</strong></p>` },
+            2: { t: '龜殼花（圖 13-6）', c: `
+                <div class="inline-block bg-ems-danger text-white px-3 py-1 rounded text-sm font-bold mb-3">出血性蛇毒</div>
+                <p class="text-base">臺灣六大毒蛇之一，蛇毒屬<strong class="text-white">出血性</strong>。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗龜殼花及赤尾鮐蛇毒血清</strong>（與赤尾青竹絲共用）</p>` },
+            3: { t: '赤尾鮐蛇（赤尾青竹絲・圖 13-7）', c: `
+                <div class="inline-block bg-ems-danger text-white px-3 py-1 rounded text-sm font-bold mb-3">出血性蛇毒</div>
+                <p class="text-base">臺灣六大毒蛇之一，蛇毒屬<strong class="text-white">出血性</strong>。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗龜殼花及赤尾鮐蛇毒血清</strong>（與龜殼花共用）</p>` },
+            4: { t: '雨傘節（圖 13-8）', c: `
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">神經性蛇毒</div>
+                <p class="text-base">臺灣六大毒蛇之一，蛇毒屬<strong class="text-white">神經性</strong>。</p>
+                <p class="text-base">⚠️ <strong class="text-ems-orange">神經性毒蛇咬傷可能會抑制呼吸</strong>，評估呼吸道及呼吸時需特別注意呼吸道的維持及給予氧氣。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗雨傘節及飯匙倩蛇毒血清</strong></p>` },
+            5: { t: '飯匙倩（眼鏡蛇・圖 13-9）', c: `
+                <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">神經性蛇毒</div>
+                <p class="text-base">臺灣六大毒蛇之一，蛇毒屬<strong class="text-white">神經性</strong>。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗雨傘節及飯匙倩蛇毒血清</strong>（與雨傘節共用）</p>` },
+            6: { t: '鎖鏈蛇（圖 13-10）', c: `
+                <div class="inline-block bg-ems-orange text-white px-3 py-1 rounded text-sm font-bold mb-3">混合毒性</div>
+                <p class="text-base">以<strong class="text-white">出血性蛇毒為主</strong>，但亦有<strong class="text-white">神經性蛇毒徵狀</strong>的混合毒性。</p>
+                <p class="text-base">對應血清：<strong class="text-ems-orange">抗鎖鏈蛇毒血清</strong></p>` }
+        };
+        const showSnake = makeGrid('snake', snakeData);
+        showSnake(1);
+
+        // ══════════════ 05 有毒海洋生物 ══════════════
+        const marineData = {
+            1: { t: '🪼 刺細胞生物（水母・海葵・水螅・珊瑚）', c: `
+                <p class="font-bold text-white">特徵：刺痛感、感覺異常、癢，及紅棕色長條狀的風疹塊（觸手印）。</p>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>利用<strong class="text-white">鑷子</strong>移除可見的觸手碎片，<strong class="text-ems-orange">避免直接觸摸</strong></li>
+                    <li>使用<strong class="text-white">海水</strong>輕柔清洗病人的傷口</li>
+                    <li class="text-ems-orange"><strong>禁忌：濕的沙子以及淡水</strong>會刺激刺囊細胞持續釋出毒液</li>
+                    <li>持續輕柔清洗直到<strong class="text-white">疼痛大幅緩解</strong></li>
+                </ul>` },
+            2: { t: '🦔 棘皮動物（海參・海星・海膽）', c: `
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>以<strong class="text-white">鑷子</strong>移除嵌入身體的刺</li>
+                    <li>應該<strong class="text-white">穿戴保護的手套</strong>並且避免自我汙染</li>
+                    <li><strong class="text-white">較大的刺</strong>則需醫師以手術方法取出</li>
+                </ul>` },
+            3: { t: '🐟 魟魚', c: `
+                <p class="font-bold text-white">魟魚的尾部有毒刺且有倒鉤。</p>
+                <ul class="list-disc pl-5 space-y-1.5">
+                    <li>可能造成病人身上超過 <strong class="text-white">15~20 公分</strong>長的嚴重撕裂傷，並且會將<strong class="text-white">毒液注入傷口</strong></li>
+                    <li>有倒刺的尖端會完全破裂並且<strong class="text-white">深埋在組織內</strong></li>
+                    <li>應<strong class="text-white">視情況</strong>以移除魟魚的倒刺；若倒刺沒入組織內，需<strong class="text-ems-orange">醫師以手術方法取出</strong></li>
+                </ul>` }
+        };
+        const showMarine = makeGrid('marine', marineData);
+        showMarine(1);
+
+        // ══════════════ 06 電傷害 ══════════════
+        const boltData = {
+            1: { t: '(1) 直接雷擊', c: '閃電<strong class="text-white">直接擊中病人</strong>。' },
+            2: { t: '(2) 側面雷擊（噴濺接觸）', c: '當雷擊擊中物體（如地面、建築物或樹）後，<strong class="text-white">噴濺至一名或多名病人</strong>。' },
+            3: { t: '(3) 接觸性雷擊', c: '當病人和一物體<strong class="text-white">直接接觸</strong>，而該物體被雷直接擊中或側面擊中時，便產生接觸性雷擊。' },
+            4: { t: '(4) 地面雷擊', c: '發生在雷擊擊中地面或附近物體時，電流快速向四周散佈。由於<strong class="text-white">人體電阻較地面小</strong>，電流會往低電阻方向移動，形成電流從病人一腳通過，再從另一腳回到地面。' },
+            5: { t: '(5) 反向電流', c: '指電流從地面通過病人身體，<strong class="text-white">但沒回流到地面</strong>。反向電流的<strong class="text-ems-orange">能量較低</strong>。' },
+            6: { t: '(6) 爆炸傷或鈍傷', c: '雷擊會產生<strong class="text-white">強大衝擊波</strong>，會造成爆炸傷及鈍傷。' }
+        };
+        const showBolt = makeGrid('bolt', boltData);
+        showBolt(1);
+
+        function calcBurn() {
+            const w = parseFloat(document.getElementById('burn-weight').value) || 0;
+            const t = parseFloat(document.getElementById('burn-tbsa').value) || 0;
+            const total = 4 * w * t;
+            document.getElementById('burn-total').innerText  = Math.round(total) + ' ml';
+            document.getElementById('burn-first').innerText  = Math.round(total / 2) + ' ml';
+            document.getElementById('burn-second').innerText = Math.round(total / 2) + ' ml';
+        }
+        calcBurn();
+
+        // ══════════════ 07 有毒氣體中毒 ══════════════
+        const gasData = {
+            1: { t: '1. 單純窒息性氣體', c: `
+                <p class="font-bold text-white">取代正常的空氣並且降低吸入的氧氣濃度，而使細胞缺氧。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>臨床上可見<strong class="text-white">低血氧的徵候</strong></li>
+                    <li><strong class="text-white">沒有呼吸道刺激</strong>的問題</li>
+                    <li>循環評估時會因低血氧而<strong class="text-ems-orange">發紺</strong></li>
+                </ul>
+                <p class="text-base mt-2">代表氣體：<strong class="text-ems-orange">二氧化碳、甲烷、丙烷、惰性氣體</strong>等。</p>` },
+            2: { t: '2. 化學窒息性氣體', c: `
+                <p class="font-bold text-white">主要影響為妨礙細胞獲得氧氣，而使細胞缺氧。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>會出現有<strong class="text-white">明顯缺氧現象但無發紺</strong></li>
+                    <li class="text-ems-orange"><strong>最大陷阱：血氧飽和濃度數值可能是正常的</strong></li>
+                </ul>
+                <p class="text-base mt-2">代表氣體：<strong class="text-ems-orange">一氧化碳、氰化物</strong>等。</p>` },
+            3: { t: '3. 刺激性毒氣', c: `
+                <p class="font-bold text-white">主要影響為刺激呼吸道等黏膜而產生呼吸困難。</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li>吸入後可能造成<strong class="text-white">肺水腫</strong>，聽診注意囉音或喘鳴音</li>
+                    <li>眼睛或皮膚接觸時，應用<strong class="text-white">清水沖洗 20~30 分鐘</strong></li>
+                </ul>
+                <p class="text-base mt-2">代表氣體：<strong class="text-ems-orange">氯氣、氨氣</strong>。</p>` },
+            4: { t: '4. 刺激性合併窒息性毒氣', c: `
+                <p class="font-bold text-white">兼具刺激呼吸道黏膜與窒息兩種機轉。</p>
+                <p class="text-base">代表氣體：<strong class="text-ems-orange">硫化氫</strong>。</p>` }
+        };
+        const showGas = makeGrid('gas', gasData);
+        showGas(1);
+
+        // ══════════════ 08 其他野外中毒 ══════════════
+        const routeData = {
+            1: { t: '（一）吸入 → 通過呼吸道進入呼吸系統', c: `
+                <p class="font-bold text-white">常見中毒因子：</p>
+                <p class="text-base"><strong class="text-white">有毒氣體、農藥、花粉</strong>，吸食<strong class="text-white">大麻、鴉片、嗎啡</strong>等。</p>` },
+            2: { t: '（二）吸收 → 通過皮膚和黏膜吸收', c: `
+                <p class="font-bold text-white">常見中毒因子：</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li><strong class="text-white">脂溶性的化學物質</strong>：有機磷、甲苯、酚、苯胺和四氯化碳</li>
+                    <li><strong class="text-white">氯氣、氰氣、硫化氫</strong>等</li>
+                </ul>
+                <p class="text-base mt-2">可經由皮膚吸收造成<strong class="text-ems-orange">局部或全身傷害</strong>。</p>` },
+            3: { t: '（三）食入 → 通過口部進入消化系統', c: `
+                <p class="font-bold text-white">常見中毒因子：</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li><strong class="text-white">農藥</strong>：巴拉刈、有機磷、除草劑、殺蟲劑等</li>
+                    <li><strong class="text-white">清潔劑</strong>：離子、非離子性清潔劑、強酸、強鹼、漂白水等</li>
+                    <li><strong class="text-white">有毒植物</strong>：大花曼陀羅、姑婆芋、毒蕈等</li>
+                    <li><strong class="text-white">有毒海洋生物</strong>：河豚、螃蟹、螺貝類、魚類生物累積毒害、不當保存造成質變</li>
+                </ul>` },
+            4: { t: '（四）注入 → 皮下、肌肉或靜脈注射進入身體組織或血管', c: `
+                <p class="font-bold text-white">常見中毒因子：</p>
+                <ul class="list-disc pl-5 space-y-1.5 text-base">
+                    <li><strong class="text-white">部分植物</strong>（咬人貓、咬人狗、姑婆芋等）有自我防衛機制，當皮膚碰到植物的汁液、嫩毛等後會造成<strong class="text-ems-orange">紅腫、潰爛</strong>等現象</li>
+                    <li><strong class="text-white">生物螫咬傷</strong>：蛇、昆蟲、海洋生物等</li>
+                </ul>` }
+        };
+        const showRoute = makeGrid('route', routeData);
+        showRoute(1);
+    </script>
+</body>
+</html>
