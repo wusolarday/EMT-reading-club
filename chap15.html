@@ -97,17 +97,13 @@
       </button>
 
       <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">01 核輻射緊急事件</div>
-      <button onclick="switchView('view-rad-basic', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+      <button onclick="switchView('view-rad-1', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
         <span class="font-bold text-sm">① 認識輻射與辨識輻射源</span>
-        <span class="text-[11px] text-slate-400">P.398 - P.399 | 游離 vs 非游離・圖 15-1／15-2</span>
+        <span class="text-[11px] text-slate-400">P.398 - P.399 | 游離 vs 非游離・示警標誌</span>
       </button>
-      <button onclick="switchView('view-rad-harm', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">② 人體危害與現場管制</span>
-        <span class="text-[11px] text-slate-400">P.399 - P.400 | 1 Gy≒1 Sv・熱區 100 μSv/hr</span>
-      </button>
-      <button onclick="switchView('view-rad-protect', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">③ 輻射防護與傷患運送</span>
-        <span class="text-[11px] text-slate-400">P.401 | TDS 三原則・ALARA・劑量上限</span>
+      <button onclick="switchView('view-rad-2', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">② 危害・現場管制・防護</span>
+        <span class="text-[11px] text-slate-400">P.399 - P.401 | 1 Gy≒1 Sv・TDS・劑量上限</span>
       </button>
 
       <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">02 生物病原緊急事件</div>
@@ -117,45 +113,27 @@
       </button>
 
       <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">03 化學物質緊急事件</div>
-      <button onclick="switchView('view-chem-id', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">① 名詞界定與危害辨識</span>
-        <span class="text-[11px] text-slate-400">P.403 - P.404 | UN number・GHS 九圖式</span>
+      <button onclick="switchView('view-chem-1', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">① 危害辨識與化學防護</span>
+        <span class="text-[11px] text-slate-400">P.403 - P.405 | UN・GHS・A～D 級防護</span>
       </button>
-      <button onclick="switchView('view-chem-ppe', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">② 現場化學防護 A～D 級</span>
-        <span class="text-[11px] text-slate-400">P.405 | 表 15-2 曝露情況對照</span>
-      </button>
-      <button onclick="switchView('view-chem-cd', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">③ C 級防護衣穿脫流程</span>
+      <button onclick="switchView('view-chem-2', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">② C 級防護衣穿脫流程</span>
         <span class="text-[11px] text-slate-400">P.406 - P.407 | 圖 15-7／15-8 各八步驟</span>
       </button>
-      <button onclick="switchView('view-chem-erg', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">④ 緊急應變指南與管制區域</span>
-        <span class="text-[11px] text-slate-400">P.408 - P.409 | ERG 五色插頁・熱暖冷區</span>
+      <button onclick="switchView('view-chem-3', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">③ 化災現場應變</span>
+        <span class="text-[11px] text-slate-400">P.408 - P.410 | ERG・熱暖冷區・HAZMAT</span>
       </button>
-      <button onclick="switchView('view-chem-hazmat', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">⑤ 化災應變原則 HAZMAT</span>
-        <span class="text-[11px] text-slate-400">P.409 - P.410 | 六大步驟互動</span>
+      <button onclick="switchView('view-chem-4', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">④ 毒化物處置與沖洗劑</span>
+        <span class="text-[11px] text-slate-400">P.410 - P.412 | 三級除污・敵腐靈／六氟靈</span>
       </button>
-      <button onclick="switchView('view-chem-tx', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">⑥ 毒化物傷患緊急處置</span>
-        <span class="text-[11px] text-slate-400">P.410 - P.411 | 三級除污・救命術・後送</span>
+      <button onclick="switchView('view-chem-5', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">⑤ 通用流程與檢傷分級</span>
+        <span class="text-[11px] text-slate-400">P.413 - P.414 | 表 15-3／15-4・參考資料</span>
       </button>
-      <button onclick="switchView('view-chem-anti', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">⑦ 敵腐靈與六氟靈</span>
-        <span class="text-[11px] text-slate-400">P.411 - P.412 | 圖 15-12～15-15</span>
-      </button>
-      <button onclick="switchView('view-flow', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">⑧ 通用流程與檢傷分級</span>
-        <span class="text-[11px] text-slate-400">P.413 | 圖 15-16・表 15-3／15-4</span>
-      </button>
-
-      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">附錄</div>
-      <button onclick="switchView('view-figs', this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
-        <span class="font-bold text-sm">圖片清單與參考資料</span>
-        <span class="text-[11px] text-slate-400">P.396 - P.415 | 待補圖檔一覽・12 篇文獻</span>
-      </button>
-    </div>
+        </div>
 
     <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">
       ← 回章節目錄
@@ -211,42 +189,14 @@
               <p class="text-sm text-slate-300 mt-1">依傳染途徑給防護、10 種已知戰劑、「潛伏期落差」造成的偵測延遲。</p>
             </div>
             <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 border-l-4 border-l-ems-danger">
-              <div class="flex items-baseline gap-2"><span class="text-2xl font-black text-ems-danger">03</span><span class="font-bold text-lg">化學物質與化學武器</span><span class="text-xs text-slate-400 ml-auto">P.403–413</span></div>
-              <p class="text-sm text-slate-300 mt-1">全章最長：UN／GHS 辨識、A–D 級防護、C 級穿脫、ERG、熱暖冷區、HAZMAT、除污、敵腐靈／六氟靈、通用流程與檢傷。</p>
+              <div class="flex items-baseline gap-2"><span class="text-2xl font-black text-ems-danger">03</span><span class="font-bold text-lg">化學物質與化學武器</span><span class="text-xs text-slate-400 ml-auto">P.403–414</span></div>
+              <p class="text-sm text-slate-300 mt-1">全章最長，占五個小節：UN／GHS 辨識、A–D 級防護、C 級穿脫、ERG 與熱暖冷區、HAZMAT、除污、沖洗劑、通用流程與檢傷。</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="card border-t-4 border-ems-blue">
-          <div class="section-label">☢️ 核／輻射的特點</div>
-          <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1.5 note-list">
-            <li>看不見、聞不到，<strong>只能靠儀器偵測</strong>。</li>
-            <li>傷害隨<strong>累積劑量</strong>增加，曝露時間越久越嚴重。</li>
-            <li><strong>脫掉衣物就能去除大部分污染。</strong></li>
-            <li>原則：<strong class="text-ems-orange">醫療優先（Medical first），除污其次</strong>。</li>
-          </ul>
-        </div>
-        <div class="card border-t-4 border-ems-orange">
-          <div class="section-label">🦠 生物的特點</div>
-          <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1.5 note-list">
-            <li>種類繁多、傳染途徑各異，<strong>除污非常困難</strong>。</li>
-            <li>發病<strong>時間有間隔</strong>，往往大量病例出現後才被察覺。</li>
-            <li>靠<strong>傳染途徑</strong>反推該給什麼防護。</li>
-          </ul>
-        </div>
-        <div class="card border-t-4 border-ems-danger">
-          <div class="section-label">🧪 化學的特點</div>
-          <ul class="list-disc pl-5 text-sm text-slate-700 space-y-1.5 note-list">
-            <li>曝露到一定劑量<strong>立即出現相似中毒症狀</strong>。</li>
-            <li>同時間、同地點<strong>大量傷患</strong>，較易被察覺。</li>
-            <li>原則：<strong class="text-ems-orange">除污是第一優先</strong>（與輻射相反）。</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-8 bg-white border-l-4 border-ems-orange rounded-xl shadow-sm p-6">
+      <div class="bg-white border-l-4 border-ems-orange rounded-xl shadow-sm p-6">
         <h3 class="text-xl font-bold text-ems-navy mb-2">🧭 讀書會提醒：核 vs 化，兩個「第一優先」不一樣</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
@@ -264,7 +214,7 @@
     <!-- ============================================================ -->
     <!-- VIEW: 01 ① 認識輻射與辨識輻射源                                -->
     <!-- ============================================================ -->
-    <section id="view-rad-basic" class="view-section hidden">
+    <section id="view-rad-1" class="view-section hidden">
       <header class="mb-8">
         <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.398 - P.399</div>
         <h2 class="text-3xl font-bold text-ems-navy">01 ①　認識輻射與辨識輻射源</h2>
@@ -360,11 +310,11 @@
     <!-- ============================================================ -->
     <!-- VIEW: 01 ② 輻射對人體的危害與現場管制                          -->
     <!-- ============================================================ -->
-    <section id="view-rad-harm" class="view-section hidden">
+    <section id="view-rad-2" class="view-section hidden">
       <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.399 - P.400</div>
-        <h2 class="text-3xl font-bold text-ems-navy">01 ②　輻射對人體的危害與現場管制</h2>
-        <p class="text-ems-gray mt-2 text-lg">兩組數字要記牢：出現症狀的門檻是<strong>一次大面積 1 Gy（≒1 Sv）</strong>；現場分區的門檻是<strong>熱區 100 μSv/hr、冷區 0.5 μSv/hr</strong>。</p>
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.399 - P.401</div>
+        <h2 class="text-3xl font-bold text-ems-navy">01 ②　輻射危害、現場管制與防護</h2>
+        <p class="text-ems-gray mt-2 text-lg">三組數字要記牢：症狀門檻<strong>一次大面積 1 Gy（≒1 Sv）</strong>、分區門檻<strong>熱區 100 μSv/hr 與冷區 0.5 μSv/hr</strong>、防護三原則<strong>T·D·S</strong>。</p>
       </header>
 
       <!-- 三、輻射對人體的危害 -->
@@ -482,17 +432,12 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW: 01 ③ 輻射防護與傷患救護運送                              -->
-    <!-- ============================================================ -->
-    <section id="view-rad-protect" class="view-section hidden">
-      <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.401</div>
-        <h2 class="text-3xl font-bold text-ems-navy">01 ③　輻射防護與輻射傷患的救護運送</h2>
-        <p class="text-ems-gray mt-2 text-lg">防護只有三個字母：<strong>T·D·S</strong>；心法只有一個縮寫：<strong>ALARA</strong>；救護只有一句話：<strong>醫療優先，除污其次</strong>。</p>
-      </header>
+      <!-- ── 輻射防護與輻射傷患的救護運送 ── -->
+      <div class="mt-12 mb-6 pb-3 border-b-2 border-slate-200">
+        <div class="inline-block bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs font-bold mb-2">P.401</div>
+        <h3 class="text-2xl font-bold text-ems-navy">輻射防護與輻射傷患的救護運送</h3>
+        <p class="text-ems-gray mt-1">防護只有三個字母：<strong>T·D·S</strong>；心法只有一個縮寫：<strong>ALARA</strong>；救護只有一句話：<strong>醫療優先，除污其次</strong>。</p>
+      </div>
 
       <!-- 五、輻射防護 -->
       <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
@@ -736,11 +681,11 @@
     <!-- ============================================================ -->
     <!-- VIEW: 03 ① 名詞界定與危害辨識                                  -->
     <!-- ============================================================ -->
-    <section id="view-chem-id" class="view-section hidden">
+    <section id="view-chem-1" class="view-section hidden">
       <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.403 - P.404</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ①　名詞界定與危害性化學品的辨識</h2>
-        <p class="text-ems-gray mt-2 text-lg">現場只有兩個辨識入口：車體／容器上的<strong>四位數 UN 編號</strong>，以及外包裝上的<strong>GHS 圖式</strong>。</p>
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.403 - P.405</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03 ①　危害辨識與現場化學防護</h2>
+        <p class="text-ems-gray mt-2 text-lg">辨識靠兩個入口：<strong>四位數 UN 編號</strong>與<strong>GHS 圖式</strong>；防護分 <strong>A～D 四級</strong>，不確定物質時一律用最高規格。</p>
       </header>
 
       <!-- 一、名詞 -->
@@ -804,17 +749,12 @@
         </div>
         <p class="text-xs text-slate-500 mt-3">＊「GHS 圖示」欄位以 emoji 示意，實際圖式為<strong>紅框白底菱形</strong>，請對照課本 P.404 表 15-1 或現場實物標示。</p>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW: 03 ② 現場化學防護 A～D 級                                -->
-    <!-- ============================================================ -->
-    <section id="view-chem-ppe" class="view-section hidden">
-      <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.405</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ②　現場化學防護：A～D 四級</h2>
-        <p class="text-ems-gray mt-2 text-lg">美國環保署依<strong>對皮膚黏膜與呼吸道保護能力</strong>的綜合考量分為四級，也是目前臺灣通用的分級方式（表 15-2）。</p>
-      </header>
+      <!-- ── 現場化學防護：A～D 四級 ── -->
+      <div class="mt-12 mb-6 pb-3 border-b-2 border-slate-200">
+        <div class="inline-block bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs font-bold mb-2">P.405</div>
+        <h3 class="text-2xl font-bold text-ems-navy">現場化學防護：A～D 四級</h3>
+        <p class="text-ems-gray mt-1">美國環保署依<strong>對皮膚黏膜與呼吸道保護能力</strong>綜合考量分為四級，也是臺灣通用的分級方式（表 15-2）。</p>
+      </div>
 
       <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-danger mb-8">
         <div class="flex flex-col md:flex-row gap-4 items-start">
@@ -888,10 +828,10 @@
     <!-- ============================================================ -->
     <!-- VIEW: 03 ③ C 級防護衣穿脫流程                                  -->
     <!-- ============================================================ -->
-    <section id="view-chem-cd" class="view-section hidden">
+    <section id="view-chem-2" class="view-section hidden">
       <header class="mb-8">
         <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.406 - P.407</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ③　C 級防護衣穿著與脫除流程</h2>
+        <h2 class="text-3xl font-bold text-ems-navy">03 ②　C 級防護衣穿著與脫除流程</h2>
         <p class="text-ems-gray mt-2 text-lg">穿是<strong>由下而上、由內而外</strong>；脫是<strong>由上而下、由內向外捲繞</strong>。脫除比穿著更危險——污染就在你手上。</p>
       </header>
 
@@ -1111,11 +1051,11 @@
     <!-- ============================================================ -->
     <!-- VIEW: 03 ④ 緊急應變指南與化災管制區域                          -->
     <!-- ============================================================ -->
-    <section id="view-chem-erg" class="view-section hidden">
+    <section id="view-chem-3" class="view-section hidden">
       <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.408 - P.409</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ④　緊急應變指南 ERG 與化災管制區域</h2>
-        <p class="text-ems-gray mt-2 text-lg">ERG 是一本<strong>五種顏色的插頁</strong>；管制區域是三個<strong>依風向與地勢畫出來的圈</strong>。指揮站永遠在<strong>上風、上坡、上游</strong>。</p>
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.408 - P.410</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03 ③　化災現場應變：ERG、管制區域與 HAZMAT</h2>
+        <p class="text-ems-gray mt-2 text-lg">ERG 是一本<strong>五色插頁</strong>；管制區域是<strong>依風向與地勢畫出的三個圈</strong>；HAZMAT 是<strong>六個步驟</strong>。指揮站永遠在上風、上坡、上游。</p>
       </header>
 
       <!-- 抵達前提醒 -->
@@ -1239,17 +1179,12 @@
           <span class="pill">禁區管制線</span><span class="pill">除污區管制線</span><span class="pill">除污走廊</span>
         </div>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW: 03 ⑤ HAZMAT 六大應變原則                                 -->
-    <!-- ============================================================ -->
-    <section id="view-chem-hazmat" class="view-section hidden">
-      <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.409 - P.410</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ⑤　化災應變的原則 HAZMAT</h2>
-        <p class="text-ems-gray mt-2 text-lg">六個字母、六個步驟。整段最該背的一句話：<strong class="text-ems-orange">危害性化學品災害處理過程，處理「對」比處理「快」重要。</strong></p>
-      </header>
+      <!-- ── 化災應變的原則 HAZMAT ── -->
+      <div class="mt-12 mb-6 pb-3 border-b-2 border-slate-200">
+        <div class="inline-block bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs font-bold mb-2">P.409 - P.410</div>
+        <h3 class="text-2xl font-bold text-ems-navy">化災應變的原則 HAZMAT</h3>
+        <p class="text-ems-gray mt-1">六個字母、六個步驟。最該背的一句：<strong class="text-ems-orange">處理「對」比處理「快」重要。</strong></p>
+      </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div class="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3">
@@ -1301,11 +1236,11 @@
     <!-- ============================================================ -->
     <!-- VIEW: 03 ⑥ 毒化物質傷患緊急處置原則                            -->
     <!-- ============================================================ -->
-    <section id="view-chem-tx" class="view-section hidden">
+    <section id="view-chem-4" class="view-section hidden">
       <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.410 - P.411</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ⑥　毒化物質傷患緊急處置原則</h2>
-        <p class="text-ems-gray mt-2 text-lg">四件事：<strong>除污 → 救命術 → 解毒劑 → 傷患後送</strong>。而第一件事的第一步，只是<strong>把衣服脫掉</strong>。</p>
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.410 - P.412</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03 ④　毒化物傷患處置與沖洗劑</h2>
+        <p class="text-ems-gray mt-2 text-lg">四件事：<strong>除污 → 救命術 → 解毒劑 → 後送</strong>；第一步只是<strong>把衣服脫掉</strong>。沖洗劑記兩個名字：敵腐靈與六氟靈。</p>
       </header>
 
       <!-- 脫衣服的威力 -->
@@ -1407,17 +1342,12 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW: 03 ⑦ 敵腐靈與六氟靈                                      -->
-    <!-- ============================================================ -->
-    <section id="view-chem-anti" class="view-section hidden">
-      <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.411 - P.412</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ⑦　敵腐靈<sup>®</sup> 與六氟靈<sup>®</sup></h2>
-        <p class="text-ems-gray mt-2 text-lg">兩個容易混淆的名字：<strong>敵腐靈 = 一般酸鹼腐蝕性／不明化學物質</strong>；<strong>六氟靈 = 含氫氟酸</strong>。兩者都是<strong>沖洗</strong>，不是中和。</p>
-      </header>
+      <!-- ── 敵腐靈<sup>®</sup> 與六氟靈<sup>®</sup> ── -->
+      <div class="mt-12 mb-6 pb-3 border-b-2 border-slate-200">
+        <div class="inline-block bg-slate-200 text-slate-700 px-2.5 py-0.5 rounded text-xs font-bold mb-2">P.411 - P.412</div>
+        <h3 class="text-2xl font-bold text-ems-navy">敵腐靈<sup>®</sup> 與六氟靈<sup>®</sup></h3>
+        <p class="text-ems-gray mt-1"><strong>敵腐靈＝一般酸鹼腐蝕／不明化學物質</strong>；<strong>六氟靈＝含氫氟酸</strong>。兩者都是<strong>沖洗</strong>，不是中和。</p>
+      </div>
 
       <div class="bg-ems-navy p-6 rounded-xl shadow-md text-white border-t-4 border-ems-blue mb-8">
         <h3 class="text-xl font-bold text-white mb-2">📌 法規與配置現況（課本 P.411）</h3>
@@ -1485,10 +1415,10 @@
     <!-- ============================================================ -->
     <!-- VIEW: 03 ⑧ 通用流程與檢傷分級                                  -->
     <!-- ============================================================ -->
-    <section id="view-flow" class="view-section hidden">
+    <section id="view-chem-5" class="view-section hidden">
       <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.413</div>
-        <h2 class="text-3xl font-bold text-ems-navy">03 ⑧　毒化災現場緊急救護通用流程與檢傷分級</h2>
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.413 - P.414</div>
+        <h2 class="text-3xl font-bold text-ems-navy">03 ⑤　通用流程、檢傷分級與參考資料</h2>
         <p class="text-ems-gray mt-2 text-lg">整章收束成一張流程圖，起點永遠是同一個問句：<strong>現場是否安全？</strong></p>
       </header>
 
@@ -1572,103 +1502,8 @@
         </div>
       </div>
 
-      <!-- 全章收束 -->
-      <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
-        <h3 class="text-2xl font-bold text-white mb-4">🧭 全章收束：核／生／化的共同語法</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🔍</div><div class="font-bold text-sm text-ems-blue">辨識</div><div class="text-xs text-slate-400 mt-1">標誌／UN／GHS／傳染途徑</div></div>
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🥽</div><div class="font-bold text-sm text-ems-blue">防護</div><div class="text-xs text-slate-400 mt-1">TDS／A–D 級／N95・P100</div></div>
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🚧</div><div class="font-bold text-sm text-ems-blue">分區</div><div class="text-xs text-slate-400 mt-1">熱區／暖區／冷區・上風上坡</div></div>
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🚿</div><div class="font-bold text-sm text-ems-blue">除污</div><div class="text-xs text-slate-400 mt-1">脫衣物 70–90%・緊急／概略／技術</div></div>
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🚑</div><div class="font-bold text-sm text-ems-blue">救護</div><div class="text-xs text-slate-400 mt-1">基本救命術・敵腐靈／六氟靈</div></div>
-          <div class="bg-slate-800 border border-slate-700 rounded-lg p-4 text-center"><div class="text-2xl mb-1">🏥</div><div class="font-bold text-sm text-ems-blue">後送</div><div class="text-xs text-slate-400 mt-1">預先通知・包覆・車輛清潔</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- VIEW 附錄：圖片清單與參考資料                                   -->
-    <!-- ============================================================ -->
-    <section id="view-figs" class="view-section hidden">
-      <header class="mb-8">
-        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.396 - P.415</div>
-        <h2 class="text-3xl font-bold text-ems-navy">附錄　圖片清單與參考資料</h2>
-        <p class="text-ems-gray mt-2 text-lg">本章共預留 <strong>25 個課本圖片插槽</strong>。把截好的圖依下表檔名放進 <code class="bg-slate-200 px-1.5 py-0.5 rounded text-sm">assets/img/</code>，頁面會自動顯示；尚未放入時會顯示帶檔名的虛線預留框。</p>
-      </header>
-
-      <!-- 使用說明 -->
-      <div class="card mb-6 border-l-4 border-ems-orange">
-        <div class="section-label">📌 怎麼補圖（三步驟）</div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
-            <div class="w-7 h-7 rounded-full bg-ems-blue text-white text-sm font-bold flex items-center justify-center mb-2">1</div>
-            <p class="text-sm text-slate-700">在電子書 <code class="bg-slate-200 px-1 rounded text-xs">ebook.nfa.gov.tw</code> 對應頁面截圖，<strong>裁掉書頁背景</strong>，建議寬度 1200px 以上。</p>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
-            <div class="w-7 h-7 rounded-full bg-ems-blue text-white text-sm font-bold flex items-center justify-center mb-2">2</div>
-            <p class="text-sm text-slate-700">依下表<strong>檔名</strong>存到 <code class="bg-slate-200 px-1 rounded text-xs">assets/img/</code>。全章統一使用 <strong><code class="bg-slate-200 px-1 rounded text-xs">.png</code></strong>，命名規則就是<strong>圖號</strong>：<code class="bg-slate-200 px-1 rounded text-xs">fig15-3.png</code>；流程分格圖多一個步驟序號：<code class="bg-slate-200 px-1 rounded text-xs">fig15-7-1.png</code>。</p>
-          </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-lg p-4">
-            <div class="w-7 h-7 rounded-full bg-ems-blue text-white text-sm font-bold flex items-center justify-center mb-2">3</div>
-            <p class="text-sm text-slate-700">重新整理頁面。圖檔存在就顯示圖，不存在就顯示<strong>帶檔名的虛線框</strong>，不會破版。</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 圖片清單 -->
-      <div class="card mb-6">
-        <div class="section-label">待補圖檔一覽（依課本順序）</div>
-        <div class="overflow-x-auto">
-          <table class="data-table text-sm">
-            <thead><tr><th class="w-20">課本頁</th><th class="w-24">圖／表號</th><th>圖說（課本小字）</th><th>檔名</th><th class="w-40">出現位置</th></tr></thead>
-            <tbody>
-              <tr><td>P.399</td><td class="font-bold">圖 15-1</td><td>輻射示警標誌<br><span class="text-xs text-slate-500">黃底紫紅三葉片</span></td><td><code>fig15-1.png</code></td><td>01 ▸ 二、辨識輻射源</td></tr>
-              <tr><td>P.399</td><td class="font-bold">圖 15-2</td><td>輻射輔助標誌<br><span class="text-xs text-slate-500">紅三角，輻射波＋骷髏頭＋奔跑的人</span></td><td><code>fig15-2.png</code></td><td>01 ▸ 二、辨識輻射源</td></tr>
-              <tr><td>P.399</td><td class="font-bold">圖 15-3</td><td>一般游離輻射劑量比較圖<br><span class="text-xs text-slate-500">核能安全委員會 111 年 11 月版</span></td><td><code>fig15-3.png</code></td><td>01 ▸ 三、輻射對人體的危害</td></tr>
-              <tr><td>P.400</td><td class="font-bold">圖 15-4</td><td>醫療游離輻射劑量比較圖<br><span class="text-xs text-slate-500">核能安全委員會 111 年 11 月版</span></td><td><code>fig15-4.png</code></td><td>01 ▸ 三、輻射對人體的危害</td></tr>
-              <tr><td>P.400</td><td class="font-bold">圖 15-5</td><td>輻射事故現場管制圖<br><span class="text-xs text-slate-500">橘底同心圓，熱區／暖區／冷區</span></td><td><code>fig15-5.png</code></td><td>01 ▸ 四、現場管制與救護準則</td></tr>
-              <tr><td>P.403</td><td class="font-bold">圖 15-6</td><td>油罐車後標示有 UN 的四碼編號和中文名稱</td><td><code>fig15-6.png</code></td><td>03 ① ▸ （一）UN number</td></tr>
-              <tr class="bg-blue-50"><td>P.406</td><td class="font-bold">圖 15-7</td><td><strong>C 級防護衣穿著流程</strong>　八個步驟小圖<br><span class="text-xs text-slate-500">步驟一～步驟八，每步一格</span></td><td><code>fig15-7-1.png</code> ～ <code>fig15-7-8.png</code><br><span class="text-xs text-slate-500">或整版一張：<code>fig15-7.png</code></span></td><td>03 ③ ▸ 穿著流程</td></tr>
-              <tr class="bg-blue-50"><td>P.407</td><td class="font-bold">圖 15-8</td><td><strong>C 級防護衣脫除流程</strong>　八個步驟小圖<br><span class="text-xs text-slate-500">步驟一～步驟八，每步一格</span></td><td><code>fig15-8-1.png</code> ～ <code>fig15-8-8.png</code><br><span class="text-xs text-slate-500">或整版一張：<code>fig15-8.png</code></span></td><td>03 ③ ▸ 脫除流程</td></tr>
-              <tr><td>P.407</td><td class="font-bold">圖 15-9</td><td>全面體濾毒罐呼吸防護具</td><td><code>fig15-9.png</code></td><td>03 ③ ▸ 濾毒罐</td></tr>
-              <tr><td>P.407</td><td class="font-bold">圖 15-10</td><td>半面體濾毒罐呼吸防護具</td><td><code>fig15-10.png</code></td><td>03 ③ ▸ 濾毒罐</td></tr>
-              <tr><td>P.409</td><td class="font-bold">圖 15-11</td><td>化災管制區域圖<br><span class="text-xs text-slate-500">熱區／暖區／冷區三色橫向示意</span></td><td><code>fig15-11.png</code></td><td>03 ④ ▸ 化災管制區域</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
-            <strong>已改用 HTML／表格重建、不需圖檔者：</strong><br>
-            表 15-1（GHS 分類圖式及標示）、表 15-2（美國環保署化災個人防護裝備分級）、表 15-3、表 15-4（兩張檢傷分級建議）、圖 15-11 三區注意事項文字、圖 15-16（毒化災通用流程，已用 HTML 流程節點重建）。<br>圖 15-12～15-15（敵腐靈／六氟靈／沖洗噴劑／葡萄糖酸鈣軟膏產品照）改以<strong>文字速記卡</strong>呈現，不放圖。
-          </div>
-          <div class="bg-orange-50 border border-orange-100 rounded-lg p-4 text-sm text-slate-700 leading-relaxed">
-            <strong>插槽數量統計：</strong>單張圖 9 個（圖 15-1～15-6、15-9～15-11）＋ C 級穿著 8 格 ＋ C 級脫除 8 格 ＝ <strong>25 個插槽</strong>。<br>
-            若不想逐格截圖，也可只放兩張整版流程圖（<code>fig15-7.png</code>／<code>fig15-8.png</code>），並把該區 8 個 <code>&lt;figure&gt;</code> 換成單一 <code>&lt;img&gt;</code>。
-          </div>
-        </div>
-      </div>
-
-      <!-- 參考資料 + 速記 -->
+      <!-- 參考資料與速記 -->
       <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <div class="card">
-          <div class="section-label">參考資料（課本 P.414）</div>
-          <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
-            <li>福島第一核電廠事故。民國 110 年 2 月 19 日，下載自 https://zh.wikipedia.org/wiki/福島第一核電廠事故</li>
-            <li>行政院核能安全委員會：輻射災害定義。民國 110 年 2 月 19 日，下載自 http://www.nusc.gov.tw/ 緊急應變 --5.html</li>
-            <li>行政院核能安全委員會：原子能知識。民國 110 年 2 月 19 日，下載自 https://www.nusc.gov.tw/category/ 便民專區 / 原子能知識 /220_271.html</li>
-            <li>行政院核能安全委員會：輻射災害第一線應變人員手冊。民國 110 年 2 月 19 日，下載自 https://www.nusc.gov.tw/ 緊急應變 / 我該怎麼做 / 輻射災害第一線應變人員專區 --5_41_4428.html</li>
-            <li>廖訓禎主編：中級救護技術員訓練教科書。內政部消防署民國 110 年 9 月。</li>
-            <li>工業技術研究院，2020 年版緊急應變指南：民國 110 年 6 月。</li>
-            <li>聯合國危險貨物編號。民國 110 年 2 月 19 日，下載自 https://zh.wikipedia.org/wiki/ 聯合國危險貨物編號　環境部化學物質管理署，毒性化學物質危害標示 - 象徵符號說明，下載自 https://www.tcsb.gov.tw/lp-271-1.html</li>
-            <li>環境部化學物質管理署，毒性化學物質危害標示 - 象徵符號說明，下載自 https://www.tcsb.gov.tw/lp-271-1.html</li>
-            <li>石富元；江文莒主編：災難醫學。台灣急診醫學會。民國 112 年 2 月 1 日。</li>
-            <li>消防機關配合執行危害性化學品災害搶救指導原則：民國 107 年 8 月 7 日，內授消字第 1070823310 號。</li>
-            <li>Hall A.H. et al, Diphoterine<sup>®</sup> for Emergent Eye/Skin Chemical Splash Decontamination solution for chemical splash injuries, Cutaneous and Ocular Toxicology. 2009, 28(4), 149-15</li>
-            <li>Kulkarni P. et al, The effects of the use of Diphoterine<sup>®</sup> solution on chemical burns in the Tarapur industrial complex, India, Burns Open. 2018, 104-107.</li>
-          </ol>
-        </div>
-
         <div class="card">
           <div class="section-label">讀書會速記：本章 12 個必記數字</div>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1686,8 +1521,26 @@
             <div class="bg-orange-50 border border-orange-100 rounded-lg p-3"><div class="font-black text-ems-orange text-lg">30 秒–3 分鐘</div><div class="text-xs text-slate-600">概略除污走道沖洗時間；敵腐靈皮膚持續處理 10–15 分鐘</div></div>
           </div>
         </div>
+        <div class="card">
+          <div class="section-label">參考資料（課本 P.414）</div>
+          <ol class="list-decimal list-inside text-sm leading-relaxed text-slate-700 space-y-2">
+            <li>福島第一核電廠事故。民國 110 年 2 月 19 日，下載自 https://zh.wikipedia.org/wiki/福島第一核電廠事故</li>
+            <li>行政院核能安全委員會：輻射災害定義。民國 110 年 2 月 19 日，下載自 http://www.nusc.gov.tw/ 緊急應變 --5.html</li>
+            <li>行政院核能安全委員會：原子能知識。民國 110 年 2 月 19 日，下載自 https://www.nusc.gov.tw/category/ 便民專區 / 原子能知識 /220_271.html</li>
+            <li>行政院核能安全委員會：輻射災害第一線應變人員手冊。民國 110 年 2 月 19 日，下載自 https://www.nusc.gov.tw/ 緊急應變 / 我該怎麼做 / 輻射災害第一線應變人員專區 --5_41_4428.html</li>
+            <li>廖訓禎主編：中級救護技術員訓練教科書。內政部消防署民國 110 年 9 月。</li>
+            <li>工業技術研究院，2020 年版緊急應變指南：民國 110 年 6 月。</li>
+            <li>聯合國危險貨物編號。民國 110 年 2 月 19 日，下載自 https://zh.wikipedia.org/wiki/ 聯合國危險貨物編號　環境部化學物質管理署，毒性化學物質危害標示 - 象徵符號說明，下載自 https://www.tcsb.gov.tw/lp-271-1.html</li>
+            <li>環境部化學物質管理署，毒性化學物質危害標示 - 象徵符號說明，下載自 https://www.tcsb.gov.tw/lp-271-1.html</li>
+            <li>石富元；江文莒主編：災難醫學。台灣急診醫學會。民國 112 年 2 月 1 日。</li>
+            <li>消防機關配合執行危害性化學品災害搶救指導原則：民國 107 年 8 月 7 日，內授消字第 1070823310 號。</li>
+            <li>Hall A.H. et al, Diphoterine<sup>®</sup> for Emergent Eye/Skin Chemical Splash Decontamination solution for chemical splash injuries, Cutaneous and Ocular Toxicology. 2009, 28(4), 149-15</li>
+            <li>Kulkarni P. et al, The effects of the use of Diphoterine<sup>®</sup> solution on chemical burns in the Tarapur industrial complex, India, Burns Open. 2018, 104-107.</li>
+          </ol>
+        </div>
       </div>
     </section>
+
 
   </main>
 
@@ -1917,8 +1770,7 @@
     window.onViewSwitch = function (viewId) {
       if (initialized[viewId]) return;
       initialized[viewId] = true;
-      if (viewId === 'view-rad-harm') initDoseChart();
-      if (viewId === 'view-rad-protect') initLimitChart();
+      if (viewId === 'view-rad-2') { initDoseChart(); initLimitChart(); }
     };
 
     function initDoseChart() {
