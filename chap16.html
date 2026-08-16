@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT 海栓讀書會 - 第十六章 大量傷病患與檢傷分類概論及演練</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/tailwind-config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; padding:1.25rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .section-label { display:inline-flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:800; color:#1e293b; margin-bottom:.9rem; }
+    .section-label::before { content:''; width:.7rem; height:1.5rem; background:#0284c7; border-radius:.125rem; display:inline-block; }
+    .pill { display:inline-flex; align-items:center; background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; border-radius:999px; padding:.3rem .65rem; font-size:.82rem; font-weight:700; }
+    .note-list li { margin-bottom:.45rem; }
+    .grid-btn { cursor:pointer; transition:transform .15s, box-shadow .15s, background-color .15s; }
+    .grid-btn:hover { transform:translateY(-2px); }
+    .grid-btn.active { background:#0284c7; color:#fff; border-color:#0284c7; box-shadow:0 8px 20px -8px rgba(2,132,199,.45); }
+    .callout { border-left:4px solid #0284c7; background:#f0f9ff; border-radius:.5rem; padding:1rem 1.25rem; }
+    .callout.warn { border-left-color:#ea580c; background:#fff7ed; }
+    .callout.danger { border-left-color:#dc2626; background:#fef2f2; }
+    .flow-node { background:#fff; border:1px solid #cbd5e1; border-radius:.6rem; padding:.75rem 1rem; text-align:center; font-weight:800; color:#1e293b; }
+    .flow-node.head { background:#1e293b; color:#fff; border-color:#1e293b; }
+    .flow-node.blue { background:#e0f2fe; border-color:#0284c7; color:#075985; }
+    .flow-node.red { background:#ffe4e6; border-color:#e11d48; color:#9f1239; }
+    .flow-node.yellow { background:#fef9c3; border-color:#eab308; color:#713f12; }
+    .flow-node.green { background:#dcfce7; border-color:#22c55e; color:#14532d; }
+    .flow-node.black { background:#292524; border-color:#292524; color:#fff; }
+    .flow-arrow { color:#0284c7; text-align:center; font-weight:900; padding:.2rem; }
+    .triage-chip { display:inline-flex; align-items:center; justify-content:center; min-width:4.5rem; border-radius:999px; padding:.35rem .8rem; font-size:.8rem; font-weight:900; }
+    .tri-red { background:#be123c; color:#fff; }
+    .tri-yellow { background:#f59e0b; color:#422006; }
+    .tri-green { background:#4dba2d; color:#fff; }
+    .tri-black { background:#292524; color:#fff; }
+    .protocol-card { border-top:4px solid #0284c7; }
+    .case-stat { display:flex; flex-direction:column; justify-content:center; min-height:6.5rem; border-radius:.75rem; padding:1rem; text-align:center; }
+    .figure-img { width:100%; max-height:34rem; object-fit:contain; background:#fff; border:1px solid #e2e8f0; border-radius:.5rem; padding:.35rem; display:block; }
+    .figure-crop { position:relative; overflow:hidden; width:100%; aspect-ratio:var(--crop-ratio); background:#f8fafc; border:1px solid #e2e8f0; border-radius:.65rem; }
+    .figure-crop img { position:absolute; top:0; left:0; width:var(--page-scale); max-width:none; transform:translate(var(--tx), var(--ty)); transform-origin:top left; }
+    figcaption { font-size:.78rem; color:#64748b; text-align:center; margin-top:.5rem; line-height:1.5; }
+    details.study-detail { background:#fff; border:1px solid #e2e8f0; border-radius:.6rem; overflow:hidden; }
+    details.study-detail summary { cursor:pointer; list-style:none; padding:1rem 1.1rem; font-weight:800; color:#1e293b; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    details.study-detail summary::-webkit-details-marker { display:none; }
+    details.study-detail summary::after { content:'＋'; color:#0284c7; font-size:1.2rem; }
+    details.study-detail[open] summary::after { content:'－'; }
+    details.study-detail .detail-body { border-top:1px solid #e2e8f0; padding:1rem 1.1rem; color:#475569; }
+    @media (max-width:1023px) { main { padding:1.25rem !important; } }
+  </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+  <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+      <h1 class="text-xl font-bold text-white tracking-wide">第十六章 大量傷病患</h1>
+      <p class="text-xs text-ems-blue font-medium mt-1">定義 · 現場管理 · 檢傷分類 · 案例演練</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+      <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">總覽</div>
+      <button onclick="switchView('view-intro',this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">前言　本章總覽</span><span class="text-[11px] text-slate-400">P.416–P.417｜學習目標・章節地圖</span>
+      </button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">01 大量傷病患的定義</div>
+      <button onclick="switchView('view-definition',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">定義與啟動標準</span><span class="text-[11px] text-slate-400">P.418–P.419｜資源超載・Level 1–3</span>
+      </button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">02 事件處置流程原則</div>
+      <button onclick="switchView('view-command',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">4S、METHANE 與 ICS</span><span class="text-[11px] text-slate-400">P.420–P.422｜安全・回報・指揮</span>
+      </button>
+      <button onclick="switchView('view-triage',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">檢傷原則與 START</span><span class="text-[11px] text-slate-400">P.423–P.425｜四色・三級檢傷</span>
+      </button>
+      <button onclick="switchView('view-3t',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">3T、工具與完整流程</span><span class="text-[11px] text-slate-400">P.425–P.427｜治療・後送・追蹤</span>
+      </button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">03 案例分享</div>
+      <button onclick="switchView('view-case-burn',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">八仙樂園粉塵暴燃</span><span class="text-[11px] text-slate-400">P.428–P.429｜燒燙傷檢傷修正</span>
+      </button>
+      <button onclick="switchView('view-case-collapse',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">維冠大樓倒塌</span><span class="text-[11px] text-slate-400">P.429–P.430｜長時間搜救・壓力</span>
+      </button>
+      <button onclick="switchView('view-case-train',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">新馬車站列車脫軌</span><span class="text-[11px] text-slate-400">P.430–P.432｜檢傷・搬運・分流</span>
+      </button>
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">← 回章節目錄</a>
+  </nav>
+
+  <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+    <section id="view-intro" class="view-section fade-in block">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.416–P.417</div>
+        <h2 class="text-3xl font-bold text-ems-navy">大量傷病患與檢傷分類概論及演練</h2>
+        <p class="text-ems-gray mt-2 text-lg">當事件規模超過平時救援量能，關鍵不再只是「逐一救治」，而是快速啟動特殊動員、建立指揮、分配有限資源，讓最多傷病患獲得適當照護。</p>
+      </header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div class="card">
+          <h3 class="text-xl font-bold text-ems-navy mb-4 flex items-center gap-2"><span class="text-ems-orange text-2xl">🎯</span> 學習目標</h3>
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex gap-3"><span class="text-ems-blue">☑</span><span>認識<strong>大量傷病患的定義</strong>與因地制宜的啟動標準。</span></li>
+            <li class="flex gap-3"><span class="text-ems-blue">☑</span><span>熟悉大量傷病患事件的<strong>處置原則與現場指揮</strong>。</span></li>
+            <li class="flex gap-3"><span class="text-ems-blue">☑</span><span>瞭解檢傷分類的<strong>目的、原則、顏色與方式</strong>。</span></li>
+            <li class="flex gap-3"><span class="text-ems-blue">☑</span><span>熟練檢傷傷票、追蹤 APP 與管理系統等<strong>實務工具</strong>。</span></li>
+            <li class="flex gap-3"><span class="text-ems-blue">☑</span><span>從八仙、維冠與新馬案例討論<strong>制度如何依現場修正</strong>。</span></li>
+          </ul>
+          <p class="text-xs text-slate-500 mt-5">編撰委員：陳玉龍 醫師、楊文宏 醫師、陳暉翰 教官、李均祈 教官</p>
+        </div>
+        <div class="bg-ems-navy p-8 rounded-xl shadow-md text-white border-t-4 border-ems-orange">
+          <h3 class="text-xl font-bold text-white mb-3">本章主線：從「超載」到「分流」</h3>
+          <div class="space-y-3 text-sm">
+            <div class="bg-slate-800 p-4 rounded border border-slate-700"><strong class="text-white">先判斷是否超載：</strong><span class="text-slate-300">不是只看總人數，而是傷情與現有的人、車、醫院量能是否失衡。</span></div>
+            <div class="bg-slate-800 p-4 rounded border border-slate-700"><strong class="text-white">再建立共同指揮：</strong><span class="text-slate-300">4S、METHANE 與 ICS 讓跨單位用同一套語言協作。</span></div>
+            <div class="bg-slate-800 p-4 rounded border border-slate-700"><strong class="text-white">最後完成 3T：</strong><span class="text-slate-300">檢傷 Triage、治療 Treatment、後送 Transport，並持續重複檢傷。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-label">本章地圖</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <button onclick="switchView('view-definition',document.querySelectorAll('.nav-item')[1])" class="grid-btn text-left border border-slate-300 rounded-lg p-5"><div class="text-3xl font-black text-ems-blue">01</div><div class="font-bold text-ems-navy mt-1">何時算大量傷病患？</div><p class="text-xs text-slate-500 mt-2">法律人數只是起點，真正標準是現場資源是否超載。</p></button>
+          <button onclick="switchView('view-command',document.querySelectorAll('.nav-item')[2])" class="grid-btn text-left border border-slate-300 rounded-lg p-5"><div class="text-3xl font-black text-ems-blue">02</div><div class="font-bold text-ems-navy mt-1">如何把現場組織起來？</div><p class="text-xs text-slate-500 mt-2">4S 評估、METHANE 回報、ICS 指揮與 3T 處置。</p></button>
+          <button onclick="switchView('view-case-burn',document.querySelectorAll('.nav-item')[5])" class="grid-btn text-left border border-slate-300 rounded-lg p-5"><div class="text-3xl font-black text-ems-blue">03</div><div class="font-bold text-ems-navy mt-1">真實案例教了什麼？</div><p class="text-xs text-slate-500 mt-2">標準流程要能因災害型態、場地與資源即時修正。</p></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-definition" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.418–P.419</div><h2 class="text-3xl font-bold text-ems-navy">01　大量傷病患的定義與啟動標準</h2><p class="text-ems-gray mt-2 text-lg">核心不是一個固定數字，而是<strong>需求超過現場救護資源負荷</strong>。</p></header>
+      <div class="callout danger mb-8"><div class="font-bold text-red-900 mb-1">臺灣法規定義</div><p class="text-sm text-red-900">《緊急醫療救護法施行細則》將大量傷病患定義為：單一事故或災害的傷病患人數達 <strong>15 人以上</strong>，或預判可能達 15 人以上。</p></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card"><div class="section-label">實務上的啟動判斷</div><ul class="list-disc pl-5 space-y-2 text-slate-700"><li>各縣市醫療資源不同，固定 15 人不一定能一體適用。</li><li>當傷病患數量或嚴重度，已超過現場可用人力、車輛與醫院承載量時，就應考慮啟動大量傷病患應變。</li><li>啟動後要建立事故指揮體系，才能有效管理並控制整體救援。</li><li>各機關與單位應事前訂定共同策略，避免真正發生時才臨時協調。</li></ul></div>
+        <div class="bg-ems-navy text-white rounded-xl p-6"><h3 class="font-bold text-xl mb-4">一個好用的判斷句</h3><p class="text-slate-300 leading-relaxed">「如果用平時的派遣與處置方式，已無法在合理時間內安全完成救援，就要切換成大量傷病患模式。」</p><div class="mt-5 flex flex-wrap gap-2"><span class="pill">傷病患數量</span><span class="pill">傷勢嚴重度</span><span class="pill">救護車量能</span><span class="pill">醫院容量</span><span class="pill">預估處置時間</span></div></div>
+      </div>
+      <div class="card mb-8"><div class="section-label">表 16-1　美國緊急醫療救護協會啟動標準</div><div class="table-scroll"><table class="data-table"><thead><tr><th>等級</th><th>傷病患人數</th><th>建議動員與聯繫</th></tr></thead><tbody><tr><td class="font-bold">Level 1</td><td>5–10 人</td><td>2 個 BLS 後送單位、1 個 ALS 後送單位；空中救護待命；聯絡 2 家附近醫院與外傷中心。</td></tr><tr><td class="font-bold">Level 2</td><td>11–20 人</td><td>6 個 BLS、2 個 ALS、1 架直昇機；聯絡 3 家附近醫院與 2 家區域外傷中心。</td></tr><tr><td class="font-bold">Level 3</td><td>21 人以上</td><td>8 個 BLS、2 個 ALS、2 架直昇機；聯絡 4 家附近醫院與 2 家區域外傷中心。</td></tr></tbody></table></div></div>
+      <div class="card"><div class="section-label">表 16-2　加州蒙特瑞郡資源負荷標準</div><div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6"><div class="protocol-card card"><div class="font-black text-ems-blue text-xl">Level 1</div><p class="text-sm mt-2">超過平時負荷，但原有系統可承擔，且可在 1 小時內完成應變。</p><div class="font-bold mt-3">3–5 台救護車</div></div><div class="protocol-card card"><div class="font-black text-ems-orange text-xl">Level 2</div><p class="text-sm mt-2">超過平時負荷，必須仰賴支援，預計應變時間超過 1 小時。</p><div class="font-bold mt-3">5–10 台救護車</div></div><div class="protocol-card card"><div class="font-black text-ems-danger text-xl">Level 3</div><p class="text-sm mt-2">地區內支援不足，必須啟動 EOC 等單位進行區域應變。</p><div class="font-bold mt-3">11 台以上</div></div></div><div class="bg-slate-100 rounded-lg p-5 text-center"><div class="text-sm text-slate-500">簡易救護車需求估算</div><div class="text-2xl md:text-3xl font-black text-ems-navy mt-1">救護車數＝（紅色傷患數 ÷ 2）＋1</div><p class="text-sm text-slate-600 mt-2">例：10 位立即送醫傷患 → 10 ÷ 2 ＋ 1 ＝ 6 台。</p></div></div>
+    </section>
+
+    <section id="view-command" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.420–P.422</div><h2 class="text-3xl font-bold text-ems-navy">02　4S、METHANE 與 ICS</h2><p class="text-ems-gray mt-2 text-lg">第一台救護車不是急著處理第一位傷患，而是先讓後續所有人知道：現場是否安全、發生什麼、需要什麼、誰在指揮。</p></header>
+      <div class="card mb-8"><div class="section-label">處置目的與基本原則</div><div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div><p class="leading-relaxed text-slate-700">交通、科技與社會型態讓災害常以複合形式出現。大量傷病患處置不同於一般緊急救護：目標是用有限資源救治最多傷病患，迅速分辨輕重、把握黃金時間、送往合適醫院，並控制災害擴大與後續傷害。</p></div><ul class="list-disc pl-5 space-y-2 text-slate-700"><li>平時準備、訓練並掌握可用人力與資源。</li><li>事件發生時快速將資源投入第一現場。</li><li>流程分成「抵達現場的災難管理」與「災難處置」。</li><li>依災害類型與現場狀況彈性調整。</li></ul></div></div>
+      <div class="mb-8"><h3 class="text-xl font-bold text-ems-navy mb-4">抵達現場：4S</h3><div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"><div class="card protocol-card"><div class="text-3xl font-black text-ems-blue">S</div><div class="font-bold">Safety 確保安全</div><p class="text-sm text-slate-600 mt-2">評估個人風險、安全作業區、周邊人群，以及二次爆炸、中毒或其他災害升級。</p></div><div class="card protocol-card"><div class="text-3xl font-black text-ems-blue">S</div><div class="font-bold">Size-up 事故資訊</div><p class="text-sm text-slate-600 mt-2">掌握地點、時間、類型、嚴重度、人數、傷情、地形、危害、路線與所需資源。</p></div><div class="card protocol-card"><div class="text-3xl font-black text-ems-blue">S</div><div class="font-bold">Send Information</div><p class="text-sm text-slate-600 mt-2">迅速回報，讓適當人員與裝備抵達、關鍵單位啟動並取得安全路線。</p></div><div class="card protocol-card"><div class="text-3xl font-black text-ems-blue">S</div><div class="font-bold">Set up 建立指揮</div><p class="text-sm text-slate-600 mt-2">建立 ICS、共同指揮與功能分組，讓跨單位按同一計畫行動。</p></div></div></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card"><div class="section-label">安全：三個面向</div><ol class="space-y-3 text-slate-700"><li><strong>1. 評估：</strong>如何安全進入現場，並安全救出傷患。</li><li><strong>2. 設置：</strong>若有二次災害，如何配置緊急疏散動線。</li><li><strong>3. 執行：</strong>建立安全區概念，持續因應環境變化。</li></ol><div class="callout warn mt-5"><p class="text-sm">大量傷病患之後仍可能再發生另一個災害，疏散與搜救計畫必須同時保護傷患及搶救人員。</p></div></div>
+        <div class="card"><div class="section-label">Size-up 八項資料</div><ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-700"><li>1. 事故地點</li><li>2. 發生時間</li><li>3. 類型與嚴重度</li><li>4. 傷病患人數</li><li>5. 嚴重度與傷害類型</li><li>6. 地形、環境與危害物質</li><li>7. 進出路徑與集結點</li><li>8. 所需資源及數量</li></ol></div>
+      </div>
+      <div class="card mb-8"><div class="section-label">圖 16-1　大量傷病患現場動線配置</div><div class="max-w-4xl mx-auto"><div class="border-2 border-dashed border-slate-400 rounded-lg p-5 bg-red-50"><div class="font-bold text-center text-red-900">衝擊區／作業範圍</div><div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mt-4"> <div class="h-10 rounded-full bg-rose-500"></div><div class="h-10 rounded-full bg-amber-400"></div><div class="h-10 rounded-full bg-green-500"></div><div class="h-10 rounded-full bg-rose-500"></div><div class="h-10 rounded-full bg-green-500"></div><div class="h-10 rounded-full bg-amber-400"></div></div></div><div class="flow-arrow">↓ 人員集結／疏散方向</div><div class="flow-node blue">集結／疏散會合點</div><div class="flow-arrow">↓</div><div class="grid grid-cols-1 sm:grid-cols-3 gap-3"><div class="flow-node">醫療救護站</div><div class="flow-node head">指揮站</div><div class="flow-node">人員物資集結區</div></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-center text-sm font-bold text-ems-blue"><div class="border-t-4 border-ems-blue pt-2">車輛動線 →</div><div class="border-t-4 border-ems-blue pt-2">車輛動線 →</div></div></div><p class="text-xs text-slate-500 text-center mt-4">重點是將衝擊區、傷患疏散、醫療救護、指揮、物資集結與車流分開，避免救援動線互相干擾。</p></div>
+      <div class="card mb-8"><div class="section-label">Send Information：回報後要促成的五件事</div><ol class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-700 list-decimal pl-5"><li>讓適當數量、具備所需專業技能的應變人員抵達。</li><li>啟動現場可能需要的關鍵單位。</li><li>提供其他應變者最安全的進場路線。</li><li>動員適當設備與物資前往現場。</li><li>迅速向指揮中心完成狀況回報。</li></ol></div>
+      <div class="card mb-8"><div class="section-label">METHANE：第一時間災情口訣</div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"><div class="flow-node"><strong>M</strong><br><span class="text-xs">Major incident<br>是否為災難／是否啟動</span></div><div class="flow-node"><strong>E</strong><br><span class="text-xs">Exact location<br>精確地點、道路、地形</span></div><div class="flow-node"><strong>T</strong><br><span class="text-xs">Type<br>災害類型</span></div><div class="flow-node"><strong>H</strong><br><span class="text-xs">Hazard<br>現有或潛在危害</span></div><div class="flow-node"><strong>A</strong><br><span class="text-xs">Access / egress<br>進出方式與動線</span></div><div class="flow-node"><strong>N</strong><br><span class="text-xs">Number<br>估計人數與傷患類型</span></div><div class="flow-node sm:col-span-2"><strong>E</strong><br><span class="text-xs">Emergency services<br>需要哪些支援與車輛</span></div></div></div>
+      <div class="card"><div class="section-label">ICS 災害現場指揮系統</div><div class="max-w-4xl mx-auto mb-8"><div class="flow-node head">事故指揮官</div><div class="flow-arrow">↓</div><div class="grid grid-cols-1 sm:grid-cols-3 gap-3"><div class="flow-node blue">安全官</div><div class="flow-node blue">聯絡官</div><div class="flow-node blue">資訊官</div></div><div class="flow-arrow">↓</div><div class="grid grid-cols-2 lg:grid-cols-4 gap-3"><div class="flow-node">執行組</div><div class="flow-node">計畫組</div><div class="flow-node">後勤組</div><div class="flow-node">財務組</div></div></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><details class="study-detail"><summary>三位管理幕僚</summary><div class="detail-body"><ul class="space-y-2"><li><strong>安全官：</strong>可緊急制止危險行動，確保應變安全；複雜事故需整合多方專家。</li><li><strong>聯絡官：</strong>聯繫政府、非政府組織與民間救難團體。</li><li><strong>資訊官：</strong>面對媒體與發布資訊；指揮官宜避免直接面對媒體。</li></ul></div></details><details class="study-detail"><summary>四個功能部門</summary><div class="detail-body"><ul class="space-y-2"><li><strong>執行：</strong>依計畫執行，可分現場救護、待命、警戒、災害控管等支部。</li><li><strong>計畫：</strong>蒐集分析資訊、資源監控、預測變化與替代方案。</li><li><strong>後勤：</strong>醫療照護、餐飲與設備補給；短事件可不設。</li><li><strong>財務：</strong>成本、人員工時、保險、器材損壞與徵用補償紀錄。</li></ul></div></details></div><div class="callout mt-5"><p class="text-sm">ICS 具系統化與彈性，不是每次都要完整展開。短時間、資源充足的事件可省略後勤與財務；長時間倒塌搜救則必須建立。</p></div></div>
+    </section>
+
+    <section id="view-triage" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.423–P.425</div><h2 class="text-3xl font-bold text-ems-navy">檢傷分類、四色標示與 START</h2><p class="text-ems-gray mt-2 text-lg">檢傷不是一次性的貼標籤，而是隨病情與救援階段持續更新的資源配置工具。</p></header>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"><div class="card"><div class="section-label">檢傷原則</div><p class="text-slate-700 leading-relaxed">Triage 源自法語 Trier「尋找、選擇」。其目的，是在有限醫療資源下快速區分嚴重度，優先處理最具生命危險、且及時治療能明顯提升存活率的傷患。</p><div class="callout mt-4"><p class="text-sm">檢傷分類概念由戰爭發展至民間運用；顏色讓現場人員能快速辨識處置順序。</p></div></div><div class="card"><div class="section-label">三個階段</div><ol class="space-y-3"><li><strong>1. 災害現場：</strong>初級檢傷，例如 START。</li><li><strong>2. 治療區：</strong>次級檢傷，重新評估並調整級數。</li><li><strong>3. 後送選擇：</strong>三級檢傷，安排順序與目的醫院。</li></ol><p class="text-sm text-slate-500 mt-4">各國制度與文化不同；臺灣可參照到院前兩級檢傷，再建立安全有效的防護網。</p></div></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8"><div class="card border-t-4 border-rose-700"><span class="triage-chip tri-red">紅色</span><h3 class="font-bold mt-3">重傷／立即治療</h3><p class="text-sm text-slate-600 mt-2">傷勢危及生命，但及時治療可大幅提升存活率，第一優先。</p></div><div class="card border-t-4 border-amber-500"><span class="triage-chip tri-yellow">黃色</span><h3 class="font-bold mt-3">中傷／暫緩治療</h3><p class="text-sm text-slate-600 mt-2">有顯著傷害，但稍微延遲不致危及生命或造成嚴重後遺症，第二優先。</p></div><div class="card border-t-4 border-green-600"><span class="triage-chip tri-green">綠色</span><h3 class="font-bold mt-3">輕傷</h3><p class="text-sm text-slate-600 mt-2">通常可自行行走，延遲處置不影響生命；多可由一般人員協助，第三優先。</p></div><div class="card border-t-4 border-stone-800"><span class="triage-chip tri-black">黑色</span><h3 class="font-bold mt-3">死亡／瀕死</h3><p class="text-sm text-slate-600 mt-2">明顯死亡或即使投入大量資源，存活率仍不高，最後處置。</p></div></div>
+      <div class="card mb-8"><div class="section-label">START：Simple Triage And Rapid Treatment</div><p class="text-sm text-slate-600 mb-6">1983 年由美國 Hoag Hospital 急診護理人員與南加州消防局共同發展。依「能否行走 → 呼吸 → 循環 → 意識」快速排序。</p><div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start"><div><div class="flow-node head">呼喊集合</div><div class="flow-arrow">↓</div><div class="flow-node green">能行走 → 綠色<br><span class="text-xs font-normal">集中後進行二次檢傷</span></div></div><div><div class="flow-node head">不能行走：有無呼吸？</div><div class="flow-arrow">↓</div><div class="grid grid-cols-2 gap-2"><div class="flow-node red">有呼吸<br><span class="text-xs">進入呼吸速率判斷</span></div><div class="flow-node black">無呼吸<br><span class="text-xs">打開呼吸道再檢查；仍無呼吸＝黑色</span></div></div><div class="flow-arrow">↓</div><div class="flow-node red">呼吸 &gt;30 次／分 → 紅色</div></div><div><div class="flow-node head">呼吸 ≤30 次／分</div><div class="flow-arrow">↓</div><div class="flow-node yellow">檢查循環<br><span class="text-xs">無橈動脈搏動或微血管填充 ≥2 秒 → 紅色</span></div><div class="flow-arrow">↓</div><div class="flow-node blue">檢查意識<br><span class="text-xs">不能遵從簡單指令 → 紅色；可以 → 黃色</span></div></div></div></div>
+      <div class="callout warn mb-8"><div class="font-bold text-orange-900">START 的限制</div><ul class="list-disc pl-5 mt-2 text-sm text-orange-900 space-y-1"><li>1–8 歲兒童可採以兒童生理特性設計的 JumpSTART。</li><li>傷患生命徵象會隨時間惡化，可能由黃轉紅、紅轉黑，必須反覆檢傷。</li><li>START 只是眾多方法之一，不是所有災害都適用；應依時間、地點、傷害機轉與資源修正。</li></ul></div>
+      <div class="card"><div class="section-label">表 16-3　四色嚴重度與順序</div><div class="table-scroll"><table class="data-table"><thead><tr><th>顏色</th><th>傷勢</th><th>處置順序</th></tr></thead><tbody><tr><td><span class="triage-chip tri-red">紅</span></td><td>重傷</td><td>第一優先</td></tr><tr><td><span class="triage-chip tri-yellow">黃</span></td><td>中傷</td><td>第二優先</td></tr><tr><td><span class="triage-chip tri-green">綠</span></td><td>輕傷</td><td>第三優先</td></tr><tr><td><span class="triage-chip tri-black">黑</span></td><td>死亡／瀕死</td><td>最後處置</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="view-3t" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.425–P.427</div><h2 class="text-3xl font-bold text-ems-navy">3T、檢傷工具與完整處置流程</h2><p class="text-ems-gray mt-2 text-lg">現場救護可整理為 Triage、Treatment、Transport；第一梯次人力不足時可兼任角色，支援抵達後再展開 ICS。</p></header>
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8"><div class="card"><div class="text-2xl">🏷️</div><h3 class="font-bold mt-2">檢傷官</h3><p class="text-sm text-slate-600 mt-1">快速辨識危險等級，使最需要資源者獲得治療。</p></div><div class="card"><div class="text-2xl">🩺</div><h3 class="font-bold mt-2">醫療官</h3><p class="text-sm text-slate-600 mt-1">管理治療區，給予適當處置並持續再評估。</p></div><div class="card"><div class="text-2xl">🚑</div><h3 class="font-bold mt-2">後送官</h3><p class="text-sm text-slate-600 mt-1">決定後送順序、紀錄目的醫院並分派車輛。</p></div><div class="card"><div class="text-2xl">🚏</div><h3 class="font-bold mt-2">集結官</h3><p class="text-sm text-slate-600 mt-1">設置車輛集結點與良好動線，避免交通紊亂。</p></div></div>
+      <div class="card mb-8"><div class="section-label">檢傷輔助工具</div><p class="text-sm text-slate-600 mb-5">檢傷傷票以紅、黃、綠、黑標示並收集人數與傷情。跨部會一站通計畫進一步整合 QR Code、檢傷追蹤 APP 與大量傷病患管理系統，快速記錄姓名、性別、級數及後送醫院，降低統計與回報負擔。</p><figure><div class="figure-crop" style="--crop-ratio:1.30;--page-scale:108.72%;--tx:-3.93%;--ty:-43.33%;"><img src="./assets/img/chap16-page425.jpg" alt="圖 16-4 至圖 16-7：分區分級檢傷、檢傷傷票、檢傷追蹤 APP 與大量傷病患管理系統"></div><figcaption>圖 16-4～16-7　分區分級檢傷、檢傷傷票、檢傷追蹤 APP 與大量傷病患管理系統（保留課本原圖）</figcaption></figure></div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div class="card border-t-4 border-ems-danger"><div class="section-label">Triage 檢傷</div><p class="text-sm text-slate-700">先完成初級分類；進入治療區後做次級檢傷；後送前再做三級檢傷。檢傷結果必須能隨病情改變。</p></div>
+        <div class="card border-t-4 border-ems-orange"><div class="section-label">Treatment 治療</div><ol class="text-sm text-slate-700 space-y-1 list-decimal pl-5"><li>入區前已完成分級。</li><li>依紅黃綠黑分區。</li><li>黑區位置避免心理創傷。</li><li>再評估病情惡化。</li><li>保留安置、器耗材與隔離空間。</li><li>管制進出路線。</li><li>位置標示清楚。</li></ol></div>
+        <div class="card border-t-4 border-ems-blue"><div class="section-label">Transport 後送</div><ol class="text-sm text-slate-700 space-y-2 list-decimal pl-5"><li>送醫前再次檢傷並安排順序與醫院。</li><li>確認、記錄基本資料及目的醫院。</li><li>選擇合適車輛與設備，例如綠牌傷患可由小型巴士統一載送。</li></ol></div>
+      </div>
+      <div class="card mb-8"><div class="section-label">大量傷病患事故處理流程</div><div class="grid grid-cols-1 lg:grid-cols-5 gap-3 items-center"><div class="flow-node head">事故現場<br><span class="text-xs font-normal">安全評估與初級檢傷</span></div><div class="flow-arrow lg:rotate-[-90deg]">↓</div><div class="flow-node blue">治療區<br><span class="text-xs font-normal">紅／黃／綠分區與次級檢傷</span></div><div class="flow-arrow lg:rotate-[-90deg]">↓</div><div class="flow-node green">後送區<br><span class="text-xs font-normal">三級檢傷、集結與分流送醫</span></div></div><div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-sm"><div class="bg-slate-100 rounded p-3">檢傷官</div><div class="bg-slate-100 rounded p-3">現場事故指揮官</div><div class="bg-slate-100 rounded p-3">醫療指揮官</div><div class="bg-slate-100 rounded p-3">後送官</div></div></div>
+      <div class="card"><div class="section-label">其他必須納入的考量</div><ol class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-700 list-decimal pl-5"><li>必要時拍照存證，例如發現黑色傷患的位置。</li><li>評估現場環境是否可能造成感染。</li><li>關注救災救護人員創傷後壓力症候群（PTSD）。</li><li>完整紀錄，事後檢討問題並提出解法。</li><li>檢討結論必須透過實際演習驗證，否則容易流於空談。</li></ol></div>
+    </section>
+
+    <section id="view-case-burn" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.428–P.429</div><h2 class="text-3xl font-bold text-ems-navy">案例一　八仙樂園粉塵暴燃事件</h2><p class="text-ems-gray mt-2 text-lg">特殊傷害機轉會讓一般 START 產生系統性誤判；此案凸顯反覆檢傷與現場修正的重要。</p></header>
+      <div class="callout mb-8"><div class="font-bold text-sky-900">課本案例脈絡</div><p class="text-sm text-sky-900 mt-1">大量傷病患並非罕見：921 集集地震、美國 911、阿里山小火車出軌、南亞海嘯、臺南梅嶺遊覽車翻覆、汶川地震、莫拉克風災、日本 311、美國校園槍擊，以及臺北捷運隨機殺人、復興航空澎湖與基隆河空難、高雄氣爆、尼泊爾強震、天津大爆炸、巴黎恐攻、八仙塵爆與維冠大樓倒塌，都提醒第一線必須能快速啟動應變機制。</p></div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"><div class="case-stat bg-ems-navy text-white"><div class="text-3xl font-black">2015.06.27</div><div class="text-sm text-slate-300">約 20:32</div></div><div class="case-stat bg-red-50 border border-red-200"><div class="text-4xl font-black text-ems-danger">15</div><div class="text-sm text-red-800">死亡</div></div><div class="case-stat bg-orange-50 border border-orange-200"><div class="text-4xl font-black text-ems-orange">484</div><div class="text-sm text-orange-800">受傷</div></div></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"><div class="card"><div class="section-label">事件與初級檢傷困境</div><p class="text-slate-700 leading-relaxed">「Color Play Asia—彩色派對」中，大量玉米粉塵遇熱源達燃燒下限後快速燃燒。多數傷患四肢大面積燒燙傷，因疼痛等緣故無法行走；依 START 單靠「可以走的請過來」會把他們判為黃或紅，但當下未必有立即生命危險。</p><div class="callout danger mt-4"><p class="text-sm">呼吸道灼傷可能在短時間內致命。顏面燒燙傷、聲音沙啞、口鼻炭粒、異常呼吸音是重要警訊，不能因「能走」就判為綠色。</p></div></div><figure><div class="figure-crop" style="--crop-ratio:1.67;--page-scale:231.27%;--tx:-5.50%;--ty:-61.67%;"><img src="./assets/img/chap16-page428.jpg" alt="八仙塵爆事故現場"></div><figcaption>圖 16-9　八仙塵爆隔日事故現場（保留課本照片）</figcaption></figure></div>
+      <div class="card mb-8"><div class="section-label">建議的燒燙傷補充檢傷</div><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div><div class="flow-node head">可行走</div><div class="flow-arrow">↓</div><div class="grid grid-cols-2 gap-3"><div><div class="flow-node yellow">顏面燒燙傷？</div><div class="flow-arrow">↓</div><div class="flow-node red">是 → 重傷 A</div></div><div><div class="flow-node yellow">嚴重燒燙傷？</div><div class="flow-arrow">↓</div><div class="flow-node red">是 → 重傷 B</div></div></div></div><div class="bg-slate-100 rounded-lg p-5"><h3 class="font-bold text-ems-navy">不能只看步行能力</h3><ul class="list-disc pl-5 mt-3 text-sm text-slate-700 space-y-2"><li>沒有顏面或嚴重燒燙傷者，才可暫列輕傷。</li><li>中傷者可能從意識清楚、全身燒傷但不能走，迅速惡化為重傷。</li><li>現場反覆檢傷是必要程序，不是重複工作。</li></ul></div></div></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div class="card"><div class="section-label">後送面臨的問題</div><ul class="list-disc pl-5 space-y-2 text-slate-700"><li>場地約 9 公頃、傷患分布廣，在舞臺休息區與入口草皮分設兩個大傷站。</li><li>後送官難掌握總人數與正確目的醫院。</li><li>園內救護車僅一條約 4 公尺寬道路，進出不易。</li><li>兩個大傷區共用進出動線，送醫時間增加。</li><li>開放空間造成兩區資料重複紀錄，統計困難。</li></ul></div><div class="card"><div class="section-label">值得保留的經驗</div><ul class="list-disc pl-5 space-y-2 text-slate-700"><li>救護人員團隊合作，許多民眾主動協助。</li><li>不到 4 小時即將現場傷患全數送醫。</li><li>災害型態特殊時，須調整檢傷方法與後送分流。</li><li>大量紅黃傷患集中可能壅塞急救責任醫院，後送官應掌握醫院容量。</li></ul></div></div>
+    </section>
+
+    <section id="view-case-collapse" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.429–P.430</div><h2 class="text-3xl font-bold text-ems-navy">案例二　0206 地震臺南永康維冠金龍大樓倒塌</h2><p class="text-ems-gray mt-2 text-lg">長時間、高危險、跨層級搜救，考驗 ICS 彈性、後勤補給與救護人員心理支持。</p></header>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"><div class="case-stat bg-ems-navy text-white"><div class="text-3xl font-black">2016.02.06</div><div class="text-sm text-slate-300">南臺灣大地震</div></div><div class="case-stat bg-stone-100 border"><div class="text-4xl font-black text-stone-800">115</div><div class="text-sm">死亡</div></div><div class="case-stat bg-green-50 border border-green-200"><div class="text-4xl font-black text-green-700">175</div><div class="text-sm text-green-800">生還，其中 96 人受傷</div></div></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"><div class="card"><div class="section-label">現場條件</div><ul class="list-disc pl-5 space-y-2 text-slate-700"><li>唯一完全倒塌的維冠金龍大樓奪走 115 條人命，是臺灣單一建築倒塌死亡最慘重災難。</li><li>9 棟、16 層相連建築，任務需要軍、警、消、民間團體與醫院協調整合。</li><li>大樓橫躺永大路阻斷救護動線，臺南消防局在四面設大傷站協助後送。</li><li>115 位黑色傷患以民間救護車後送至殯儀館，將有限醫療資源留給存活率較高者。</li></ul></div><figure><div class="figure-crop" style="--crop-ratio:1.67;--page-scale:231.27%;--tx:-5.50%;--ty:-77.78%;"><img src="./assets/img/chap16-page429.jpg" alt="維冠大樓倒塌現場"></div><figcaption>圖 16-11　維冠大樓倒塌現場搶救情形（保留課本照片）</figcaption></figure></div>
+      <div class="card mb-8"><div class="section-label">長時間搜救的額外需求</div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="bg-slate-100 rounded-lg p-4"><div class="font-bold">特殊訓練</div><p class="text-sm text-slate-600 mt-2">深入倒塌建築的破壞搶救，伴隨餘震與不可預期突發狀況，須經完整消防特搜訓練。</p></div><div class="bg-slate-100 rounded-lg p-4"><div class="font-bold">危險區醫療</div><p class="text-sm text-slate-600 mt-2">受困者無法快速脫困時，救護人員需深入危險區暫時維持氧合、循環與必要處置。</p></div><div class="bg-slate-100 rounded-lg p-4"><div class="font-bold">身心後勤</div><p class="text-sm text-slate-600 mt-2">約 180 小時搜救承受親友支離破碎、體力消耗與年節壓力，須重視創傷後壓力後續治療。</p></div></div></div>
+      <div class="callout"><div class="font-bold text-sky-900">領讀重點</div><p class="text-sm text-sky-900 mt-1">有限資源下的黑色分類，不是放棄生命，而是追求最多數傷患的整體福祉；這也會對現場救護人員造成巨大心理壓力，教育訓練必須納入心理建設。</p></div>
+    </section>
+
+    <section id="view-case-train" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.430–P.432</div><h2 class="text-3xl font-bold text-ems-navy">案例三　宜蘭縣新馬車站列車脫軌</h2><p class="text-ems-gray mt-2 text-lg">翻覆、觸電風險、尖銳碎片、動線分裂與大量外傷，同時考驗指揮者在救助、檢傷與後送之間切換角色。</p></header>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"><div class="case-stat bg-ems-navy text-white"><div class="text-3xl font-black">2018.10.21</div><div class="text-sm text-slate-300">16:50 普悠瑪 6432 次</div></div><div class="case-stat bg-red-50 border border-red-200"><div class="text-4xl font-black text-ems-danger">18</div><div class="text-sm text-red-800">死亡</div></div><div class="case-stat bg-orange-50 border border-orange-200"><div class="text-4xl font-black text-ems-orange">190</div><div class="text-sm text-orange-800">輕重傷</div></div></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"><div class="card"><div class="section-label">事故與初期動員</div><p class="text-slate-700 leading-relaxed">列車進入蘇澳新馬車站時出軌，造成第 3 至第 8 節車廂翻覆，最嚴重傷亡在第 8 節車廂。高速扯斷高架電纜、鐵軌變形，許多乘客在睡夢中來不及反應。</p><ul class="list-disc pl-5 mt-4 space-y-2 text-slate-700"><li>消防局派遣馬賽、冬山、蘇澳、羅東分隊與救災車組。</li><li>初報約 20 人受傷、受困不明，立即加派救護車、器材車與照明車。</li><li>消防人員 63 人、義消 105 人；現場救護車含消防、衛生、國軍單位合計 33 輛。</li></ul></div><figure><div class="figure-crop" style="--crop-ratio:1.75;--page-scale:227.14%;--tx:-51.10%;--ty:-70.83%;"><img src="./assets/img/chap16-page430.jpg" alt="新馬車站列車脫軌初級檢傷分類"></div><figcaption>圖 16-12　初級檢傷分類情形（保留課本照片）</figcaption></figure></div>
+      <div class="card mb-8"><div class="section-label">指揮與檢傷配置</div><div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="bg-slate-100 p-4 rounded-lg"><div class="font-bold">初期指揮官</div><p class="text-sm text-slate-600 mt-2">初期兼任救助與救護指揮；翻覆處具危險時，先調度救災人員進行人命救助。</p></div><div class="bg-slate-100 p-4 rounded-lg"><div class="font-bold">檢傷分工</div><p class="text-sm text-slate-600 mt-2">初期一名 EMT 做初級檢傷；另一名負責次級檢傷與救護車後送分流。</p></div><div class="bg-slate-100 p-4 rounded-lg"><div class="font-bold">支援展開</div><p class="text-sm text-slate-600 mt-2">支援抵達後分派第八車廂主攻、其餘車廂後續搜索，另設救護指揮官協調多單位車輛。</p></div></div></div>
+      <div class="card mb-8"><div class="section-label">現場五項問題與應變</div><ol class="space-y-3 text-slate-700 list-decimal pl-5"><li><strong>場域被車站圍牆切成前後兩側：</strong>兩側不互通，需投入更多人力檢傷與後送。</li><li><strong>重傷與受困者多、搬運器材不足：</strong>除協助脫困外，後續仍缺長背板、SKED 等器材，延誤送至救護站。</li><li><strong>尖銳碎片與 PPE：</strong>手套、消防衣保護人員，卻使傷卡操作與掛卡變得不便。</li><li><strong>走動傷患自行送醫：</strong>後送官難掌握總數，鄰近醫院壅塞；假日國道五號也影響轉送較遠醫院。</li><li><strong>綠卡與紅黃卡分流：</strong>多數綠卡往車站後側自行逃生，前側救護站才能集中處置紅黃卡傷患。</li></ol></div>
+      <figure class="mb-8"><div class="figure-crop" style="--crop-ratio:1.60;--page-scale:153.25%;--tx:-18.08%;--ty:-67.22%;"><img src="./assets/img/chap16-page431.jpg" alt="新馬車站事故現場救護部署圖"></div><figcaption>圖 16-13　事故現場救護部署圖（保留課本航照與標示）</figcaption></figure>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"><div class="card"><div class="section-label">救護站後送</div><figure><div class="figure-crop" style="--crop-ratio:1.75;--page-scale:231.27%;--tx:-5.50%;--ty:-31.67%;"><img src="./assets/img/chap16-page432.jpg" alt="新馬車站救護站傷患後送情形"></div><figcaption>圖 16-14　救護站傷患後送情形（保留課本照片）</figcaption></figure></div><div class="card"><div class="section-label">順利完成的三個關鍵</div><ol class="space-y-3 text-slate-700 list-decimal pl-5"><li><strong>支援迅速：</strong>初期量能不足，但義消及其他分隊快速抵達，後期救援與搬運資源充足。</li><li><strong>指揮得宜：</strong>即時分配第八車廂主攻、其餘搜索與救護指揮任務，協調消防、衛生、軍方車輛。</li><li><strong>初級與次級檢傷搭配：</strong>傷患先送救護站，再由救護指揮官重新檢傷、決定順序與最適醫院。</li></ol><div class="callout mt-5"><p class="text-sm">事故後 7 分鐘第一梯次抵達；約半小時內車廂已無受困者，兩小時內 190 名傷患均送醫。</p></div></div></div>
+      <div class="card"><div class="section-label">本章結語與參考資料</div><p class="text-slate-700 leading-relaxed mb-5">此案為宜蘭近年最嚴重、傷亡最慘重的交通事故。平時訓練、快速跨單位配合與檢傷後送分流，讓傷亡降至最低；人力調度、檢傷方式與搬運器材問題，也成為後續精進的重要依據。</p><ol class="text-sm text-slate-600 space-y-2 list-decimal pl-5"><li>江文莒、李彬州、林志豪及馬惠明主編：《高級救護技術員教科書（第二版）》，衛生福利部，民國 108 年 12 月。</li><li>符凌斌、潘師典、蕭雅文：以 CSCATTT 剖析花蓮地震現場醫療站運作，《台灣急診醫學通訊》，2021 Feb，第四卷第一期。</li><li>廖訓楨主編：《初級救護技術員訓練教材（第二版）》，內政部消防署，民國 107 年 12 月。</li><li>劉德明、馬惠明、黃建華、黃妙如、黃朝群、黃祥璋等：《大量傷病患應變訓練教材》，臺北市政府消防局，民國 98 年 12 月 24 日。</li><li>Jenkins JL, McCarthy ML, Sauer LM, et al. Mass-Casualty Triage: Time for an Evidence-Based Approach. Comprehensive Review. 2008;23(1):3–8.</li></ol></div>
+    </section>
+  </main>
+
+  <script src="./assets/js/chapter-nav.js"></script>
+</body>
+</html>
