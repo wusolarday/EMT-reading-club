@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT 海栓讀書會 - 第十七章 團隊資源管理介紹與應用</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/tailwind-config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; padding:1.25rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .section-label { display:inline-flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:800; color:#1e293b; margin-bottom:.9rem; }
+    .section-label::before { content:''; width:.7rem; height:1.5rem; background:#0284c7; border-radius:.125rem; display:inline-block; }
+    .pill { display:inline-flex; align-items:center; background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; border-radius:999px; padding:.3rem .65rem; font-size:.82rem; font-weight:700; }
+    .grid-btn { cursor:pointer; transition:transform .15s, box-shadow .15s, background-color .15s; }
+    .grid-btn:hover { transform:translateY(-2px); }
+    .callout { border-left:4px solid #0284c7; background:#f0f9ff; border-radius:.5rem; padding:.9rem 1.1rem; }
+    .callout.warn { border-left-color:#ea580c; background:#fff7ed; }
+    .callout.danger { border-left-color:#dc2626; background:#fef2f2; }
+    .flow-node { background:#fff; border:1px solid #cbd5e1; border-radius:.6rem; padding:.7rem .9rem; text-align:center; font-weight:800; color:#1e293b; }
+    .flow-node.head { background:#1e293b; color:#fff; border-color:#1e293b; }
+    .flow-node.blue { background:#e0f2fe; border-color:#0284c7; color:#075985; }
+    .flow-arrow { color:#0284c7; text-align:center; font-weight:900; padding:.2rem; }
+
+    /* 「帶過就好」的內容一律收在摺疊卡裡 */
+    details.study-detail { background:#fff; border:1px solid #e2e8f0; border-radius:.6rem; overflow:hidden; }
+    details.study-detail summary { cursor:pointer; list-style:none; padding:.85rem 1.1rem; font-weight:800; color:#1e293b; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    details.study-detail summary::-webkit-details-marker { display:none; }
+    details.study-detail summary::after { content:'＋'; color:#0284c7; font-size:1.2rem; }
+    details.study-detail[open] summary::after { content:'－'; }
+    details.study-detail .detail-body { border-top:1px solid #e2e8f0; padding:1rem 1.1rem; color:#475569; font-size:.9rem; line-height:1.75; }
+    .skim-tag { font-size:.7rem; font-weight:800; color:#94a3b8; letter-spacing:.08em; }
+
+    /* 口訣字母磚 */
+    .mne-wrap { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; overflow:hidden; }
+    .mne-head { background:#1e293b; color:#fff; padding:.8rem 1.05rem; display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; }
+    .mne-head .mne-code { font-size:1.1rem; font-weight:900; letter-spacing:.12em; }
+    .mne-head .mne-sub { font-size:.76rem; color:#94a3b8; }
+    .mne-tiles { display:flex; flex-wrap:wrap; gap:.45rem; padding:.9rem 1.05rem .15rem; }
+    .mne-tile { width:2.8rem; height:3.2rem; border-radius:.55rem; border:2px solid #cbd5e1; background:#f8fafc; color:#1e293b;
+                font-size:1.4rem; font-weight:900; cursor:pointer; transition:all .18s ease; position:relative; flex:0 0 auto; }
+    .mne-tile span { position:absolute; bottom:.15rem; left:0; right:0; font-size:.55rem; font-weight:700; color:#94a3b8; }
+    .mne-tile:hover { border-color:#0284c7; transform:translateY(-3px); }
+    .mne-tile.active { background:#0284c7; border-color:#ea580c; color:#fff; transform:translateY(-3px); box-shadow:0 10px 18px -10px rgba(2,132,199,.7); }
+    .mne-tile.active span { color:#e0f2fe; }
+    .mne-body { padding:.4rem 1.05rem 1.1rem; }
+    .mne-title { font-weight:900; color:#0284c7; font-size:1.02rem; }
+    .mne-en { font-size:.75rem; color:#64748b; font-weight:700; }
+    .mne-text { color:#334155; font-size:.9rem; line-height:1.7; margin-top:.45rem; }
+    .mne-say { margin-top:.6rem; background:#f1f5f9; border-left:3px solid #ea580c; border-radius:.35rem; padding:.5rem .75rem; font-size:.86rem; color:#1e293b; font-weight:700; }
+    .mne-progress { font-size:.68rem; color:#94a3b8; padding:0 1.05rem .8rem; }
+
+    /* 無線電對話氣泡 */
+    .radio-box { background:#0f172a; border-radius:.75rem; padding:1rem; }
+    .radio-title { color:#38bdf8; font-size:.7rem; font-weight:800; letter-spacing:.16em; margin-bottom:.75rem; text-transform:uppercase; }
+    .chat-row { display:flex; margin-bottom:.6rem; }
+    .chat-row.right { justify-content:flex-end; }
+    .bubble { max-width:86%; border-radius:.9rem; padding:.55rem .85rem; font-size:.9rem; line-height:1.6; }
+    .bubble .who { display:block; font-size:.66rem; font-weight:800; letter-spacing:.06em; opacity:.75; margin-bottom:.12rem; }
+    .bubble.a { background:#1e293b; color:#e2e8f0; border:1px solid #334155; border-bottom-left-radius:.2rem; }
+    .bubble.b { background:#0284c7; color:#fff; border-bottom-right-radius:.2rem; }
+    .bubble.ok { background:#166534; color:#dcfce7; border-bottom-right-radius:.2rem; }
+    .loop-badge { display:inline-flex; align-items:center; gap:.3rem; background:#164e63; color:#a5f3fc; border-radius:999px; padding:.15rem .55rem; font-size:.68rem; font-weight:800; }
+
+    /* 衝突升級階梯 */
+    .ladder { display:flex; flex-direction:column-reverse; gap:.55rem; }
+    .rung { border-radius:.7rem; padding:.9rem 1.05rem; border:1px solid #e2e8f0; background:#fff; }
+    .rung .rung-no { font-size:.68rem; font-weight:900; letter-spacing:.12em; color:#64748b; }
+    .rung.l1 { border-left:5px solid #0284c7; }
+    .rung.l2 { border-left:5px solid #ea580c; }
+    .rung.l3 { border-left:5px solid #dc2626; }
+    @media (min-width:768px) { .rung.l2 { margin-left:2rem; } .rung.l3 { margin-left:4rem; } }
+
+    /* 口訣牆 */
+    .wall-card { border:1px solid #e2e8f0; border-top:4px solid #0284c7; border-radius:.65rem; background:#fff; padding:.85rem .95rem; }
+    .wall-card .wc-code { font-size:1.05rem; font-weight:900; color:#1e293b; letter-spacing:.1em; }
+    .wall-card .wc-when { font-size:.7rem; color:#0284c7; font-weight:800; }
+    .wall-card .wc-body { font-size:.78rem; color:#475569; margin-top:.35rem; line-height:1.6; }
+
+    @media (max-width:1023px) { main { padding:1.25rem !important; } }
+  </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+  <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+      <h1 class="text-xl font-bold text-white tracking-wide">第十七章 團隊資源管理</h1>
+      <p class="text-xs text-ems-blue font-medium mt-1">領導 · 溝通 · 守望 · 相助｜5 節精簡版</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+      <button onclick="switchView('view-intro',this)" class="nav-item active w-full text-left px-6 py-3 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">① 前言與 TRM 來歷</span><span class="text-[11px] text-slate-400">P.434–P.437｜非技術性技能・四大模組</span>
+      </button>
+      <button onclick="switchView('view-leader',this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">② 領導模組</span><span class="text-[11px] text-slate-400">P.438–P.439｜SPASE・SNAPPI・ERCP</span>
+      </button>
+      <button onclick="switchView('view-comm',this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">③ 溝通模組</span><span class="text-[11px] text-slate-400">P.440–P.442｜閉圈式・ISAR</span>
+      </button>
+      <button onclick="switchView('view-team',this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">④ 守望與相助</span><span class="text-[11px] text-slate-400">P.443–P.446｜STEP・衝突三階・DESC</span>
+      </button>
+      <button onclick="switchView('view-closing',this)" class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 flex flex-col gap-0.5">
+        <span class="font-bold text-sm">⑤ 結語與口訣牆</span><span class="text-[11px] text-slate-400">P.446–P.447｜9 組口訣總複習</span>
+      </button>
+      <div class="px-6 pt-5 text-[11px] text-slate-500 leading-relaxed">
+        帶「帶過」標記的摺疊卡是課本細節，時間不夠可直接跳過。
+      </div>
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">← 回章節目錄</a>
+  </nav>
+
+  <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+
+    <!-- ① 前言與來歷 -->
+    <section id="view-intro" class="view-section fade-in block">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.434–P.437</div>
+        <h2 class="text-3xl font-bold text-ems-navy">團隊資源管理介紹與應用</h2>
+        <p class="text-ems-gray mt-2 text-lg">技術練得再熟，勤務照樣會亂。這章講的不是怎麼做技術，而是<strong>一群人怎麼一起把事情做對</strong>。</p>
+      </header>
+
+      <div class="bg-ems-navy rounded-xl shadow-md text-white border-t-4 border-ems-orange p-7 mb-8">
+        <div class="text-xs tracking-[0.2em] text-ems-blue font-bold mb-2">本章的一句話</div>
+        <p class="text-lg md:text-xl font-bold leading-relaxed">
+          「緊急救護技能，只是成為一名合格救護技術員的<span class="text-slate-400">基本要求</span>；<br class="hidden md:block">
+          團隊資源管理的能力，才決定了面對各種狀況時<span class="text-ems-orange">是否能全身而退</span>。」
+        </p>
+        <p class="text-xs text-slate-400 mt-3">— 課本 P.436 前言</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card">
+          <div class="section-label">學習目標</div>
+          <ul class="space-y-2 text-slate-700 text-sm">
+            <li class="flex gap-2"><span class="text-ems-blue">☑</span><span>認識 TRM 的<strong>四大模組</strong>（領導・溝通・守望・相助）。</span></li>
+            <li class="flex gap-2"><span class="text-ems-blue">☑</span><span>瞭解<strong>實際救護中如何運用</strong>團隊資源管理。</span></li>
+            <li class="flex gap-2"><span class="text-ems-blue">☑</span><span>學習以<strong>事後反饋技巧</strong>改善下次的行為或品質。</span></li>
+          </ul>
+          <div class="callout mt-4"><p class="text-sm text-sky-900">課本點名的四個干擾因子都跟「技術不熟」無關：<strong>病人突然惡化、現場環境干擾、設備故障、溝通傳達落差</strong>。TRM 強調的正是這些<strong>非技術性技能</strong>（有效溝通、領導、對周遭情況的敏銳察覺）。</p></div>
+          <p class="text-xs text-slate-500 mt-3">編撰委員：劉政亨 醫師（臺大醫院）、陳冠佑 醫師（新北市消防局）、宋威儀 教官（新北市消防局）</p>
+        </div>
+
+        <div class="card">
+          <div class="section-label">來歷：三句話講完</div>
+          <div class="space-y-2 mb-4">
+            <div class="flow-node blue text-left text-sm">✈️ 航空業 CRM<span class="block text-xs font-normal mt-1">1978 年聯合航空 173 號班機：排除故障時效率低、缺乏狀況察覺，最後<strong>燃油耗盡</strong>墜毀。飛機沒壞，是沒人在看全局。</span></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node blue text-left text-sm">🏥 醫療版 TeamSTEPPS<span class="block text-xs font-normal mt-1">美國國防部（DoD）與 AHRQ 借鑑 CRM，<strong>2006 年推出 TeamSTEPPS 1.0</strong>，2014 年再推 2.0。</span></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node head text-left text-sm">🚑 救護車上的 TRM<span class="block text-xs font-normal mt-1">同一套原則進到緊急救護，就是本章的四大模組。</span></div>
+          </div>
+          <details class="study-detail">
+            <summary><span>完整沿革與名詞演變<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <ul class="list-disc pl-5 space-y-1">
+                <li><strong>1970 年代</strong>：航空業發現改善人員溝通與合作可減少人為錯誤，CRM 概念成形。</li>
+                <li><strong>1979 年</strong>：類似事件層出不窮，NASA 召開研討會專注討論飛行員的人為因素。</li>
+                <li><strong>名詞演變</strong>：Cockpit（機艙）→ Crew（機組，含空服員）Resource Management → 進入醫療領域後成為 Team Resource Management。</li>
+                <li><strong>1990 年代末</strong>：美國醫療系統面臨嚴重醫療錯誤與病人安全問題，才在 2000 年代初期借鑑航空業經驗。</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-label">四大模組：一趟勤務的四個時刻（點卡片跳節）</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <button onclick="switchView('view-leader',document.querySelectorAll('.nav-item')[1])" class="grid-btn text-left border border-slate-300 rounded-lg p-4 bg-white">
+            <div class="text-2xl">🧭</div>
+            <div class="font-black text-ems-blue mt-1 text-sm">領導 Leadership</div>
+            <p class="text-xs text-slate-600 mt-1">分派任務、追蹤進程、事後檢討。<br>口訣：SPASE／SNAPPI／ERCP</p>
+          </button>
+          <button onclick="switchView('view-comm',document.querySelectorAll('.nav-item')[2])" class="grid-btn text-left border border-slate-300 rounded-lg p-4 bg-white">
+            <div class="text-2xl">📣</div>
+            <div class="font-black text-ems-blue mt-1 text-sm">溝通 Communication</div>
+            <p class="text-xs text-slate-600 mt-1">訊息準確傳遞、減少誤解。<br>工具：閉圈式溝通／ISAR</p>
+          </button>
+          <button onclick="switchView('view-team',document.querySelectorAll('.nav-item')[3])" class="grid-btn text-left border border-slate-300 rounded-lg p-4 bg-white">
+            <div class="text-2xl">👀</div>
+            <div class="font-black text-ems-blue mt-1 text-sm">守望 Situational Awareness</div>
+            <p class="text-xs text-slate-600 mt-1">對整體情境維持警覺。<br>口訣：STEP</p>
+          </button>
+          <button onclick="switchView('view-team',document.querySelectorAll('.nav-item')[3])" class="grid-btn text-left border border-slate-300 rounded-lg p-4 bg-white">
+            <div class="text-2xl">🤝</div>
+            <div class="font-black text-ems-blue mt-1 text-sm">相助 Mutual Support</div>
+            <p class="text-xs text-slate-600 mt-1">互相協助、交叉提醒、解決衝突。<br>口訣：CUS／DESC</p>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 領導 -->
+    <section id="view-leader" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.438–P.439</div>
+        <h2 class="text-3xl font-bold text-ems-navy">② 領導模組：三個階段、三組口訣</h2>
+        <p class="text-ems-gray mt-2 text-lg">領導不是「誰官比較大」，而是<strong>有人負責讓計畫存在、讓計畫被更新</strong>。</p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="card border-t-4 border-ems-blue"><div class="text-xs font-bold tracking-widest text-ems-blue">任務前</div><h4 class="font-bold text-ems-navy mt-1">事前簡報 Brief</h4><p class="text-sm text-slate-600 mt-1">分配工作、確認目標、預想對策與可能結果。</p><div class="mt-2"><span class="pill">SPASE</span></div></div>
+        <div class="card border-t-4 border-ems-orange"><div class="text-xs font-bold tracking-widest text-ems-orange">任務中</div><h4 class="font-bold text-ems-navy mt-1">突發狀況解決 Huddle</h4><p class="text-sm text-slate-600 mt-1">狀況變了就盤點資源、重新分配工作。</p><div class="mt-2"><span class="pill">SNAPPI</span></div></div>
+        <div class="card border-t-4 border-slate-400"><div class="text-xs font-bold tracking-widest text-slate-500">任務後</div><h4 class="font-bold text-ems-navy mt-1">事後反饋 Debrief</h4><p class="text-sm text-slate-600 mt-1">系統化回顧，找出成功之處與待改進處。</p><div class="mt-2"><span class="pill">ERCP</span></div></div>
+      </div>
+
+      <p class="text-sm text-slate-600 mb-4">👇 三組口訣都做成字母磚，<strong class="text-ems-blue">點字母看該步驟要做什麼、現場怎麼說</strong>。讀書會可以只點一輪就好。</p>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <div class="mne-block" data-mne="spase"></div>
+        <div class="mne-block" data-mne="snappi"></div>
+      </div>
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div class="mne-block" data-mne="ercp"></div>
+        <div class="space-y-4">
+          <div class="card">
+            <div class="section-label">事後反饋只要記一件事</div>
+            <p class="text-sm text-slate-700"><strong>檢討事件，不論斷個人對錯。</strong>避免成員產生防備心態；領導者採引導而非指正的語氣，必要時才說明正確答案。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3"><div class="text-xs font-bold text-red-700 mb-1">✗ 容易讓人關門</div><p class="text-sm text-red-900">「你怎麼會壓那麼淺？」</p></div>
+              <div class="bg-green-50 border border-green-200 rounded-lg p-3"><div class="text-xs font-bold text-green-700 mb-1">✓ 引導式</div><p class="text-sm text-green-900">「剛剛壓胸時你當下在想什麼？有什麼讓你不好施力？」</p></div>
+            </div>
+          </div>
+          <details class="study-detail">
+            <summary><span>領導者的其他細節<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <ul class="list-disc pl-5 space-y-1">
+                <li>領導的四件事：擬訂計畫並分配任務、追蹤進程、即時回饋、事後檢討；善用事後檢討（After Action Review）改善團隊表現。</li>
+                <li>好的事後反饋對<strong>團隊學習、發現漏洞、品管作業</strong>都有幫助。</li>
+                <li>以愉悅的心情進行，用正向思考誘發操作者說出當下行為。</li>
+                <li>歸納正確過程並<strong>架構化、甚至口訣化</strong>方便記憶，下次才能操作正確或表現更好。</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 溝通 -->
+    <section id="view-comm" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.440–P.442</div>
+        <h2 class="text-3xl font-bold text-ems-navy">③ 溝通模組：話說出去，不等於話被收到</h2>
+        <p class="text-ems-gray mt-2 text-lg">本節只要帶走一招：<strong>閉圈式溝通</strong>——訊息接收者複誦或確認，確保資訊傳遞無誤。</p>
+      </header>
+
+      <div class="card mb-8">
+        <div class="section-label">閉圈式溝通 Closed-loop Communication</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div>
+            <div class="space-y-2 mb-4">
+              <div class="flow-node head text-sm">① 發話：主手「準備 20 號針具」</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node blue text-sm">② 複誦：副手「準備 20 號針具，收到」</div>
+              <div class="flow-arrow">↓</div>
+              <div class="flow-node text-sm">③ 確認／糾正：主手「正確」</div>
+            </div>
+            <div class="callout warn"><p class="text-sm text-orange-900">現場最危險的狀態不是「沒講」，而是<strong>「我以為他聽到了」</strong>。多講這一句，可減少誤解與受干擾而產生的錯誤。</p></div>
+          </div>
+          <div class="radio-box">
+            <div class="radio-title">課本例句 · 靜脈注射</div>
+            <div class="chat-row"><div class="bubble a"><span class="who">主手</span>「準備 20 號針具。」</div></div>
+            <div class="chat-row right"><div class="bubble b"><span class="who">副手</span>「準備 20 號針具，收到。」</div></div>
+            <div class="chat-row"><div class="bubble a"><span class="who">主手</span>「正確。」<span class="loop-badge mt-1">🔁 圈已閉合</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card">
+          <div class="section-label">主動呼叫 Call-out：五種時機</div>
+          <p class="text-sm text-slate-600 mb-4">語氣冷靜、內容簡潔。<strong>不代表一定要大聲</strong>——穩定音量說出「大家聽我說」常比大喊有效。</p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex gap-3 items-start"><span class="pill shrink-0">緊急情況</span><span class="text-slate-700">「大家聽我說，病人血壓量不到！」</span></li>
+            <li class="flex gap-3 items-start"><span class="pill shrink-0">訊息更新</span><span class="text-slate-700">「現在血壓是 80／50！」</span></li>
+            <li class="flex gap-3 items-start"><span class="pill shrink-0">資源需求</span><span class="text-slate-700">「門打不開，需要破門工具。」</span></li>
+            <li class="flex gap-3 items-start"><span class="pill shrink-0">時間提醒</span><span class="text-slate-700">「學長我們已經等待 15 分鐘了喔！」</span></li>
+            <li class="flex gap-3 items-start"><span class="pill shrink-0">狀態更新</span><span class="text-slate-700">「IV 上了！」</span></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="section-label">回覆確認 Check-back：現場對話練習</div>
+          <p class="text-sm text-slate-600 mb-4">複誦一次任務內容 ＋ 告知「收到」。發話者聽到回饋後可再確認或糾正。</p>
+          <div class="radio-box mb-3">
+            <div class="radio-title">分配任務時</div>
+            <div class="chat-row"><div class="bubble a"><span class="who">EMT A</span>「等一下學長你負責詢問病史。」</div></div>
+            <div class="chat-row right"><div class="bubble b"><span class="who">EMT B</span>「收到，等下我來詢問病史！」</div></div>
+          </div>
+          <div class="radio-box mb-3">
+            <div class="radio-title">傳達關鍵訊息時</div>
+            <div class="chat-row"><div class="bubble a"><span class="who">EMT A</span>「病人血氧沒有提升，麻煩改用 NRM。」</div></div>
+            <div class="chat-row right"><div class="bubble b"><span class="who">EMT B</span>「改給病人使用 NRM！開 15L／min。」</div></div>
+            <div class="chat-row"><div class="bubble ok"><span class="who">EMT A</span>「正確喔！」</div></div>
+          </div>
+          <div class="radio-box">
+            <div class="radio-title">到院交班</div>
+            <div class="chat-row"><div class="bubble a"><span class="who">EMT</span>「病人現場血糖過低，有給予 5% 葡萄糖輸液。」</div></div>
+            <div class="chat-row right"><div class="bubble b"><span class="who">檢傷</span>「現場給 5% 葡萄糖，對嗎？」</div></div>
+            <div class="chat-row"><div class="bubble ok"><span class="who">EMT</span>「正確喔！」</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div>
+          <p class="text-sm text-slate-600 mb-3">交班內容繁多，沒有架構就容易缺失或錯誤。<strong>ISAR</strong> 可用於個人或團隊間的交接：</p>
+          <div class="mne-block" data-mne="isar"></div>
+        </div>
+        <div class="space-y-4">
+          <details class="study-detail">
+            <summary><span>教導回覆 Teach back（對病人與家屬）<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <p>要求訊息接收者<strong>用自己的話重複關鍵資訊</strong>，確保正確理解。當身分、層級或教育程度有落差時特別適用。</p>
+              <ul class="list-disc pl-5 space-y-1 mt-2">
+                <li>用開放式問題邀請對方重述：「能請你用自己的話解釋一下剛才的內容嗎？」</li>
+                <li>耐心聆聽、不要打斷；發現誤解就溫和澄清並重新解釋。</li>
+                <li><strong>避免用是非問題（封閉式問答）</strong>，「你聽懂了嗎？」無法反映真正的理解程度。</li>
+              </ul>
+            </div>
+          </details>
+          <details class="study-detail">
+            <summary><span>非語言溝通四技巧<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <ul class="list-disc pl-5 space-y-1">
+                <li><strong>保持眼神交流</strong>：表明認真聽取並尊重對方。</li>
+                <li><strong>注意身體語言</strong>：開放姿勢（未交叉手臂）、向對方傾斜身體。</li>
+                <li><strong>適當的面部表情</strong>：鼓勵的微笑或同情的表情。</li>
+                <li><strong>語調一致性</strong>：壓力下仍保持穩定平和，顯示冷靜與控制。</li>
+              </ul>
+              <p class="mt-2">現場一個<strong>拍肩</strong>或<strong>揮手示意</strong>加上簡要語言，就能構成清楚且有方向性的訊息。</p>
+            </div>
+          </details>
+          <details class="study-detail">
+            <summary><span>其他架構化交班：MIST<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">外傷病史詢問與交接班可參考 MIST：<strong>機轉（Mechanism）・傷勢（Injury）・徵象（Signs）・治療（Treatment）</strong>。</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ④ 守望與相助 -->
+    <section id="view-team" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.443–P.446</div>
+        <h2 class="text-3xl font-bold text-ems-navy">④ 守望與相助</h2>
+        <p class="text-ems-gray mt-2 text-lg">守望＝<strong>永遠留一雙眼睛看全局</strong>；相助＝<strong>幫得上忙，也要講得出口</strong>。</p>
+      </header>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <div class="lg:col-span-2 card">
+          <div class="section-label">守望：STEP 守望四方</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="border border-slate-200 rounded-lg p-4"><div class="text-2xl font-black text-ems-blue leading-none">S</div><div class="font-bold text-ems-navy mt-1">病人狀況</div><div class="text-xs text-slate-500">Status of patient</div><p class="text-sm text-slate-600 mt-1">持續監控生理狀況與治療反應；有變化要及時反映給領導者與團隊。</p></div>
+            <div class="border border-slate-200 rounded-lg p-4"><div class="text-2xl font-black text-ems-blue leading-none">T</div><div class="font-bold text-ems-navy mt-1">成員狀況</div><div class="text-xs text-slate-500">Team members</div><p class="text-sm text-slate-600 mt-1">壓力、疲勞程度與工作負荷；可參考 IMSAFE。</p></div>
+            <div class="border border-slate-200 rounded-lg p-4"><div class="text-2xl font-black text-ems-blue leading-none">E</div><div class="font-bold text-ems-navy mt-1">環境狀況</div><div class="text-xs text-slate-500">Environment</div><p class="text-sm text-slate-600 mt-1">周遭變化與潛在風險，例如局限空間救護、車禍現場的危害移除。</p></div>
+            <div class="border border-slate-200 rounded-lg p-4"><div class="text-2xl font-black text-ems-blue leading-none">P</div><div class="font-bold text-ems-navy mt-1">任務進展</div><div class="text-xs text-slate-500">Progress toward goal</div><p class="text-sm text-slate-600 mt-1">治療計畫是否如預期；病人持續惡化就要積極查找遺漏的線索。</p></div>
+          </div>
+          <div class="callout danger mt-4"><p class="text-sm text-red-900">團隊<strong>隨時要有至少一人維持警覺</strong>；跳進個別任務前，必須確保有人接手狀況監控。如果成員各自只顧自己的項目、領導者也沒察覺改變，就可能造成病人或團隊的危害（＝1978 那架飛機的翻譯版）。</p></div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-ems-navy text-white rounded-xl p-6 border-t-4 border-ems-orange">
+            <h3 class="font-bold mb-2">把「人」也放進監測清單</h3>
+            <p class="text-sm text-slate-300">近年職場安全與身心健康也是重點。發現擔任<strong class="text-white">司機的同仁精神狀況不佳</strong>，應及時討論、必要時由領導者重新分配工作；體力工作宜由狀況較佳者協助。</p>
+          </div>
+          <details class="study-detail">
+            <summary><span>IMSAFE 六項自我檢查<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <ul class="list-disc pl-5 space-y-1">
+                <li><strong>I</strong>llness 身體不適或感冒</li>
+                <li><strong>M</strong>edication 服藥影響，例如半夜出勤前吃了感冒藥</li>
+                <li><strong>S</strong>tress 長期壓力或執行不擅長技術的壓力</li>
+                <li><strong>A</strong>lcohol 酒精或其他物質影響</li>
+                <li><strong>F</strong>atigue 連續勤務、輪班累積的疲勞</li>
+                <li><strong>E</strong>ating and Elimination 吃喝拉撒等基本生理需求</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card">
+          <div class="section-label">相助 ①　工作負荷管理</div>
+          <div class="space-y-3">
+            <div class="border-l-4 border-ems-blue pl-4">
+              <h4 class="font-bold text-ems-navy">為病人倡議 <span class="text-xs text-slate-500 font-normal">Advocacy</span></h4>
+              <p class="text-sm text-slate-700">發現病人照護的未盡事宜，<strong>縱使領導者未分派也應提出建議</strong>。例：疑似心因性胸痛，提出在現場完成 12 導程心電圖。</p>
+            </div>
+            <div class="border-l-4 border-ems-orange pl-4">
+              <h4 class="font-bold text-ems-navy">主動求援與協助 <span class="text-xs text-slate-500 font-normal">Task Assistance</span></h4>
+              <p class="text-sm text-slate-700">自己或同仁需要協助時<strong>主動求援或幫忙</strong>。例：壓胸手體力不支時提前告知領導者，讓他在適當時機換手。</p>
+            </div>
+          </div>
+          <details class="study-detail mt-4">
+            <summary><span>表達與主張的原則<span class="skim-tag ml-2">帶過</span></span></summary>
+            <div class="detail-body">
+              <ul class="list-disc pl-5 space-y-1">
+                <li>表達與主張要<strong>以病人的安全為出發點</strong>；若被忽視，應再次表達重點，甚至以標準作業流程與病人安全為根據。</li>
+                <li>對於問題應<strong>簡述觀點、提出問題點並提供解決方案</strong>，方可達成共識。</li>
+                <li>成員發現問題時以<strong>婉轉的語氣</strong>提出；處置病人時設身處地，以救護安全與病人權益為出發點。</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="section-label">相助 ②　衝突管理三階（由下往上）</div>
+          <div class="ladder">
+            <div class="rung l1">
+              <div class="rung-no">LEVEL 1 · 再說一次</div>
+              <h4 class="font-bold text-ems-navy">重申關切 <span class="text-xs text-slate-500 font-normal">Two-challenge Rule</span></h4>
+              <p class="text-sm text-slate-700">對方沒接收到訊息時，最直接的做法就是<strong>再說一次</strong>，讓接收者再次確認，避免因忙碌或分心導致不適當的處置。</p>
+            </div>
+            <div class="rung l2">
+              <div class="rung-no">LEVEL 2 · 加關鍵字</div>
+              <h4 class="font-bold text-ems-navy">再三關切 <span class="text-xs text-slate-500 font-normal">CUS</span></h4>
+              <p class="text-sm text-slate-700">建議未受接納時適當增強語氣：我<strong>擔憂</strong>（Concerned）、感到<strong>不安</strong>（Uncomfortable）、有<strong>安全</strong>疑慮（Safety）。例：「我擔心這樣可能會影響到安全。」</p>
+            </div>
+            <div class="rung l3">
+              <div class="rung-no">LEVEL 3 · 結構化談判</div>
+              <h4 class="font-bold text-ems-navy">DESC 模組</h4>
+              <p class="text-sm text-slate-700">意見難以協調時用四步驟化解，完成後多數情況可達成團隊共識。</p>
+            </div>
+          </div>
+          <div class="callout warn mt-4"><p class="text-sm text-orange-900">升級的是<strong>語氣的清楚度</strong>，不是情緒的強度。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div class="mne-block" data-mne="desc"></div>
+        <div class="card">
+          <div class="section-label">DESC 一次串起來（課本 P.446 原例）</div>
+          <div class="radio-box">
+            <div class="radio-title">疑似心因性胸痛 · 現場主張</div>
+            <div class="chat-row"><div class="bubble b"><span class="who">D 再次描述</span>「病人是 65 歲男性，胸悶冒冷汗、血壓偏低。」</div></div>
+            <div class="chat-row"><div class="bubble b"><span class="who">E 說明擔憂</span>「我擔心病人的表現為心肌梗塞。」</div></div>
+            <div class="chat-row"><div class="bubble b"><span class="who">S 提供建議</span>「建議下一步進行院前 12 導程心電圖檢查。」</div></div>
+            <div class="chat-row"><div class="bubble b"><span class="who">C 預期後果</span>「心電圖若異常，應考慮將病人分流到重度急救責任醫院。」</div></div>
+            <div class="chat-row right"><div class="bubble ok"><span class="who">領導者</span>「好，就先做心電圖。」</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ 結語 -->
+    <section id="view-closing" class="view-section hidden">
+      <header class="mb-8">
+        <div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.446–P.447</div>
+        <h2 class="text-3xl font-bold text-ems-navy">⑤ 結語與口訣牆</h2>
+        <p class="text-ems-gray mt-2 text-lg">用一句話收尾，再用一面牆把 9 組口訣複習一輪。</p>
+      </header>
+
+      <div class="bg-ems-navy rounded-xl shadow-md text-white border-t-4 border-ems-orange p-7 mb-8">
+        <div class="text-xs tracking-[0.2em] text-ems-blue font-bold mb-2">結語</div>
+        <p class="text-slate-300 leading-relaxed mb-4">團隊若缺乏良好合作，容易產生失誤並使錯誤持續累積，最終危及病人安全。透過 TRM 整合每位成員的專業與現有資源，能將團隊效能推至最高——<strong class="text-white">如同要達到高品質 CPR，必須有 HP-CPR 的精神</strong>。</p>
+        <div class="flex flex-wrap items-center gap-2 text-sm">
+          <span class="bg-slate-800 border border-slate-700 px-3 py-2 rounded font-bold">有效的領導</span>
+          <span class="bg-slate-800 border border-slate-700 px-3 py-2 rounded font-bold">良好的溝通</span>
+          <span class="bg-slate-800 border border-slate-700 px-3 py-2 rounded font-bold">合作無間</span>
+          <span class="bg-slate-800 border border-slate-700 px-3 py-2 rounded font-bold">狀況監測</span>
+          <span class="text-ems-blue font-black">→</span>
+          <span class="bg-ems-blue px-3 py-2 rounded font-bold">共享心智模式</span>
+          <span class="text-ems-blue font-black">→</span>
+          <span class="bg-ems-orange px-3 py-2 rounded font-bold">穩定病人到院前生命徵象</span>
+        </div>
+      </div>
+
+      <div class="card mb-8">
+        <div class="section-label">口訣牆：9 組縮寫一次收齊</div>
+        <p class="text-sm text-slate-600 mb-5">收尾小遊戲：遮住下半段，只看縮寫，能不能說出「什麼時候用、每個字母是什麼」？</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div class="wall-card"><div class="wc-when">領導 · 任務前</div><div class="wc-code">SPASE</div><div class="wc-body">告知情況・盤點人員・分配任務・注意流程・攜帶裝備</div></div>
+          <div class="wall-card"><div class="wc-when">領導 · 任務中</div><div class="wc-code">SNAPPI</div><div class="wc-body">大聲呼叫・告知狀況・重新評估・制定計畫・依序分派・徵求意見</div></div>
+          <div class="wall-card"><div class="wc-when">領導 · 任務後</div><div class="wc-code">ERCP</div><div class="wc-body">描述事件・引導反思・歸納原則・總結應用</div></div>
+          <div class="wall-card"><div class="wc-when">溝通 · 交接班</div><div class="wc-code">ISAR</div><div class="wc-body">自我介紹與邀請・狀況・評估・處置與再評估</div></div>
+          <div class="wall-card"><div class="wc-when">溝通 · 外傷交班</div><div class="wc-code">MIST</div><div class="wc-body">機轉・傷勢・徵象・治療</div></div>
+          <div class="wall-card"><div class="wc-when">守望 · 四方</div><div class="wc-code">STEP</div><div class="wc-body">病人狀況・成員狀況・環境狀況・任務進展</div></div>
+          <div class="wall-card"><div class="wc-when">守望 · 自我檢查</div><div class="wc-code">IMSAFE</div><div class="wc-body">身體不適・藥物・壓力・酒精・疲勞・基本生理需求</div></div>
+          <div class="wall-card"><div class="wc-when">相助 · 衝突第二階</div><div class="wc-code">CUS</div><div class="wc-body">我擔憂・感到不安・安全疑慮</div></div>
+          <div class="wall-card"><div class="wc-when">相助 · 衝突第三階</div><div class="wc-code">DESC</div><div class="wc-body">再次描述・說明擔憂・提供建議・預期後果</div></div>
+        </div>
+      </div>
+
+      <details class="study-detail">
+        <summary><span>參考資料（課本 P.447）<span class="skim-tag ml-2">帶過</span></span></summary>
+        <div class="detail-body">
+          <ol class="list-decimal pl-5 space-y-1">
+            <li>陳志金、王嘉地、郭雅薇、黃首詠、黃建中、姚惠貞、江惠英、陳德人、林宏榮（2010），醫療團隊資源管理課程中文化初探，《醫療品質雜誌》，4(3)，85-90。</li>
+            <li>黃泰霖，院前 OHCA 救護的團隊合作，《台灣急診醫學通訊》，第五卷第三期（2022）。</li>
+            <li>Alonso A, Baker D, Day R, et al. Reducing medical error in the military health system: How can team training help? <em>Hum Resour Manage Rev</em> 2006; 16: 396-415.</li>
+            <li>Baker, D.P., Day, R. &amp; Salas, E. (2006). Teamwork as an essential component of high-reliability organizations. <em>Health Research and Educational Trust</em>, 41, 1576-1598.</li>
+            <li>O'Dea, A., O'Connor, P. &amp; Keogh, I. (2014). A meta-analysis of the effectiveness of crew resource management training in acute care domains. <em>Postgraduate Medical Journal</em>, 90, 699-708.</li>
+            <li>Oriol, M.D. (2006). Crew resource management. <em>Journal of Nursing Administration</em>, 36(9), 402-406.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="./assets/js/chapter-nav.js"></script>
+  <script>
+  /* =========================================================
+     第十七章：口訣字母磚（唯一互動元件）
+     ========================================================= */
+  const MNE = {
+    spase: {
+      code: 'SPASE', sub: '事前簡報 Brief｜分工說明的具體方式', items: [
+        { l:'S', zh:'告知情況', en:'Situation of scene', d:'將救護案件內容告知成員，包含病人基本狀況、現場可能的情形等。', say:'「78 歲男性倒地沒反應，三樓公寓、沒有電梯。」' },
+        { l:'P', zh:'盤點人員', en:'People', d:'盤點出勤人員的人數、職級與能力。例如可能有 T1、T2、協助的義消，能力與可執行的任務會有差異；此時也可適時關心同仁。', say:'「今天我們兩個 T2 加一位義消學長。」' },
+        { l:'A', zh:'分配任務', en:'Assignment', d:'依照案件內容及團隊成員進行任務分配。', say:'「A 員先接手壓胸、B 員建立呼吸道。」' },
+        { l:'S', zh:'注意流程', en:'SOP', d:'該案件是否有需要注意或提醒的規範及操作程序，此時再次提醒團隊成員。', say:'「照 OHCA 流程走，記得 2 分鐘換手。」' },
+        { l:'E', zh:'攜帶裝備', en:'Equipment', d:'明確指出應攜帶的裝備、器材，並指派誰來攜帶。', say:'「我帶 AED 跟急救袋，你帶抽吸跟氧氣。」' }
+      ]
+    },
+    snappi: {
+      code: 'SNAPPI', sub: '突發狀況解決 Huddle｜盤點資源、重新分配', items: [
+        { l:'S', zh:'大聲呼叫', en:'Shout', d:'大聲呼叫，喚起成員的注意。', say:'「大家聽我說！」' },
+        { l:'N', zh:'告知狀況', en:'Notify', d:'通知團隊成員現有突發狀況為何。', say:'「病人 ROSC 了，但血壓只有 70／40。」' },
+        { l:'A', zh:'重新評估', en:'Access', d:'評估狀況相關資訊，例如重新評估病人及可用資源。', say:'「我們手上還有一支 IV、氧氣夠用。」' },
+        { l:'P', zh:'制定計畫', en:'Plan', d:'基於評估結果，迅速制定行動計畫。', say:'「先穩住呼吸道與輸液，準備上車。」' },
+        { l:'P', zh:'依序分派', en:'Prioritize', d:'依照優先次序分配角色和任務。', say:'「你顧呼吸道，學長準備搬運，我聯絡醫院。」' },
+        { l:'I', zh:'徵求意見', en:'Invite ideas', d:'徵求意見，詢問團隊成員是否有遺漏項目。最容易被省略，卻是把「一個人的視野」變成「全隊視野」的關鍵。', say:'「有沒有我漏掉的？」' }
+      ]
+    },
+    ercp: {
+      code: 'ERCP', sub: '事後反饋 Debrief｜任務後的系統化回顧', items: [
+        { l:'E', zh:'描述事件', en:'Experience', d:'請成員回想勤務過程中印象最深刻（最好、最差或最特別）的過程，並予以闡述。', say:'「剛剛那趟，你印象最深的一段是什麼？」' },
+        { l:'R', zh:'引導反思', en:'Reflection', d:'詢問某些行為是為了什麼？對病人有什麼影響？如果下次再操作，怎麼做對病人比較好？', say:'「那個動作對病人的影響是什麼？」' },
+        { l:'C', zh:'歸納原則', en:'Conceptualization', d:'以架構化的方式引導成員說出解法，必要時才由領導者說明正確答案。重點是讓成員自己想出解決方法，領導者採引導而非指正的語氣。', say:'「所以我們可以整理成哪幾個步驟？」' },
+        { l:'P', zh:'總結應用', en:'Plan', d:'以同樣的學習目標為出發點，討論類似情況發生時具體如何應變。', say:'「下次遇到一樣的狀況，第一件事做什麼？」' }
+      ]
+    },
+    isar: {
+      code: 'ISAR', sub: '緊急救護交接班模組｜個人或團隊間交接', items: [
+        { l:'I', zh:'介紹／邀請／啟動', en:'Introduction / Invitation / Initiation', d:'交班前自我介紹以建立關係，並釋出邀請詢問對方可否交班；若對方未予理會，則依病人的急迫性拋出訊息、表達訴求。', say:'「我是海栓分隊小林，方便現在交班嗎？」' },
+        { l:'S', zh:'狀況', en:'Situation', d:'包含病人主訴及狀況，以及與本次救護相關的過去病史。', say:'「65 歲男性，胸悶 30 分鐘，有高血壓與糖尿病。」' },
+        { l:'A', zh:'評估', en:'Assessment', d:'包含現場評估的結果及初步臆斷。', say:'「血壓 90／60、心跳 110，疑似心因性胸痛。」' },
+        { l:'R', zh:'再評估', en:'Re-evaluation', d:'包含所給予的處置及處置後的再評估。', say:'「給氧並做了 12 導程，上車後血壓回到 100／65。」' }
+      ]
+    },
+    desc: {
+      code: 'DESC', sub: '衝突管理第三階｜意見難以協調時使用', items: [
+        { l:'D', zh:'再次描述', en:'Describe', d:'再次說明病人狀況。有時衝突來自資訊落差，再次說明有機會澄清誤會。', say:'「病人是 65 歲男性，胸悶冒冷汗、血壓偏低。」' },
+        { l:'E', zh:'說明擔憂', en:'Express', d:'說明擔憂及不安的原因。', say:'「我擔心病人的表現為心肌梗塞。」' },
+        { l:'S', zh:'提供建議', en:'Suggest', d:'建議可行的策略或操作方式。', say:'「建議下一步進行院前 12 導程心電圖檢查。」' },
+        { l:'C', zh:'預期後果', en:'Consequences', d:'告知未採行建議的潛在不良後果，或採行後預期的效益。', say:'「心電圖若異常，應考慮分流到重度急救責任醫院。」' }
+      ]
+    }
+  };
+
+  function renderMne(block) {
+    const key = block.dataset.mne, m = MNE[key];
+    if (!m) return;
+    let tiles = '';
+    m.items.forEach((it, i) => {
+      tiles += '<button class="mne-tile' + (i === 0 ? ' active' : '') + '" onclick="pickMne(\'' + key + '\',' + i + ',this)">' + it.l + '<span>' + (i + 1) + '</span></button>';
+    });
+    block.innerHTML =
+      '<div class="mne-wrap">' +
+        '<div class="mne-head"><span class="mne-code">' + m.code + '</span><span class="mne-sub">' + m.sub + '</span></div>' +
+        '<div class="mne-tiles">' + tiles + '</div>' +
+        '<div class="mne-progress">共 ' + m.items.length + ' 個步驟 · 點字母切換</div>' +
+        '<div class="mne-body"><div class="mne-title"></div><div class="mne-en"></div><div class="mne-text"></div><div class="mne-say"></div></div>' +
+      '</div>';
+    block.dataset.ready = '1';
+    fillMne(block, key, 0);
+  }
+
+  function fillMne(block, key, i) {
+    const it = MNE[key].items[i], w = block.querySelector('.mne-body');
+    w.querySelector('.mne-title').innerText = it.l + '　' + it.zh;
+    w.querySelector('.mne-en').innerText = it.en;
+    w.querySelector('.mne-text').innerText = it.d;
+    w.querySelector('.mne-say').innerText = '現場這樣說：' + it.say;
+  }
+
+  function pickMne(key, i, el) {
+    const block = el.closest('.mne-block');
+    block.querySelectorAll('.mne-tile').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    fillMne(block, key, i);
+  }
+
+  window.onViewSwitch = function (viewId) {
+    document.querySelectorAll('#' + viewId + ' .mne-block').forEach(b => { if (!b.dataset.ready) renderMne(b); });
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.mne-block').forEach(renderMne);
+  });
+  </script>
+</body>
+</html>
