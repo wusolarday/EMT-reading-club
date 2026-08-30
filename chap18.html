@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMT 海栓讀書會 - 第十八章 戰術緊急傷患救護</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/tailwind-config.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <style>
+    .card { background:#fff; border:1px solid #e2e8f0; border-radius:.75rem; padding:1.25rem; box-shadow:0 1px 2px rgba(15,23,42,.04); }
+    .section-label { display:inline-flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:800; color:#1e293b; margin-bottom:.9rem; }
+    .section-label::before { content:''; width:.7rem; height:1.5rem; background:#0284c7; border-radius:.125rem; display:inline-block; flex:0 0 auto; }
+    .pill { display:inline-flex; align-items:center; background:#f1f5f9; color:#334155; border:1px solid #e2e8f0; border-radius:999px; padding:.3rem .65rem; font-size:.82rem; font-weight:700; }
+    .grid-btn { cursor:pointer; transition:transform .15s, box-shadow .15s, background-color .15s; }
+    .grid-btn:hover { transform:translateY(-2px); box-shadow:0 10px 20px -14px rgba(15,23,42,.4); }
+    .callout { border-left:4px solid #0284c7; background:#f0f9ff; border-radius:.5rem; padding:1rem 1.2rem; }
+    .callout.warn { border-left-color:#ea580c; background:#fff7ed; }
+    .callout.danger { border-left-color:#dc2626; background:#fef2f2; }
+    .callout.safe { border-left-color:#16a34a; background:#f0fdf4; }
+    .zone-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.75rem; }
+    .zone-card { position:relative; overflow:hidden; border-radius:.75rem; padding:1rem; color:#fff; min-height:8.5rem; }
+    .zone-card::after { content:''; position:absolute; right:-1.4rem; bottom:-2.2rem; width:7rem; height:7rem; border:1.2rem solid rgba(255,255,255,.14); border-radius:50%; }
+    .zone-hot { background:#be123c; }
+    .zone-warm { background:#ea580c; }
+    .zone-cold { background:#16a34a; }
+    .zone-en { font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; opacity:.82; }
+    .march-code { width:3.25rem; height:3.25rem; border-radius:.7rem; display:flex; align-items:center; justify-content:center; flex:0 0 auto; background:#1e293b; color:#fff; border-bottom:4px solid #ea580c; font-size:1.45rem; font-weight:900; }
+    .timeline-item { padding-bottom:1.25rem; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .figure-crop { position:relative; overflow:hidden; width:100%; aspect-ratio:var(--crop-ratio); background:#f8fafc; border:1px solid #e2e8f0; border-radius:.65rem; }
+    .figure-crop img { position:absolute; top:0; left:0; width:var(--page-scale); max-width:none; transform:translate(var(--tx),var(--ty)); transform-origin:top left; }
+    figcaption { font-size:.78rem; color:#64748b; text-align:center; margin-top:.5rem; line-height:1.5; }
+    details.study-detail { background:#fff; border:1px solid #e2e8f0; border-radius:.65rem; overflow:hidden; }
+    details.study-detail summary { cursor:pointer; list-style:none; padding:1rem 1.1rem; font-weight:800; color:#1e293b; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    details.study-detail summary::-webkit-details-marker { display:none; }
+    details.study-detail summary::after { content:'＋'; color:#0284c7; font-size:1.2rem; flex:0 0 auto; }
+    details.study-detail[open] summary::after { content:'－'; }
+    details.study-detail .detail-body { border-top:1px solid #e2e8f0; padding:1rem 1.1rem; color:#475569; line-height:1.75; }
+    .pace-letter { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:.5rem; background:#1e293b; color:#fff; font-weight:900; margin-right:.55rem; }
+    .ref-list li { margin-bottom:.75rem; overflow-wrap:anywhere; }
+    @media (max-width:767px) { .zone-strip { grid-template-columns:1fr; } }
+    @media (max-width:1023px) { main { padding:1.25rem !important; } }
+  </style>
+</head>
+<body class="flex h-screen bg-ems-light font-sans text-slate-800">
+
+  <nav class="w-72 bg-ems-navy text-slate-300 flex flex-col shadow-2xl z-20 shrink-0">
+    <div class="p-6 border-b border-slate-700 bg-slate-900">
+      <h1 class="text-xl font-bold text-white tracking-wide">第十八章 戰術緊急傷患救護</h1>
+      <p class="text-xs text-ems-blue font-medium mt-1">TECC · 三區照護 · MARCH · PACE</p>
+    </div>
+    <div class="flex-1 overflow-y-auto py-2">
+      <div class="px-6 py-1 text-xs font-bold tracking-wider text-slate-500 uppercase">總覽</div>
+      <button onclick="switchView('view-intro',this)" class="nav-item active w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">前言　學習目標與起源</span><span class="text-[11px] text-slate-400">P.448–P.450｜TCCC・C-TECC・高風險 EMS</span></button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">01 TECC 的架構</div>
+      <button onclick="switchView('view-framework',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">三區照護與核心策略</span><span class="text-[11px] text-slate-400">P.451｜熱區・暖區・冷區</span></button>
+      <button onclick="switchView('view-zones',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">熱區與暖區行動</span><span class="text-[11px] text-slate-400">P.452｜準備・救護・撤離・武裝處理</span></button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">02 MARCH 評估</div>
+      <button onclick="switchView('view-march',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">致命傷勢處置流程</span><span class="text-[11px] text-slate-400">P.453–P.454｜M・A・R・C・H</span></button>
+      <div class="px-6 pt-4 pb-1 text-xs font-bold tracking-wider text-slate-500 uppercase">03 後送救護</div>
+      <button onclick="switchView('view-evac',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">冷區照護與 PACE</span><span class="text-[11px] text-slate-400">P.455｜撤退・再評估・復甦</span></button>
+      <button onclick="switchView('view-closing',this)" class="nav-item w-full text-left px-6 py-2.5 hover:bg-slate-800 flex flex-col gap-0.5"><span class="font-bold text-sm">結語與參考資料</span><span class="text-[11px] text-slate-400">P.456｜EMS 安全概念的落實</span></button>
+    </div>
+    <a href="./index.html" class="block p-4 border-t border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition">← 回章節目錄</a>
+  </nav>
+
+  <main class="flex-1 overflow-y-auto p-8 md:p-12 relative bg-slate-50/50">
+    <section id="view-intro" class="view-section fade-in block">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3 shadow-sm">P.448–P.450</div><h2 class="text-3xl font-bold text-ems-navy">戰術緊急傷患救護</h2><p class="text-ems-gray mt-2 text-lg">TECC 不只教「怎麼救」，更要求在威脅快速變化的現場，持續判斷<strong>現在能不能救、在哪裡救、救到什麼程度</strong>。</p></header>
+
+      <div class="bg-ems-navy rounded-xl shadow-md text-white border-t-4 border-ems-orange p-7 mb-8"><div class="text-xs tracking-[0.2em] text-ems-blue font-bold mb-2">本章的一句話</div><h3 class="text-2xl font-black">先讓救護行動安全地發生，再依威脅程度分配處置深度。</h3><p class="text-slate-300 mt-3 leading-relaxed max-w-4xl">熱區先脫離直接威脅並控制致命出血；暖區以 MARCH 系統評估；冷區重新評估、復甦並依 PACE 規劃後送。三區界線是動態的，不是畫好就永遠不變。</p></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="card border-t-4 border-ems-blue"><div class="text-xs font-black tracking-widest text-ems-blue">學習目標 01</div><h3 class="font-bold text-ems-navy mt-2">辨識三個主要階段</h3><p class="text-sm text-slate-600 mt-2 leading-relaxed">分辨熱區、暖區、冷區的威脅程度，以及各區應優先執行的照護重點。</p></div>
+        <div class="card border-t-4 border-ems-orange"><div class="text-xs font-black tracking-widest text-ems-orange">學習目標 02</div><h3 class="font-bold text-ems-navy mt-2">掌握 MARCH</h3><p class="text-sm text-slate-600 mt-2 leading-relaxed">依致命速度與處置黃金時效，系統性評估並處理暖區傷患。</p></div>
+        <div class="card border-t-4 border-green-600"><div class="text-xs font-black tracking-widest text-green-700">學習目標 03</div><h3 class="font-bold text-ems-navy mt-2">運用 PACE 規劃後送</h3><p class="text-sm text-slate-600 mt-2 leading-relaxed">建立主要、次要、應急與緊急方案，並在冷區完成再評估與後送救護。</p></div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card"><div class="section-label">TECC 從哪裡來？</div>
+          <div class="timeline-item"><div class="font-black text-ems-blue">1996–2011｜TCCC</div><p class="text-sm text-slate-600 mt-1 leading-relaxed">美國特種作戰部隊建立戰術戰鬥傷患救護（Tactical Combat Casualty Care, TCCC），由 TCCC 委員會持續更新戰場救護準則。</p></div>
+          <div class="timeline-item"><div class="font-black text-ems-blue">2011｜C-TECC 成立</div><p class="text-sm text-slate-600 mt-1 leading-relaxed">戰術緊急傷患救護委員會（Committee on Tactical Emergency Casualty Care, C-TECC）將戰場經驗轉化為民間高風險事件可使用的 TECC 指引。</p></div>
+          <div class="timeline-item"><div class="font-black text-ems-blue">2013–2019｜納入聯合反恐</div><p class="text-sm text-slate-600 mt-1 leading-relaxed">TECC 納入美國聯合反恐工作重點，讓跨機構理解高風險救護應變能力的重要。</p></div>
+          <div class="timeline-item"><div class="font-black text-ems-blue">2018／2021｜NFPA 標準化</div><p class="text-sm text-slate-600 mt-1 leading-relaxed">美國國家消防協會（NFPA）在 2018 年提出消防與緊急醫療人員應具備 TECC 能力，並於 2021 年成為標準。</p></div>
+        </div>
+        <div class="space-y-5">
+          <div class="card"><div class="section-label">為什麼一般 EMS 也需要？</div><p class="text-slate-700 leading-relaxed">TECC 提供系統性指引，協助救護人員在高風險環境中做出安全判斷。訓練不只傳授醫療知識，也強調環境觀察、安全考量與決策，使救護人員即使身處危險仍能有效照護傷患。</p><div class="callout warn mt-4 text-sm">高風險不只等於武裝衝突。刀械攻擊、爆炸、穿刺、跌落、地震危樓、交通事故與大型災害，都可能同時威脅傷患與救護人員。</div></div>
+          <div class="card"><div class="section-label">臺灣情境提醒</div><ul class="list-disc pl-5 space-y-2 text-sm text-slate-700 leading-relaxed"><li>民國 110 年臺鐵臺北車站開山刀刺警案。</li><li>民國 108 年臺鐵嘉義車站刺警命案。</li><li>民國 108 年台 9 線蘇花公路遊覽車撞山壁事故。</li></ul><p class="text-sm text-slate-600 mt-4 leading-relaxed">共同要求是：快速救治傷患的同時，持續保持警覺，注意現場是否還有新的安全威脅。</p></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <button onclick="switchView('view-framework',document.querySelectorAll('.nav-item')[1])" class="grid-btn text-left border border-slate-300 rounded-lg p-5 bg-white"><div class="text-3xl font-black text-ems-blue">01</div><div class="font-bold text-ems-navy mt-1">三區怎麼分？</div><p class="text-xs text-slate-500 mt-2">先用威脅程度決定熱區、暖區、冷區，再決定能做多少處置。</p></button>
+        <button onclick="switchView('view-march',document.querySelectorAll('.nav-item')[3])" class="grid-btn text-left border border-slate-300 rounded-lg p-5 bg-white"><div class="text-3xl font-black text-ems-blue">02</div><div class="font-bold text-ems-navy mt-1">MARCH 怎麼走？</div><p class="text-xs text-slate-500 mt-2">依大出血、呼吸道、呼吸、循環、頭傷／低體溫的順序處置。</p></button>
+        <button onclick="switchView('view-evac',document.querySelectorAll('.nav-item')[4])" class="grid-btn text-left border border-slate-300 rounded-lg p-5 bg-white"><div class="text-3xl font-black text-ems-blue">03</div><div class="font-bold text-ems-navy mt-1">後送失效怎麼辦？</div><p class="text-xs text-slate-500 mt-2">用 PACE 預先準備替代路線與交通工具。</p></button>
+      </div>
+    </section>
+
+    <section id="view-framework" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.451</div><h2 class="text-3xl font-bold text-ems-navy">TECC 的架構與核心</h2><p class="text-ems-gray mt-2 text-lg">照護階段由現場威脅決定：威脅越直接，處置越精簡；安全度提高，評估與治療才能逐步展開。</p></header>
+
+      <div class="zone-strip mb-8" aria-label="TECC 三個照護階段">
+        <div class="zone-card zone-hot"><div class="zone-en">Direct Threat Care</div><div class="text-2xl font-black mt-1">熱區照護</div><div class="text-sm mt-3 text-rose-100">直接威脅仍在｜快速撤離＋控制肢端大出血</div></div>
+        <div class="zone-card zone-warm"><div class="zone-en">Indirect Threat Care</div><div class="text-2xl font-black mt-1">暖區照護</div><div class="text-sm mt-3 text-orange-100">間接威脅｜依 MARCH 評估與處置</div></div>
+        <div class="zone-card zone-cold"><div class="zone-en">Evacuation Care</div><div class="text-2xl font-black mt-1">冷區照護</div><div class="text-sm mt-3 text-green-100">預期無威脅｜再評估、復甦與後送</div></div>
+      </div>
+      <p class="text-xs text-slate-500 text-center -mt-4 mb-8">圖 18-1　救護現場的安全狀態具有動態性與過渡性，而非一成不變（依課本內容重新設計）</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
+        <div class="card border-t-4 border-rose-600"><div class="text-xs font-black text-rose-700 tracking-widest">熱區｜直接威脅</div><h3 class="text-lg font-bold text-ems-navy mt-2">先降低暴露，再做最少但關鍵的救護</h3><p class="text-sm text-slate-600 mt-3 leading-relaxed">救護人員與傷患仍可能面臨武器、爆炸或自然災害。主要目標是迅速離開威脅環境、減少傷亡；情況允許時，以止血帶控制外出血。</p></div>
+        <div class="card border-t-4 border-ems-orange"><div class="text-xs font-black text-ems-orange tracking-widest">暖區｜間接威脅</div><h3 class="text-lg font-bold text-ems-navy mt-2">威脅未完全解除，開始 MARCH</h3><p class="text-sm text-slate-600 mt-3 leading-relaxed">風險尚未排除，但通常不會立即危及生命。依 MARCH 進行評估與處置，持續準備撤至安全區域。</p></div>
+        <div class="card border-t-4 border-green-600"><div class="text-xs font-black text-green-700 tracking-widest">冷區｜後送途中</div><h3 class="text-lg font-bold text-ems-navy mt-2">重新評估，銜接完整外傷流程</h3><p class="text-sm text-slate-600 mt-3 leading-relaxed">威脅已解除或正在後送，有較充裕時間確認暖區處置是否有效，進行進階醫療、復甦與運輸規劃。</p></div>
+      </div>
+
+      <div class="card mb-8"><div class="section-label">暖區評估口訣：MARCH</div><div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3">
+        <div class="flex gap-3 items-start"><div class="march-code">M</div><div><div class="font-black text-ems-navy">Massive hemorrhage</div><div class="text-xs text-slate-500 mt-1">大出血控制</div></div></div>
+        <div class="flex gap-3 items-start"><div class="march-code">A</div><div><div class="font-black text-ems-navy">Airway</div><div class="text-xs text-slate-500 mt-1">呼吸道管理</div></div></div>
+        <div class="flex gap-3 items-start"><div class="march-code">R</div><div><div class="font-black text-ems-navy">Respiration</div><div class="text-xs text-slate-500 mt-1">呼吸問題</div></div></div>
+        <div class="flex gap-3 items-start"><div class="march-code">C</div><div><div class="font-black text-ems-navy">Circulation</div><div class="text-xs text-slate-500 mt-1">循環問題</div></div></div>
+        <div class="flex gap-3 items-start"><div class="march-code">H</div><div><div class="font-black text-ems-navy">Head / Hypothermia</div><div class="text-xs text-slate-500 mt-1">頭部外傷／低體溫</div></div></div>
+      </div></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div class="card"><div class="section-label">TECC 核心策略</div><ul class="list-disc pl-5 space-y-2 text-slate-700 leading-relaxed"><li>優先控制外出血，避免可預防的死亡。</li><li>維持呼吸道與呼吸，處理胸部外傷。</li><li>迅速把傷患移到安全地點，再進行更深入治療。</li><li>各階段持續重評，而不是一次貼上區域標籤後就不再改變。</li></ul></div><div class="callout warn"><div class="font-bold text-ems-navy">醫療、安全與任務必須協調一致</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">救護人員需與執法人員或戰術團隊緊密合作，讓醫療行動、安全策略與任務計畫互相配合。高風險現場若只看醫療、不看威脅，可能同時傷害傷患與救護者。</p></div></div>
+    </section>
+
+    <section id="view-zones" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.452</div><h2 class="text-3xl font-bold text-ems-navy">熱區與暖區的環境特性</h2><p class="text-ems-gray mt-2 text-lg">同一個現場可能在幾分鐘內由暖區重新變成熱區；安全評估必須貫穿準備、接觸、處置與撤離。</p></header>
+
+      <div class="card border-t-4 border-rose-600 mb-8">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5"><div><div class="text-xs font-black text-rose-700 tracking-widest">DIRECT THREAT CARE</div><h3 class="text-2xl font-bold text-ems-navy">一、直接威脅下救護（熱區照護）</h3></div><span class="pill">快速進出・基本救護・控制大出血</span></div>
+        <p class="text-slate-700 leading-relaxed mb-6">熱區的任務不是執行戰術操作，而是在危險環境中協助傷患脫離現場，提供最基本、最能避免立即死亡的救護。地震危樓、武裝攻擊或爆炸現場都可能需要使用此模式。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-5"><div class="font-black text-ems-navy">（一）進入前準備</div><ul class="list-disc pl-5 mt-3 space-y-2 text-sm text-slate-700 leading-relaxed"><li>評估環境安全與潛在危險，持續聆聽異常聲響。</li><li>確保進出路徑暢通，預先確認撤離方向。</li><li>制定救援與救護計畫，盤點人員和設備需求。</li><li>以快速進出、縮短停留時間為原則。</li></ul></div>
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-5"><div class="font-black text-ems-navy">（二）進入熱區後</div><ul class="list-disc pl-5 mt-3 space-y-2 text-sm text-slate-700 leading-relaxed"><li>持續評估環境變化；遭攻擊時使用掩護（防護攻擊）或掩蔽（隱藏身形）降低風險。</li><li>與傷患保持溝通，確認能否自行撤離。</li><li>快速評估傷情、呼吸道暢通度與意識狀態。</li><li>四肢活動性大出血可引導傷患自救，或協助使用止血帶。</li></ul></div>
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-5"><div class="font-black text-ems-navy">（三）撤離與搬運</div><ul class="list-disc pl-5 mt-3 space-y-2 text-sm text-slate-700 leading-relaxed"><li>完成最基本救護後通常立刻撤離。</li><li>依人力採單人或雙人拖曳、消防員式搬運等方式。</li><li>搬運時維持警覺與環境感知；人力足夠時提供警戒或掩護。</li><li>環境風險評估、防護應變與高效率救援缺一不可。</li></ul></div>
+        </div>
+        <div class="callout danger mt-5 text-sm"><strong>熱區的成功標準：</strong>人員安全、快速離開直接威脅，並控制最可能立即致命的肢端大出血，而不是在原地完成所有醫療處置。</div>
+      </div>
+
+      <div class="card border-t-4 border-ems-orange">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-5"><div><div class="text-xs font-black text-ems-orange tracking-widest">INDIRECT THREAT CARE</div><h3 class="text-2xl font-bold text-ems-navy">二、間接威脅下救護（暖區照護）</h3></div><span class="pill">MARCH・動態警戒・準備再撤離</span></div>
+        <p class="text-slate-700 leading-relaxed">暖區代表威脅未完全消除、但沒有立即危險；環境仍可能再次進入直接威脅。救護人員執行 MARCH 的同時，必須與戰術單位緊密協作，並與警方、特搜等人員共同維持警戒與秩序。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-6">
+          <div class="bg-orange-50 rounded-lg border border-orange-200 p-5"><div class="font-black text-ems-navy">（一）與傷患互動</div><p class="text-sm text-slate-700 mt-3 leading-relaxed">傷患可能因大量出血、休克等生命危急狀況，或因受驚而情緒失控、躁動不安。接近並救護前，應小心安撫、清楚告知救護目的，降低傷患因誤解而攻擊救護人員的風險。</p></div>
+          <div class="bg-orange-50 rounded-lg border border-orange-200 p-5"><div class="font-black text-ems-navy">武裝與通訊器材處理</div><p class="text-sm text-slate-700 mt-3 leading-relaxed">傷患身上的武裝與通訊器材，應依訓練流程處理，或請戰術人員協助移除，避免救護過程誤擊與敏感資訊洩漏。</p></div>
+        </div>
+        <div class="callout warn mt-5 text-sm">暖區雖有較多處置空間，仍不是完全安全區。任何醫療步驟都要保留中止與撤離的彈性。</div>
+      </div>
+    </section>
+
+    <section id="view-march" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.453–P.454</div><h2 class="text-3xl font-bold text-ems-navy">MARCH 評估流程</h2><p class="text-ems-gray mt-2 text-lg">順序依傷勢致命速度與黃金處置時效排列；在直接威脅下先處理活動性致命出血，暖區則依序完成 MARCH。</p></header>
+
+      <div class="callout danger mb-8"><div class="font-bold text-ems-navy">為什麼 M 排在最前面？</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">伊拉克與阿富汗戰爭資料顯示，高達 87% 傷員在抵達醫院前死亡；可避免死亡的原因多與致命性出血相關。大動脈出血甚至可能在 3 分鐘內致死，因此先止血，再處理後續項目。</p></div>
+
+      <details class="study-detail mb-5" open><summary><span class="flex items-center gap-3"><span class="march-code">M</span><span>Massive hemorrhage｜大出血控制</span></span></summary><div class="detail-body"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div>
+        <h3 class="font-black text-ems-navy mb-3">止血帶使用與檢查</h3><ul class="list-disc pl-5 space-y-2"><li><strong>熱區：</strong>立即在患肢最靠近軀幹處採「綁高綁緊（High and tight）」。</li><li><strong>暖區：</strong>確認出血位置後，可在傷口上方 5–8 公分綁止血帶。</li><li><strong>有效判定：</strong>傷口不再出血，且摸不到遠端脈搏，兩項都要滿足。</li><li>移動傷患後必須檢查止血帶有無滑脫或鬆脫；不要為了查看傷口而反覆放鬆。</li><li>第一條位置正確、鬆緊適當但仍未完全止血時，可在其近心端再加第二條。</li></ul>
+        <h3 class="font-black text-ems-navy mt-5 mb-3">止血帶轉換與填塞</h3><ul class="list-disc pl-5 space-y-2"><li>在暖區或冷區重新評估後，若出血未如預期嚴重，可轉換為傷口填塞或加壓敷料。</li><li>填塞適用四肢與交界處、疑似或確定深部血管損傷；以細且紮實的止血紗布填滿傷口後持續加壓，成功後再以加壓繃帶包紮固定。</li></ul>
+      </div><figure><div class="figure-crop" style="--crop-ratio:1.34;--page-scale:230.4%;--tx:-51.5%;--ty:-21.45%;"><img src="./assets/img/chap18-page454.jpg" alt="消防署辦理 TECC 訓練時教授傷口填塞技術"></div><figcaption>圖 18-2　消防署辦理 TECC 訓練時，教授傷口填塞技術（保留課本照片）</figcaption></figure></div></div></details>
+
+      <details class="study-detail mb-5" open><summary><span class="flex items-center gap-3"><span class="march-code">A</span><span>Airway｜呼吸道管理</span></span></summary><div class="detail-body"><ul class="list-disc pl-5 space-y-2"><li>清醒且能自行順利呼吸、沒有通氣困難徵象者，通常不需要介入。</li><li>清醒但有呼吸道問題時，可先讓傷患自行調整到能維持呼吸道的姿勢。</li><li>意識不清且有阻塞徵象時，先調整為復甦姿勢；仍無效則以下顎推舉法或抬頦法徒手打開呼吸道。</li><li>評估舌頭後倒、血液等阻塞物並及時清除。</li><li>鼻咽呼吸道適用於無意識且沒有顱底骨折疑慮者。</li><li>嚴重阻塞且上述方式無法維持暢通時，考慮聲門上呼吸道或外科環甲膜切開術等進階處置。</li></ul></div></details>
+
+      <details class="study-detail mb-5" open><summary><span class="flex items-center gap-3"><span class="march-code">R</span><span>Respiration｜呼吸問題</span></span></summary><div class="detail-body"><ul class="list-disc pl-5 space-y-2"><li>檢查開放性氣胸或張力性氣胸。</li><li>開放性氣胸優先使用具導氣孔的胸封貼片（chest seal）；若沒有，可用無導氣孔貼片、塑膠膜或鋁箔覆蓋，固定三邊以維持單向引流。</li><li>張力性氣胸若針刺減壓無效，需儘快轉送；胸管引流須由合格人員執行。</li></ul></div></details>
+
+      <details class="study-detail mb-5" open><summary><span class="flex items-center gap-3"><span class="march-code">C</span><span>Circulation｜循環問題</span></span></summary><div class="detail-body"><div class="grid grid-cols-1 lg:grid-cols-2 gap-5"><div><p>休克源於細胞與組織灌流不足，醫學上分為四類：</p><div class="flex flex-wrap gap-2 mt-3"><span class="pill">低血容性 Hypovolemic</span><span class="pill">心因性 Cardiogenic</span><span class="pill">分布性 Distributive</span><span class="pill">阻塞性 Obstructive</span></div><p class="mt-4">外傷最常見低血容性休克，因此需持續減少出血。輸液及復甦重點是穩定血壓，避免長時間休克導致器官衰竭。</p></div><div class="callout warn text-sm"><strong>疑似骨盆骨折：</strong>使用骨盆固定帶可減少骨盆容積、形成內部填塞效果，同時穩定骨盆、降低骨折處出血並提升舒適度。</div></div></div></details>
+
+      <details class="study-detail mb-8" open><summary><span class="flex items-center gap-3"><span class="march-code">H</span><span>Head injury / Hypothermia｜頭部外傷與低體溫</span></span></summary><div class="detail-body"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div><ul class="list-disc pl-5 space-y-2"><li>處置包括預防與治療低體溫，以及頭部外傷照護。</li><li>外傷致命三要素是低體溫、酸血症與凝血病變；盡快替換濕衣物並積極保暖。</li><li>頭部外傷若沒有頸椎損傷疑慮，保持頭部連同背部抬高約 30 度，以降低顱內壓。</li><li>心跳慢、血壓高、呼吸不規則為庫欣氏三徵，提示顱內壓升高，需以過度通氣、藥物或手術等方式立即減壓。</li></ul></div><figure><div class="figure-crop" style="--crop-ratio:1.50;--page-scale:230.4%;--tx:-51.5%;--ty:-51.85%;"><img src="./assets/img/chap18-page454.jpg" alt="執行頭部抬高時應連同背部抬高"></div><figcaption>圖 18-3　頭部抬高時應連同背部抬高，並非屈曲頸椎（保留課本照片）</figcaption></figure></div></div></details>
+
+      <div class="card"><div class="section-label">MARCH 後仍要處理的傷勢</div><div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><div class="font-black text-ems-navy">燒燙傷</div><p class="text-sm text-slate-600 mt-2 leading-relaxed">維持呼吸道暢通；以乾燥無菌敷料包紮，減少感染與體液散失；以大量乳酸林格氏液維持循環。</p></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><div class="font-black text-ems-navy">疼痛管理</div><p class="text-sm text-slate-600 mt-2 leading-relaxed">避免會影響凝血功能的 NSAID。依我國緊急救護管制與現場醫療評估，可考慮 Tramadol 等類嗎啡藥物或由醫療人員給藥。</p></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-lg p-4"><div class="font-black text-ems-navy">眼部穿刺傷</div><p class="text-sm text-slate-600 mt-2 leading-relaxed">使用硬式眼罩保護受傷眼睛，避免直接加壓與進一步傷害。</p></div>
+      </div></div>
+    </section>
+
+    <section id="view-evac" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.455</div><h2 class="text-3xl font-bold text-ems-navy">後送救護與冷區照護</h2><p class="text-ems-gray mt-2 text-lg">冷區是預期沒有威脅的相對安全區域；醫療與運輸資源較多，重點是撤退計畫、後送救護與完整再評估。</p></header>
+      <div class="callout safe mb-8"><div class="font-bold text-ems-navy">冷區不是「不用再管」，而是「終於有條件把處置做完整」</div><p class="text-sm text-slate-700 mt-2 leading-relaxed">冷區中的照護稱為後送救護（Evacuation care）。威脅較小，救護通常不會因現場威脅中止，可以完整落實外傷緊急救護流程。</p></div>
+
+      <div class="card mb-8"><div class="section-label">（一）撤退計畫：PACE 原則</div><p class="text-slate-700 leading-relaxed mb-5">撤退計畫需納入交通工具與路線可能改變的情況。不要只準備一條路，而要在任務前就想好四個層級。</p><div class="table-scroll"><table class="data-table"><thead><tr><th>層級</th><th>意義</th><th>課本示例</th><th>領讀提示</th></tr></thead><tbody>
+        <tr><td><span class="pace-letter">P</span><strong>主要 Primary</strong></td><td>首選方案</td><td>救護車、直昇機</td><td>正常情況下最快、最合適的後送方式</td></tr>
+        <tr><td><span class="pace-letter">A</span><strong>次要 Alternate</strong></td><td>主要方案失效時的替代</td><td>巴士、廂型車</td><td>預先知道何時轉換，不要臨時才找車</td></tr>
+        <tr><td><span class="pace-letter">C</span><strong>應急 Contingency</strong></td><td>特殊限制下使用</td><td>裝甲車等特殊交通工具</td><td>配合威脅、地形或道路封鎖調整</td></tr>
+        <tr><td><span class="pace-letter">E</span><strong>緊急 Emergency</strong></td><td>最後可行手段</td><td>依現況選擇，甚至徒步運送</td><td>目標是仍能把傷患送離，而非等待完美資源</td></tr>
+      </tbody></table></div></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="card"><div class="section-label">（二）後送救護再評估</div><p class="text-slate-700 leading-relaxed">重新評估傷患目前狀況與暖區已做的處置，包括止血帶、呼吸道裝置與呼吸處置。特別要確認止血帶是否仍有效、是否需要轉換，並記錄病情與處置效果。</p></div>
+        <div class="card"><div class="section-label">（三）休克與輸液復甦</div><p class="text-slate-700 leading-relaxed">冷區的出血性休克傷患應積極使用輸液甚至血品復甦，可經靜脈或骨針通路給予；目標是維持可觸及的橈動脈脈搏，或收縮壓約 90–100 mmHg。</p></div>
+        <div class="card"><div class="section-label">（四）外傷性腦損傷 TBI</div><p class="text-slate-700 leading-relaxed">持續以 GCS、意識狀況、瞳孔大小與對光反應監測，詳細記錄所有變化與趨勢。若出現顱內壓上升徵象，且無禁忌，考慮將頭部連同背部抬高約 30 度。</p></div>
+        <div class="card"><div class="section-label">（五）疼痛與燒傷</div><p class="text-slate-700 leading-relaxed">冷區可依傷患狀況及各縣市救護流程給予止痛藥物；燒傷則依既有救護重點照護，包括呼吸道、乾燥無菌覆蓋、保暖與適當輸液。</p></div>
+      </div>
+      <div class="callout warn"><div class="font-bold text-ems-navy">每次移動後都重新開始一次思考</div><p class="text-sm text-slate-700 mt-2">區域改變、運輸工具改變或傷患被搬動後，都可能出現止血帶鬆脫、呼吸道位置改變、胸部傷勢惡化或休克加深。後送不是流程結束，而是下一輪評估的開始。</p></div>
+    </section>
+
+    <section id="view-closing" class="view-section hidden">
+      <header class="mb-8"><div class="inline-block bg-ems-blue text-white px-3 py-1 rounded text-sm font-bold mb-3">P.456</div><h2 class="text-3xl font-bold text-ems-navy">結語：把安全概念延伸到動態威脅</h2><p class="text-ems-gray mt-2 text-lg">TECC 是 EMS 安全概念的落實與延伸：現場不是永遠安全，救護者必須隨威脅變化調整判斷與處置。</p></header>
+      <div class="bg-ems-navy rounded-xl shadow-md text-white border-t-4 border-ems-orange p-7 mb-8"><div class="text-xs tracking-[0.2em] text-ems-blue font-bold mb-2">帶回勤務的核心</div><h3 class="text-2xl font-black">安全不是救護的前置作業，而是救護流程本身。</h3><p class="text-slate-300 mt-3 leading-relaxed max-w-4xl">傳統 EMS 常假設到場後環境安全；TECC 則提醒熱區、暖區、冷區的界線會快速移動。救護資源在高風險環境中特別珍貴，應避免不必要的傷害與犧牲。</p></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="card"><div class="section-label">制度在臺灣的落地</div><ul class="list-disc pl-5 space-y-3 text-slate-700 leading-relaxed"><li>消防署於民國 113 年 6 月正式發布《戰術緊急傷患救護訓練手冊（初版）》，把高危環境操作納入 EMS 基本課程與訓練。</li><li>同年度由消防署與臺灣緊急救護醫療指導醫師學會合作，於六都開辦 TECC 訓練課程。</li><li>課程不只教授醫療知識，也強調環境意識、系統性外傷救護技能與高風險決策。</li></ul></div>
+        <div class="card"><div class="section-label">完成訓練後要能做到</div><ul class="list-disc pl-5 space-y-3 text-slate-700 leading-relaxed"><li>在暴力攻擊、有害物質、火災、交通事故或大量傷病患事件中，辨識威脅並調整照護階段。</li><li>以 MARCH 優先處理可預防死亡，以 PACE 確保後送仍有替代方案。</li><li>在急救需求與現場安全間取得平衡，保障救護人員、傷患與協作人員的生命安全。</li></ul></div>
+      </div>
+
+      <div class="card mb-8"><div class="section-label">一分鐘總複習</div><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"><div class="bg-rose-50 border border-rose-200 rounded-lg p-4"><div class="font-black text-rose-800">熱區</div><p class="text-sm text-slate-600 mt-2">脫離直接威脅，控制最致命的外出血。</p></div><div class="bg-orange-50 border border-orange-200 rounded-lg p-4"><div class="font-black text-orange-800">暖區</div><p class="text-sm text-slate-600 mt-2">保持警戒，依 MARCH 展開系統處置。</p></div><div class="bg-green-50 border border-green-200 rounded-lg p-4"><div class="font-black text-green-800">冷區</div><p class="text-sm text-slate-600 mt-2">重新評估、復甦並完成後送救護。</p></div><div class="bg-sky-50 border border-sky-200 rounded-lg p-4"><div class="font-black text-sky-800">PACE</div><p class="text-sm text-slate-600 mt-2">預先準備主要、次要、應急、緊急方案。</p></div></div></div>
+
+      <details class="study-detail"><summary>參考資料（課本 P.456）</summary><div class="detail-body"><ol class="ref-list list-decimal pl-5 text-sm">
+        <li>Committee for Tactical Emergency Casualty Care. What is C-TECC? Available from: https://www.c-tecc.org/about-us/what-is-c-tecc</li>
+        <li>Eastridge BJ, Mabry RL, Seguin P, Cantrell J, Tops T, Uribe P, Mallett O, Zubko T, Oetjen-Gerdes L, Rasmussen TE, Butler FK, Kotwal RS, Holcomb JB, Wade C, Champion H, Lawnick M, Moores L, Blackbourne LH. Death on the battlefield (2001–2011): implications for the future of combat casualty care. <em>J Trauma Acute Care Surg.</em> 2012;73(6 Suppl 5):S431–7. Erratum in: <em>J Trauma Acute Care Surg.</em> 2013;74(2):706.</li>
+        <li>Module 6: Massive Hemorrhage Control. Deployed Medicine. Available from: https://books.allogy.com/web/tenant/8/books/3f274639-3bbc-4530-8ed0-569fb9e7721f/</li>
+        <li>Wound Packing Essentials for EMTs and Paramedics. <em>Journal of Emergency Medical Services.</em> Available from: https://www.jems.com/patient-care/emergency-trauma-care/wound-packing-essentials-for-emts-and-paramedics/</li>
+        <li>Spencer T, Austin H. Pelvic trauma: Initial evaluation and management. <em>UpToDate.</em> Accessed November 25, 2024.</li>
+        <li>《戰術緊急傷患救護訓練手冊－Tactical Emergency Casualty Care Course Manual（初版）》。新北市：內政部消防署；2024。</li>
+      </ol></div></details>
+    </section>
+  </main>
+
+  <script src="./assets/js/chapter-nav.js"></script>
+</body>
+</html>
